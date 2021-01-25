@@ -41,25 +41,25 @@ $template = App\Models\Template::select('id', 'logo', 'logo_title')->first();
                 <div class="user-panel p-3 light mb-2">
                     <div>
                         <div class="float-left image ml-2">
-                            <img class="rounded-circle img-circular mr-3" width="60" height="60" src="{{ asset('images/ava/' . Auth::user()->admin_detail[0]->foto) }}" alt="User Image">
+                            <img class="rounded-circle img-circular mr-3" width="60" height="60" src="" alt="User Image">
                         </div>
                         <div class="float-left info mt-1">
-                            <h6 class="font-weight-light mb-1">{{ Auth::user()->username }}</h6>
+                            <h6 class="font-weight-light mb-1"></h6>
                             <a class="text-primary"><i class="icon-circle text-primary blink mr-1"></i>Online</a>
                         </div>
                     </div>
                     <div class="clearfix"></div>
                     <div class="collapse multi-collapse" id="userSettingsCollapse">
                         <div class="list-group mt-3 shadow">
-                            <a href="{{ route('master-profile.profile.index') }}" class="list-group-item list-group-item-action ">
+                            <a href="#" class="list-group-item list-group-item-action ">
                                 <i class="mr-2 icon-user text-blue"></i>Profile
                             </a>
                             @can('setting-template')
-                            <a href="{{ route('config-template.template.index') }}" class="list-group-item list-group-item-action">
+                            <a href="#" class="list-group-item list-group-item-action">
                                 <i class="mr-2 icon-cogs"></i>Settings
                             </a>
                             @endcan
-                            <a href="{{ route('master-profile.profile.editPassword', Auth::user()->admin_detail[0]->id) }}" class="list-group-item list-group-item-action">
+                            <a href="#" class="list-group-item list-group-item-action">
                                 <i class="mr-2 icon-key4 orange-text"></i>Change Password
                             </a>
                         </div>
