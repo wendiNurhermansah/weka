@@ -39,6 +39,8 @@ Route::get('/home', 'HomeController@index')->name('home');
     //pengguna
     Route::resource('pengguna', 'PenggunaController');
     Route::post('pengguna/api', 'PenggunaController@api')->name('pengguna.api');
+    Route::get('{id}/editPassword', 'PenggunaController@editPassword')->name('editPassword');
+    Route::post('{id}/updatePassword', 'PenggunaController@updatePassword')->name('updatePassword');
 
 
     //jenis Barang

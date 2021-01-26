@@ -174,6 +174,35 @@
         }
         $(this).addClass('was-validated');
     });
+
+    function remove(id){
+        $.confirm({
+            title: '',
+            content: 'Apakah Anda yakin akan menghapus data ini ?',
+            icon: 'icon icon-question amber-text',
+            theme: 'modern',
+            closeIcon: true,
+            animation: 'scale',
+            type: 'red',
+            buttons: {
+                ok: {
+                    text: "ok!",
+                    btnClass: 'btn-primary',
+                    keys: ['enter'],
+                    action: function(){
+                        $.post("{{ route('pengguna.destroy', ':id') }}".replace(':id', id), {'_method' : 'DELETE'}, function(data) {
+                           table.api().ajax.reload();
+                            if(id == $('#id').val()) add();
+                        }, "JSON").fail(function(){
+                            reload();
+                        });
+                    }
+                },
+                cancel: function(){}
+            }
+        });
+    }
+
  </script>
 
 @endsection
