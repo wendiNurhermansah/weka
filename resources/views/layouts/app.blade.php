@@ -1,6 +1,4 @@
-@php
-$template = App\Models\Template::select('id', 'logo', 'logo_title')->first();
-@endphp
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -11,7 +9,7 @@ $template = App\Models\Template::select('id', 'logo', 'logo_title')->first();
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Title --> 
-    <link rel="icon" href="{{ asset('images/logo/'.$template->logo_title) }}" type="image/x-icon">
+    
     <title>{{ config('app.name') }} @yield('title')</title>
 
     <!-- CSS -->
@@ -32,7 +30,7 @@ $template = App\Models\Template::select('id', 'logo', 'logo_title')->first();
     <aside class="main-sidebar fixed offcanvas shadow" data-toggle='offcanvas'>
         <section class="sidebar">
             <div class=" mt-3 mb-3">
-                <img src="{{ asset('images/logo/'.$template->logo) }}" class="mx-auto d-block" width="100" alt="Logo Top">
+                <img src="" class="mx-auto d-block" width="100" alt="Logo Top">
             </div>
             <div class="relative">
                 <a data-toggle="collapse" href="#userSettingsCollapse" role="button" class="btn-fab btn-fab-sm absolute fab-right-bottom fab-top btn-primary shadow1 ">
