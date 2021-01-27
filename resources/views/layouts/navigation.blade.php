@@ -27,24 +27,6 @@
         </a>
     </li>
 
-    <li class="header light"><strong>MASTER TRANSAKSI</strong></li>
-    <li class="no-b">
-        <a href="{{ route('JenisProduk.index')}}">
-            <i class="icon icon-box blue-text s-18"></i>
-            <span>Jenis Produk</span>
-        </a>
-    </li>
-    <li class="no-b">
-        <a href="{{ route('rincianProduk.index')}}">
-            <i class="icon icon-list-alt red-text s-18"></i>
-            <span>Rincian Produk</span>
-        </a>
-    </li>
-    <li class="no-b">
-        <a href="{{ route('transaksi.index')}}">
-            <i class="icon icon-money red-text s-18"></i>
-            <span>Transaksi</span>
-        </a>
-    </li>
+
 
 </ul>

@@ -43,17 +43,6 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::post('{id}/updatePassword', 'PenggunaController@updatePassword')->name('updatePassword');
 
 
-    //jenis Barang
-    Route::resource('JenisProduk', 'JenisprodukController');
-    Route::post('JenisProduk/api', 'JenisprodukController@api')->name('JenisProduk.api');
-
-    //rincian Produk
-    Route::resource('rincianProduk', 'Rincianprodukcontroller');
-    Route::post('rincianProduk/api', 'RincianprodukController@api')->name('rincianProduk.api');
-
-    //transaksi
-    Route::resource('transaksi', 'TransaksiController');
-    Route::post('transaksi/api', 'TransaksiController@api')->name('transaksi.api');
 
 
 
