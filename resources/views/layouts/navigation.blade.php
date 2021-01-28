@@ -27,6 +27,24 @@
         </a>
     </li>
 
-
+    <li class="header light"><strong>KATEGORI</strong></li>
+    <li class="no-b">
+        <a href="{{ route('Kategori.daftarkategori.index')}}">
+            <i class="icon icon-list red-text s-18"></i>
+            <span>Daftar Kategori</span>
+        </a>
+    </li>
+    <li class="no-b">
+        <a href="{{ route('Kategori.tambahkategori.index') }}">
+            <i class="icon icon-plus green-text s-18"></i>
+            <span>Tambahkan Kategori</span>
+        </a>
+    </li>
+    <li class="no-b">
+        <a href="#">
+            <i class="icon icon-download blue-text s-18"></i>
+            <span>Import Kategori</span>
+        </a>
+    </li>
 
 </ul>

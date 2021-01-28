@@ -42,9 +42,16 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::get('{id}/editPassword', 'PenggunaController@editPassword')->name('editPassword');
     Route::post('{id}/updatePassword', 'PenggunaController@updatePassword')->name('updatePassword');
 
+    Route::prefix('Kategori')->namespace('kategori')->name('Kategori.')->group(function () {
+        //kategori
+
+        //daftar kategori
+        Route::resource('daftarkategori', 'DaftarkategoriController');
+        Route::post('daftarketegori/api', 'DaftarkategoriController@api')->name('daftarkategori.api');
 
 
+        //tambah kategori
+        Route::resource('tambahkategori', 'TambahkategoriController');
 
 
-
-
+    });
