@@ -55,3 +55,25 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
     });
+    Route::prefix('Orang')->namespace('orang')->name('Orang.')->group(function () {
+
+        Route::post('chek', function(){
+            dd('ok');
+        })->name('chek');
+        //pegawai
+        Route::resource('pegawai', 'PegawaiController');
+        Route::post('pegawai/api', 'PegawaiController@api')->name('pegawai.api');
+        Route::get('tambahpegawai', 'PegawaiController@tambahpegawai')->name('tambahpegawai');
+
+        //pelanggan
+        Route::resource('pelanggan', 'PelangganController');
+        Route::post('pelanggan/api', 'PelangganController@api')->name('pelanggan.api');
+        Route::get('tambahpelanggan', 'PelangganController@tambahpelanggan')->name('tambahpelanggan');
+
+        //pemasok
+        Route::resource('pemasok', 'PemasokController');
+        Route::post('pemasok/api', 'PemasokController@api')->name('pemasok.api');
+        Route::get('tambahpemasok', 'PemasokController@tambahpemasok')->name('tambahpemasok');
+
+
+    });
