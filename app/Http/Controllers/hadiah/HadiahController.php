@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\orang;
+namespace App\Http\Controllers\hadiah;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DataTables;
-use App\Models\Pemasok;
+use App\Models\Hadiah;
 
-class PemasokController extends Controller
+class HadiahController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,21 +16,21 @@ class PemasokController extends Controller
      */
     public function index()
     {
-        return view('orang.pemasok');
+        return view('hadiah.daftarkartuhadiah');
     }
 
-    public function tambahpemasok(){
-        return view ('orang.tambahpemasok');
+    public function tambahHadiah(){
+        return view('hadiah.tambahHadiah');
     }
 
     public function api()
     {
-        $Pemasok = Pemasok::all();
-        return Datatables::of($Pemasok)
+        $Hadiah = Hadiah::all();
+        return Datatables::of($Hadiah)
 
             ->addColumn('action', function ($p) {
                 return "
-                    <a href='" . route('Orang.pemasok.edit', $p->id) . "' onclick='edit(" . $p->id . ")' title='Edit Role'><i class='icon-pencil mr-1'></i></a>
+                    <a href='" . route('Hadiah.hadiah.edit', $p->id) . "' onclick='edit(" . $p->id . ")' title='Edit Role'><i class='icon-pencil mr-1'></i></a>
                     <a href='#' onclick='remove(" . $p->id . ")' class='text-danger' title='Hapus data'><i class='icon-remove'></i></a>";
             })
 
@@ -61,22 +61,18 @@ class PemasokController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
-            'telepon' => 'required',
-            'email' => 'required',
-            'ccf_1' => 'required',
-            'ccf_2' => 'required'
+            'card' => 'required',
+            'nilai' => 'required',
+            'kedaluwarsa' => 'required'
         ]);
 
 
-        $tmpemasok = new Pemasok();
-        $tmpemasok->nama = $request->nama;
-        $tmpemasok->telepon = $request->telepon;
-        $tmpemasok->email = $request->email;
-        $tmpemasok->ccf_1 = $request->ccf_1;
-        $tmpemasok->ccf_2 = $request->ccf_2;
+        $tmhadiah = new Hadiah();
+        $tmhadiah->card = $request->card;
+        $tmhadiah->nilai = $request->nilai;
+        $tmhadiah->kedaluwarsa = $request->kedaluwarsa;
 
-        $tmpemasok->save();
+        $tmhadiah->save();
 
         return response()->json([
             'message' => 'Data berhasil tersimpan.'
@@ -102,8 +98,8 @@ class PemasokController extends Controller
      */
     public function edit($id)
     {
-        $Pemasok = Pemasok::find($id);
-        return view ('orang.editpemasok', compact('Pemasok'));
+        $Hadiah = Hadiah::find($id);
+        return view('hadiah.editHadiah',compact('Hadiah'));
     }
 
     /**
@@ -115,30 +111,25 @@ class PemasokController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $Pemasok = Pemasok::find($id);
+        $Hadiah = Hadiah::find($id);
         $request->validate([
-            'nama' => 'required',
-            'telepon' => 'required',
-            'email' => 'required',
-            'ccf_1' => 'required',
-            'ccf_2' => 'required'
-        ]);
-
-        $nama = $request->nama;
-        $telepon = $request->telepon;
-        $email = $request->email;
-        $ccf_1 = $request->ccf_1;
-        $ccf_2 = $request->ccf_2;
-        $Pemasok->update([
-            'nama' => $nama,
-            'telepon' => $telepon,
-            'email' => $email,
-            'group' => $ccf_1,
-            'status' => $ccf_2
+            'card' => 'required',
+            'nilai' => 'required',
+            'kedaluwarsa' => 'required'
 
         ]);
+        $card = $request->card;
+        $nilai = $request->nilai;
+        $kedaluwarsa = $request->kedaluwarsa;
 
-        return redirect('Orang/pemasok')->with('status', 'data berhasil di rubah');
+        $Hadiah->update([
+            'card' => $card,
+            'nilai' => $nilai,
+            'kedaluwarsa' => $kedaluwarsa,
+
+
+        ]);
+        return redirect('Hadiah/hadiah')->with('status', 'data mahasiswa berhasil diubah');
     }
 
     /**
@@ -149,9 +140,10 @@ class PemasokController extends Controller
      */
     public function destroy($id)
     {
-        Pemasok::destroy($id);
+        Hadiah::destroy($id);
         return response()->json([
-            'massage' => 'data berhasil di hapus.'
+            'massage' => 'data berhasil di hapus',
         ]);
     }
+
 }

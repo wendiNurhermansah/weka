@@ -42,38 +42,65 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::get('{id}/editPassword', 'PenggunaController@editPassword')->name('editPassword');
     Route::post('{id}/updatePassword', 'PenggunaController@updatePassword')->name('updatePassword');
 
-    Route::prefix('Kategori')->namespace('kategori')->name('Kategori.')->group(function () {
-        //kategori
+        Route::prefix('Kategori')->namespace('kategori')->name('Kategori.')->group(function () {
+            //kategori
 
-        //daftar kategori
-        Route::resource('daftarkategori', 'DaftarkategoriController');
-        Route::post('daftarketegori/api', 'DaftarkategoriController@api')->name('daftarkategori.api');
-
-
-        //tambah kategori
-        Route::resource('tambahkategori', 'TambahkategoriController');
+            //daftar kategori
+            Route::resource('daftarkategori', 'DaftarkategoriController');
+            Route::post('daftarketegori/api', 'DaftarkategoriController@api')->name('daftarkategori.api');
 
 
-    });
-    Route::prefix('Orang')->namespace('orang')->name('Orang.')->group(function () {
-
-        Route::post('chek', function(){
-            dd('ok');
-        })->name('chek');
-        //pegawai
-        Route::resource('pegawai', 'PegawaiController');
-        Route::post('pegawai/api', 'PegawaiController@api')->name('pegawai.api');
-        Route::get('tambahpegawai', 'PegawaiController@tambahpegawai')->name('tambahpegawai');
-
-        //pelanggan
-        Route::resource('pelanggan', 'PelangganController');
-        Route::post('pelanggan/api', 'PelangganController@api')->name('pelanggan.api');
-        Route::get('tambahpelanggan', 'PelangganController@tambahpelanggan')->name('tambahpelanggan');
-
-        //pemasok
-        Route::resource('pemasok', 'PemasokController');
-        Route::post('pemasok/api', 'PemasokController@api')->name('pemasok.api');
-        Route::get('tambahpemasok', 'PemasokController@tambahpemasok')->name('tambahpemasok');
+            //tambah kategori
+            Route::resource('tambahkategori', 'TambahkategoriController');
 
 
-    });
+        });
+        Route::prefix('Orang')->namespace('orang')->name('Orang.')->group(function () {
+
+            //pegawai
+            Route::resource('pegawai', 'PegawaiController');
+            Route::post('pegawai/api', 'PegawaiController@api')->name('pegawai.api');
+            Route::get('tambahpegawai', 'PegawaiController@tambahpegawai')->name('tambahpegawai');
+
+            //pelanggan
+            Route::resource('pelanggan', 'PelangganController');
+            Route::post('pelanggan/api', 'PelangganController@api')->name('pelanggan.api');
+            Route::get('tambahpelanggan', 'PelangganController@tambahpelanggan')->name('tambahpelanggan');
+
+            //pemasok
+            Route::resource('pemasok', 'PemasokController');
+            Route::post('pemasok/api', 'PemasokController@api')->name('pemasok.api');
+            Route::get('tambahpemasok', 'PemasokController@tambahpemasok')->name('tambahpemasok');
+
+
+        });
+
+        Route::prefix('Pembelian')->namespace('pembelian')->name('Pembelian.')->group(function () {
+            //pembelian
+            Route::resource('pembelian', 'PembelianController');
+            Route::post('pembelian/api', 'PembelianController@api')->name('pembelian.api');
+            Route::get('tambahPembelian', 'PembelianController@tambahPembelian')->name('tambahPembelian');
+
+            //biaya
+            Route::resource('biaya', 'BiayaController');
+            Route::post('biaya/api', 'BiayaController@api')->name('biaya.api');
+            Route::get('tambahbiaya', 'BiayaController@tambahbiaya')->name('tambahbiaya');
+
+        });
+
+        Route::prefix('Hadiah')->namespace('hadiah')->name('Hadiah.')->group(function () {
+            Route::resource('hadiah', 'HadiahController');
+            Route::post('hadiah/api', 'HadiahController@api')->name('hadiah.api');
+            Route::get('tambahHadiah', 'HadiahController@tambahHadiah')->name('tambahHadiah');
+        });
+
+        Route::prefix('Laporan')->namespace('laporan')->name('Laporan.')->group(function () {
+            Route::get('PenjualanHarian', 'LaporanController@PenjualanHarian')->name('PenjualanHarian');
+            Route::get('PenjualanBulanan', 'LaporanController@PenjualanBulanan')->name('PenjualanBulanan');
+            Route::get('laporanPenjualan', 'LaporanController@laporanPenjualan')->name('laporanPenjualan');
+            Route::get('laporanPembayaran', 'LaporanController@laporanPembayaran')->name('laporanPembayaran');
+            Route::get('laporanPendaftaran', 'LaporanController@laporanPendaftaran')->name('laporanPendaftaran');
+            Route::get('laporanProduk', 'LaporanController@laporanProduk')->name('laporanProduk');
+
+
+        });

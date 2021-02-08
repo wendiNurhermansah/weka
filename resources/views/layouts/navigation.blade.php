@@ -26,7 +26,7 @@
             <span>Pengguna</span>
         </a>
     </li>
-    <li class="header light"><strong></strong></li>
+    <li class="header light"><strong>MASTER TRANSAKSI</strong></li>
 
     <li class="treeview ">
         <a href="#">
@@ -108,27 +108,100 @@
         </a>
         <ul class="treeview-menu">
             <li class="no-b">
-                <a href="#">
+                <a href="{{route('Pembelian.pembelian.index')}}">
                     <i class="icon icon-list blue-text s-18"></i>
                     <span>Daftar Pembelian</span>
                 </a>
             </li>
             <li class="no-b">
-                <a href="#">
+                <a href="{{route('Pembelian.tambahPembelian')}}">
                     <i class="icon icon-plus black-text s-18"></i>
                     <span>Tambahkan Pembelian</span>
                 </a>
             </li>
             <li class="no-b">
-                <a href="#">
+                <a href="{{route('Pembelian.biaya.index')}}">
                     <i class="icon icon-list yellow-text s-18"></i>
                     <span>Daftar Biaya</span>
                 </a>
             </li>
             <li class="no-b">
-                <a href="#">
+                <a href="{{route('Pembelian.tambahbiaya')}}">
                     <i class="icon icon-plus red-text s-18"></i>
                     <span>Tambah Biaya</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="treeview ">
+        <a href="#">
+            <i class="icon icon-payment text-lime s-18"></i> <span>Kartu Hadiah</span>
+            <i class="icon icon-angle-left s-18 pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li class="no-b">
+                <a href="{{route('Hadiah.hadiah.index')}}">
+                    <i class="icon icon-list blue-text s-18"></i>
+                    <span>Daftar Kartu Hadiah</span>
+                </a>
+            </li>
+            <li class="no-b">
+                <a href="{{route('Hadiah.tambahHadiah')}}">
+                    <i class="icon icon-plus black-text s-18"></i>
+                    <span>Tambahkan Kartu Hadiah</span>
+                </a>
+            </li>
+
+        </ul>
+    </li>
+
+    <li class="treeview ">
+        <a href="#">
+            <i class="icon icon-analytics text-lime s-18"></i> <span>Laporan</span>
+            <i class="icon icon-angle-left s-18 pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li class="no-b">
+                <a href="{{route('Laporan.PenjualanHarian')}}">
+                    <i class="icon icon-circle blue-text s-18"></i>
+                    <span>Penjualan Harian</span>
+                </a>
+            </li>
+            <li class="no-b">
+                <a href="{{route('Laporan.PenjualanBulanan')}}">
+                    <i class="icon icon-circle blue-text s-18"></i>
+                    <span>Penjualan Bulanan</span>
+                </a>
+            </li>
+            <li class="no-b">
+                <a href="{{route('Laporan.laporanPenjualan')}}">
+                    <i class="icon icon-circle blue-text s-18"></i>
+                    <span>Laporan Penjualan</span>
+                </a>
+            </li>
+            <li class="no-b">
+                <a href="{{route('Laporan.laporanPembayaran')}}">
+                    <i class="icon icon-circle blue-text s-18"></i>
+                    <span>Laporan Pembayaran</span>
+                </a>
+            </li>
+            <li class="no-b">
+                <a href="{{route('Laporan.laporanPendaftaran')}}">
+                    <i class="icon icon-circle blue-text s-18"></i>
+                    <span>Laporan Pendaftaran</span>
+                </a>
+            </li>
+            <li class="no-b">
+                <a href="#">
+                    <i class="icon icon-circle blue-text s-18"></i>
+                    <span>Produk Teratas</span>
+                </a>
+            </li>
+            <li class="no-b">
+                <a href="{{route('Laporan.laporanProduk')}}">
+                    <i class="icon icon-circle blue-text s-18"></i>
+                    <span>Laporan Produk</span>
                 </a>
             </li>
         </ul>
