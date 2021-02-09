@@ -129,7 +129,7 @@
                     <!-- Profile -->
                     <li class="dropdown custom-dropdown user user-menu ">
                         <a href="#" class="nav-link" data-toggle="dropdown">
-                            <img src="#" class="rounded-circle img-circular" style="margin-top: -10px" width="30" height="30">
+                            <h6 class="font-weight-light mb-3 " style="color: cornsilk;">{{ Auth::user()->username }}</h6>
                             <i class="icon-more_vert "></i>
                         </a>
                         <div class="dropdown-menu p-4 dropdown-menu-right" style="width:255px">
@@ -140,7 +140,10 @@
                                         <div class="pt-1">Profil</div>
                                     </a>
                                 </div>
-                                
+                                <div class="col">
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="list-group-item list-group-item-action mt-2"><i class="mr-2 icon-power-off text-danger"></i>Logout</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
+                                </div>
                             </div>
                         </div>
                     </li>

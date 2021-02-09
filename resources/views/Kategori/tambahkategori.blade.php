@@ -71,7 +71,7 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript">
+<script type="text/javascript">
 
 (function () {
         'use strict';

@@ -15,8 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/', 'HomeController@index')->name('home');
 
 
     //Role
@@ -42,7 +49,7 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::get('{id}/editPassword', 'PenggunaController@editPassword')->name('editPassword');
     Route::post('{id}/updatePassword', 'PenggunaController@updatePassword')->name('updatePassword');
 
-        Route::prefix('Kategori')->namespace('kategori')->name('Kategori.')->group(function () {
+    Route::prefix('Kategori')->namespace('kategori')->name('Kategori.')->group(function () {
             //kategori
 
             //daftar kategori
@@ -53,9 +60,17 @@ Route::get('/home', 'HomeController@index')->name('home');
             //tambah kategori
             Route::resource('tambahkategori', 'TambahkategoriController');
 
+            //import
+            Route::resource('import', 'ImportController');
 
-        });
-        Route::prefix('Orang')->namespace('orang')->name('Orang.')->group(function () {
+            //Toko
+            Route::resource('toko', 'TokoController');
+            Route::post('toko/api', 'TokoController@api')->name('toko.api');
+            Route::get('tambahToko', 'TokoController@tambahToko')->name('tambahToko');
+
+     });
+
+    Route::prefix('Orang')->namespace('orang')->name('Orang.')->group(function () {
 
             //pegawai
             Route::resource('pegawai', 'PegawaiController');
@@ -73,9 +88,9 @@ Route::get('/home', 'HomeController@index')->name('home');
             Route::get('tambahpemasok', 'PemasokController@tambahpemasok')->name('tambahpemasok');
 
 
-        });
+    });
 
-        Route::prefix('Pembelian')->namespace('pembelian')->name('Pembelian.')->group(function () {
+    Route::prefix('Pembelian')->namespace('pembelian')->name('Pembelian.')->group(function () {
             //pembelian
             Route::resource('pembelian', 'PembelianController');
             Route::post('pembelian/api', 'PembelianController@api')->name('pembelian.api');
@@ -86,15 +101,15 @@ Route::get('/home', 'HomeController@index')->name('home');
             Route::post('biaya/api', 'BiayaController@api')->name('biaya.api');
             Route::get('tambahbiaya', 'BiayaController@tambahbiaya')->name('tambahbiaya');
 
-        });
+    });
 
-        Route::prefix('Hadiah')->namespace('hadiah')->name('Hadiah.')->group(function () {
+    Route::prefix('Hadiah')->namespace('hadiah')->name('Hadiah.')->group(function () {
             Route::resource('hadiah', 'HadiahController');
             Route::post('hadiah/api', 'HadiahController@api')->name('hadiah.api');
             Route::get('tambahHadiah', 'HadiahController@tambahHadiah')->name('tambahHadiah');
-        });
+    });
 
-        Route::prefix('Laporan')->namespace('laporan')->name('Laporan.')->group(function () {
+    Route::prefix('Laporan')->namespace('laporan')->name('Laporan.')->group(function () {
             Route::get('PenjualanHarian', 'LaporanController@PenjualanHarian')->name('PenjualanHarian');
             Route::get('PenjualanBulanan', 'LaporanController@PenjualanBulanan')->name('PenjualanBulanan');
             Route::get('laporanPenjualan', 'LaporanController@laporanPenjualan')->name('laporanPenjualan');
@@ -102,5 +117,10 @@ Route::get('/home', 'HomeController@index')->name('home');
             Route::get('laporanPendaftaran', 'LaporanController@laporanPendaftaran')->name('laporanPendaftaran');
             Route::get('laporanProduk', 'LaporanController@laporanProduk')->name('laporanProduk');
 
+    });
 
-        });
+
+
+});
+
+

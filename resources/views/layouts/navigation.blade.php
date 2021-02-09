@@ -47,9 +47,21 @@
                 </a>
             </li>
             <li class="no-b">
-                <a href="#">
+                <a href="{{ route('Kategori.import.index') }}">
                     <i class="icon icon-download blue-text s-18"></i>
                     <span>Import Kategori</span>
+                </a>
+            </li>
+            <li class="no-b">
+                <a href="{{ route('Kategori.toko.index') }}">
+                    <i class="icon icon-circle green-text s-18"></i>
+                    <span>Toko</span>
+                </a>
+            </li>
+            <li class="no-b">
+                <a href="{{ route('Kategori.tambahToko') }}">
+                    <i class="icon icon-plus green-text s-18"></i>
+                    <span>Tambahkan Toko</span>
                 </a>
             </li>
         </ul>

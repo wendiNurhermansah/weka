@@ -33,7 +33,7 @@
     <aside class="main-sidebar fixed offcanvas shadow" data-toggle='offcanvas'>
         <section class="sidebar">
             <div class=" mt-3 mb-3">
-                <img src="" class="mx-auto d-block" width="100" alt="Logo Top">
+                <img src="{{asset('images/logo.png')}}" class="mx-auto d-block" width="100" alt="Logo Top">
             </div>
             <div class="relative">
                 <a data-toggle="collapse" href="#userSettingsCollapse" role="button" class="btn-fab btn-fab-sm absolute fab-right-bottom fab-top btn-primary shadow1 ">
@@ -41,11 +41,11 @@
                 </a>
                 <div class="user-panel p-3 light mb-2">
                     <div>
-                        <div class="float-left image ml-2">
-                            <img class="rounded-circle img-circular mr-3" width="60" height="60" src="" alt="User Image">
-                        </div>
+
                         <div class="float-left info mt-1">
-                            <h6 class="font-weight-light mb-1"></h6>
+                            <h6 class="font-weight-light mb-1">
+                                {{ Auth::user()->username }}
+                            </h6>
                             <a class="text-primary"><i class="icon-circle text-primary blink mr-1"></i>Online</a>
                         </div>
                     </div>
