@@ -1,7 +1,7 @@
 <ul class="sidebar-menu">
     <li class="header"><strong>MAIN NAVIGATION</strong></li>
     <li>
-        <a href="#">
+        <a href="{{url('/dashboard')}}">
             <i class="icon icon-dashboard2 blue-text s-18"></i>
             <span>Dashboard</span>
         </a>
@@ -26,6 +26,9 @@
             <span>Pengguna</span>
         </a>
     </li>
+
+    {{-- mater transaksi --}}
+
     <li class="header light"><strong>MASTER TRANSAKSI</strong></li>
 
     <li class="treeview ">
@@ -40,12 +43,7 @@
                     <span>Daftar Kategori</span>
                 </a>
             </li>
-            <li class="no-b">
-                <a href="{{ route('Kategori.tambahkategori.index') }}">
-                    <i class="icon icon-plus green-text s-18"></i>
-                    <span>Tambahkan Kategori</span>
-                </a>
-            </li>
+
             <li class="no-b">
                 <a href="{{ route('Kategori.import.index') }}">
                     <i class="icon icon-download blue-text s-18"></i>
@@ -56,6 +54,12 @@
                 <a href="{{ route('Kategori.toko.index') }}">
                     <i class="icon icon-circle green-text s-18"></i>
                     <span>Toko</span>
+                </a>
+            </li>
+            <li class="no-b">
+                <a href="{{ route('Kategori.tambahkategori.index') }}">
+                    <i class="icon icon-plus green-text s-18"></i>
+                    <span>Tambahkan Kategori</span>
                 </a>
             </li>
             <li class="no-b">
@@ -79,6 +83,21 @@
                     <span>Daftar Pegawai</span>
                 </a>
             </li>
+
+            <li class="no-b">
+                <a href="{{route('Orang.pelanggan.index')}}">
+                    <i class="icon icon-align-justify blue-text s-18"></i>
+                    <span>Daftar Pelanggan</span>
+                </a>
+            </li>
+
+            <li class="no-b">
+                <a href="{{route('Orang.pemasok.index')}}">
+                    <i class="icon icon-list-ol yellow-text s-18"></i>
+                    <span>Daftar Pemasok</span>
+                </a>
+            </li>
+
             <li class="no-b">
                 <a href="{{route('Orang.tambahpegawai')}}">
                     <i class="icon icon-plus red-text s-18"></i>
@@ -86,21 +105,9 @@
                 </a>
             </li>
             <li class="no-b">
-                <a href="{{route('Orang.pelanggan.index')}}">
-                    <i class="icon icon-align-justify blue-text s-18"></i>
-                    <span>Daftar Pelanggan</span>
-                </a>
-            </li>
-            <li class="no-b">
                 <a href="{{route('Orang.tambahpelanggan')}}">
                     <i class="icon icon-plus purple-text s-18"></i>
                     <span>Tambahkan Pelanggan</span>
-                </a>
-            </li>
-            <li class="no-b">
-                <a href="{{route('Orang.pemasok.index')}}">
-                    <i class="icon icon-list-ol yellow-text s-18"></i>
-                    <span>Daftar Pemasok</span>
                 </a>
             </li>
             <li class="no-b">
@@ -125,16 +132,17 @@
                     <span>Daftar Pembelian</span>
                 </a>
             </li>
-            <li class="no-b">
-                <a href="{{route('Pembelian.tambahPembelian')}}">
-                    <i class="icon icon-plus black-text s-18"></i>
-                    <span>Tambahkan Pembelian</span>
-                </a>
-            </li>
+
             <li class="no-b">
                 <a href="{{route('Pembelian.biaya.index')}}">
                     <i class="icon icon-list yellow-text s-18"></i>
                     <span>Daftar Biaya</span>
+                </a>
+            </li>
+            <li class="no-b">
+                <a href="{{route('Pembelian.tambahPembelian')}}">
+                    <i class="icon icon-plus black-text s-18"></i>
+                    <span>Tambahkan Pembelian</span>
                 </a>
             </li>
             <li class="no-b">

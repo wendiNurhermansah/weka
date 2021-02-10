@@ -52,7 +52,7 @@
                                 <label for="status">Status</label>
                                 <div class="col-md-6 p-0 bg-light">
                                     <select class="select2 form-control r-0 light s-12" name="status" id="status" autocomplete="off">
-                                        <option value="Aktif">Aktif</option>
+                                        <option value="Aktif" >Aktif</option>
                                         <option value="Tidak Aktif">Tidak Aktif</option>
                                     </select>
                                 </div>
