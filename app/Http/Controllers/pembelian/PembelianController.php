@@ -30,8 +30,8 @@ class PembelianController extends Controller
 
             ->addColumn('action', function ($p) {
                 return "
-                     <a href='#' onclick='show(" . $p->id . ")' class='text-danger' title='Show data'><i class='icon-list'></i></a>
-                    <a href='" . route('Orang.pelanggan.edit', $p->id) . "' onclick='edit(" . $p->id . ")' title='Edit Role'><i class='icon-pencil mr-1'></i></a>
+                    <a href='#' onclick='list(" . $p->id . ")' class='text-success' title='Show data'><i class='icon-list'></i></a>
+                    <a href='" . route('Pembelian.pembelian.edit', $p->id) . "' onclick='edit(" . $p->id . ")' title='Edit Role'><i class='icon-pencil mr-1'></i></a>
                     <a href='#' onclick='remove(" . $p->id . ")' class='text-danger' title='Hapus data'><i class='icon-remove'></i></a>";
             })
 
@@ -82,7 +82,8 @@ class PembelianController extends Controller
      */
     public function edit($id)
     {
-        //
+        $Pembelian = Pembelian::findOrfail($id);
+        return view('pembelian.editPembelian', compact('Pembelian'));
     }
 
     /**
@@ -105,6 +106,9 @@ class PembelianController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Pembelian::destroy($id);
+        return response()->json([
+            'message' => 'Data berhasil di hapus.'
+        ]);
     }
 }

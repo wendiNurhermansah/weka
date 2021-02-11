@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="{{ asset('assets/css/jquery-fancybox.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/buttons.dataTables.min.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
+    {{-- kalender --}}
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.css' rel='stylesheet'/>
+    <link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
 
 
 
@@ -83,6 +86,7 @@
     <script src="{{ asset('assets/js/myScript.js') }}"></script>
     <script src="{{ asset('assets/js/jquery-confirm.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery-fancybox.min.js') }}"></script>
+
     <!-- script data tables-->
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
@@ -92,6 +96,8 @@
 
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+    {{-- kalender --}}
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js'></script>
 
     <script src="https://cdn.tiny.cloud/1/bahzlaw51md174lh1m8b240y7rd7571ovae6p1veskzrui7h/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script type="text/javascript">
