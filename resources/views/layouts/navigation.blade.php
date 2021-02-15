@@ -28,5 +28,21 @@
     </li>
 
 
+    <li class="treeview ">
+        <a href="#">
+            <i class="icon icon-package text-lime s-18"></i> <span>Produk</span>
+            <i class="icon icon-angle-left s-18 pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{{ url('product') }}"><i class="icon icon-circle-o"></i>Daftar Produk</a>
+            </li>
+            <li><a href="{{ url('tambahproduk') }}"><i class="icon icon-circle-o"></i>Tambahkan Produk</a>
+            </li>
+            <li><a href="{{ url('importproduk') }}"><i class="icon icon-circle-o"></i>Import Produk</a>
+            </li>
+        </ul>
+    </li>
+
+
 
 </ul>
