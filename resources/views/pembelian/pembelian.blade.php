@@ -39,12 +39,80 @@
                 </div>
 
             </div>
+            <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Beli</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <td>Tanggal</td>
+                                    <td>qwqwqewrwfrwedsda</td>
+                                </tr>
+                                <tr>
+                                    <td>Referensi</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>Catatan</td>
+                                    <td>2</td>
+                                </tr>
+                            </thead>
+
+                        </table>
+
+                        <table class="table" style="margin: 10px;">
+                            <thead class="table-active">
+                              <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Produk</th>
+                                <th scope="col">Kuantitas</th>
+                                <th scope="col">Biaya Satuan</th>
+                                <th scope="col">Subtotal</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                              </tr>
+                            </tbody>
+                            <tfoot class="table-active">
+                                <tr>
+                                  <th>Total</th>
+                                  <th></th>
+                                  <th></th>
+                                  <th></th>
+                                  <th>
+                                      <span>0.00</span>
+                                  </th>
+
+                                </tr>
+                            </tfoot>
+                          </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
+
     </div>
 </div>
 @endsection
 @section('script')
+
     <script type="text/javascript">
+
+
         var table = $('#dataTable').dataTable({
             processing: true,
             serverSide: true,
@@ -66,6 +134,40 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
             ]
     });
+
+
+
+    function remove(id){
+        $.confirm({
+            title: '',
+            content: 'Apakah Anda yakin akan menghapus data ini ?',
+            icon: 'icon icon-question amber-text',
+            theme: 'modern',
+            closeIcon: true,
+            animation: 'scale',
+            type: 'red',
+            buttons: {
+                ok: {
+                    text: "ok!",
+                    btnClass: 'btn-primary',
+                    keys: ['enter'],
+                    action: function(){
+                        $.post("{{ route('Pembelian.pembelian.destroy', ':id') }}".replace(':id', id), {'_method' : 'DELETE'}, function(data) {
+                           table.api().ajax.reload();
+                            if(id == $('#id').val()) add();
+                        }, "JSON").fail(function(){
+                            reload();
+                        });
+                    }
+                },
+                cancel: function(){}
+            }
+        });
+    }
+
+    function list(id){
+        $('#modal1').modal('show');
+    }
 
 </script>
 @endsection

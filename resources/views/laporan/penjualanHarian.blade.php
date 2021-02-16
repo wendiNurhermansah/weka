@@ -60,9 +60,35 @@
 
                     </div>
 
+                    <div>
+                        <div class="container-fluid relative animatedParent animateOnce p-0">
+                            <div class="white p-5" style="min-height:100px; max-height: 80vh;overflow:auto;border:none">
+                                <div class="table-responsive" style="padding-right:5px;min-height:350px">
+                                    <div id='calendar'></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+
+@section('script')
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            themeSystem: 'bootstrap',
+            height: 650
+        });
+        calendar.render();
+    });
+</script>
 @endsection

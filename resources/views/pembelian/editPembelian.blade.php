@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', ' | Tambah Pembelian')
+@section('title', ' | Edit')
 @section('content')
 <div class="page has-sidebar-left height-full">
     <header class="blue accent-3 relative nav-sticky">
@@ -8,7 +8,7 @@
                 <div class="col">
                     <h4>
                         <i class="icon icon-plus mr-1"></i>
-                        TAMBAH PEMBELIAN
+                        EDIT PEMBELIAN
                     </h4>
                 </div>
             </div>
@@ -18,10 +18,11 @@
     <div class="container-fluid my-3">
         <div class="card">
             <div class="card-body">
-                <form class="needs-validation" id="form" method="POST"  novalidate>
-                    {{ method_field('POST') }}
-                    <input type="hidden" id="id" name="id"/>
-                    <h4 id="formTitle">Tambah Pembelian</h4><hr>
+                <form class="needs-validation" action="{{ route('Pembelian.pembelian.update', $Pembelian->id) }}" method="POST" enctype="multipart/form-data">
+                    {{ method_field('PATCH') }}
+                    @csrf
+                    <input type="hidden" id="id" name="id" value="{{$Pembelian->id}}"/>
+                    <h4 id="formTitle">Edit Pembelian</h4><hr>
                     <div class="form-row">
                         <div class="col md-6">
                             <label for="tanggal">Tanggal</label>
@@ -46,6 +47,7 @@
                                         <th>Kuantitas</th>
                                         <th>Biaya Satuan</th>
                                         <th>Sub Total</th>
+
                                         <th width="60">Tindakan</th>
                                     </tr>
 
@@ -56,6 +58,7 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
+
                                             <td></td>
                                         </tr>
 
@@ -65,6 +68,7 @@
                                           <th>Total</th>
                                           <th></th>
                                           <th></th>
+
                                           <th>
                                               <span>0.00</span>
                                           </th>
@@ -110,8 +114,8 @@
 
 
                         <div class="mt-2 col-md-8" style="">
-                            <button type="submit" class="btn btn-primary" id="action">Tambahkan Pembelian<span id="txtAction"></span></button>
-                            <a class="btn btn-danger" onclick="add()" id="reset">Atur Ulang</a>
+                            <button type="submit" class="btn btn-primary" id="action">Rubah Pembelian<span id="txtAction"></span></button>
+
                         </div>
                     </div>
                 </form>
