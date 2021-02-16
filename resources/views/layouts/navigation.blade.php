@@ -30,6 +30,13 @@
     {{-- mater transaksi --}}
 
     <li class="header light"><strong>MASTER TRANSAKSI</strong></li>
+    
+    <li class="treeview">
+        <a href="{{ route('Pos.main.index')}}">
+            <i class="icon icon-apps s-18"></i>
+            <span>POS</span>
+        </a>
+    </li>
 
     <li class="treeview ">
         <a href="#">

@@ -50,6 +50,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('{id}/editPassword', 'PenggunaController@editPassword')->name('editPassword');
     Route::post('{id}/updatePassword', 'PenggunaController@updatePassword')->name('updatePassword');
 
+    Route::prefix('Pos')->namespace('pos')->name('Pos.')->group(function () {
+        //kategori
+
+        //daftar kategori
+        Route::resource('main', 'PosController');
+        Route::post('main/api', 'PosController@api')->name('main.api');
+        Route::post('kategori', 'PosController@kategori')->name('kategori');
+    });
+
     Route::prefix('Kategori')->namespace('kategori')->name('Kategori.')->group(function () {
             //kategori
 
