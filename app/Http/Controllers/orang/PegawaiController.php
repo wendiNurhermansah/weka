@@ -79,7 +79,7 @@ class PegawaiController extends Controller
         $tmpegawai->save();
 
         return response()->json([
-            'massage' => 'Data berhasil tersimpan.'
+            'message' => 'Data berhasil tersimpan.'
         ]);
     }
 
@@ -152,7 +152,7 @@ class PegawaiController extends Controller
     {
         Pegawai::destroy($id);
         return response()->json([
-            'massage' => 'data berhasil di hapus.'
+            'message' => 'data berhasil di hapus.'
         ]);
     }
 }

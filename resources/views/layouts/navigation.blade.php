@@ -30,7 +30,7 @@
     {{-- mater transaksi --}}
 
     <li class="header light"><strong>MASTER TRANSAKSI</strong></li>
-    
+
     <li class="treeview">
         <a href="{{ route('Pos.main.index')}}">
             <i class="icon icon-apps s-18"></i>
@@ -40,7 +40,7 @@
 
     <li class="treeview ">
         <a href="#">
-            <i class="icon icon-apps text-lime s-18"></i> <span>Kategori</span>
+            <i class="icon icon-folder-open text-lime s-18"></i> <span>Kategori</span>
             <i class="icon icon-angle-left s-18 pull-right"></i>
         </a>
         <ul class="treeview-menu">
@@ -59,7 +59,7 @@
             </li>
             <li class="no-b">
                 <a href="{{ route('Kategori.toko.index') }}">
-                    <i class="icon icon-circle green-text s-18"></i>
+                    <i class="icon icon-shopping-bag green-text s-18"></i>
                     <span>Toko</span>
                 </a>
             </li>

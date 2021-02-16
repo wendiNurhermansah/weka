@@ -53,8 +53,9 @@ class TambahkategoriController extends Controller
         $tmkategori->save();
 
         return response()->json([
-            'massage' => 'Data berhasil tersimpan.'
+            'message' => 'Data berhasil tersimpan.'
         ]);
+
     }
 
     /**

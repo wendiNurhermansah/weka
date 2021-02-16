@@ -23,14 +23,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/jquery-fancybox.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/buttons.dataTables.min.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
-<<<<<<< HEAD
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-=======
     {{-- kalender --}}
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.css' rel='stylesheet'/>
     <link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
 
->>>>>>> 547538ad81106c7305324a870f9bd490359105ee
 
 
 </head>
