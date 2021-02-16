@@ -6,7 +6,7 @@
             <span>Dashboard</span>
         </a>
     </li>
-
+    @can('Role')
     <li class="header light"><strong>MASTER ROLES</strong></li>
     <li>
         <a href="{{ route('role.index') }}">
@@ -27,7 +27,10 @@
         </a>
     </li>
 
+    @endcan
+
     {{-- mater transaksi --}}
+    @can('Umum')
 
     <li class="header light"><strong>MASTER TRANSAKSI</strong></li>
 
@@ -233,4 +236,6 @@
             </li>
         </ul>
     </li>
+
+    @endcan
 </ul>
