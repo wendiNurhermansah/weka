@@ -20,7 +20,7 @@ class PosController extends Controller
     protected $route = 'Pos.main.';
     protected $view  = 'pos.';
     protected $title = 'POS';
-    protected $path  = '/images/';
+    protected $path  = '/images/ava/';
 
     public function index()
     {
@@ -29,12 +29,14 @@ class PosController extends Controller
         $path = $this->path;
 
         $pelanggan = $this->pelanggan();
+        $kartu = $this->kartu();
         // dd(Core::count());
         return view($this->view . 'index', compact(
             'route',
             'title',
             'path', 
-            'pelanggan'
+            'pelanggan',
+            'kartu'
         ));
     }
 
@@ -42,6 +44,12 @@ class PosController extends Controller
     {
         $pelanggan = Pelanggan::all();
         return $pelanggan;
+    }
+
+    public function kartu()
+    {
+        $kartu = Kategori::all();
+        return $kartu;
     }
 
     public function kategori(Request $request)

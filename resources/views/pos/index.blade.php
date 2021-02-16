@@ -120,7 +120,17 @@
                 </div>
             </div>
             <div class="col-md-7">
-                <div class="product-card" style="overflow: hidden; width: auto"></div>
+                <div class="product-card" style="overflow: hidden; width: auto">
+                    @foreach ($kartu as $k)
+                      <div class="card text-left">
+                        <img class="card-img-top" src="{{asset($path.$k->gambar)}}" alt="">
+                        <div class="card-body">
+                          <h4 class="card-title">{{$k->nama}}</h4>
+                          <p class="card-text">harga</p>
+                        </div>
+                      </div>
+                    @endforeach
+                </div>
                 <div class="product-nav row text-white">
                     <a class="btn btn-secondary col-md-4 font-weight-bold"><</a>
                     <a class="btn btn-success col-md-4 font-weight-bold"><i class="icon icon-card"></i> Sell Gift Card</a>
