@@ -93,10 +93,10 @@ class ProductsController extends Controller
     //  * @param  \App\Models\Employee  $employee
     //  * @return \Illuminate\Http\Response
     //  */
-    // public function show(Employee $employee)
-    // {
-    //     return view ('namapegawai.show', compact ('employee'));
-    // }
+    public function show(product $produk)
+    {
+        return view ('Produk.edit', compact ('produk'));
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -104,17 +104,17 @@ class ProductsController extends Controller
     //  * @param  \App\Models\Employee  $employee
     //  * @return \Illuminate\Http\Response
     //  */
-    // public function edit(Employee $employee)
-    // {
-    //     return view('namapegawai.edit', compact('employee'));
-    // }
+    public function edit(product $produk)
+    {
+        return view ('Produk.edit', compact('produk'));
+    }
 
     /**
      * Update the specified resource in storage.
      *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  \App\Models\product
-    //  * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\product
+     * @return \Illuminate\Http\Response
     //  */
     // public function update(Request $request, produks $produk)
     // {
@@ -149,10 +149,11 @@ class ProductsController extends Controller
     //  * @param  \App\Models\produks  $employee
     //  * @return \Illuminate\Http\Response
     //  */
-    // public function destroy(Employee $produk)
-    // {
-    //     Employee::destroy($produk -> id);
-    //     return redirect('/produk')->with('status', 'Data Berhasil Dihapus');
-    // }
+    public function destroy($id)
+    {
+        $produks = product::find($id);
+        $produks -> delete();
+        return redirect('/product')->with('status', 'Data Berhasil Dihapus');
+    }
 // }
     }

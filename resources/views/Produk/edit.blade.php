@@ -1,50 +1,79 @@
-<div class="row">
-    <div class="col-xs-4">
-        <img id="pr-image" src="" alt="Minion Banana" class="img-responsive img-thumbnail">
-    </div>
-    <div class="col-xs-8">
-        <div class="table-responsive">
-            <table class="table table-borderless table-striped dfTable table-right-left">
-                <tbody>
-                    <tr>
-                        <td class="col-xs-5">Jenis Produk</td>
-                        <td class="col-xs-7">Standar</td>
-                    </tr>
-                    <tr>
-                        <td>Nama Produk</td>
-                        <td>Kentang</td>
-                    </tr>
-                    <tr>
-                        <td>Kode Produk</td>
-                        <td>KTG</td>
-                    </tr>
-                    <tr>
-                        <td>Kategori</td>
-                        <td>General (G01)</td>
-                    </tr>
-                    <tr><td>Biaya</td><td>10.00</td></tr>
-                    <tr>
-                        <td>Harga</td>
-                        <td>15.00</td>
-                    </tr>
-                    <tr>
-                        <td>Tarif Pajak</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>Metode Pajak</td>
-                        <td>Inklusif</td>
-                    </tr>
-                                                    <tr>
-                        <td>Kuantitas</td>
-                        <td>7.00</td>
-                    </tr>
-                                                </tbody>
-            </table>
+@extends('layouts.app')
+@section('title', 'Edit Produk')
+@section('content')
+<div class="page has-sidebar-left height-full">
+    <header class="blue accent-3 relative nav-sticky">
+        <div class="container-fluid text-white">
+            <div class="row p-t-b-10 ">
+                <div class="col">
+                    <h4>
+                        <i class="icon icon-dashboard"></i>
+                        EDIT PRODUK
+                    </h4>
+                </div>
+            </div>
         </div>
+    </header>
 
-                    </div>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-10">
+                <form method="POST" action="/product/{{ $produk->id }}">
+                    @method('patch')
+                    @csrf
+                        <div class="form-group">
+                            <label for="ketik">Ketik</label>
+                            <select class="custom-select" name="ketik">
+                                <option selected>Standar</option>
+                                <option value="1">Combo</option>
+                                <option value="2">Layanan</option>
+                            </select>
+                        </div>
 
-<div class="col-xs-12">
-    <div class="panel panel-primary"><div class="panel-heading">Detail Produk</div><div class="panel-body">A toy for children aged 2 - 6</div></div>            </div>
+                        <div class="form-group">
+                            <label for="nama">Nama Makanan</label>
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukkan Nama" name="nama" value="{{$produk -> nama}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="kategori">Kategori</label>
+                            <select class="custom-select" name="kategori">
+                                <option selected>Makanan</option>
+                                <option value="1">Minuman</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="kuantitas">Kuantitas</label>
+                            <input type="text" class="form-control @error('kuantitas') is-invalid @enderror" id="kuantitas" placeholder="Masukkan kuantitas" name="kuantitas" value="{{$produk -> kuantitas}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pajak">Pajak</label>
+                            <input type="text" class="form-control @error('pajak') is-invalid @enderror" id="pajak" placeholder="Masukkan pajak" name="pajak" value="{{$produk -> pajak}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="metode">Metode</label>
+                            <input type="text" class="form-control @error('metode') is-invalid @enderror" id="metode" placeholder="Masukkan metode" name="metode" value="{{$produk -> metode}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="biaya">Biaya</label>
+                            <input type="text" class="form-control @error('biaya') is-invalid @enderror" id="biaya" placeholder="Masukkan biaya" name="biaya" value="{{$produk -> biaya}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="harga">Harga</label>
+                            <input type="text" class="form-control @error('kuantitas') is-invalid @enderror" id="kuantitas" placeholder="Masukkan kuantitas" name="kuantitas" value="{{$produk -> kuantitas}}">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Edit Data</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
+@endsection

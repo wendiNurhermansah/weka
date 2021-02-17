@@ -50,9 +50,13 @@
                 <td><a href="https://spos.tecdiary.net/products/view/2" title="Lihat" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#exampleModal"><i class="icon icon-file"></i></a>
                     <a href="https://spos.tecdiary.net/products/single_barcode/2" title="Cetak Barcode" class="tip btn btn-default btn-xs" data-toggle="ajax-modal"><i class="fa fa-print"></i></a>
                     <a href="https://spos.tecdiary.net/products/single_label/2" title="Cetak Label" class="tip btn btn-default btn-xs" data-toggle="ajax-modal"><i class="fa fa-print"></i></a>
-                    <a class="tip image btn btn-primary btn-xs" id="Minion Banana (TOY02)" href="https://spos.tecdiary.net/uploads/213c9e007090ca3fc93889817ada3115.png" title="Lihat Gambar"><i class="fa fa-picture-o"></i></a>
-                    <a href="https://spos.tecdiary.net/products/edit/2" title="Edit Produk" class="tip btn btn-warning btn-xs"><i class="fa fa-edit"></i></a>
-                    <a href="https://spos.tecdiary.net/products/delete/2" onclick="return confirm('Anda akan menghapus produk, silakan klik ok untuk menghapus.')" title="Hapus Produk" class="tip btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+                    <a href="/product/{{ $product->id }}/edit" class="btn btn-primary" >Edit</a>
+                    {{-- <a href="{{route('product.destroy')}}" onclick="return confirm('Anda akan menghapus produk, silakan klik ok untuk menghapus.')" title="Hapus Produk" class="tip btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a> --}}
+                    <form action="/product/{{$product->id}}" method="post" class="d-inline">
+                        @method('delete')
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                 </td>
 
             </tr>
