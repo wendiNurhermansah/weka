@@ -125,23 +125,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('laporanPendaftaran', 'LaporanController@laporanPendaftaran')->name('laporanPendaftaran');
             Route::get('laporanProduk', 'LaporanController@laporanProduk')->name('laporanProduk');
 
-// <<<<<<< HEAD
-    // Produk
-    // Route::get('/product', 'ProductsController@index');;
-    // Route::get('/tambahproduk', 'AddProductsController@index');
-    // Route::post('/product/add', 'AddProductsController@store')->name('addProduct');
-    // Route::get('/importproduk', 'ImportProductsController@index');
-    Route::post('product/api', 'productsController@api')->name('product.api');
-    Route::resource('product', 'ProductsController');
 
-    // Route::resource('produk', 'productsController');
-
-
-
-// =======
     });
-// >>>>>>> d074b98a9dd68ccd22cd2efea279bf4942712eaa
-// <<<<<<< HEAD
+
     // Produk
     // Route::get('/product', 'ProductsController@index');;
     // Route::get('/tambahproduk', 'AddProductsController@index');

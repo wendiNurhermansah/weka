@@ -46,7 +46,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        // return view('namapegawai.create');
+        return view('Produk.TambahProduk');
 
     }
 
