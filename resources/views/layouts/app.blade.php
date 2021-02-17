@@ -47,15 +47,8 @@
                     <div>
 
                         <div class="float-left info mt-1">
-<<<<<<< HEAD
                             <h6 class="font-weight-light mb-1"></h6>
                             <a class="text-primary"><i class="icon-circle text-primary blink mr-1"></i>Admin</a>
-=======
-                            <h6 class="font-weight-light mb-1">
-                                {{ Auth::user()->username }}
-                            </h6>
-                            <a class="text-primary"><i class="icon-circle text-primary blink mr-1"></i>Online</a>
->>>>>>> d074b98a9dd68ccd22cd2efea279bf4942712eaa
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -109,7 +102,6 @@
     <script type="text/javascript">
         $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
     </script>
-<<<<<<< HEAD
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
@@ -119,11 +111,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
-=======
-
-    {{-- <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script> --}}
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
->>>>>>> d074b98a9dd68ccd22cd2efea279bf4942712eaa
     @yield('script')
 
 
