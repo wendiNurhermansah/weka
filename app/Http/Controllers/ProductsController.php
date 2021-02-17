@@ -104,8 +104,9 @@ class ProductsController extends Controller
     //  * @param  \App\Models\Employee  $employee
     //  * @return \Illuminate\Http\Response
     //  */
-    public function edit(product $produk)
+    public function edit(product $produk, $id)
     {
+        $produk = product::where('id', $id)->first();
         return view ('Produk.edit', compact('produk'));
     }
 

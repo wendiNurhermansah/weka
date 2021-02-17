@@ -32,7 +32,7 @@
 
                         <div class="form-group">
                             <label for="nama">Nama Makanan</label>
-                            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukkan Nama" name="nama" value="{{$produk -> nama}}">
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukkan Nama" name="nama" value="{{$produk->nama}}">
                         </div>
 
                         <div class="form-group">
