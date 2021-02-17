@@ -122,12 +122,7 @@
                 </a>
             </li>
 
-    <li class="treeview ">
-        <a href="#">
-            <i class="icon icon-package text-lime s-18"></i> <span>DLL</span>
-            <i class="icon icon-angle-left s-18 pull-right"></i>
-        </a>
-        <ul class="treeview-menu">
+
             <li class="no-b">
                 <a href="{{route('Orang.tambahpegawai')}}">
                     <i class="icon icon-plus red-text s-18"></i>
@@ -180,14 +175,13 @@
                     <i class="icon icon-plus red-text s-18"></i>
                     <span>Tambah Biaya</span>
                 </a>
-{{-- >>>>>>> d074b98a9dd68ccd22cd2efea279bf4942712eaa --}}
             </li>
         </ul>
     </li>
 
-{{-- <<<<<<< HEAD --}}
 
-{{-- ======= --}}
+
+
     <li class="treeview ">
         <a href="#">
             <i class="icon icon-payment text-lime s-18"></i> <span>Kartu Hadiah</span>
@@ -260,7 +254,7 @@
             </li>
         </ul>
     </li>
-{{-- >>>>>>> d074b98a9dd68ccd22cd2efea279bf4942712eaa --}}
+
 
     @endcan
 </ul>
