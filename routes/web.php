@@ -15,8 +15,16 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/dashboard', 'DashboardController@index');
 
 
     //Role
@@ -42,7 +50,82 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::get('{id}/editPassword', 'PenggunaController@editPassword')->name('editPassword');
     Route::post('{id}/updatePassword', 'PenggunaController@updatePassword')->name('updatePassword');
 
+    Route::prefix('Pos')->namespace('pos')->name('Pos.')->group(function () {
 
+        //Pos
+        Route::resource('main', 'PosController');
+        Route::post('main/api', 'PosController@api')->name('main.api');
+        Route::post('kategori', 'PosController@kategori')->name('kategori');
+    });
+
+    Route::prefix('Kategori')->namespace('kategori')->name('Kategori.')->group(function () {
+
+            //daftar kategori
+            Route::resource('daftarkategori', 'DaftarkategoriController');
+            Route::post('daftarketegori/api', 'DaftarkategoriController@api')->name('daftarkategori.api');
+
+
+            //tambah kategori
+            Route::resource('tambahkategori', 'TambahkategoriController');
+
+            //import
+            Route::resource('import', 'ImportController');
+
+            //Toko
+            Route::resource('toko', 'TokoController');
+            Route::post('toko/api', 'TokoController@api')->name('toko.api');
+            Route::get('tambahToko', 'TokoController@tambahToko')->name('tambahToko');
+
+     });
+
+    Route::prefix('Orang')->namespace('orang')->name('Orang.')->group(function () {
+
+            //pegawai
+            Route::resource('pegawai', 'PegawaiController');
+            Route::post('pegawai/api', 'PegawaiController@api')->name('pegawai.api');
+            Route::get('tambahpegawai', 'PegawaiController@tambahpegawai')->name('tambahpegawai');
+
+            //pelanggan
+            Route::resource('pelanggan', 'PelangganController');
+            Route::post('pelanggan/api', 'PelangganController@api')->name('pelanggan.api');
+            Route::get('tambahpelanggan', 'PelangganController@tambahpelanggan')->name('tambahpelanggan');
+
+            //pemasok
+            Route::resource('pemasok', 'PemasokController');
+            Route::post('pemasok/api', 'PemasokController@api')->name('pemasok.api');
+            Route::get('tambahpemasok', 'PemasokController@tambahpemasok')->name('tambahpemasok');
+
+
+    });
+
+    Route::prefix('Pembelian')->namespace('pembelian')->name('Pembelian.')->group(function () {
+            //pembelian
+            Route::resource('pembelian', 'PembelianController');
+            Route::post('pembelian/api', 'PembelianController@api')->name('pembelian.api');
+            Route::get('tambahPembelian', 'PembelianController@tambahPembelian')->name('tambahPembelian');
+
+            //biaya
+            Route::resource('biaya', 'BiayaController');
+            Route::post('biaya/api', 'BiayaController@api')->name('biaya.api');
+            Route::get('tambahbiaya', 'BiayaController@tambahbiaya')->name('tambahbiaya');
+
+    });
+
+    Route::prefix('Hadiah')->namespace('hadiah')->name('Hadiah.')->group(function () {
+            Route::resource('hadiah', 'HadiahController');
+            Route::post('hadiah/api', 'HadiahController@api')->name('hadiah.api');
+            Route::get('tambahHadiah', 'HadiahController@tambahHadiah')->name('tambahHadiah');
+    });
+
+    Route::prefix('Laporan')->namespace('laporan')->name('Laporan.')->group(function () {
+            Route::get('PenjualanHarian', 'LaporanController@PenjualanHarian')->name('PenjualanHarian');
+            Route::get('PenjualanBulanan', 'LaporanController@PenjualanBulanan')->name('PenjualanBulanan');
+            Route::get('laporanPenjualan', 'LaporanController@laporanPenjualan')->name('laporanPenjualan');
+            Route::get('laporanPembayaran', 'LaporanController@laporanPembayaran')->name('laporanPembayaran');
+            Route::get('laporanPendaftaran', 'LaporanController@laporanPendaftaran')->name('laporanPendaftaran');
+            Route::get('laporanProduk', 'LaporanController@laporanProduk')->name('laporanProduk');
+
+// <<<<<<< HEAD
     // Produk
     // Route::get('/product', 'ProductsController@index');;
     // Route::get('/tambahproduk', 'AddProductsController@index');
@@ -55,8 +138,21 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 
+// =======
+    });
+// >>>>>>> d074b98a9dd68ccd22cd2efea279bf4942712eaa
+// <<<<<<< HEAD
+    // Produk
+    // Route::get('/product', 'ProductsController@index');;
+    // Route::get('/tambahproduk', 'AddProductsController@index');
+    // Route::post('/product/add', 'AddProductsController@store')->name('addProduct');
+    // Route::get('/importproduk', 'ImportProductsController@index');
+    Route::post('product/api', 'productsController@api')->name('product.api');
+    Route::resource('product', 'ProductsController');
+
+    // Route::resource('produk', 'productsController');
 
 
-
+});
 
 
