@@ -20,7 +20,7 @@ class PosController extends Controller
     protected $route = 'Pos.main.';
     protected $view  = 'pos.';
     protected $title = 'POS';
-    protected $path  = '/images/ava/';
+    protected $path  = 'kategori/images/ava/';
 
     public function index()
     {

@@ -5,13 +5,12 @@
     .product-card {
         position: static;
         width: auto;
-        text-align: center;
-        height: 90%;
+        height: 390px;
     }
 
     .product-nav{
-        position: static;
-        height: 10%;
+        position: relative;
+        height: 10px;
     }
 </style>
 @endsection
@@ -120,24 +119,60 @@
                 </div>
             </div>
             <div class="col-md-7">
-                <div class="product-card" style="overflow: hidden; width: auto">
+                <div class="product-card">
+                    {{-- <div class="row">
                     @foreach ($kartu as $k)
-                      <div class="card text-left">
-                        <img class="card-img-top" src="{{asset($path.$k->gambar)}}" alt="">
-                        <div class="card-body">
-                          <h4 class="card-title">{{$k->nama}}</h4>
-                          <p class="card-text">harga</p>
+                        <div class="col-md-2">
+                            <div class="card text-center">
+                                <img class="card-img-top" src="{{asset($path.$k->gambar)}}" alt="" width="40" height="80">
+                                <div class="card-body">
+                                  <p class="card-title"><small>{{$k->nama}}</small></p>
+                                  <p class="card-text"><small>harga</small></p>
+                                </div>
+                            </div>
                         </div>
-                      </div>
+                    @endforeach
+                    </div> --}}
+                    @foreach ($kartu as $k)
+                    <button type="button" class="col-md-2 btn btn-light m-1">
+                        <span>
+                            <img src="{{asset($path.$k->gambar)}}" alt=""  width="40" height="80">
+                        </span>
+                        <br>
+                        <span class="">
+                            <span>{{$k->nama}}</span>
+                        </span>
+                    </button>
                     @endforeach
                 </div>
                 <div class="product-nav row text-white">
                     <a class="btn btn-secondary col-md-4 font-weight-bold"><</a>
-                    <a class="btn btn-success col-md-4 font-weight-bold"><i class="icon icon-card"></i> Sell Gift Card</a>
+                    <button class="btn btn-success col-md-4 font-weight-bold" data-toggle="modal" data-target="#myModal"><i class="icon icon-card"></i> Sell Gift Card</button>
+                    {{-- modal --}}
                     <a class="btn btn-secondary col-md-4 font-weight-bold">></a>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="text-black modal-title">Modal Header</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+      
     </div>
 </div>
 @endsection
