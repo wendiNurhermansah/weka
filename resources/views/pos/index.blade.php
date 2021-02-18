@@ -147,7 +147,9 @@
                 </div>
                 <div class="product-nav row text-white">
                     <a class="btn btn-secondary col-md-4 font-weight-bold"><</a>
-                    <button class="btn btn-success col-md-4 font-weight-bold" data-toggle="modal" data-target="#myModal"><i class="icon icon-card"></i> Sell Gift Card</button>
+                    <button class="btn btn-success col-md-4 font-weight-bold" data-toggle="modal" data-target="#myModal">
+                        <i class="icon icon-folder"></i>Sell Gift Card
+                    </button>
                     {{-- modal --}}
                     <a class="btn btn-secondary col-md-4 font-weight-bold">></a>
                 </div>
@@ -161,11 +163,15 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-            <h4 class="text-black modal-title">Modal Header</h4>
+            <h4 class="text-black modal-title"><i class="icon icon-folder"></i>  Sell Gift Card</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <p>Some text in the modal.</p>
+          <p>Please fill in the information below</p>
+          <div class="form-group">
+            <label for="nomorKartu">Card No</label>
+             <input class="form-control" type="text" value="" id="nomorKartu" name="nomorKartu">
+          </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -180,6 +186,13 @@
 <script type="text/javascript">
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $(document).ready(function(){
+            $("#nomorKartu").attr('maxlength','16');
+            // limit nomor kartu
+            $("#nomorKartu").keypress(function (e) {
+                if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
+            });
+
+            // ajax get product
             $( "#kategori" ).autocomplete({
                 source: function( request, response ) {
                     // Fetch data

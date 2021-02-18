@@ -22,7 +22,8 @@
                 <h4>Tautan Cepat :</h4>
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-1" style=" margin:3px; ">
+                        {{-- wendy --}}
+                        {{-- <div class="col-md-1" style=" margin:3px; ">
                             <a href="">
                             <div class="card" style="height: 4rem; width: 6rem;">
                                 <div class="card-body" style="background-color: rgba(183, 194, 194, 0.865);">
@@ -157,9 +158,74 @@
                                 </div>
                             </div>
                             </a>
-                        </div>
+                        </div> --}}
 
-
+                            <a href="{{ route('Pos.main.index')}}" class="btn btn-light m-2 border border-secondary">
+                                <div class="justify-content-center">
+                                    <small><i class="icon-th s-48 text-secondary"></i></small>
+                                </div>
+                                <span class="text-secondary"><small>POS</small></span>
+                            </a>
+                            <a href="" class="btn btn-light m-2 border border-secondary">
+                                <div class="justify-content-center">
+                                    <small><i class="icon-barcode s-48 text-secondary"></i></small>
+                                </div>
+                                <span class="text-secondary"><small>Produk</small></span>
+                            </a>
+                            <a href="" class="btn btn-light m-2 border border-secondary">
+                                <div class="justify-content-center">
+                                    <small><i class="icon-shopping-cart s-48 text-secondary"></i></small>
+                                </div>
+                                <span class="text-secondary"><small>penjualan</small></span>
+                            </a>
+                            <a href="" class="btn btn-light m-2 border border-secondary">
+                                <div class="justify-content-center">
+                                    <small><i class="icon-bell s-48 text-secondary"></i></small>
+                                </div>
+                                <span class="text-secondary"><small>Tagihan</small></span>
+                            </a>   
+                            <a href="" class="btn btn-light m-2 border border-secondary">
+                                <div class="justify-content-center">
+                                    <small><i class="icon-folder-open s-48 text-secondary"></i></small>
+                                </div>
+                                <span class="text-secondary"><small>Kategori</small></span>
+                            </a> 
+                            <a href="" class="btn btn-light m-2 border border-secondary">
+                                <div class="justify-content-center">
+                                    <small><i class="icon-credit-card s-48 text-secondary"></i></small>
+                                </div>
+                                <span class="text-secondary"><small>Hadiah</small></span>
+                            </a>
+                            <a href="" class="btn btn-light m-2 border border-secondary">
+                                <div class="justify-content-center">
+                                    <small><i class="icon-users s-48 text-secondary"></i></small>
+                                </div>
+                                <span class="text-secondary"><small>Pelanggan</small></span>
+                            </a>
+                            <a href="" class="btn btn-light m-2 border border-secondary">
+                                <div class="justify-content-center">
+                                    <small><i class="icon-cogs s-48 text-secondary"></i></small>
+                                </div>
+                                <span class="text-secondary"><small>Pengaturan</small></span>
+                            </a>  
+                            <a href="" class="btn btn-light m-2 border border-secondary">
+                                <div class="justify-content-center">
+                                    <small><i class="icon-bar-chart-o s-48 text-secondary"></i></small>
+                                </div>
+                                <span class="text-secondary"><small>Laporan</small></span>
+                            </a>  
+                            <a href="" class="btn btn-light m-2 border border-secondary">
+                                <div class="justify-content-center">
+                                    <small><i class="icon-users s-48 text-secondary"></i></small>
+                                </div>
+                                <span class="text-secondary"><small>Pengguna</small></span>
+                            </a>
+                            <a href="" class="btn btn-light m-2 border border-secondary">
+                                <div class="justify-content-center">
+                                    <small><i class="icon-database s-48 text-secondary"></i></small>
+                                </div>
+                                <span class="text-secondary"><small>Backup</small></span>
+                            </a>                
                     </div>
 
                 </div>
