@@ -81,7 +81,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-    
+
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -159,7 +159,7 @@
 </div>
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
-    
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -178,7 +178,7 @@
             <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
-      
+
     </div>
 </div>
 @endsection
@@ -239,7 +239,7 @@
             ]
         });
 
-    
+
 
 //   $( function() {
 //     var availableTags =
@@ -250,7 +250,7 @@
 //       source: availableTags
 //     });
 //   } );
-    
+
 
 </script>
 @endsection

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DataTables;
 use App\Models\Pembelian;
+use App\Models\Kategori;
 
 class PembelianController extends Controller
 {
@@ -19,8 +20,35 @@ class PembelianController extends Controller
         return view('pembelian.pembelian');
     }
 
+
+
     public function tambahPembelian(){
         return view ('pembelian.tambahPembelian');
+    }
+
+    public function produk(Request $request)
+    {
+        $search = $request->search;
+
+        if($search == ''){
+           $kategori = Kategori::orderby('nama','asc')
+                        ->select('nama')
+                        ->limit(5)
+                        ->get();
+        }else{
+           $kategori = Kategori::orderby('nama','asc')
+                        ->select('nama')
+                        ->where('nama', 'like', '%' .$search . '%')
+                        ->limit(5)
+                        ->get();
+        }
+
+        $response = array();
+        foreach($kategori as $k){
+           $response[] = array("label"=>$k->nama);
+        }
+
+        return response()->json($response);
     }
 
     public function api()

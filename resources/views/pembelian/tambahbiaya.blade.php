@@ -27,7 +27,7 @@
                         <div class="col-md-12">
                             <div class="form-group col-md-5">
                                 <label for="tanggal">Tanggal</label>
-                                <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" placeholder="" name="tanggal" value="{{ old('tanggal') }}" required>
+                                <input type="datetime-local" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" placeholder="" name="tanggal" value="{{ old('tanggal') }}" required>
 
                             </div>
                             <div class="form-group col-md-5">
@@ -41,19 +41,19 @@
 
                             </div>
                             <div class="form-group col-md-5">
-                                <label for="lampiran">lampiran</label>
-                                <input type="file" class="form-control @error('lampiran') is-invalid @enderror" id="lampiran" placeholder="" name="lampiran" value="{{ old('lampiran') }}" required>
+                                <label for="dibuat">Dibuat Oleh</label>
+                                <input type="text" class="form-control @error('dibuat') is-invalid @enderror" id="dibuat" placeholder="" name="dibuat" value="{{ old('dibuat') }}" required>
 
                             </div>
                             <div class="form-group col-md-5">
                                 <label for="catatan">Catatan</label>
-                                <textarea name="" id="" cols="30" rows="10"></textarea>
+                                <textarea name="catatan" id="catatan" cols="30" rows="10" required></textarea>
 
                             </div>
 
                             <div class="mt-2 col-md-8" style="">
                                 <button type="submit" class="btn btn-primary btn-sm" id="action">Tambah Biaya<span id="txtAction"></span></button>
-
+                                <a class="btn btn-sm" onclick="add()" id="reset">Reset</a>
                             </div>
                         </div>
                     </div>
@@ -73,6 +73,60 @@
       tinycomments_mode: 'embedded',
       tinycomments_author: 'Author name',
    });
+
+   function reset(){
+        $('#form').trigger('reset');
+        $('#preview').attr({ 'src': '-', 'alt': ''});
+        $('#changeText').html('Browser Image')
+    }
+
+        function add(){
+        save_method = "add";
+        $('#form').trigger('reset');
+        $('#formTitle').html('Tambah Data');
+        $('input[name=_method]').val('POST');
+        $('#txtAction').html('');
+        $('#reset').show();
+        $('#name').focus();
+    }
+
+
+
+    $('#form').on('submit', function (e) {
+        if ($(this)[0].checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        else{
+            $('#alert').html('');
+            url = "{{ route('Pembelian.biaya.store') }}",
+            $.ajax({
+                url : url,
+                type : 'POST',
+                data: new FormData(($(this)[0])),
+                contentType: false,
+                processData: false,
+                success : function(data) {
+                    console.log(data);
+                    $('#alert').html("<div role='alert' class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Success!</strong> " + data.message + "</div>");
+                    add();
+                },
+                error : function(data){
+                    err = '';
+                    respon = data.responseJSON;
+                    if(respon.errors){
+                        $.each(respon.errors, function( index, value ) {
+                            err = err + "<li>" + value +"</li>";
+                        });
+                    }
+                    $('#alert').html("<div role='alert' class='alert alert-danger alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Error!</strong> " + respon.message + "<ol class='pl-3 m-0'>" + err + "</ol></div>");
+                }
+            });
+            return false;
+        }
+        $(this).addClass('was-validated');
+    });
+
     </script>
 @endsection
 
