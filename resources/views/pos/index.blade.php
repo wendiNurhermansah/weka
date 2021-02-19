@@ -63,7 +63,7 @@
                         <input type="text" id="note" name="note" class="form-control" placeholder="Rerefence Note">
                     </div>
                     <div class="form-group">
-                            <input class="form-control" type="text" id="kategori" placeholder="Search product by code or name, you can scan barcode too">
+                            <input class="form-control" type="text" id="kategori" onclick="" placeholder="Search product by code or name, you can scan barcode too">
                             {{-- <ul class="list-group">
                                 @foreach ($kategori as $k)
                                 <li class="list-group-item">{{$k->nama}}</li>
@@ -81,7 +81,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-    
+                                <td></td>
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -105,7 +105,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <a href="" class="btn btn-primary h-50">Hold</a>
+                            <a href="" class="btn btn-primary h-50" data-toggle="modal" data-target="#hold">Hold</a>
                             <a href="" class="btn btn-primary h-50">Print Order</a>
                         </div>
                         <div class="col-md-4">
@@ -135,19 +135,20 @@
                     </div> --}}
                     @foreach ($kartu as $k)
                     <button type="button" class="col-md-2 btn btn-light m-1">
-                        <span>
+                        <div class="col-md-12">
                             <img src="{{asset($path.$k->gambar)}}" alt=""  width="40" height="80">
-                        </span>
+                        </div>
+                        <div class="col-md-4">
+                            {{$k->nama}}
+                        </div>
+                        
                         <br>
-                        <span class="">
-                            <span>{{$k->nama}}</span>
-                        </span>
                     </button>
                     @endforeach
                 </div>
                 <div class="product-nav row text-white">
                     <a class="btn btn-secondary col-md-4 font-weight-bold"><</a>
-                    <button class="btn btn-success col-md-4 font-weight-bold" data-toggle="modal" data-target="#myModal">
+                    <button class="btn btn-success col-md-4 font-weight-bold" data-toggle="modal" data-target="#hadiah">
                         <i class="icon icon-folder"></i>Sell Gift Card
                     </button>
                     {{-- modal --}}
@@ -157,7 +158,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="myModal" role="dialog">
+<div class="modal fade" id="hadiah" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -169,8 +170,21 @@
         <div class="modal-body">
           <p>Please fill in the information below</p>
           <div class="form-group">
-            <label for="nomorKartu">Card No</label>
+            <label for="nomorKartu" class="font-weight-bold">Card No</label>
              <input class="form-control" type="text" value="" id="nomorKartu" name="nomorKartu">
+             <button type="button" onclick="randomNomorKartu()" class="btn btn-secondary">&#9762;</button>
+          </div>
+          <div class="form-group">
+            <label for="nomorKartu" class="font-weight-bold">Value</label>
+             <input class="form-control" type="text" value="" id="nomorKartu" name="nomorKartu">
+          </div>
+          <div class="form-group">
+            <label for="nomorKartu" class="font-weight-bold">Price</label>
+             <input class="form-control" type="number" value="" id="nomorKartu" name="nomorKartu">
+          </div>
+          <div class="form-group">
+            <label for="nomorKartu" class="font-weight-bold">Expiry Date</label>
+             <input class="form-control" type="date" value="" id="nomorKartu" name="nomorKartu">
           </div>
         </div>
         <div class="modal-footer">
@@ -181,13 +195,48 @@
       
     </div>
 </div>
+<div class="modal fade" id="hold" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="text-black modal-title">Suspend Sale</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Type Reference Note</p>
+            <div class="form-group">
+                <label for="nomorKartu" class="font-weight-bold">Reference Note</label>
+                <input class="form-control" type="text" value="" id="nomorKartu" name="nomorKartu">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+</div>
 @endsection
 @section('script')
 <script type="text/javascript">
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+        function randomNomorKartu() {
+            var random = Math.floor((Math.random() * 10000000000000000) + 1);
+            $('#nomorKartu').val(random);
+        }
+
+        function tambahProduk() {
+            
+            $('#nomorKartu').val(random);
+        }
+
         $(document).ready(function(){
+            
             $("#nomorKartu").attr('maxlength','16');
             // limit nomor kartu
+
             $("#nomorKartu").keypress(function (e) {
                 if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
             });

@@ -21,158 +21,20 @@
             <div class="card-body">
                 <h4>Tautan Cepat :</h4>
                 <div class="container">
-                    <div class="row">
-                        {{-- wendy --}}
-                        {{-- <div class="col-md-1" style=" margin:3px; ">
-                            <a href="">
-                            <div class="card" style="height: 4rem; width: 6rem;">
-                                <div class="card-body" style="background-color: rgba(183, 194, 194, 0.865);">
-                                        <div class="" style="color:white;">
-                                            <span class="icon icon-th s-48"></span>
-                                            <span style="margin: 10px;">POS</span>
-                                        </div>
-                                </div>
-                            </div>
-                            </a>
-                        </div>
-
-                        <div class="col-md-1" style=" margin:3px;">
-                            <a href="">
-                            <div class="card" style="height: 4rem; width: 6rem;">
-                                <div class="card-body" style="background-color: rgba(183, 194, 194, 0.865);">
-                                        <div class="" style="color:white;">
-                                            <span class="icon icon-barcode s-48"></span>
-                                            <span style="margin: 5px; font-size:10px;">Produk</span>
-                                        </div>
-                                </div>
-                            </div>
-                            </a>
-                        </div>
-
-                        <div class="col-md-1" style=" margin:3px;">
-                            <a href="">
-                            <div class="card" style="width: 6rem;">
-                                <div class="card-body" style="background-color: rgba(183, 194, 194, 0.865);">
-                                        <div class="" style="color:white;">
-                                            <span class="icon icon-shopping-cart s-48"></span>
-                                            <span style="font-size: 10px;">penjualan</span>
-                                        </div>
-                                </div>
-                            </div>
-                            </a>
-                        </div>
-
-                        <div class="col-md-1" style=" margin:3px;">
-                            <a href="">
-                            <div class="card" style="width: 6rem;">
-                                <div class="card-body" style="background-color: rgba(183, 194, 194, 0.865);">
-                                        <div class="" style="color:white;">
-                                            <span class="icon icon-bell s-48"></span>
-                                            <span style="font-size: 10px;">Tagihan</span>
-                                        </div>
-                                </div>
-                            </div>
-                            </a>
-                        </div>
-
-                        <div class="col-md-1" style=" margin:3px;">
-                            <a href="">
-                            <div class="card" style="width: 6rem;">
-                                <div class="card-body" style="background-color: rgba(183, 194, 194, 0.865);">
-                                        <div class="" style="color:white;">
-                                            <span class="icon icon-folder-open s-48"></span>
-                                            <span style="font-size: 10px;">Kategori</span>
-                                        </div>
-                                </div>
-                            </div>
-                            </a>
-                        </div>
-                        <div class="col-md-1" style=" margin:3px;">
-                            <a href="">
-                            <div class="card" style="width: 6rem;">
-                                <div class="card-body" style="background-color: rgba(183, 194, 194, 0.865);">
-                                        <div class="" style="color:white;">
-                                            <span class="icon icon-credit-card s-48"></span>
-                                            <span style="font-size: 10px;">Hadiah</span>
-                                        </div>
-                                </div>
-                            </div>
-                            </a>
-                        </div>
-                        <div class="col-md-1" style=" margin:3px;">
-                            <a href="">
-                            <div class="card" style="width: 6rem;">
-                                <div class="card-body" style="background-color: rgba(183, 194, 194, 0.865);">
-                                        <div class="" style="color:white;">
-                                            <span class="icon icon-users s-48"></span>
-                                            <span style="font-size: 10px;">Pelanggan</span>
-                                        </div>
-                                </div>
-                            </div>
-                            </a>
-                        </div>
-                        <div class="col-md-1" style=" margin:3px;">
-                            <a href="">
-                            <div class="card" style="width: 6rem;">
-                                <div class="card-body" style="background-color: rgba(183, 194, 194, 0.865);">
-                                        <div class="" style="color:white;">
-                                            <span class="icon icon-cogs s-48"></span>
-                                            <span style="font-size: 10px;">Pengaturan</span>
-                                        </div>
-                                </div>
-                            </div>
-                            </a>
-                        </div>
-                        <div class="col-md-1" style=" margin:3px;">
-                            <a href="">
-                            <div class="card" style="width: 6rem;">
-                                <div class="card-body" style="background-color: rgba(183, 194, 194, 0.865);">
-                                        <div class="" style="color:white;">
-                                            <span class="icon icon-bar-chart-o s-48"></span>
-                                            <span style="font-size: 10px;">Laporan</span>
-                                        </div>
-                                </div>
-                            </div>
-                            </a>
-                        </div>
-                        <div class="col-md-1" style=" margin:3px;">
-                            <a href="">
-                            <div class="card" style="width: 6rem;">
-                                <div class="card-body" style="background-color: rgba(183, 194, 194, 0.865);">
-                                        <div class="" style="color:white;">
-                                            <span class="icon icon-users s-48"></span>
-                                            <span style="font-size: 10px;">Pengguna</span>
-                                        </div>
-                                </div>
-                            </div>
-                            </a>
-                        </div>
-                        <div class="col-md-1" style=" margin:3px;">
-                            <a href="">
-                            <div class="card" style="width: 6rem;">
-                                <div class="card-body" style="background-color: rgba(183, 194, 194, 0.865);">
-                                        <div class="" style="color:white;">
-                                            <span class="icon icon-database s-48"></span>
-                                            <span style="font-size: 10px;">Backup</span>
-                                        </div>
-                                </div>
-                            </div>
-                            </a>
-                        </div> --}}
-
+                    <div class="row">                      
                             <a href="{{ route('Pos.main.index')}}" class="btn btn-light m-2 border border-secondary">
                                 <div class="justify-content-center">
                                     <small><i class="icon-th s-48 text-secondary"></i></small>
                                 </div>
                                 <span class="text-secondary"><small>POS</small></span>
                             </a>
-                            <a href="" class="btn btn-light m-2 border border-secondary">
+                            <a href="{{ url('product') }}" class="btn btn-light m-2 border border-secondary">
                                 <div class="justify-content-center">
                                     <small><i class="icon-barcode s-48 text-secondary"></i></small>
                                 </div>
                                 <span class="text-secondary"><small>Produk</small></span>
                             </a>
-                            <a href="" class="btn btn-light m-2 border border-secondary">
+                            <a href="{{route('Laporan.PenjualanHarian')}}" class="btn btn-light m-2 border border-secondary">
                                 <div class="justify-content-center">
                                     <small><i class="icon-shopping-cart s-48 text-secondary"></i></small>
                                 </div>
@@ -184,19 +46,19 @@
                                 </div>
                                 <span class="text-secondary"><small>Tagihan</small></span>
                             </a>   
-                            <a href="" class="btn btn-light m-2 border border-secondary">
+                            <a href="{{ route('Kategori.daftarkategori.index')}}" class="btn btn-light m-2 border border-secondary">
                                 <div class="justify-content-center">
                                     <small><i class="icon-folder-open s-48 text-secondary"></i></small>
                                 </div>
                                 <span class="text-secondary"><small>Kategori</small></span>
                             </a> 
-                            <a href="" class="btn btn-light m-2 border border-secondary">
+                            <a href="{{route('Hadiah.hadiah.index')}}" class="btn btn-light m-2 border border-secondary">
                                 <div class="justify-content-center">
                                     <small><i class="icon-credit-card s-48 text-secondary"></i></small>
                                 </div>
                                 <span class="text-secondary"><small>Hadiah</small></span>
                             </a>
-                            <a href="" class="btn btn-light m-2 border border-secondary">
+                            <a href="{{route('Orang.pelanggan.index')}}" class="btn btn-light m-2 border border-secondary">
                                 <div class="justify-content-center">
                                     <small><i class="icon-users s-48 text-secondary"></i></small>
                                 </div>
@@ -208,13 +70,13 @@
                                 </div>
                                 <span class="text-secondary"><small>Pengaturan</small></span>
                             </a>  
-                            <a href="" class="btn btn-light m-2 border border-secondary">
+                            <a href="{{route('Laporan.laporanPenjualan')}}" class="btn btn-light m-2 border border-secondary">
                                 <div class="justify-content-center">
                                     <small><i class="icon-bar-chart-o s-48 text-secondary"></i></small>
                                 </div>
                                 <span class="text-secondary"><small>Laporan</small></span>
                             </a>  
-                            <a href="" class="btn btn-light m-2 border border-secondary">
+                            <a href="{{ route('pengguna.index') }}" class="btn btn-light m-2 border border-secondary">
                                 <div class="justify-content-center">
                                     <small><i class="icon-users s-48 text-secondary"></i></small>
                                 </div>
