@@ -228,8 +228,6 @@
         }
 
         function tambahProduk() {
-            
-            $('#nomorKartu').val(random);
         }
 
         $(document).ready(function(){

@@ -53,39 +53,35 @@ class ProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request);
-    // {
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nama' => 'required',
+            'ketik' => 'required',
+            'kategori' => 'required',
+            'kuantitas' => 'required',
+            'pajak' => 'required',
+            'metode' => 'required',
+            'biaya' => 'required',
+            'harga' => 'required'
+        ]);
 
-    //     $request->validate([
-    //         'nama' => 'required',
-    //         'ketik' => 'required',
-    //         'kategori' => 'required',
-    //         'kuantitas' => 'required',
-    //         'pajak' => 'required',
-    //         'metode' => 'required',
-    //         'biaya' => 'required',
-    //         'harga' => 'required'
-    //     ]);
+        $produk = new product();
+        $produk->nama     = $request->nama;
+        $produk->ketik = $request->ketik;
+        $produk->kategori = $request->kategori;
+        $produk->kuantitas = $request->kuantitas;
+        $produk->pajak = $request->pajak;
+        $produk->metode = $request->metode;
+        $produk->biaya = $request->biaya;
+        $produk->harga = $request->harga;
+        $produk->save();
 
-    //     // $karyawan = new employee;
-    //     // $karyawan->nama = $request->nama;
-    //     // $karyawan->jabatan = $request->jabatan;
-    //     // $karyawan->alamat = $request->alamat;
-    //     // $karyawan->tempat_lahir = $request->tempat_lahir;
-    //     // $karyawan->tanggal_lahir = $request->tanggal_lahir;
-    //     // $karyawan->agama = $request->agama;
-    //     // $karyawan->pendidikan_terakhir = $request->pendidikan_terakhir;
-
-    //     // $karyawan->save();
-    //     // return redirect('/name' );
-
-    //     Employee::create($request->all());
-    //     return redirect('/index')->with('status', 'Data Berhasil Ditambahkan');
-
-    // }
+        return redirect()->route('product.index')->withSuccess('data berhasil ditambahkan');
+    }
 
     /**
      * Display the specified resource.
@@ -113,36 +109,36 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\product
-     * @return \Illuminate\Http\Response
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @param  \App\Models\product
+    //  * @return \Illuminate\Http\Response
     //  */
-    // public function update(Request $request, produks $produk)
-    // {
-    //     $request->validate([
-    //         'nama' => 'required',
-    //         'ketik' => 'required',
-    //         'kategori' => 'required',
-    //         'kuantitas' => 'required',
-    //         'pajak' => 'required',
-    //         'metode' => 'required',
-    //         'biaya' => 'required',
-    //         'harga' => 'required'
-    //     ]);
+    public function update(Request $request, $id)
+        {
+        $request->validate([
+            'nama' => 'required',
+            'ketik' => 'required',
+            'kategori' => 'required',
+            'kuantitas' => 'required',
+            'pajak' => 'required',
+            'metode' => 'required',
+            'biaya' => 'required',
+            'harga' => 'required'
+        ]);
 
-    //     Employee::where('id', $produk->id)
-    //         ->update([
-    //             'nama' => $request->nama,
-    //             'ketik' => $request->ketik,
-    //             'kategori' => $request->kategori,
-    //             'kuantitas' => $request->kuantitas,
-    //             'pajak' => $request->pajak,
-    //             'metode' => $request->metode,
-    //             'biaya' => $request->biaya,
-    //             'harga' => $request->harga,
-    //         ]);
-    //     return redirect('/produk')->with('status', 'Data Berhasil Diubah');
-    // }
+        product::where('id', $id)
+            ->update([
+                'nama' => $request->nama,
+                'ketik' => $request->ketik,
+                'kategori' => $request->kategori,
+                'kuantitas' => $request->kuantitas,
+                'pajak' => $request->pajak,
+                'metode' => $request->metode,
+                'biaya' => $request->biaya,
+                'harga' => $request->harga,
+            ]);
+         return redirect()->route('product.index')->withSuccess('data berhasil diubah');
+    }
 
     // /**
     //  * Remove the specified resource from storage.

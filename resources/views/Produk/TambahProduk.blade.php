@@ -18,7 +18,7 @@
     <div class="container mt-3">
         <div class="row">
             <div class="col-10">
-                <form method="POST" action="{{route('addProduct')}}">
+                <form method="POST" action="{{ route('product.store') }}">
                         @csrf
                         <div class="form-group">
                             <label for="ketik">Ketik</label>
@@ -59,7 +59,7 @@
 
                         <div class="form-group">
                             <label for="biaya">Biaya</label>
-                            <input type="text" class="form-control @error('harga') is-invalid @enderror" id="harga" placeholder="Masukkan kontol" name="biaya">
+                            <input type="text" class="form-control @error('harga') is-invalid @enderror" id="harga" placeholder="Biaya" name="biaya">
                         </div>
                         <div class="form-group">
                             <label for="harga">Harga</label>
