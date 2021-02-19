@@ -140,14 +140,10 @@
                                         <div class="pt-1">Admin</div>
                                     </a>
                                 </div>
-<<<<<<< HEAD
-
-=======
                                 <div class="col">
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="list-group-item list-group-item-action mt-2"><i class="mr-2 icon-power-off text-danger"></i>Logout</a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
                                 </div>
->>>>>>> d074b98a9dd68ccd22cd2efea279bf4942712eaa
                             </div>
                         </div>
                     </li>

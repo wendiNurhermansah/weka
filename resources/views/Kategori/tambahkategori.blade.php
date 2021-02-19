@@ -57,6 +57,8 @@
                                 </label>
                             </div>
 
+
+
                             <div class="mt-2 col-md-8" style="">
                                 <button type="submit" class="btn btn-primary btn-sm" id="action"><i class="icon-save mr-2"></i>Simpan<span id="txtAction"></span></button>
                                 <a class="btn btn-sm" onclick="add()" id="reset">Reset</a>
@@ -178,6 +180,8 @@
         }
         $(this).addClass('was-validated');
     });
+
+
 
     </script>
 @endsection

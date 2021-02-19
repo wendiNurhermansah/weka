@@ -85,6 +85,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('pegawai/api', 'PegawaiController@api')->name('pegawai.api');
             Route::get('tambahpegawai', 'PegawaiController@tambahpegawai')->name('tambahpegawai');
 
+
             //pelanggan
             Route::resource('pelanggan', 'PelangganController');
             Route::post('pelanggan/api', 'PelangganController@api')->name('pelanggan.api');
@@ -103,6 +104,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::resource('pembelian', 'PembelianController');
             Route::post('pembelian/api', 'PembelianController@api')->name('pembelian.api');
             Route::get('tambahPembelian', 'PembelianController@tambahPembelian')->name('tambahPembelian');
+            Route::post('produk', 'PembelianController@produk')->name('produk');
 
             //biaya
             Route::resource('biaya', 'BiayaController');
