@@ -7,7 +7,7 @@
             <div class="row p-t-b-10 ">
                 <div class="col">
                     <h4>
-                        <i class="icon icon-plus mr-1"></i>
+                        <i class="icon icon-pencil mr-1"></i>
                         EDIT PEMBELIAN
                     </h4>
                 </div>

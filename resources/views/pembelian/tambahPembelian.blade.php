@@ -25,7 +25,7 @@
                     <div class="form-row">
                         <div class="col md-6">
                             <label for="tanggal">Tanggal</label>
-                            <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" placeholder="" name="tanggal" value="{{ old('tanggal') }}" required>
+                            <input type="datetime-local" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" placeholder="" name="tanggal" value="{{ old('tanggal') }}" required>
                         </div>
                         <div class="col md-6">
                             <label for="referensi">Referensi</label>
@@ -34,8 +34,8 @@
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="nama_depan"></label>
-                                <input type="text" class="form-control @error('nama_depan') is-invalid @enderror" id="nama_depan" placeholder="cari produk dengan kode atau nama" name="nama_depan" value="{{ old('nama_depan') }}" required>
+                                <label for=""></label>
+                                <input type="text" class="form-control @error('nama_depan') is-invalid @enderror" id="id1" placeholder="cari produk dengan kode atau nama" name="nama_depan" value="{{ old('nama_depan') }}" required>
 
                             </div>
                             <div class="table-responsive">
@@ -50,12 +50,22 @@
                                     </tr>
 
                                     </thead>
-                                    <tbody>
+                                    <tbody style="text-align: center;">
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td style="width: 300px; text-align: left;">
+                                                <input type="hidden">
+                                                <span>wendi</span>
+                                            </td>
+                                            <td>
+                                                <input type="text" value="1" style="width: 200px; text-align: center;">
+                                            </td>
+                                            <td>
+                                                <input type="text" value="10.000" style="width: 200px; text-align: center;">
+                                            </td>
+                                            <td>
+                                                <span></span>
+
+                                            </td>
                                             <td></td>
                                         </tr>
 
@@ -130,5 +140,33 @@
       tinycomments_mode: 'embedded',
       tinycomments_author: 'Author name',
    });
+
+   var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $(document).ready(function(){
+
+            // ajax get product
+            $( "#id1" ).autocomplete({
+                source: function( request, response ) {
+                    // Fetch data
+                    $.ajax({
+                    url:"{{route('Pembelian.produk')}}",
+                    type: 'post',
+                    dataType: "json",
+                    data: {
+                        _token: CSRF_TOKEN,
+                        search: request.term
+                    },
+                    success: function( data ) {
+                        response( data );
+                    }
+                    });
+                },
+                select: function (event, ui) {
+                    // Set selection
+                    $('#id1').val(ui.item.label); // display the selected text
+                    return false;
+                }
+            });
+        });
     </script>
 @endsection

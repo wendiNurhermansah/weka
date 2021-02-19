@@ -30,14 +30,18 @@ class BiayaController extends Controller
 
             ->addColumn('action', function ($p) {
                 return "
+                     <a href='" . route('Pembelian.biaya.edit', $p->id) . "' onclick='edit(" . $p->id . ")' title='Edit Role'><i class='icon-pencil mr-1'></i></a>
                     <a href='#' onclick='remove(" . $p->id . ")' class='text-danger' title='Hapus data'><i class='icon-remove'></i></a>";
+            })
+            ->addColumn('catatan', function ($c) {
+                return $c->catatan;
             })
 
 
 
 
             ->addIndexColumn()
-            ->rawColumns(['action'])
+            ->rawColumns(['action','catatan'])
             ->toJson();
     }
 
@@ -59,7 +63,27 @@ class BiayaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'tanggal' => 'required',
+            'referensi' => 'required',
+            'jumlah' => 'required',
+            'catatan' => 'required',
+            'dibuat' => 'required'
+        ]);
+
+
+        $tmbiaya = new Biaya();
+        $tmbiaya->tanggal = $request->tanggal;
+        $tmbiaya->referensi = $request->referensi;
+        $tmbiaya->jumlah = $request->jumlah;
+        $tmbiaya->catatan = $request->catatan;
+        $tmbiaya->dibuat= $request->dibuat;
+
+        $tmbiaya->save();
+
+        return response()->json([
+            'message' => 'Data berhasil tersimpan.'
+        ]);
     }
 
     /**
@@ -81,7 +105,8 @@ class BiayaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $Biaya = Biaya::find($id);
+        return view('pembelian.editbiaya', compact('Biaya'));
     }
 
     /**
@@ -93,7 +118,31 @@ class BiayaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $Biaya = Biaya::find($id);
+        $request->validate([
+            'tanggal' => 'required',
+            'referensi' => 'required',
+            'jumlah' => 'required',
+            'catatan' => 'required',
+            'dibuat' => 'required'
+        ]);
+
+
+       $tanggal = $request->tanggal;
+       $referensi = $request->referensi;
+       $jumlah = $request->jumlah;
+       $catatan = $request->catatan;
+       $dibuat= $request->dibuat;
+        $Biaya->update([
+            'tanggal' => $tanggal,
+            'referensi' => $referensi,
+            'jumlah' => $jumlah,
+            'catatan' => $catatan,
+            'dibuat' => $dibuat
+
+        ]);
+
+        return redirect('Pembelian/biaya')->with('status', 'data berhasil di rubah');
     }
 
     /**
@@ -104,6 +153,9 @@ class BiayaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Biaya::destroy($id);
+        return response()->json([
+            'message' => 'data berhasil di hapus.'
+        ]);
     }
 }
