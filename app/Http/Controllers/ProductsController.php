@@ -113,36 +113,37 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\product
-     * @return \Illuminate\Http\Response
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @param  \App\Models\product
+    //  * @return \Illuminate\Http\Response
     //  */
-    // public function update(Request $request, produks $produk)
-    // {
-    //     $request->validate([
-    //         'nama' => 'required',
-    //         'ketik' => 'required',
-    //         'kategori' => 'required',
-    //         'kuantitas' => 'required',
-    //         'pajak' => 'required',
-    //         'metode' => 'required',
-    //         'biaya' => 'required',
-    //         'harga' => 'required'
-    //     ]);
+    public function update(Request $request, $id)
+    {
 
-    //     Employee::where('id', $produk->id)
-    //         ->update([
-    //             'nama' => $request->nama,
-    //             'ketik' => $request->ketik,
-    //             'kategori' => $request->kategori,
-    //             'kuantitas' => $request->kuantitas,
-    //             'pajak' => $request->pajak,
-    //             'metode' => $request->metode,
-    //             'biaya' => $request->biaya,
-    //             'harga' => $request->harga,
-    //         ]);
-    //     return redirect('/produk')->with('status', 'Data Berhasil Diubah');
-    // }
+        $request->validate([
+            'nama' => 'required',
+            'ketik' => 'required',
+            'kategori' => 'required',
+            'kuantitas' => 'required',
+            'pajak' => 'required',
+            'metode' => 'required',
+            'biaya' => 'required',
+            'harga' => 'required'
+        ]);
+
+        product::where('id', $id)
+            ->update([
+                'nama' => $request->nama,
+                'ketik' => $request->ketik,
+                'kategori' => $request->kategori,
+                'kuantitas' => $request->kuantitas,
+                'pajak' => $request->pajak,
+                'metode' => $request->metode,
+                'biaya' => $request->biaya,
+                'harga' => $request->harga,
+            ]);
+         return redirect()->route('product.index')->with('status', 'Data Berhasil Diubah');
+    }
 
     // /**
     //  * Remove the specified resource from storage.

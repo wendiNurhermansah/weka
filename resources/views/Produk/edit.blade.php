@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Love Ridha')
+@section('title', 'EDIT')
 @section('content')
 <div class="page has-sidebar-left height-full">
     <header class="blue accent-3 relative nav-sticky">
@@ -23,7 +23,7 @@
                     @csrf
                         <div class="form-group">
                             <label for="ketik">Ketik</label>
-                            <select class="custom-select" name="ketik">
+                            <select class="custom-select @error('ketik') is-invalid @enderror" id="ketik" placeholder="Masukkan ketik" name="ketik" value="{{$produk -> ketik}}">
                                 <option selected>Standar</option>
                                 <option value="1">Combo</option>
                                 <option value="2">Layanan</option>
@@ -37,7 +37,7 @@
 
                         <div class="form-group">
                             <label for="kategori">Kategori</label>
-                            <select class="custom-select" name="kategori">
+                            <select class="custom-select @error('kategori') is-invalid @enderror" id="kategori" placeholder="Masukkan kategori" name="kategori" value="{{$produk -> kategori}}">
                                 <option selected>Makanan</option>
                                 <option value="1">Minuman</option>
                             </select>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="form-group">
                             <label for="harga">Harga</label>
-                            <input type="text" class="form-control @error('kuantitas') is-invalid @enderror" id="kuantitas" placeholder="Masukkan kuantitas" name="kuantitas" value="{{$produk -> kuantitas}}">
+                            <input type="text" class="form-control @error('harga') is-invalid @enderror" id="harga" placeholder="Masukkan harga" name="harga" value="{{$produk -> harga}}">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Edit Data</button>
