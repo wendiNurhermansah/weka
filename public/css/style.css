@@ -74,3 +74,12 @@
     object-fit: cover;
     object-position: center;
 }
+
+.modal{
+    animation-name: modal;
+    animation-duration: 2s;
+}
+@keyframes modal {
+    0%   {transform: rotateX(90deg);}
+    100%  {transform: rotateX(0deg);}
+}

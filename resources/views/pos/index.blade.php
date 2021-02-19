@@ -3,15 +3,19 @@
 @section('style')
 <style>
     .product-card {
-        position: static;
+        position: ;
         width: auto;
         height: 390px;
     }
 
     .product-nav{
-        position: relative;
+        position: ;
         height: 10px;
     }
+    .button-footer{
+        width: 100px;
+    }
+
 </style>
 @endsection
 @section('content')
@@ -105,15 +109,15 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <a href="" class="btn btn-primary h-50" data-toggle="modal" data-target="#hold">Hold</a>
-                            <a href="" class="btn btn-primary h-50">Print Order</a>
+                            <button href="" class="btn btn-primary button-footer" data-toggle="modal" data-target="#hold">Hold</button>
+                            <button href="" class="btn btn-danger button-footer" data-toggle="modal" data-target="#cancel">Cancel</button>
                         </div>
                         <div class="col-md-4">
-                            <a href="" class="btn btn-danger h-50">Cancel</a>
-                            <a href="" class="btn btn-primary h-50">Print Bill</a>
+                            <a href="" class="btn btn-primary h-50 button-footer" data-toggle="modal" data-target="#printOrder">Print Order</a>
+                            <a href="" class="btn btn-primary h-50 button-footer">Print Bill</a>
                         </div>
                         <div class="col-md-4">
-                            <a href="" class="btn btn-success py-4">Payment</a>
+                            <a href="" class="btn btn-success py-4 button-footer">Payment</a>
                         </div>
                     </div>
                 </div>
@@ -197,23 +201,74 @@
 </div>
 <div class="modal fade" id="hold" role="dialog">
     <div class="modal-dialog">
-    
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="text-black modal-title">Suspend Sale</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-            <p>Type Reference Note</p>
-            <div class="form-group">
-                <label for="nomorKartu" class="font-weight-bold">Reference Note</label>
-                <input class="form-control" type="text" value="" id="nomorKartu" name="nomorKartu">
+            <div class="modal-header">
+                <h4 class="text-black modal-title">Suspend Sale</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Type Reference Note</p>
+                <div class="form-group">
+                    <label for="nomorKartu" class="font-weight-bold">Reference Note</label>
+                    <input class="form-control" type="text" value="" id="nomorKartu" name="nomorKartu">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+    </div>
+</div>
+<div class="modal fade" id="cancel" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+        <div class="modal-content w-50 mx-auto">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="nomorKartu" class="font-weight-bold">Are you sure ?</label>
+                </div>
+                <div class="row m-1">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">No</button>
+                    <a class="btn btn-primary ml-auto" href="{{url('/')}}">Yes</a>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="printOrder" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="text-black modal-title">Print Order</h4>
+                <button type="button" class="btn btn-light" data-dismiss="modal">PRINT</button>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center my-4">
+                    <h4 class="text-black modal-title font-weight-bold">Simple POS</h4>
+                    <p class="text-black modal-title">Order</p>
+                </div>
+                <div class="form-group">
+                    <label for="customer" class="">C : </label>
+                    <label for="getCustomter" class=""></label>
+                </div>
+                <div class="form-group">
+                    <label for="note" class="">R : </label>
+                    <label for="getNote" class=""></label>
+                </div>
+                <div class="form-group">
+                    <label for="pelayan" class="">U : </label>
+                    <label for="getPelayan" class=""></label>
+                </div>
+                <div class="form-group">
+                    <label for="date" class="">T : </label>
+                    <label for="getDate" class="">{{ date('D d M Y h:i A') }}</label>
+                </div>
+            </div>
         </div>
     </div>
 </div>
