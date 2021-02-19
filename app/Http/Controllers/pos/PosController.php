@@ -30,13 +30,15 @@ class PosController extends Controller
 
         $pelanggan = $this->pelanggan();
         $kartu = $this->kartu();
+        $getKartu = $this->getKategori();
         // dd(Core::count());
         return view($this->view . 'index', compact(
             'route',
             'title',
             'path', 
             'pelanggan',
-            'kartu'
+            'kartu',
+            'getKartu'
         ));
     }
 
@@ -75,6 +77,12 @@ class PosController extends Controller
         }
   
         return response()->json($response);
+    }
+
+    public function getKategori()
+    {
+        $getkartu = Kategori::all();
+        return $getkartu;
     }
 
     public function api()
