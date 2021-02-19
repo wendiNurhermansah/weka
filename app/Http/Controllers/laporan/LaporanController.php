@@ -15,9 +15,6 @@ class LaporanController extends Controller
         return view('laporan.penjualanBulanan');
     }
 
-    public function laporanPenjualan(){
-        return view('laporan.laporanPenjualan');
-    }
 
     public function laporanPembayaran(){
         return view('laporan.laporanPembayaran');

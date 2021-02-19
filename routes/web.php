@@ -122,10 +122,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('Laporan')->namespace('laporan')->name('Laporan.')->group(function () {
             Route::get('PenjualanHarian', 'LaporanController@PenjualanHarian')->name('PenjualanHarian');
             Route::get('PenjualanBulanan', 'LaporanController@PenjualanBulanan')->name('PenjualanBulanan');
-            Route::get('laporanPenjualan', 'LaporanController@laporanPenjualan')->name('laporanPenjualan');
             Route::get('laporanPembayaran', 'LaporanController@laporanPembayaran')->name('laporanPembayaran');
             Route::get('laporanPendaftaran', 'LaporanController@laporanPendaftaran')->name('laporanPendaftaran');
             Route::get('laporanProduk', 'LaporanController@laporanProduk')->name('laporanProduk');
+
+            //laporan penjualan
+
+            Route::resource('laporanPenjualan', 'LaporanpenjualanController');
+            Route::post('laporanPenjualan/api', 'LaporanpenjualanController@api')->name('laporanPenjualan.api');
 
 
     });

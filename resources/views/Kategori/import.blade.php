@@ -33,7 +33,7 @@
                             <div class="form-group">
                                 <label for="gambar">File</label>
                                 <input type="file" class="form-control" id="gambar" placeholder="masukan gambar" name="gambar" value="{{ old('gambar') }}">
-                                <span>Silakan pilih file .csv (ukuran file diizinkan 200KB)</span>
+                                <span>Silakan pilih file .csv .xlxs (ukuran file diizinkan 200KB)</span>
                             </div>
 
                             <div class="mt-2 col-md-8" style="">

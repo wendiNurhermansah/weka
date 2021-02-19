@@ -223,7 +223,7 @@
                 </a>
             </li>
             <li class="no-b">
-                <a href="{{route('Laporan.laporanPenjualan')}}">
+                <a href="{{route('Laporan.laporanPenjualan.index')}}">
                     <i class="icon icon-circle blue-text s-18"></i>
                     <span>Laporan Penjualan</span>
                 </a>
