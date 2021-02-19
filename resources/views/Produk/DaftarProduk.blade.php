@@ -15,6 +15,14 @@
         </div>
     </header>
     <div class="mt-3 mb-5">
+        @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{session('success')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          @endif
         <h3>Silakan gunakan tabel di bawah ini untuk menavigasi atau memfilter hasil.</h3>
     </div>
 

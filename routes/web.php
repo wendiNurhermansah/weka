@@ -137,6 +137,7 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::get('/importproduk', 'ImportProductsController@index');
     Route::post('product/api', 'productsController@api')->name('product.api');
     Route::resource('product', 'ProductsController');
+    Route::get('tambahproduk', 'ProductsController@create')->name('tambahproduk');
 
     // Route::resource('produk', 'productsController');
 
