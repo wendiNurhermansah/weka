@@ -28,7 +28,7 @@
 
 
 
-        <table id="example" class="display" style="width:100%">
+        <table id="example" class="display bg-white text-dark" style="width:100%">
         <thead>
             <tr>
                 <th>Gambar</th>
@@ -57,38 +57,33 @@
                 <td>{{$product->biaya}}</td>
                 <td>{{$product->harga}}</td>
                 <td>
-                    <a href="/product/{{ $product->id }}/edit" class="btn btn-primary" >Edit</a>
-                        <form action="/product/{{$product->id}}" method="post" class="d-inline">
+                <a href="/product/{{ $product->id }}/edit" class="btn btn-primary" >Edit</a>
+                    <form action="/product/{{$product->id}}" method="post" class="d-inline">
                             @method('delete')
                             @csrf
                             <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
+                    </form>
                 </td>
-
             </tr>
             @endforeach
-
-
 </div>
+
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
         </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 @endsection
 
 @section('script')
