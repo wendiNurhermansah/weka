@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app') 
 @section('title', ' | Laporan Penjualan')
 @section('content')
 <div class="page has-sidebar-left height-full">
