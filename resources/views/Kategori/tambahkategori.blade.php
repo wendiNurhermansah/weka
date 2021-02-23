@@ -18,6 +18,7 @@
     <div class="container-fluid my-3">
         <div class="card">
             <div class="card-body">
+                <div id="alert"></div>
                 <form class="needs-validation" id="form" method="POST" enctype="multipart/form-data" novalidate>
                     {{ method_field('POST') }}
                     <input type="hidden" id="id" name="id"/>

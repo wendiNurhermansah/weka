@@ -49,11 +49,12 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                    @foreach ($Kategori as $i)
+
                     <div>
-                        <img src="images/ava/{{$i->gambar}}" alt="">
+                        <img id="photo_" alt="">
                     </div>
-                    @endforeach
+
+
 
 
                 </div>
@@ -119,6 +120,13 @@
 
     function show(id){
         $('#modal2').modal('show');
+        $.get("{{ route('Kategori.daftarkategori.showDataModal', ':id') }}".replace(':id', id), function(data){
+            var path = "{{ asset('/kategori/images/ava') }}"+ "/" + data.gambar;
+            console.log(data.gambar)
+            $('#photo_').attr({'src': path});
+        }, "JSON").fail(function(){
+            reload();
+        });
     }
 </script>
 
