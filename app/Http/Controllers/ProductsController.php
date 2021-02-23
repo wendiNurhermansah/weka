@@ -23,12 +23,19 @@ class ProductsController extends Controller
                     <a href='" . route('Orang.pelanggan.edit', $p->id) . "' onclick='edit(" . $p->id . ")' title='Edit Role'><i class='icon-pencil mr-1'></i></a>
                     <a href='#' onclick='remove(" . $p->id . ")' class='text-danger' title='Hapus data'><i class='icon-remove'></i></a>";
             })
+            ->editColumn('gambar',  function ($p)  {
+                if ($p->gambar != null) {
+                    return "<img width='50' class='img-fluid mx-auto d-block rounded-circle' alt='foto' src='" . $this->path . $p->gambar . "'>";
+                } else {
+                    return "<img width='50' class='rounded img-fluid mx-auto d-block' alt='foto' src='" . asset('images/404.png') . "'>";
+                }
+            })
 
 
 
 
             ->addIndexColumn()
-            ->rawColumns(['action'])
+            ->rawColumns(['action', 'gambar' ])
             ->toJson();
     }
 
@@ -66,8 +73,13 @@ class ProductsController extends Controller
             'pajak' => 'required',
             'metode' => 'required',
             'biaya' => 'required',
-            'harga' => 'required'
+            'harga' => 'required',
+            'gambar' => 'required'
         ]);
+        $file     = $request->file('gambar');
+
+        $fileName = rand() . '.' . $file->getClientOriginalExtension();
+        $request->file('gambar')->move("produk/images/ava/", $fileName);
 
         $produk = new product();
         $produk->nama     = $request->nama;
@@ -78,6 +90,7 @@ class ProductsController extends Controller
         $produk->metode = $request->metode;
         $produk->biaya = $request->biaya;
         $produk->harga = $request->harga;
+        $produk->gambar = $fileName;
         $produk->save();
 
         return redirect()->route('product.index')->withSuccess('data berhasil ditambahkan');

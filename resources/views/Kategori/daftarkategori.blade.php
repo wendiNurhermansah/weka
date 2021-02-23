@@ -31,7 +31,7 @@
                             <th>Gambar</th>
                             <th>Kode</th>
                             <th>Nama</th>
-                            <th width="60">Tindakan</th>
+                        <th width="60">Tindakan</th>
                         </thead>
                         <tbody></tbody>
                     </table>
