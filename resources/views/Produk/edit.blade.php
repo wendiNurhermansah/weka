@@ -21,6 +21,7 @@
                 <form method="POST" action="/product/{{ $produk->id }}">
                     @method('patch')
                     @csrf
+
                         <div class="form-group">
                             <label for="ketik">Ketik</label>
                             <select class="custom-select @error('ketik') is-invalid @enderror" id="ketik" placeholder="Masukkan ketik" name="ketik" value="{{$produk -> ketik}}">

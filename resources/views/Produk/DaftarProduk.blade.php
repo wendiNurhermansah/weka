@@ -46,7 +46,8 @@
         <tbody>
             @foreach ($produk as $product)
             <tr>
-                <td>UNTUK GAMBAR</td>
+                {{-- <td>{{$product->gambar}}</td> --}}
+                <td><img src="produk/images/ava/{{$product->gambar}}" alt="" width='100'></td>
                 <td>{{$product->nama}}</td>
                 <td>{{$product->ketik}}</td>
                 <td>{{$product->kategori}}</td>

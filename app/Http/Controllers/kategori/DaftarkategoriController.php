@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Kategori;
 use DataTables;
+use File;
 class DaftarkategoriController extends Controller
 {
     protected $path  = 'images/ava/';
@@ -18,6 +19,13 @@ class DaftarkategoriController extends Controller
     {
         $Kategori = Kategori::all();
         return view('Kategori.daftarkategori', compact('Kategori'));
+    }
+
+    public function showDataModal($id)
+    {
+        $Kategori = Kategori::find($id);
+
+        return $Kategori;
     }
 
     public function api()
@@ -148,6 +156,8 @@ class DaftarkategoriController extends Controller
      */
     public function destroy($id)
     {
+        $gambar = Kategori::where('id',$id)->first();
+        File::delete('kategori/images/ava/'.$gambar->gambar);
         Kategori::destroy($id);
         return response()->json([
             'massage' => 'data berhasil di hapus',

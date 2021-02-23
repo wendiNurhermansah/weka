@@ -63,6 +63,7 @@ Route::group(['middleware' => ['auth']], function () {
             //daftar kategori
             Route::resource('daftarkategori', 'DaftarkategoriController');
             Route::post('daftarketegori/api', 'DaftarkategoriController@api')->name('daftarkategori.api');
+            Route::get('show-data-modal/{id}', 'DaftarkategoriController@showDataModal')->name('daftarkategori.showDataModal');
 
 
             //tambah kategori

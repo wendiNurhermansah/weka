@@ -18,8 +18,17 @@
     <div class="container mt-3">
         <div class="row">
             <div class="col-10">
-                <form method="POST" action="{{ route('product.store') }}">
+                <form method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data">
                         @csrf
+                        <div class="form-group">
+                              <label for="gambar">Gambar
+                                <a class="ml-1 mt-1" data-toggle="popover" title="Required" data-html="true" data-content="Max File: 2MB<br/>Format File: (png, jpg, jpeg)<br/>Width: 500 pixel<br/>Height: 500 pixel">
+                                <i class="icon icon-information2 s-18 red-text"></i>
+                                </a>
+                              </label>
+                              <input type="file"  name="gambar" id="file" class="form-control-file" onchange="tampilkanPreview(this,'preview')">
+                        </div>
+
                         <div class="form-group">
                             <label for="ketik">Ketik</label>
                             <select class="custom-select" name="ketik">
@@ -65,6 +74,7 @@
                             <label for="harga">Harga</label>
                             <input type="text" class="form-control @error('harga') is-invalid @enderror" id="harga" placeholder="Harga" name="harga">
                         </div>
+
 
                         <button type="submit" class="btn btn-primary">Tambah Data</button>
                 </form>

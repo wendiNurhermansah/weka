@@ -21,7 +21,7 @@
             <div class="card-body">
                 <h4>Tautan Cepat :</h4>
                 <div class="container">
-                    <div class="row">                      
+                    <div class="row">
                             <a href="{{ route('Pos.main.index')}}" class="btn btn-light m-2 border border-secondary">
                                 <div class="justify-content-center">
                                     <small><i class="icon-th s-48 text-secondary"></i></small>
@@ -45,13 +45,13 @@
                                     <small><i class="icon-bell s-48 text-secondary"></i></small>
                                 </div>
                                 <span class="text-secondary"><small>Tagihan</small></span>
-                            </a>   
+                            </a>
                             <a href="{{ route('Kategori.daftarkategori.index')}}" class="btn btn-light m-2 border border-secondary">
                                 <div class="justify-content-center">
                                     <small><i class="icon-folder-open s-48 text-secondary"></i></small>
                                 </div>
                                 <span class="text-secondary"><small>Kategori</small></span>
-                            </a> 
+                            </a>
                             <a href="{{route('Hadiah.hadiah.index')}}" class="btn btn-light m-2 border border-secondary">
                                 <div class="justify-content-center">
                                     <small><i class="icon-credit-card s-48 text-secondary"></i></small>
@@ -69,13 +69,17 @@
                                     <small><i class="icon-cogs s-48 text-secondary"></i></small>
                                 </div>
                                 <span class="text-secondary"><small>Pengaturan</small></span>
+<<<<<<< HEAD
                             </a>  
+=======
+                            </a>
+>>>>>>> f433f232d081b8ac6dcc02ce9ace198804d9165c
                             <a href="{{route('Laporan.laporanPenjualan.index')}}" class="btn btn-light m-2 border border-secondary">
                                 <div class="justify-content-center">
                                     <small><i class="icon-bar-chart-o s-48 text-secondary"></i></small>
                                 </div>
                                 <span class="text-secondary"><small>Laporan</small></span>
-                            </a>  
+                            </a>
                             <a href="{{ route('pengguna.index') }}" class="btn btn-light m-2 border border-secondary">
                                 <div class="justify-content-center">
                                     <small><i class="icon-users s-48 text-secondary"></i></small>
@@ -87,7 +91,7 @@
                                     <small><i class="icon-database s-48 text-secondary"></i></small>
                                 </div>
                                 <span class="text-secondary"><small>Backup</small></span>
-                            </a>                
+                            </a>
                     </div>
 
                 </div>
