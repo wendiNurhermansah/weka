@@ -69,11 +69,7 @@
                                     <small><i class="icon-cogs s-48 text-secondary"></i></small>
                                 </div>
                                 <span class="text-secondary"><small>Pengaturan</small></span>
-<<<<<<< HEAD
                             </a>  
-=======
-                            </a>
->>>>>>> f433f232d081b8ac6dcc02ce9ace198804d9165c
                             <a href="{{route('Laporan.laporanPenjualan.index')}}" class="btn btn-light m-2 border border-secondary">
                                 <div class="justify-content-center">
                                     <small><i class="icon-bar-chart-o s-48 text-secondary"></i></small>
