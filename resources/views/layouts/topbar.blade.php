@@ -8,7 +8,7 @@
                             <i></i>
                         </a>
                     </div>
-                    <div class="row m-t-12">
+                    <div id="navigasi" class="row m-t-12">
                         <li type="none" class="mr-1 ml-2 fs-13 text-white">
                             <i class="icon icon-calendar-check-o"></i>
                             <a id="hari"></a>
@@ -25,6 +25,23 @@
                             :
                             <a id="detik"></a>
                         </li>
+                        <li id="dashboard-nav-li" type="none" class="mx-2 fs-13 text-white">
+                            <a id="dashboard-nav"href="{{url('/dashboard')}}"><i class="icon-dashboard"></i></a>
+                        </li>
+                        <li id="setting-nav-li" type="none" class="mx-2 fs-13 text-white">
+                            <a id="setting-nav" href=""><i class="icon-cogs"></i></a>
+                        </li>
+                        <li id="customer-nav-li" type="none" class="mx-2 fs-13 text-white">
+                            <a id="customer-nav" href=""><i class="icon-desktop"></i></a>
+                        </li>
+                        </li>
+                        <li id="pos-nav-li" type="none" class="mx-2 fs-13 text-white">
+                            <a id="pos-nav" href="{{ route('Pos.main.index')}}"><i class="icon-th"></i></a>
+                        </li>
+                        {{-- <li id="shortcut-nav-li" type="none" class="mx-2 fs-13 text-white">
+                            <a id="shortcut-nav" data-toggle='modal' data-target='#shortcut'><i class="icon-key"></i></a>
+                        </li> --}}
+                        @yield('topbar')
                     </div>
                 </div>
             </div>

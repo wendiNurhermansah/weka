@@ -7,7 +7,6 @@
         width: auto;
         height: 390px;
     }
-
     .product-nav{
         position: ;
         height: 10px;
@@ -15,8 +14,21 @@
     .button-footer{
         width: 100px;
     }
-
 </style>
+@endsection
+@section('topbar')
+<li id="shortcut-nav-li" type="none" class="mx-2 fs-13 text-white">
+    <a id="shortcut-nav" data-toggle='modal' data-target='#shortcut'><i class="icon-key"></i></a>
+</li>
+<li id="register-nav-li" type="none" class="mx-2 fs-13 text-white">
+    <a id="register-nav" data-toggle='modal' data-target='#register'>Register Details</a>
+</li>
+<li id="penjualanHariIni-nav-li" type="none" class="mx-2 fs-13 text-white">
+    <a id="penjualanHariIni-nav" data-toggle='modal' data-target='#penjualanHariIni'>Today's Sale</a>
+</li>
+<li id="tutupDaftar-nav-li" type="none" class="mx-2 fs-13 text-white">
+    <a id="tutupDaftar-nav" data-toggle='modal' data-target='#tutupDaftar'>Close Register</a>
+</li>    
 @endsection
 @section('content')
 <div class="page has-sidebar-left height-full">
@@ -68,11 +80,6 @@
                     </div>
                     <div class="form-group">
                             <input class="form-control" type="text" id="kategori" onclick="" placeholder="Search product by code or name, you can scan barcode too">
-                            {{-- <ul class="list-group">
-                                @foreach ($kategori as $k)
-                                <li class="list-group-item">{{$k->nama}}</li>
-                                @endforeach
-                            </ul> --}}
                     </div>
                     <div class="form-group">
                         <table>
@@ -179,16 +186,16 @@
              <button type="button" onclick="randomNomorKartu()" class="btn btn-secondary">&#9762;</button>
           </div>
           <div class="form-group">
-            <label for="nomorKartu" class="font-weight-bold">Value</label>
-             <input class="form-control" type="text" value="" id="nomorKartu" name="nomorKartu">
+            <label for="nilai" class="font-weight-bold">Value</label>
+             <input class="form-control" type="text" value="" id="nilai" name="nilai">
           </div>
           <div class="form-group">
-            <label for="nomorKartu" class="font-weight-bold">Price</label>
-             <input class="form-control" type="number" value="" id="nomorKartu" name="nomorKartu">
+            <label for="harga" class="font-weight-bold">Price</label>
+             <input class="form-control" type="number" value="" id="harga" name="harga">
           </div>
           <div class="form-group">
-            <label for="nomorKartu" class="font-weight-bold">Expiry Date</label>
-             <input class="form-control" type="date" value="" id="nomorKartu" name="nomorKartu">
+            <label for="tanggalKedaluwarsa" class="font-weight-bold">Expiry Date</label>
+             <input class="form-control" type="date" value="" id="tanggalKedaluwarsa" name="tanggalKedaluwarsa">
           </div>
         </div>
         <div class="modal-footer">
@@ -272,6 +279,172 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="shortcut" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="text-black modal-title">Shortcut Key</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <th>Shortcut Keys</th>
+                        <th>Actions</th>
+                    </thead>
+                  </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="register" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="text-black modal-title">Register Details (Opened at: {{ date('d F Y h:i A') }})</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Cash in hand :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Cash Sales :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Cheque Sales :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Gift Card Sales :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Credit Card :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Stripe :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Others :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Total Sales :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Expenses :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Total Cash :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="penjualanHariIni" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="text-black modal-title">Today's Sale ({{ date('D d M Y') }})</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Cash Sales :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Cheque Sales :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Credit Card :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Gift Card Sales :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Stripe :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Others :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Total Cash :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="tutupDaftar" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="text-black modal-title">Register Details (Opened at: {{ date('d F Y h:i A') }})</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Cash Sales :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Cheque Sales :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Credit Card :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Gift Card Sales :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Stripe :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Others :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                        <tr>
+                            <th>Total Cash :</th>
+                            <th class="text-right">0000</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @section('script')
 <script type="text/javascript">
@@ -286,7 +459,9 @@
         }
 
         $(document).ready(function(){
-            
+            // nav
+            $("#pos-nav-li").remove();
+            // $("#navigasi").add("<li id='shortcut-nav-li' type='none' class='mx-2 fs-13 text-white'><a id='shortcut' href='' data-toggle='modal' data-target='#shortcut'><i class='icon-key'></i></a></li>").appendTo("#navigasi");
             $("#nomorKartu").attr('maxlength','16');
             // limit nomor kartu
 

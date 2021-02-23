@@ -77,7 +77,7 @@
 
 .modal{
     animation-name: modal;
-    animation-duration: 2s;
+    animation-duration: 1s;
 }
 @keyframes modal {
     0%   {transform: rotateX(90deg);}
