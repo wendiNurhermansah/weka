@@ -5,7 +5,7 @@
     .product-card {
         position: ;
         width: auto;
-        height: 390px;
+        height: 460px;
     }
     .product-nav{
         position: ;
@@ -52,7 +52,7 @@
             </div>
         @endif
         <div class="row mx-2">
-            <div class="card col-md-5 h-100">
+            <div class="card col-md-5" style="height:500px;">
                 <div class="card-body">
                     <!-- <div class="table-responsive">
                         <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
@@ -144,7 +144,7 @@
                         </div>
                     @endforeach
                     </div> --}}
-                    @foreach ($kartu as $k)
+                    @foreach ($kartu->take(15) as $k)
                     <button type="button" class="col-md-2 btn btn-light m-1">
                         <div class="col-md-12">
                             <img src="{{asset($path.$k->gambar)}}" alt=""  width="40" height="80">
