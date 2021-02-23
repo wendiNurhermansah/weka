@@ -144,7 +144,7 @@
                         </div>
                     @endforeach
                     </div> --}}
-                    @foreach ($kartu->take(15) as $k)
+                    @foreach ($kartu as $k)
                     <button type="button" class="col-md-2 btn btn-light m-1">
                         <div class="col-md-12">
                             <img src="{{asset($path.$k->gambar)}}" alt=""  width="40" height="80">
@@ -158,12 +158,13 @@
                     @endforeach
                 </div>
                 <div class="product-nav row text-white">
-                    <a class="btn btn-secondary col-md-4 font-weight-bold"><</a>
+                    
+                    <a href="{{ $kartu->previousPageUrl() }}" class="btn btn-secondary col-md-4 font-weight-bold"><</a>
                     <button class="btn btn-success col-md-4 font-weight-bold" data-toggle="modal" data-target="#hadiah">
                         <i class="icon icon-folder"></i>Sell Gift Card
                     </button>
                     {{-- modal --}}
-                    <a class="btn btn-secondary col-md-4 font-weight-bold">></a>
+                    <a href="{{ $kartu->nextPageUrl() }}" class="btn btn-secondary col-md-4 font-weight-bold">></a>
                 </div>
             </div>
         </div>

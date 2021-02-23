@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\pos;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Contracts\Support\Jsonable;
+
 use App\Http\Controllers\Controller;
 use DataTables;
+
 use App\Models\Pembelian;
 use App\Models\Pelanggan;
 use App\Models\Kategori;
@@ -50,7 +54,7 @@ class PosController extends Controller
 
     public function kartu()
     {
-        $kartu = Kategori::all();
+        $kartu = Kategori::paginate(15);
         return $kartu;
     }
 
