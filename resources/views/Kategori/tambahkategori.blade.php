@@ -26,7 +26,7 @@
                     <div class="form-row">
                         <div class="col-md-12">
                             <div class="form-group col-md-8">
-                                <label for="kode">Kode</label>
+                                <label for="kode">KODE</label>
                                 <input type="text" class="form-control @error('kode') is-invalid @enderror" id="kode" placeholder="masukan kode" name="kode" value="{{ old('kode') }}" required>
                                 @error('kode')
                                     <div class="valid-feedback">
@@ -35,7 +35,7 @@
                                 @enderror
                             </div>
                             <div class="form-group col-md-8">
-                                <label for="nama">Nama</label>
+                                <label for="nama">KODE</label>
                                 <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="masukan nama" name="nama" value="{{ old('nama') }}" required>
                                 @error('nama')
                                     <div class="valid-feedback">
