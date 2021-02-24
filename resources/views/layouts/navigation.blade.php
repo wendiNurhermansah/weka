@@ -81,7 +81,7 @@
                 </a>
             </li>
             <li class="no-b">
-                <a href="{{ route('Kategori.tambahkategori.index') }}">
+                <a href="{{ route('Kategori.tambahkategori') }}">
                     <i class="icon icon-plus green-text s-18"></i>
                     <span>Tambahkan Kategori</span>
                 </a>

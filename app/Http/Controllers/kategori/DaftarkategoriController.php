@@ -21,12 +21,19 @@ class DaftarkategoriController extends Controller
         return view('Kategori.daftarkategori', compact('Kategori'));
     }
 
+    public function tambahkategori()
+    {
+        return view ('Kategori.tambahkategori');
+    }
+
+
     public function showDataModal($id)
     {
         $Kategori = Kategori::find($id);
 
         return $Kategori;
     }
+
 
     public function api()
     {
@@ -35,7 +42,7 @@ class DaftarkategoriController extends Controller
 
             ->addColumn('action', function ($p) {
                 return "
-                    <a href='#' onclick='show(" . $p->id . ")' class='text-danger' title='Hapus data'><i class='icon-image'></i></a>
+                    <a href='#' onclick='show(" . $p->id . ")' class='text-danger' title='lihat'><i class='icon-image'></i></a>
                     <a href='" . route('Kategori.daftarkategori.edit', $p->id) . "' onclick='edit(" . $p->id . ")' title='Edit Role'><i class='icon-pencil mr-1'></i></a>
                     <a href='#' onclick='remove(" . $p->id . ")' class='text-danger' title='Hapus data'><i class='icon-remove'></i></a>";
             })
@@ -71,7 +78,26 @@ class DaftarkategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'kode' => 'required | unique',
+            'nama' => 'required',
+            'gambar' => 'required'
+        ]);
+
+        $file     = $request->file('gambar');
+        $fileName = rand() . '.' . $file->getClientOriginalExtension();
+        $request->file('gambar')->move("kategori/images/ava/", $fileName);
+
+        $tmkategori = new Kategori();
+        $tmkategori->kode = $request->kode;
+        $tmkategori->nama = $request->nama;
+        $tmkategori->gambar = $fileName;
+        $tmkategori->save();
+
+        return response()->json([
+            'message' => 'Data berhasil tersimpan.'
+        ]);
+
     }
 
     /**

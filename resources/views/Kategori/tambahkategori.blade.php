@@ -154,7 +154,7 @@
         }
         else{
             $('#alert').html('');
-            url = "{{ route('Kategori.tambahkategori.store') }}",
+            url = "{{ route('Kategori.daftarkategori.store') }}",
             $.ajax({
                 url : url,
                 type : 'POST',
