@@ -28,7 +28,7 @@
 </li>
 <li id="tutupDaftar-nav-li" type="none" class="mx-2 fs-13 text-white">
     <a id="tutupDaftar-nav" data-toggle='modal' data-target='#tutupDaftar'>Close Register</a>
-</li>    
+</li>
 @endsection
 @section('content')
 <div class="page has-sidebar-left height-full">
@@ -152,13 +152,13 @@
                         <div class="col-md-4">
                             {{$k->nama}}
                         </div>
-                        
+
                         <br>
                     </button>
                     @endforeach
                 </div>
                 <div class="product-nav row text-white">
-                    
+
                     <a href="{{ $kartu->previousPageUrl() }}" class="btn btn-secondary col-md-4 font-weight-bold"><</a>
                     <button class="btn btn-success col-md-4 font-weight-bold" data-toggle="modal" data-target="#hadiah">
                         <i class="icon icon-folder"></i>Sell Gift Card
@@ -231,7 +231,7 @@
 </div>
 <div class="modal fade" id="cancel" role="dialog">
     <div class="modal-dialog">
-    
+
       <!-- Modal content-->
         <div class="modal-content w-50 mx-auto">
             <div class="modal-body">
@@ -242,7 +242,7 @@
                     <button type="button" class="btn btn-light" data-dismiss="modal">No</button>
                     <a class="btn btn-primary ml-auto" href="{{url('/')}}">Yes</a>
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
 </div>
