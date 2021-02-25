@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\product;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
+
 {
     /**
      * Display a listing of the resource.
@@ -53,7 +55,9 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('Produk.TambahProduk');
+        $kategori = Kategori::all();
+        return view('Produk.TambahProduk', compact('kategori'));
+
 
     }
 
@@ -65,29 +69,25 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required',
-            'ketik' => 'required',
-            'kategori' => 'required',
-            'kuantitas' => 'required',
-            'pajak' => 'required',
-            'metode' => 'required',
-            'biaya' => 'required',
-            'harga' => 'required',
-            'gambar' => 'required'
-        ]);
+        // $request->validate([
+        //     'nama' => 'required',
+        //     'kategori' => 'required',
+        //     'kuantitas' => 'required',
+        //     'pajak' => 'required',
+        //     'biaya' => 'required',
+        //     'harga' => 'required',
+        //     'gambar' => 'required|mimes:png,jpeg,png|max:2024'
+        // ]);
         $file     = $request->file('gambar');
-
         $fileName = rand() . '.' . $file->getClientOriginalExtension();
         $request->file('gambar')->move("produk/images/ava/", $fileName);
+        // dd($fileName);
 
         $produk = new product();
         $produk->nama     = $request->nama;
-        $produk->ketik = $request->ketik;
         $produk->kategori = $request->kategori;
         $produk->kuantitas = $request->kuantitas;
         $produk->pajak = $request->pajak;
-        $produk->metode = $request->metode;
         $produk->biaya = $request->biaya;
         $produk->harga = $request->harga;
         $produk->gambar = $fileName;
@@ -130,11 +130,9 @@ class ProductsController extends Controller
         {
         $request->validate([
             'nama' => 'required',
-            'ketik' => 'required',
             'kategori' => 'required',
             'kuantitas' => 'required',
             'pajak' => 'required',
-            'metode' => 'required',
             'biaya' => 'required',
             'harga' => 'required'
         ]);
@@ -142,11 +140,9 @@ class ProductsController extends Controller
         product::where('id', $id)
             ->update([
                 'nama' => $request->nama,
-                'ketik' => $request->ketik,
                 'kategori' => $request->kategori,
                 'kuantitas' => $request->kuantitas,
                 'pajak' => $request->pajak,
-                'metode' => $request->metode,
                 'biaya' => $request->biaya,
                 'harga' => $request->harga,
             ]);

@@ -33,11 +33,8 @@
             <tr>
                 <th>Gambar</th>
                 <th>Nama</th>
-                <th>Ketik</th>
-                <th>Kategori</th>
+                <th>Kode</th>
                 <th>Kuantitas</th>
-                <th>Pajak</th>
-                <th>Metode</th>
                 <th>Biaya</th>
                 <th>Harga</th>
                 <th>Tindakan</th>
@@ -49,11 +46,8 @@
                 {{-- <td>{{$product->gambar}}</td> --}}
                 <td><img src="produk/images/ava/{{$product->gambar}}" alt="" width='100'></td>
                 <td>{{$product->nama}}</td>
-                <td>{{$product->ketik}}</td>
                 <td>{{$product->kategori}}</td>
                 <td>{{$product->kuantitas}}</td>
-                <td>{{$product->pajak}}</td>
-                <td>{{$product->metode}}</td>
                 <td>{{$product->biaya}}</td>
                 <td>{{$product->harga}}</td>
                 <td>
@@ -77,10 +71,10 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-                <div class="modal-footer">
+            <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+            </div>
         </div>
     </div>
 </div>

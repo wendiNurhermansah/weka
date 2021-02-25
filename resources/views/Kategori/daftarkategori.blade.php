@@ -49,14 +49,9 @@
                   </button>
                 </div>
                 <div class="modal-body">
-
                     <div>
                         <img id="photo_" alt="">
                     </div>
-
-
-
-
                 </div>
               </div>
             </div>

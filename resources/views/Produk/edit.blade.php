@@ -23,15 +23,6 @@
                     @csrf
 
                         <div class="form-group">
-                            <label for="ketik">Ketik</label>
-                            <select class="custom-select @error('ketik') is-invalid @enderror" id="ketik" placeholder="Masukkan ketik" name="ketik" value="{{$produk -> ketik}}">
-                                <option selected>Standar</option>
-                                <option value="1">Combo</option>
-                                <option value="2">Layanan</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
                             <label for="nama">Nama Makanan</label>
                             <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukkan Nama" name="nama" value="{{$produk->nama}}">
                         </div>
@@ -40,7 +31,7 @@
                             <label for="kategori">Kategori</label>
                             <select class="custom-select @error('kategori') is-invalid @enderror" id="kategori" placeholder="Masukkan kategori" name="kategori" value="{{$produk -> kategori}}">
                                 <option selected>Makanan</option>
-                                <option value="1">Minuman</option>
+                                <option value="Minuman">Minuman</option>
                             </select>
                         </div>
 
@@ -52,11 +43,6 @@
                         <div class="form-group">
                             <label for="pajak">Pajak</label>
                             <input type="text" class="form-control @error('pajak') is-invalid @enderror" id="pajak" placeholder="Masukkan pajak" name="pajak" value="{{$produk -> pajak}}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="metode">Metode</label>
-                            <input type="text" class="form-control @error('metode') is-invalid @enderror" id="metode" placeholder="Masukkan metode" name="metode" value="{{$produk -> metode}}">
                         </div>
 
                         <div class="form-group">
