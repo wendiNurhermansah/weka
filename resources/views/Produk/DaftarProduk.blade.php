@@ -41,7 +41,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($produk as $product)
+            @foreach ($produk as $index => $product)
             <tr>
                 {{-- <td>{{$product->gambar}}</td> --}}
                 <td><img src="produk/images/ava/{{$product->gambar}}" alt="" width='100'></td>
@@ -51,45 +51,18 @@
                 <td>{{$product->biaya}}</td>
                 <td>{{$product->harga}}</td>
                 <td>
-                <div class="btn btn-primary">
-                    <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 30px;">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Gambar</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div>
-                                        <img id="photo_" alt="">
+                    <button href="" class="btn btn-warning button-footer far fa-image" data-toggle="modal" data-target="#img{{$index}}"></button>
+                        <div class="modal fade" id="img{{$index}}" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div><img src="{{asset('/produk/images/ava/'.$product->gambar)}}"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 30px;">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Gambar</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                                <div class="modal-body">
-                                    <div>
-                                        <img id="photo_" alt="">
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- <a href="produk/images/ava/{{$product->gambar}}" class="btn btn-primary" ><i class="far fa-image"></i></a> --}}
                 <a href="/product/{{ $product->id }}/edit" class="btn btn-primary" >Edit</a>
                     <form action="/product/{{$product->id}}" method="post" class="d-inline">
                             @method('delete')
@@ -134,18 +107,7 @@
             {data: 'catatan', name: 'catatan'},
             {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
         ]
-
-        function show(id){
-        $('#modal2').modal('show');
-        $.get("{{ route('Kategori.daftarkategori.showDataModal', ':id') }}".replace(':id', id), function(data){
-            var path = "{{ asset('/produk/images/ava') }}"+ "/" + data.gambar;
-            console.log(data.gambar)
-            $('#photo_').attr({'src': path});
-        }, "JSON").fail(function(){
-            reload();
         });
-
-    }
 
 </script>
 
