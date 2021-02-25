@@ -107,6 +107,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('pembelian/api', 'PembelianController@api')->name('pembelian.api');
             Route::get('tambahPembelian', 'PembelianController@tambahPembelian')->name('tambahPembelian');
             Route::post('produk', 'PembelianController@produk')->name('produk');
+            Route::get('price/{id}', 'PembelianController@price')->name('pembelian.price');
+
 
             //biaya
             Route::resource('biaya', 'BiayaController');
@@ -147,6 +149,13 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Route::resource('produk', 'productsController');
 
+    Route::get('tes', function(){
+        return response()->json([
+            'status' => 1,
+            'message' => 'sukses'
+
+        ]);
+    })->name('tes');
 
 });
 

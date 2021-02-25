@@ -16,16 +16,19 @@
     </header>
 
     <div class="container-fluid my-3">
+        <div id="alert"></div>
+
         <div class="card">
             <div class="card-body">
                 <form class="needs-validation" id="form" method="POST"  novalidate>
                     {{ method_field('POST') }}
                     <input type="hidden" id="id" name="id"/>
                     <h4 id="formTitle">Tambah Pembelian</h4><hr>
+
                     <div class="form-row">
                         <div class="col md-6">
                             <label for="tanggal">Tanggal</label>
-                            <input type="datetime-local" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" placeholder="" name="tanggal" value="{{ old('tanggal') }}" required>
+                            <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" placeholder="" name="tanggal" value="{{ old('tanggal') }}" required>
                         </div>
                         <div class="col md-6">
                             <label for="referensi">Referensi</label>
@@ -34,8 +37,8 @@
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for=""></label>
-                                <input type="text" class="form-control @error('nama_depan') is-invalid @enderror" id="id1" placeholder="cari produk dengan kode atau nama" name="nama_depan" value="{{ old('nama_depan') }}" required>
+                                <label for="produk1"></label>
+                                <input type="text"   class="form-control @error('produk1') is-invalid @enderror" id="id1" placeholder="cari produk dengan kode atau nama" name="produk1" value="{{ old('produk1') }}" required>
 
                             </div>
                             <div class="table-responsive">
@@ -46,27 +49,28 @@
                                         <th>Kuantitas</th>
                                         <th>Biaya Satuan</th>
                                         <th>Sub Total</th>
-                                        <th width="60">Tindakan</th>
+                                        <th width="60"><i class="fas fa-trash-alt"></i></th>
                                     </tr>
 
                                     </thead>
-                                    <tbody style="text-align: center;">
-                                        <tr>
+                                    <tbody style="text-align: center;" id="appendd">
+                                        {{-- <tr >
                                             <td style="width: 300px; text-align: left;">
-                                                <input type="hidden">
-                                                <span>wendi</span>
-                                            </td>
-                                            <td>
-                                                <input type="text" value="1" style="width: 200px; text-align: center;">
-                                            </td>
-                                            <td>
-                                                <input type="text" value="10.000" style="width: 200px; text-align: center;">
-                                            </td>
-                                            <td>
-                                                <span></span>
+
+                                                <input type="text" id="produk_0" name="produk" style="width: 400px; border: none;">
 
                                             </td>
-                                            <td></td>
+                                            <td>
+                                                <input type="text" id="id3"  style="width: 200px; text-align: center;" name="kuantitas">
+                                            </td>
+                                            <td>
+                                                <input type="text"  id="id4"  style="width: 200px; text-align: center;" name="biaya_satuan">
+                                            </td>
+                                            <td>
+                                                <input type="text"  id="id4"  style="width: 100px; text-align: center; border: none;" name="sub_total">
+
+                                            </td>
+                                            <td></td> --}}
                                         </tr>
 
                                     </tbody>
@@ -76,19 +80,20 @@
                                           <th></th>
                                           <th></th>
                                           <th>
-                                              <span>0.00</span>
+                                            <input type="text"  id="id4" value="0" style="width: 100px; text-align: center; border:none;" name="total">
                                           </th>
                                           <th></th>
                                         </tr>
                                     </tfoot>
                                 </table>
                             </div>
+
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="group">Pemasok</label>
+                                <label for="pemasok">Pemasok</label>
                                 <div class=" p-0 bg-light">
-                                    <select class="select2 form-control r-0 light s-12" name="group" id="group" autocomplete="off">
+                                    <select class="select2 form-control r-0 light s-12" name="pemasok" id="pemasok" autocomplete="off">
                                         <option value="">Pilih Pemasok :</option>
                                         <option value="Staff">Staff</option>
                                     </select>
@@ -97,9 +102,9 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="group">Diterima</label>
+                                <label for="diterima">Diterima</label>
                                 <div class=" p-0 bg-light">
-                                    <select class="select2 form-control r-0 light s-12" name="group" id="group" autocomplete="off">
+                                    <select class="select2 form-control r-0 light s-12" name="diterima" id="diterima" autocomplete="off">
                                         <option value="Diterima">Diterima</option>
                                         <option value="Belum Diterima">Belum Diterima</option>
                                     </select>
@@ -108,14 +113,14 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="nama_depan">Lampiran</label>
-                                <input type="file" class="form-control @error('nama_depan') is-invalid @enderror" id="nama_depan" placeholder="cari produk dengan kode atau nama" name="nama_depan" value="{{ old('nama_depan') }}" required>
+                                <label for="lampiran">Lampiran</label>
+                                <input type="file" class="form-control @error('lampiran') is-invalid @enderror" id="lampiran" placeholder="cari produk dengan kode atau nama" name="lampiran" value="{{ old('lampiran') }}" required>
 
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <label for="">Catatan</label>
-                            <textarea name="" id="" cols="30" rows="10"></textarea>
+                            <label for="catatan">Catatan</label>
+                            <textarea name="catatan" id="catatan" cols="30" rows="10" required></textarea>
                         </div>
 
 
@@ -141,6 +146,9 @@
       tinycomments_author: 'Author name',
    });
 
+
+
+
    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $(document).ready(function(){
 
@@ -157,16 +165,145 @@
                         search: request.term
                     },
                     success: function( data ) {
+                        // console.log(data);
                         response( data );
                     }
                     });
                 },
                 select: function (event, ui) {
                     // Set selection
-                    $('#id1').val(ui.item.label); // display the selected text
+                    // $('#id1').val(ui.item.label);
+                    price(ui.item.id);
+                    // console.log(ui.item.value);
+                    // console.log(ui.item.id);
                     return false;
                 }
             });
         });
+
+        var formAdd = 0;
+        function price(id) {
+        formAdd++;
+        console.log(formAdd);
+        // console.log(price());
+
+        var url = "{{ route('Pembelian.pembelian.price', ':id') }}".replace(':id', id);
+
+        var html = `
+                                        <tr >
+                                            <td style="width: 300px; text-align: left;">
+
+                                                <input type="text" id="produk_`+formAdd+`" name="produk" style="width: 400px; border: none;">
+
+                                            </td>
+                                            <td>
+                                                <input type="text" id="id3"  style="width: 200px; text-align: center;" name="kuantitas">
+                                            </td>
+                                            <td>
+                                                <input type="text"  id="id4"  style="width: 200px; text-align: center;" name="biaya_satuan">
+                                            </td>
+                                            <td>
+                                                <input type="text"  id="id4"  style="width: 100px; text-align: center; border: none;" name="sub_total">
+
+                                            </td>
+                                            <td>
+
+                                                <a href='#' onclick='hapusTable("+formAdd+")' class='text-danger' title='Hapus data'><i class="fas fa-trash-alt"></i>  </a>
+                                            </td>
+                                        </tr>
+
+                                    `;
+
+         $.get(url, function (res) {
+            // console.log(res);
+            //  console.log(res.kode);
+            // $('#produk_0').val(res.nama);
+            // $('#id3').val(res.kode);
+
+            $('#appendd').append(html);
+
+            $('#produk_'+formAdd).val(res.nama);
+
+
+
+            // $.each(res.data, function(index, value){
+
+            // });
+
+
+        }, 'JSON').done(function () {
+            console.log('Done');
+        }).fail(function(e){
+            console.log('Error');
+        });
+
+
+
+        }
+
+    //delete
+    function hapusTable(id){
+        $('#appendd').remove();
+    }
+
+
+
+
+  //submit
+  function reset(){
+        $('#form').trigger('reset');
+        $('#preview').attr({ 'src': '-', 'alt': ''});
+        $('#changeText').html('Browser Image')
+    }
+
+        function add(){
+        save_method = "add";
+        $('#form').trigger('reset');
+        $('#formTitle').html('Tambah Data');
+        $('input[name=_method]').val('POST');
+        $('#txtAction').html('');
+        $('#reset').show();
+        $('#name').focus();
+    }
+
+        $('#form').on('submit', function (e) {
+        if ($(this)[0].checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        else{
+            $('#alert').html('');
+            url = "{{ route('Pembelian.pembelian.store') }}",
+            $.ajax({
+                url : url,
+                type : 'POST',
+                data: new FormData(($(this)[0])),
+                contentType: false,
+                processData: false,
+                success : function(data) {
+                    console.log(data);
+                    $('#alert').html("<div role='alert' class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Success!</strong> " + data.message + "</div>");
+                    location.reload();
+                },
+                error : function(data){
+                    err = '';
+                    respon = data.responseJSON;
+                    if(respon.errors){
+                        $.each(respon.errors, function( index, value ) {
+                            err = err + "<li>" + value +"</li>";
+                        });
+                    }
+                    $('#alert').html("<div role='alert' class='alert alert-danger alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Error!</strong> " + respon.message + "<ol class='pl-3 m-0'>" + err + "</ol></div>");
+                }
+            });
+            return false;
+        }
+        $(this).addClass('was-validated');
+    });
+
+    //delete table
+
+
+
     </script>
 @endsection

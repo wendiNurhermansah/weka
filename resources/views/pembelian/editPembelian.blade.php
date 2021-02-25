@@ -23,20 +23,21 @@
                     @csrf
                     <input type="hidden" id="id" name="id" value="{{$Pembelian->id}}"/>
                     <h4 id="formTitle">Edit Pembelian</h4><hr>
+                    <div id="alert"></div>
                     <div class="form-row">
                         <div class="col md-6">
                             <label for="tanggal">Tanggal</label>
-                            <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" placeholder="" name="tanggal" value="{{ old('tanggal') }}" required>
+                            <input type="date" class="form-control" name="tanggal" value="{{ date('Y-m-d') }}" required>
                         </div>
                         <div class="col md-6">
                             <label for="referensi">Referensi</label>
-                            <input type="text" class="form-control @error('referensi') is-invalid @enderror" id="referensi" placeholder="" name="referensi" value="{{ old('referensi') }}" required>
+                            <input type="text" class="form-control @error('referensi') is-invalid @enderror" id="referensi" placeholder="" name="referensi" value="{{ $Pembelian->referensi }}" required>
                         </div>
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="nama_depan"></label>
-                                <input type="text" class="form-control @error('nama_depan') is-invalid @enderror" id="nama_depan" placeholder="cari produk dengan kode atau nama" name="nama_depan" value="{{ old('nama_depan') }}" required>
+                                <label for="produk"></label>
+                                <input type="text"   class="form-control @error('produk') is-invalid @enderror" id="id1" placeholder="cari produk dengan kode atau nama" name="produk" value="{{ $Pembelian->produk }}" required>
 
                             </div>
                             <div class="table-responsive">
@@ -47,18 +48,25 @@
                                         <th>Kuantitas</th>
                                         <th>Biaya Satuan</th>
                                         <th>Sub Total</th>
-
                                         <th width="60">Tindakan</th>
                                     </tr>
 
                                     </thead>
-                                    <tbody>
+                                    <tbody style="text-align: center;">
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td style="width: 300px; text-align: left;">
+                                                <input type="text" id="id2" name="produk" style="width: 400px; border: none;" value="{{ $Pembelian->produk }}">
+                                            </td>
+                                            <td>
+                                                <input type="text" id="id3" style="width: 200px; text-align: center;" name="kuantitas" value="{{ $Pembelian->kuantitas }}">
+                                            </td>
+                                            <td>
+                                                <input type="text"  id="id4" style="width: 200px; text-align: center;" name="biaya_satuan" value="{{ $Pembelian->biaya_satuan }}">
+                                            </td>
+                                            <td>
+                                                <input type="text"  id="id4"  style="width: 100px; text-align: center; border: none;" name="sub_total" value="{{ $Pembelian->sub_total }}">
 
+                                            </td>
                                             <td></td>
                                         </tr>
 
@@ -68,9 +76,8 @@
                                           <th>Total</th>
                                           <th></th>
                                           <th></th>
-
                                           <th>
-                                              <span>0.00</span>
+                                            <input type="text"  id="id4" style="width: 100px; text-align: center; border: none;" name="total" value="{{ $Pembelian->total }}">
                                           </th>
                                           <th></th>
                                         </tr>
@@ -80,9 +87,9 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="group">Pemasok</label>
+                                <label for="pemasok">Pemasok</label>
                                 <div class=" p-0 bg-light">
-                                    <select class="select2 form-control r-0 light s-12" name="group" id="group" autocomplete="off">
+                                    <select class="select2 form-control r-0 light s-12" name="pemasok" id="pemasok" autocomplete="off">
                                         <option value="">Pilih Pemasok :</option>
                                         <option value="Staff">Staff</option>
                                     </select>
@@ -91,9 +98,9 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="group">Diterima</label>
+                                <label for="diterima">Diterima</label>
                                 <div class=" p-0 bg-light">
-                                    <select class="select2 form-control r-0 light s-12" name="group" id="group" autocomplete="off">
+                                    <select class="select2 form-control r-0 light s-12" name="diterima" id="diterima" autocomplete="off">
                                         <option value="Diterima">Diterima</option>
                                         <option value="Belum Diterima">Belum Diterima</option>
                                     </select>
@@ -102,20 +109,20 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="nama_depan">Lampiran</label>
-                                <input type="file" class="form-control @error('nama_depan') is-invalid @enderror" id="nama_depan" placeholder="cari produk dengan kode atau nama" name="nama_depan" value="{{ old('nama_depan') }}" required>
+                                <label for="lampiran">Lampiran</label>
+                                <input type="file" class="form-control @error('lampiran') is-invalid @enderror" id="lampiran" placeholder="cari produk dengan kode atau nama" name="lampiran" value="{{ $Pembelian->lampiran }}" required>
 
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <label for="">Catatan</label>
-                            <textarea name="" id="" cols="30" rows="10"></textarea>
+                            <label for="catatan">Catatan</label>
+                            <textarea name="catatan" id="catatan" cols="30" rows="10" required>{{ $Pembelian->catatan }}"</textarea>
                         </div>
 
 
                         <div class="mt-2 col-md-8" style="">
                             <button type="submit" class="btn btn-primary" id="action">Rubah Pembelian<span id="txtAction"></span></button>
-
+                            <a class="btn btn-danger" onclick="add()" id="reset">Atur Ulang</a>
                         </div>
                     </div>
                 </form>

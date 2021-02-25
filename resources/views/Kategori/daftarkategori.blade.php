@@ -113,6 +113,7 @@
         });
     }
 
+//modal gambar
     function show(id){
         $('#modal2').modal('show');
         $.get("{{ route('Kategori.daftarkategori.showDataModal', ':id') }}".replace(':id', id), function(data){
