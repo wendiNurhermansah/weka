@@ -99,29 +99,29 @@
                                     <th>Total Items</th>
                                     <th>0</th>
                                     <th>Total</th>
-                                    <th>0</th>
+                                    <th><span id="tabelTotal"></span></th>
                                 </tr>
                                 <tr>
-                                    <th>Discount</th>
-                                    <th>0</th>
-                                    <th>Order Tax</th>
-                                    <th>0</th>
+                                    <th><a data-toggle="modal" data-target="#modalDiskon" class="text-primary">Discount</a></th>
+                                    <th>(<span id="nilaiDiskon"></span>)<span id="hasilDiskon"></span></th>
+                                    <th><a data-toggle="modal" data-target="#modalPajak" class="text-primary">Order Tax</a></th>
+                                    <th>(<span id="nilaiPajak"></span>)<span id="hasilPajak"></span></th>
                                 </tr>
                                 <tr>
-                                    <th>Total Payable</th>
-                                    <th>0</th>
+                                    <th>Total Payable <a data-toggle="modal" data-target="#catatan"><i class="text-primary icon-comment"></i></a></th>
+                                    <th class="text-right"><span id="totalPayable"></span></th>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
-                    <div class="row">
+                    <div class="row mt-5 pt-5">
                         <div class="col-md-4">
-                            <button href="" class="btn btn-primary button-footer" data-toggle="modal" data-target="#hold">Hold</button>
+                            <button href="" class="btn btn-warning button-footer" data-toggle="modal" data-target="#hold">Hold</button>
                             <button href="" class="btn btn-danger button-footer" data-toggle="modal" data-target="#cancel">Cancel</button>
                         </div>
                         <div class="col-md-4">
                             <a href="" class="btn btn-primary h-50 button-footer" data-toggle="modal" data-target="#printOrder">Print Order</a>
-                            <a href="" class="btn btn-primary h-50 button-footer">Print Bill</a>
+                            <a href="" class="btn btn-dark h-50 button-footer">Print Bill</a>
                         </div>
                         <div class="col-md-4">
                             <a href="" class="btn btn-success py-4 button-footer">Payment</a>
@@ -200,7 +200,7 @@
           </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-light mr-auto border" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
@@ -218,13 +218,33 @@
             <div class="modal-body">
                 <p>Type Reference Note</p>
                 <div class="form-group">
-                    <label for="nomorKartu" class="font-weight-bold">Reference Note</label>
-                    <input class="form-control" type="text" value="" id="nomorKartu" name="nomorKartu">
+                    <label for="note" class="font-weight-bold">Reference Note</label>
+                    <input class="form-control" type="text" value="" id="note" name="note">
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-light mr-auto border" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="catatan" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="text-black modal-title">Note</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input class="form-control" type="text" value="" id="note" name="note">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light mr-auto border" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Update</button>
             </div>
         </div>
     </div>
@@ -239,7 +259,7 @@
                     <label for="nomorKartu" class="font-weight-bold">Are you sure ?</label>
                 </div>
                 <div class="row m-1">
-                    <button type="button" class="btn btn-light" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-light mr-auto border" data-dismiss="modal">No</button>
                     <a class="btn btn-primary ml-auto" href="{{url('/')}}">Yes</a>
                 </div>
             </div>
@@ -446,9 +466,102 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="modalDiskon" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <form action=""></form>
+        <div class="modal-content w-50 mx-auto">
+            <div class="modal-header">
+                <h4 class="text-black modal-title">Discount (5 or 5%)</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" id="inputDiskon" name="inputDiskon" class="form-control" placeholder="" value="0" onclick="">
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input border rounded-circle" type="checkbox" id="orderTotal" value="orderTotal">
+                    <label class="form-check-label" for="orderTotal">Apply to order total</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="allOrder" value="allOrder">
+                    <label class="form-check-label" for="allOrder">Apply to all order items</label>
+                </div>
+            </div> 
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light mr-auto border" data-dismiss="modal">Close</button>
+                <button type="button" onclick="updateDiskon()" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalPajak" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+        <div class="modal-content w-50 mx-auto">
+            <div class="modal-header">
+                <h4 class="text-black modal-title">Tax (5 or 5%)</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" id="inputPajak" name="inputPajak" class="form-control" value="5%" placeholder="">
+                </div>
+            </div> 
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light mr-auto border" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="updatePajak()">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @section('script')
 <script type="text/javascript">
+        // diskon
+        
+        function updateDiskon()
+        {
+            var diskon = $('#inputDiskon').val();
+            $('#nilaiDiskon').html(diskon);
+            var total = $('#tabelTotal').text();
+            100  
+            hasilDiskon = total * diskon / 100 ;
+            // 10
+            $('#hasilDiskon').html(hasilDiskon);
+            // 10
+            var nilaiPajak = $('#nilaiPajak').text();
+            // 1%
+            hasilPajak = (total - hasilDiskon) * nilaiPajak / 100 ;
+                            // (100 - 10) * 1% = 9
+                                // 90
+            $('#hasilPajak').html(hasilPajak);
+            // 9
+            bayar = total - hasilDiskon + parseFloat(hasilPajak);
+            $('#totalPayable').html(bayar);
+            $('#modalDiskon').modal('toggle');
+            $('#inputDiskon').val('0');
+            
+            // return hasilDiskon;
+        }
+
+        // pajak
+        function updatePajak()
+        {
+            var pajak = $('#inputPajak').val();
+            $('#nilaiPajak').html(pajak);
+            var total = $('#tabelTotal').text();  
+            hasilPajak = total * pajak / 100;
+            $('#hasilPajak').html(hasilPajak);
+            var hasilDiskon = $('#hasilDiskon').text();
+            bayar = total - hasilDiskon + parseFloat(hasilDiskon);
+            $('#totalPayable').html(bayar);
+            $('#modalPajak').modal('toggle');
+            $('#inputPajak').val('5%');
+
+            // return hasilPajak;
+        }
+
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
         function randomNomorKartu() {
@@ -460,16 +573,43 @@
         }
 
         $(document).ready(function(){
+            // total
+            $("#tabelTotal").html(90);
+
+            // totalPayable
+            $("#totalPayable").html('0');
+
             // nav
             $("#pos-nav-li").remove();
             // $("#navigasi").add("<li id='shortcut-nav-li' type='none' class='mx-2 fs-13 text-white'><a id='shortcut' href='' data-toggle='modal' data-target='#shortcut'><i class='icon-key'></i></a></li>").appendTo("#navigasi");
             $("#nomorKartu").attr('maxlength','16');
             // limit nomor kartu
 
+            // no.card
             $("#nomorKartu").keypress(function (e) {
                 if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
             });
 
+            // diskon
+            $("#inputDiskon").keypress(function (e) {
+                if (String.fromCharCode(e.keyCode).match(/[^0-9-%]/g)) return false;
+            });
+            $("#nilaiDiskon").html('0');
+            $("#hasilDiskon").html('0');
+
+            // pajak
+            $("#inputPajak").keypress(function (e) {
+                if (String.fromCharCode(e.keyCode).match(/[^0-9-%]/g)) return false;
+            });
+
+            $("#nilaiPajak").html(5);
+            nilaiPajak = $("#nilaiPajak").text();
+            var total = $('#tabelTotal').text();
+            hasilPajak = total * nilaiPajak / 100
+            $("#hasilPajak").html(hasilPajak);
+            var bayar = parseFloat(total) + parseFloat(hasilPajak);
+            $('#totalPayable').html(bayar);
+            
             // ajax get product
             $( "#kategori" ).autocomplete({
                 source: function( request, response ) {
