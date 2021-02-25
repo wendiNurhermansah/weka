@@ -41,7 +41,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($produk as $product)
+            @foreach ($produk as $index => $product)
             <tr>
                 {{-- <td>{{$product->gambar}}</td> --}}
                 <td><img src="produk/images/ava/{{$product->gambar}}" alt="" width='100'></td>
@@ -51,6 +51,18 @@
                 <td>{{$product->biaya}}</td>
                 <td>{{$product->harga}}</td>
                 <td>
+                    <button href="" class="btn btn-warning button-footer far fa-image" data-toggle="modal" data-target="#img{{$index}}"></button>
+                        <div class="modal fade" id="img{{$index}}" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div><img src="{{asset('/produk/images/ava/'.$product->gambar)}}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                 <a href="/product/{{ $product->id }}/edit" class="btn btn-primary" >Edit</a>
                     <form action="/product/{{$product->id}}" method="post" class="d-inline">
                             @method('delete')
@@ -62,22 +74,6 @@
             @endforeach
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
 
 @section('script')

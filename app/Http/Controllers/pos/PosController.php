@@ -12,6 +12,7 @@ use DataTables;
 use App\Models\Pembelian;
 use App\Models\Pelanggan;
 use App\Models\Kategori;
+use App\Models\product;
 
 class PosController extends Controller
 {
@@ -54,7 +55,7 @@ class PosController extends Controller
 
     public function kartu()
     {
-        $kartu = Kategori::paginate(15);
+        $kartu = product::paginate(15);
         return $kartu;
     }
 
