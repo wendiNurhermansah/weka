@@ -7,7 +7,21 @@
         </a>
     </li>
     @can('Role')
-    <li class="header light"><strong>MASTER ROLES</strong></li>
+    <li class="treeview ">
+        <a href="#">
+            <i class="header icon icon-package text-lime s-18"></i> <span>MASTER ROLES</span>
+            <i class="icon icon-angle-left s-18 pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{{ route('role.index') }}"><i class="icon icon-key4 amber-text s-18"></i>Role</a>
+            </li>
+            <li><a href="{{ route('permission.index') }}"><i class="icon icon-clipboard-list2 text-success s-18"></i>Permission</a>
+            </li>
+            <li><a href="{{ url('pengguna.index') }}"><i class="icon icon-user blue-text s-18"></i>Pengguna</a>
+        </ul>
+    </li>
+
+    {{-- <li class="header light"><strong>MASTER ROLES</strong></li>
     <li>
         <a href="{{ route('role.index') }}">
             <i class="icon icon-key4 amber-text s-18"></i>
@@ -26,6 +40,7 @@
             <span>Pengguna</span>
         </a>
     </li>
+    </li> --}}
 
     @endcan
 
