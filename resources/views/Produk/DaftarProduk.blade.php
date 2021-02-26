@@ -18,7 +18,8 @@
         @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{session('success')}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close" data-dismiss="ale
+            rt" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -44,7 +45,9 @@
             @foreach ($produk as $index => $product)
             <tr>
                 {{-- <td>{{$product->gambar}}</td> --}}
-                <td><img src="produk/images/ava/{{$product->gambar}}" alt="" width='100'></td>
+                <td><a href="#" data-toggle="modal" data-target="#img{{$index}}"><img src="produk/images/ava/{{$product->gambar}}" alt="" width="100"></a>
+
+                </td>
                 <td>{{$product->nama}}</td>
                 <td>{{$product->kategori}}</td>
                 <td>{{$product->kuantitas}}</td>
