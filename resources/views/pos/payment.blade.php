@@ -3,6 +3,9 @@
         .uang{
             width: 100px;
         }
+        .badge{
+            color: black !important;
+        }
     </style>
 @endpush
 
@@ -94,12 +97,27 @@
                           </div>
                     </div>
                     <div class="col-md-3">
-                        <button id="bayarPas" onclick="bayarPas()" class="border uang btn btn-primary">0</button><br>
-                        <button id="uang10" onclick="bayar10()" class="border uang btn btn-warning">10</button> <br>
-                        <button id="uang20" onclick="bayar20()" class="border uang btn btn-warning">20</button> <br>
-                        <button id="uang50" onclick="bayar50()" class="border uang btn btn-warning">50</button>    <br>
-                        <button id="uang100" onclick="bayar100()" class="border uang btn btn-warning">100</button> <br>
-                        <button id="uang500"  onclick="bayar500()" class="border uang btn btn-warning">500</button> <br>
+                        <button id="uangPas" onclick="bayarPas()" class="border uang btn btn-primary"></button><br>
+                        <button onclick="bayar10()" class="border uang btn btn-warning">
+                            <span id="uang10">10</span>
+                            <span id="notif10" class="badge badge-dark">0</span>
+                        </button> <br>
+                        <button onclick="bayar20()" class="border uang btn btn-warning">
+                            <span id="uang20">20</span>
+                            <span id="notif20" class="badge badge-dark">0</span>
+                        </button> <br>
+                        <button onclick="bayar50()" class="border uang btn btn-warning">
+                            <span id="uang50">50</span>
+                            <span id="notif50" class="badge badge-dark">0</span>
+                        </button>    <br>
+                        <button id="uang100" onclick="bayar100()" class="border uang btn btn-warning">
+                            <span id="uang100">100</span>
+                            <span id="notif100" class="badge badge-dark">0</span>
+                        </button> <br>
+                        <button id="uang500"  onclick="bayar500()" class="border uang btn btn-warning">
+                            <span id="uang500">500</span>
+                            <span id="notif500" class="badge badge-dark">0</span>
+                        </button> <br>
                         <button id="clear" onclick="hapus()" class="border uang btn btn-danger">clear</button>   <br>                     
                     </div>
                 </div>
@@ -118,10 +136,13 @@
     <script>
         function payment(){
             totalPayable = $('#totalPayable').text();
+            $('#uangPas').html(totalPayable);
             $('#totalPayable_Payment').html(totalPayable);
             totalPaying = $('#totalPaying').text();
             saldo = parseFloat(totalPaying) - parseFloat(totalPayable);
             $('#saldo').html(saldo);
+            $('.badge').html(0);
+            $('.badge').hide();
         }
 
         function bayar10(){
@@ -133,6 +154,10 @@
             totalPayable = $('#totalPayable').text();
             saldo = parseFloat(totalPaying) - parseFloat(totalPayable);
             $('#saldo').html(saldo);
+            notif = $('#notif10').text();
+            notif++;
+            $('#notif10').html(notif);
+            $('#notif10').show();
         }
         function bayar20(){
             totalPaying = $("#totalPaying").text();
@@ -142,6 +167,10 @@
             $("#jumlah").val(totalPaying);
             saldo = parseFloat(totalPaying) - parseFloat(totalPayable);
             $('#saldo').html(saldo);
+            notif = $('#notif20').text();
+            notif++;
+            $('#notif20').html(notif);
+            $('#notif20').show();
         }
         function bayar50(){
             totalPaying = $("#totalPaying").text();
@@ -151,6 +180,10 @@
             $("#jumlah").val(totalPaying);
             saldo = parseFloat(totalPaying) - parseFloat(totalPayable);
             $('#saldo').html(saldo);
+            notif = $('#notif50').text();
+            notif++;
+            $('#notif50').html(notif);
+            $('#notif50').show();
         }
         function bayar100(){
             totalPaying = $("#totalPaying").text();
@@ -160,6 +193,10 @@
             $("#jumlah").val(totalPaying);
             saldo = parseFloat(totalPaying) - parseFloat(totalPayable);
             $('#saldo').html(saldo);
+            notif = $('#notif100').text();
+            notif++;
+            $('#notif100').html(notif);
+            $('#notif100').show();
         }
         function bayar500(){
             totalPaying = $("#totalPaying").text();
@@ -169,6 +206,10 @@
             $("#jumlah").val(totalPaying);
             saldo = parseFloat(totalPaying) - parseFloat(totalPayable);
             $('#saldo').html(saldo);
+            notif = $('#notif500').text();
+            notif++;
+            $('#notif500').html(notif);
+            $('#notif500').show();
         }
         function hapus(){
             $("#totalPaying").html(0);
@@ -177,6 +218,19 @@
             totalPaying = $('#totalPaying').text();
             saldo = parseFloat(totalPaying) - parseFloat(totalPayable);
             $('#saldo').html(saldo);
+            $('.badge').html(0);
+            $('.badge').hide();
+        }
+        function bayarPas() {
+            uangPas = $('#uangPas').text();
+            $('#totalPaying').html(uangPas);
+            $('#jumlah').val(uangPas);
+            totalPayable = $('#totalPayable').text();
+            totalPaying = $('#totalPaying').text();
+            saldo = parseFloat(totalPaying) - parseFloat(totalPayable);
+            $('#saldo').html(saldo);
+            $('.badge').html(0);
+            $('.badge').hide();
         }
     </script>
 @endpush
