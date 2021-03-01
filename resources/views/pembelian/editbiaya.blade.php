@@ -28,7 +28,7 @@
                         <div class="col-md-12">
                             <div class="form-group col-md-5">
                                 <label for="tanggal">Tanggal</label>
-                                <input type="datetime-local" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" placeholder="" name="tanggal" value="{{ $Biaya->tanggal }}" required>
+                                <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" placeholder="" name="tanggal" value="{{  date('Y-m-d') }}" required>
 
                             </div>
                             <div class="form-group col-md-5">
@@ -53,7 +53,7 @@
                             </div>
 
                             <div class="mt-2 col-md-8" style="">
-                                <button type="submit" class="btn btn-primary btn-sm" id="action">Tambah Biaya<span id="txtAction"></span></button>
+                                <button type="submit" class="btn btn-primary btn-sm" id="action">Edit Biaya<span id="txtAction"></span></button>
 
                             </div>
                         </div>

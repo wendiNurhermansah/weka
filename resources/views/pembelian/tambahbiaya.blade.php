@@ -27,7 +27,7 @@
                         <div class="col-md-12">
                             <div class="form-group col-md-5">
                                 <label for="tanggal">Tanggal</label>
-                                <input type="datetime-local" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" placeholder="" name="tanggal" value="{{ old('tanggal') }}" required>
+                                <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" placeholder="" name="tanggal" value="{{ old('tanggal') }}" required>
 
                             </div>
                             <div class="form-group col-md-5">
