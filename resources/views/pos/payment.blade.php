@@ -1,0 +1,182 @@
+@push('style')
+    <style>
+        .uang{
+            width: 100px;
+        }
+    </style>
+@endpush
+
+@push('modal')
+<div class="modal fade" id="payment" role="dialog">
+    <div class="modal-dialog">
+        <form action="{{route('Pos.main.store')}}">
+
+        
+    <!-- Modal content-->
+        <div class="modal-content text-white">
+            <div class="modal-header bg-green">
+                <h4 class="text-black modal-title">Payment</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body bg-success">
+                <div class="row px-1">
+                    <div class="col-md-9">
+                        {{-- <table class="table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th class="col">
+                                        <span>Total Items</span>
+                                        <span class="">0</span>
+                                    </th>
+                                    <th class="col">
+                                        <span>Total Payable</span>
+                                        <span class="">0</span>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table> --}}
+                        <table class="table table-bordered">
+                            <tbody>
+                              <tr>
+                                <th>
+                                    <span class="d-flex">
+                                        <span>Total Items</span>
+                                        <span class="ml-auto">0</span>
+                                    </span>
+                                </th>
+                                <th>
+                                    <span class="d-flex">
+                                        <span>Total Payable</span>
+                                        <span id="totalPayable_Payment" class="ml-auto"></span>
+                                    </span> 
+                                </th>
+                              </tr>
+                              <tr>
+                                <th>
+                                    <span class="d-flex">
+                                        <span>Total Paying</span>
+                                        <span id="totalPaying" class="ml-auto">0</span>
+                                    </span>
+                                </th>
+                                <th>
+                                    <span class="d-flex">
+                                        <span>Balance</span>
+                                        <span id="saldo" class="ml-auto"></span>
+                                    </span> 
+                                </th>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <div class="">
+                                <label for="noteSebelumPembayaran" class="form-label">Note</label>
+                                <textarea id="noteSebelumPembayaran" name="noteSebelumPembayaran" class="form-control w-100" value="" required></textarea>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                                <label for="jumlah" class="form-label">Amount</label>
+                                <input type="number" value="" class="form-control" id="jumlah" name="jumlah">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="metodePembayaran" class="form-label">Paying By</label>
+                                <select class="form-control" id="metodePembayaran" name="metodePembayaran">
+                                    <option value="cash">Cash</option>
+                                    <option value="Credit Card">Credit Card</option>
+                                    <option value="cheque">Cheque</option>
+                                    <option value="giftCard">Gift Card</option>
+                                    <option value="Stripe">stripe</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                          </div>
+                          <div class="">
+                                <label for="notePembayaran" class="form-label">Payment Note</label>
+                                <input type="textarea" value="" class="form-control" id="notePembayran" name="notePembayran">
+                          </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button id="bayarPas" onclick="bayarPas()" class="border uang btn btn-primary">0</button><br>
+                        <button id="uang10" onclick="bayar10()" class="border uang btn btn-warning">10</button> <br>
+                        <button id="uang20" onclick="bayar20()" class="border uang btn btn-warning">20</button> <br>
+                        <button id="uang50" onclick="bayar50()" class="border uang btn btn-warning">50</button>    <br>
+                        <button id="uang100" onclick="bayar100()" class="border uang btn btn-warning">100</button> <br>
+                        <button id="uang500"  onclick="bayar500()" class="border uang btn btn-warning">500</button> <br>
+                        <button id="clear" onclick="hapus()" class="border uang btn btn-danger">clear</button>   <br>                     
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer bg-green">
+                <button type="button" class="btn btn-light mr-auto border" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+@endpush
+
+@push('script')
+    <script>
+        function payment(){
+            totalPayable = $('#totalPayable').text();
+            $('#totalPayable_Payment').html(totalPayable);
+            totalPaying = $('#totalPaying').text();
+            saldo = parseFloat(totalPaying) - parseFloat(totalPayable);
+            $('#saldo').html(saldo);
+        }
+
+        function bayar10(){
+            totalPaying = $("#totalPaying").text();
+            uang = $("#uang10").text();
+            totalPaying = parseInt(totalPaying) + parseInt(uang);
+            $("#totalPaying").html(totalPaying);
+            $("#jumlah").val(totalPaying);
+            totalPayable = $('#totalPayable').text();
+            saldo = parseFloat(totalPaying) - parseFloat(totalPayable);
+            $('#saldo').html(saldo);
+        }
+        function bayar20(){
+            totalPaying = $("#totalPaying").text();
+            uang = $("#uang20").text();
+            totalPaying = parseInt(totalPaying) + parseInt(uang);
+            $("#totalPaying").html(totalPaying);
+            $("#jumlah").val(totalPaying);
+            saldo = parseFloat(totalPaying) - parseFloat(totalPayable);
+            $('#saldo').html(saldo);
+        }
+        function bayar50(){
+            totalPaying = $("#totalPaying").text();
+            uang = $("#uang50").text();
+            totalPaying = parseInt(totalPaying) + parseInt(uang);
+            $("#totalPaying").html(totalPaying);
+            $("#jumlah").val(totalPaying);
+            saldo = parseFloat(totalPaying) - parseFloat(totalPayable);
+            $('#saldo').html(saldo);
+        }
+        function bayar100(){
+            totalPaying = $("#totalPaying").text();
+            uang = $("#uang100").text();
+            totalPaying = parseInt(totalPaying) + parseInt(uang);
+            $("#totalPaying").html(totalPaying);
+            $("#jumlah").val(totalPaying);
+            saldo = parseFloat(totalPaying) - parseFloat(totalPayable);
+            $('#saldo').html(saldo);
+        }
+        function bayar500(){
+            totalPaying = $("#totalPaying").text();
+            uang = $("#uang500").text();
+            totalPaying = parseInt(totalPaying) + parseInt(uang);
+            $("#totalPaying").html(totalPaying);
+            $("#jumlah").val(totalPaying);
+            saldo = parseFloat(totalPaying) - parseFloat(totalPayable);
+            $('#saldo').html(saldo);
+        }
+        function hapus(){
+            $("#totalPaying").html(0);
+            $("#jumlah").val('');
+            totalPayable = $('#totalPayable').text();
+            totalPaying = $('#totalPaying').text();
+            saldo = parseFloat(totalPaying) - parseFloat(totalPayable);
+            $('#saldo').html(saldo);
+        }
+    </script>
+@endpush
