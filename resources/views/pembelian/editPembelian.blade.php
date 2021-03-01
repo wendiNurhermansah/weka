@@ -36,8 +36,8 @@
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="produk"></label>
-                                <input type="text"   class="form-control @error('produk') is-invalid @enderror" id="id1" placeholder="cari produk dengan kode atau nama" name="produk" value="{{ $Pembelian->produk }}" required>
+                                <label for=""></label>
+                                <input type="text"   class="form-control @error('produk') is-invalid @enderror" id="id1" placeholder="cari produk dengan kode atau nama" name="" value="s" required>
 
                             </div>
                             <div class="table-responsive">
@@ -52,7 +52,7 @@
                                     </tr>
 
                                     </thead>
-                                    <tbody style="text-align: center;">
+                                    <tbody style="text-align: center;" id="appendd">
                                         <tr>
                                             <td style="width: 300px; text-align: left;">
                                                 <input type="text" id="id2" name="produk" style="width: 400px; border: none;" value="{{ $Pembelian->produk }}">
@@ -77,7 +77,7 @@
                                           <th></th>
                                           <th></th>
                                           <th>
-                                            <input type="text"  id="id4" style="width: 100px; text-align: center; border: none;" name="total" value="{{ $Pembelian->total }}">
+                                            <input type="text"  id="total_" style="width: 100px; text-align: center; border: none;" name="total" value="{{ $Pembelian->total }}">
                                           </th>
                                           <th></th>
                                         </tr>
@@ -91,7 +91,10 @@
                                 <div class=" p-0 bg-light">
                                     <select class="select2 form-control r-0 light s-12" name="pemasok" id="pemasok" autocomplete="off">
                                         <option value="">Pilih Pemasok :</option>
-                                        <option value="Staff">Staff</option>
+                                        @foreach ($Pemasok as $i)
+                                        <option value="{{$i->id}}" @if($Pembelian->pemasok == '{{$i->id}}') selected @endif>{{$i->nama}}</option>
+                                        @endforeach
+
                                     </select>
                                 </div>
                             </div>
@@ -101,8 +104,8 @@
                                 <label for="diterima">Diterima</label>
                                 <div class=" p-0 bg-light">
                                     <select class="select2 form-control r-0 light s-12" name="diterima" id="diterima" autocomplete="off">
-                                        <option value="Diterima">Diterima</option>
-                                        <option value="Belum Diterima">Belum Diterima</option>
+                                        <option value="Diterima" @if($Pembelian->diterima == 'Diterima') selected @endif>Diterima</option>
+                                        <option value="Belum Diterima" @if($Pembelian->diterima == 'Belum Diterima') selected @endif>Belum Diterima</option>
                                     </select>
                                 </div>
                             </div>
@@ -110,7 +113,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="lampiran">Lampiran</label>
-                                <input type="file" class="form-control @error('lampiran') is-invalid @enderror" id="lampiran" placeholder="cari produk dengan kode atau nama" name="lampiran" value="{{ $Pembelian->lampiran }}" required>
+                                <input type="file" class="form-control @error('lampiran') is-invalid @enderror" id="lampiran" placeholder="cari produk dengan kode atau nama" name="lampiran" value="{{ $Pembelian->lampiran }}" >
 
                             </div>
                         </div>
@@ -122,7 +125,7 @@
 
                         <div class="mt-2 col-md-8" style="">
                             <button type="submit" class="btn btn-primary" id="action">Rubah Pembelian<span id="txtAction"></span></button>
-                            <a class="btn btn-danger" onclick="add()" id="reset">Atur Ulang</a>
+
                         </div>
                     </div>
                 </form>
@@ -141,5 +144,120 @@
       tinycomments_mode: 'embedded',
       tinycomments_author: 'Author name',
    });
+
+   var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $(document).ready(function(){
+
+            // ajax get product
+            $( "#id1" ).autocomplete({
+                source: function( request, response ) {
+                    // Fetch data
+                    $.ajax({
+                    url:"{{route('Pembelian.produk')}}",
+                    type: 'post',
+                    dataType: "json",
+                    data: {
+                        _token: CSRF_TOKEN,
+                        search: request.term
+                    },
+                    success: function( data ) {
+                        // console.log(data);
+                        response( data );
+                    }
+                    });
+                },
+                select: function (event, ui) {
+                    // Set selection
+                    // $('#id1').val(ui.item.label);
+                    price(ui.item.id);
+                    // console.log(ui.item.value);
+                    // console.log(ui.item.id);
+                    return false;
+                }
+            });
+        });
+
+        var formAdd = 0;
+
+        function price(id) {
+        formAdd++;
+        console.log(formAdd);
+        // console.log(price());
+
+        var url = "{{ route('Pembelian.pembelian.price', ':id') }}".replace(':id', id);
+
+        var html = `
+        <tr id="trTable_`+formAdd+`">
+                                            <td style="width: 300px; text-align: left;">
+
+                                                <input type="text" id="produk_`+formAdd+`" name="produk" style="width: 400px; border: none;">
+
+                                            </td>
+                                            <td>
+                                                <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="kuantitas">
+                                            </td>
+                                            <td>
+                                                <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="biaya_satuan">
+                                            </td>
+                                            <td>
+                                                <input type="text"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total" >
+
+                                            </td>
+                                            <td>
+
+                                                <a href='#' onclick='hapusTable(`+formAdd+`)' class='text-danger' title='Hapus data'><i class="fas fa-trash-alt"></i>  </a>
+                                            </td>
+                                        </tr>
+
+                                    `;
+
+         $.get(url, function (res) {
+            // console.log(res);
+            //  console.log(res.kode);
+            // $('#produk_0').val(res.nama);
+            // $('#id3').val(res.kode);
+            $('#appendd').append(html);
+
+            $('#produk_'+formAdd).val(res.nama);
+            // $.each(res.data, function(index, value){
+
+            // });
+        }, 'JSON').done(function () {
+            console.log('Done');
+        }).fail(function(e){
+            console.log('Error');
+        });
+
+
+
+        }
+
+    //delete table
+    function hapusTable(formAdd){
+        $('#trTable_'+formAdd).remove();
+    }
+
+    // penjumlahan
+var total2 = 0 ;
+    function hitungKuantitas(){
+        var kuantitas  = $("#kuantitas_"+formAdd).val();
+        // console.log(kuantitas);
+        var biaya = $("#biaya_satuan_"+formAdd).val();
+        // console.log(biaya);
+        var total = kuantitas * biaya;
+
+        total2 += total;
+        // console.log(total);
+        $("#sub_total_"+formAdd).val(total);
+
+        var sum = 0;
+        $("#sub_total_"+formAdd).each(function() {
+        sum += Number($(this).val());
+        $('#total_').val(total2);
+
+    });
+
+    }
+
     </script>
 @endsection

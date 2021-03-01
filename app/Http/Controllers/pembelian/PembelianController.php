@@ -8,6 +8,7 @@ use DataTables;
 use App\Models\Pembelian;
 use App\Models\Kategori;
 use File;
+use App\Models\Pemasok;
 
 class PembelianController extends Controller
 {
@@ -24,7 +25,8 @@ class PembelianController extends Controller
 
 
     public function tambahPembelian(){
-        return view ('pembelian.tambahPembelian');
+        $Pemasok = Pemasok::all();
+        return view ('pembelian.tambahPembelian', compact('Pemasok'));
     }
 
     public function produk(Request $request)
@@ -105,7 +107,7 @@ class PembelianController extends Controller
             'sub_total' => 'required',
             'pemasok' => 'required',
             'diterima' => 'required',
-            'lampiran' => 'required'
+            'lampiran' => 'required|mimes:doc,csv,xlsx,xls,docx,ppts,csv,jpg,jpeg,png'
         ]);
 
         $file     = $request->file('lampiran');
@@ -151,7 +153,8 @@ class PembelianController extends Controller
     public function edit($id)
     {
         $Pembelian = Pembelian::findOrfail($id);
-        return view('pembelian.editPembelian', compact('Pembelian'));
+        $Pemasok = Pemasok::all();
+        return view('pembelian.editPembelian', compact('Pembelian', 'Pemasok'));
     }
 
     /**
@@ -176,6 +179,7 @@ class PembelianController extends Controller
             'pemasok' => 'required',
             'diterima' => 'required',
 
+
         ]);
 
         $tanggal = $request->tanggal;
@@ -190,9 +194,7 @@ class PembelianController extends Controller
         $diterima = $request->diterima;
 
         if ($request->foto != null) {
-            $request->validate([
-                'lampiran' => 'required',
-            ]);
+
 
             // Proses Saved Foto
             $file     = $request->file('lampiran');

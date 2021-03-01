@@ -20,25 +20,26 @@
 
         <div class="card">
             <div class="card-body">
-                <form class="needs-validation" id="form" method="POST"  novalidate>
+                <form class="needs-validation" id="form" method="POST" enctype="multipart/form-data" novalidate>
                     {{ method_field('POST') }}
+                    @csrf
                     <input type="hidden" id="id" name="id"/>
                     <h4 id="formTitle">Tambah Pembelian</h4><hr>
 
                     <div class="form-row">
                         <div class="col md-6">
                             <label for="tanggal">Tanggal</label>
-                            <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" placeholder="" name="tanggal" value="{{ old('tanggal') }}" required>
+                            <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" placeholder="" name="tanggal" value="{{ old('tanggal') }}" >
                         </div>
                         <div class="col md-6">
                             <label for="referensi">Referensi</label>
-                            <input type="text" class="form-control @error('referensi') is-invalid @enderror" id="referensi" placeholder="" name="referensi" value="{{ old('referensi') }}" required>
+                            <input type="text" class="form-control @error('referensi') is-invalid @enderror" id="referensi" placeholder="" name="referensi" value="{{ old('referensi') }}" >
                         </div>
 
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="produk1"></label>
-                                <input type="text"   class="form-control @error('produk1') is-invalid @enderror" id="id1" placeholder="cari produk dengan kode atau nama" name="produk1" value="{{ old('produk1') }}" required>
+                                <input type="text"   class="form-control @error('produk1') is-invalid @enderror" id="id1" placeholder="cari produk dengan kode atau nama" name="produk1" value="{{ old('produk1') }}" >
 
                             </div>
                             <div class="table-responsive">
@@ -70,8 +71,8 @@
                                                 <input type="text"  id="id4"  style="width: 100px; text-align: center; border: none;" name="sub_total">
 
                                             </td>
-                                            <td></td> --}}
-                                        </tr>
+                                            <td></td>
+                                        </tr> --}}
 
                                     </tbody>
                                     <tfoot style="text-align: center;">
@@ -80,7 +81,7 @@
                                           <th></th>
                                           <th></th>
                                           <th>
-                                            <input type="text"  id="id4" value="0" style="width: 100px; text-align: center; border:none;" name="total">
+                                            <input type="text"  id="total_" onkeyup="Total()" value="" style="width: 100px; text-align: center; border:none;" name="total">
                                           </th>
                                           <th></th>
                                         </tr>
@@ -95,7 +96,11 @@
                                 <div class=" p-0 bg-light">
                                     <select class="select2 form-control r-0 light s-12" name="pemasok" id="pemasok" autocomplete="off">
                                         <option value="">Pilih Pemasok :</option>
-                                        <option value="Staff">Staff</option>
+
+                                        @foreach ( $Pemasok as $i)
+                                        <option value="{{$i -> id }}">{{$i -> nama}}</option>
+                                        @endforeach
+
                                     </select>
                                 </div>
                             </div>
@@ -114,7 +119,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="lampiran">Lampiran</label>
-                                <input type="file" class="form-control @error('lampiran') is-invalid @enderror" id="lampiran" placeholder="cari produk dengan kode atau nama" name="lampiran" value="{{ old('lampiran') }}" required>
+                                <input type="file" class="form-control @error('lampiran') is-invalid @enderror" id="lampiran" placeholder="cari produk dengan kode atau nama" name="lampiran" value="{{ old('lampiran') }}" >
 
                             </div>
                         </div>
@@ -182,6 +187,7 @@
         });
 
         var formAdd = 0;
+
         function price(id) {
         formAdd++;
         console.log(formAdd);
@@ -190,25 +196,25 @@
         var url = "{{ route('Pembelian.pembelian.price', ':id') }}".replace(':id', id);
 
         var html = `
-                                        <tr >
+        <tr id="trTable_`+formAdd+`">
                                             <td style="width: 300px; text-align: left;">
 
                                                 <input type="text" id="produk_`+formAdd+`" name="produk" style="width: 400px; border: none;">
 
                                             </td>
                                             <td>
-                                                <input type="text" id="id3"  style="width: 200px; text-align: center;" name="kuantitas">
+                                                <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="kuantitas">
                                             </td>
                                             <td>
-                                                <input type="text"  id="id4"  style="width: 200px; text-align: center;" name="biaya_satuan">
+                                                <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="biaya_satuan">
                                             </td>
                                             <td>
-                                                <input type="text"  id="id4"  style="width: 100px; text-align: center; border: none;" name="sub_total">
+                                                <input type="text"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total" >
 
                                             </td>
                                             <td>
 
-                                                <a href='#' onclick='hapusTable("+formAdd+")' class='text-danger' title='Hapus data'><i class="fas fa-trash-alt"></i>  </a>
+                                                <a href='#' onclick='hapusTable(`+formAdd+`)' class='text-danger' title='Hapus data'><i class="fas fa-trash-alt"></i>  </a>
                                             </td>
                                         </tr>
 
@@ -219,18 +225,12 @@
             //  console.log(res.kode);
             // $('#produk_0').val(res.nama);
             // $('#id3').val(res.kode);
-
             $('#appendd').append(html);
 
             $('#produk_'+formAdd).val(res.nama);
-
-
-
             // $.each(res.data, function(index, value){
 
             // });
-
-
         }, 'JSON').done(function () {
             console.log('Done');
         }).fail(function(e){
@@ -241,10 +241,36 @@
 
         }
 
-    //delete
-    function hapusTable(id){
-        $('#appendd').remove();
+    //delete table
+    function hapusTable(formAdd){
+        $('#trTable_'+formAdd).remove();
     }
+
+    // penjumlahan
+var total2 = 0 ;
+    function hitungKuantitas(){
+        var kuantitas  = $("#kuantitas_"+formAdd).val();
+        // console.log(kuantitas);
+        var biaya = $("#biaya_satuan_"+formAdd).val();
+        // console.log(biaya);
+        var total = kuantitas * biaya;
+
+        total2 += total;
+        // console.log(total);
+        $("#sub_total_"+formAdd).val(total);
+
+        var sum = 0;
+        $("#sub_total_"+formAdd).each(function() {
+        sum += Number($(this).val());
+        $('#total_').val(total2);
+
+    });
+
+    }
+
+    // total semua
+
+
 
 
 
@@ -266,7 +292,7 @@
         $('#name').focus();
     }
 
-        $('#form').on('submit', function (e) {
+    $('#form').on('submit', function (e) {
         if ($(this)[0].checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
@@ -283,7 +309,7 @@
                 success : function(data) {
                     console.log(data);
                     $('#alert').html("<div role='alert' class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Success!</strong> " + data.message + "</div>");
-                    location.reload();
+                   add();
                 },
                 error : function(data){
                     err = '';
