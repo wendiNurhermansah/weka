@@ -109,7 +109,7 @@
                             <div class="form-group">
                                 <label for="diterima">Diterima</label>
                                 <div class=" p-0 bg-light">
-                                    <select class="select2 form-control r-0 light s-12" name="diterima" id="diterima" autocomplete="off">
+                                    <select class="select2 form-control r-0 light s-12" name="diterima" id="diterima" autocomplete="off" required>
                                         <option value="Diterima">Diterima</option>
                                         <option value="Belum Diterima">Belum Diterima</option>
                                     </select>
@@ -119,7 +119,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="lampiran">Lampiran</label>
-                                <input type="file" class="form-control @error('lampiran') is-invalid @enderror" id="lampiran" placeholder="cari produk dengan kode atau nama" name="lampiran" value="{{ old('lampiran') }}" >
+                                <input type="file" class="form-control @error('lampiran') is-invalid @enderror" id="lampiran" placeholder="cari produk dengan kode atau nama" name="lampiran" value="{{ old('lampiran') }}">
 
                             </div>
                         </div>
@@ -199,17 +199,17 @@
         <tr id="trTable_`+formAdd+`">
                                             <td style="width: 300px; text-align: left;">
 
-                                                <input type="text" id="produk_`+formAdd+`" name="produk" style="width: 400px; border: none;">
+                                                <input type="text" id="produk_`+formAdd+`" name="produk[]" style="width: 400px; border: none;">
 
                                             </td>
                                             <td>
-                                                <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="kuantitas">
+                                                <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="kuantitas[]">
                                             </td>
                                             <td>
-                                                <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="biaya_satuan">
+                                                <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="biaya_satuan[]">
                                             </td>
                                             <td>
-                                                <input type="text"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total" >
+                                                <input type="text"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total[]" >
 
                                             </td>
                                             <td>
@@ -228,6 +228,9 @@
             $('#appendd').append(html);
 
             $('#produk_'+formAdd).val(res.nama);
+            $('#kuantitas_'+formAdd).val(res.kuantitas);
+            $('#biaya_satuan_'+formAdd).val(res.biaya);
+
             // $.each(res.data, function(index, value){
 
             // });

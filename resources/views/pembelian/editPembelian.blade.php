@@ -92,7 +92,8 @@
                                     <select class="select2 form-control r-0 light s-12" name="pemasok" id="pemasok" autocomplete="off">
                                         <option value="">Pilih Pemasok :</option>
                                         @foreach ($Pemasok as $i)
-                                        <option value="{{$i->id}}" @if($i->pemasok == '{{$i->id}}') selected @endif>{{$i->nama}}</option>
+                                        <option value="{{$i->id}}"
+                                            @if($Pembelian->pemasok == $i->id) selected @endif>{{$i->nama}}</option>
                                         @endforeach
 
                                     </select>

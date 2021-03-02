@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use DataTables;
 use App\Models\Pembelian;
 use App\Models\Kategori;
+use App\Models\product;
 use File;
 use App\Models\Pemasok;
 
@@ -34,12 +35,12 @@ class PembelianController extends Controller
         $search = $request->search;
 
         if($search == ''){
-           $kategori = Kategori::orderby('nama','asc')
+           $product = Product::orderby('nama','asc')
                         ->select('id','nama')
                         ->limit(5)
                         ->get();
         }else{
-           $kategori = Kategori::orderby('nama','asc')
+           $product = Product::orderby('nama','asc')
                         ->select('id','nama')
                         ->where('nama', 'like', '%' .$search . '%')
                         ->limit(5)
@@ -47,7 +48,7 @@ class PembelianController extends Controller
         }
 
         $response = array();
-        foreach($kategori as $k){
+        foreach($product as $k){
            $response[] = array("label"=>$k->nama, "id"=>$k->id, );
         }
 
@@ -96,6 +97,7 @@ class PembelianController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'tanggal' => 'required',
             'referensi' => 'required',
@@ -106,27 +108,41 @@ class PembelianController extends Controller
             'biaya_satuan' => 'required',
             'sub_total' => 'required',
             'pemasok' => 'required',
-            'diterima' => 'required',
-            'lampiran' => 'required|mimes:doc,csv,xlsx,xls,docx,ppts,csv,jpg,jpeg,png'
+            'diterima' => 'required'
         ]);
 
+
+        if ($request->hasFile('lampiran')) {
         $file     = $request->file('lampiran');
         $fileName = rand() . '.' . $file->getClientOriginalExtension();
         $request->file('lampiran')->move("Dokumen/lampiran/", $fileName);
+        }else{
+            $fileName='';
+        }
 
-        $tmpembelian = new Pembelian();
-        $tmpembelian->tanggal = $request->tanggal;
-        $tmpembelian->referensi = $request->referensi;
-        $tmpembelian->total = $request->total;
-        $tmpembelian->catatan = $request->catatan;
-        $tmpembelian->produk = $request->produk;
-        $tmpembelian->kuantitas = $request->kuantitas;
-        $tmpembelian->biaya_satuan = $request->biaya_satuan;
-        $tmpembelian->sub_total = $request->sub_total;
-        $tmpembelian->pemasok = $request->pemasok;
-        $tmpembelian->diterima = $request->diterima;
-        $tmpembelian->lampiran = $fileName;
-        $tmpembelian->save();
+            foreach($request->produk as $key => $produk){
+
+
+
+                $tmpembelian = new Pembelian();
+                $tmpembelian->tanggal = $request->tanggal;
+                $tmpembelian->referensi = $request->referensi;
+                $tmpembelian->total = $request->total;
+                $tmpembelian->catatan = $request->catatan;
+
+                $tmpembelian->produk = $produk;
+                $tmpembelian->kuantitas = $request->input('kuantitas')[$key];
+                $tmpembelian->biaya_satuan = $request->input('biaya_satuan')[$key];
+                $tmpembelian->sub_total = $request->input('sub_total')[$key];
+
+
+                $tmpembelian->pemasok = $request->pemasok;
+                $tmpembelian->diterima = $request->diterima;
+                $tmpembelian->lampiran = $fileName;
+                $tmpembelian->save();
+            }
+
+
 
         return response()->json([
             'message' => 'Data berhasil tersimpan.'
@@ -197,10 +213,13 @@ class PembelianController extends Controller
 
 
             // Proses Saved Foto
+            if ($request->hasFile('lampiran')) {
             $file     = $request->file('lampiran');
             $fileName = rand() . '.' . $file->getClientOriginalExtension();
             $request->file('lampiran')->move("Documen/lampiran/", $fileName);
-
+            }else{
+                $fileName = '';
+            }
             // Proses Delete Foto
             $exist = $Pembelian->foto;
             $path  = "Dokumen/lampiran/" . $exist;
@@ -255,6 +274,6 @@ class PembelianController extends Controller
     }
 
     public function price($id){
-        return Kategori::find($id);
+        return product::find($id);
     }
 }
