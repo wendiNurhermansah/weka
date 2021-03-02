@@ -4,6 +4,7 @@ namespace App\Http\Controllers\laporan;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Tahun;
 
 class LaporanController extends Controller
 {
@@ -12,7 +13,8 @@ class LaporanController extends Controller
     }
 
     public function PenjualanBulanan(){
-        return view('laporan.penjualanBulanan');
+        $Tahun = Tahun::find(1);
+        return view('laporan.penjualanBulanan', compact('Tahun'));
     }
 
 
@@ -27,4 +29,27 @@ class LaporanController extends Controller
     public function laporanProduk(){
         return view('laporan.laporanProduk');
     }
+
+    //laporan bulanan kalender
+
+    public function increment(){
+        $Tahun = Tahun::find(1);
+
+        $Tahun->update([
+            'tahun' => (++$Tahun->tahun),
+        ]);
+
+        return true;
+    }
+
+    public function decretment(){
+        $Tahun = Tahun::find(1);
+
+        $Tahun->update([
+            'tahun' => (--$Tahun->tahun),
+        ]);
+
+        return true;
+    }
+
 }

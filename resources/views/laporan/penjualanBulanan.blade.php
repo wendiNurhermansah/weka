@@ -57,13 +57,102 @@
                                 <h6 class="counter-title" style="color:white;">Untung</h6>
                             </div>
                         </div>
+                        <div class="col-lg-3" style="margin-top: 50px;">
 
+                            <table class="table table-bordered" style="text-align: center; width: 1110px; ">
+
+                                <tr height="50px">
+                                   <td>
+                                       <a href="#"  onclick="reev()">< <</a>
+                                    </td>
+                                   <td colspan="10">
+                                      <span >{{$Tahun->tahun}}</span>
+                                    </td>
+                                   <td>
+                                       <a href="#" onclick="next()">> ></a>
+                                    </td>
+                                </tr>
+
+                                    <tr height="50px"  width="50px" >
+                                        <td>Januari</td>
+                                        <td>Februari</td>
+                                        <td>Maret</td>
+                                        <td>April</td>
+                                        <td>Mei</td>
+                                        <td>Juni</td>
+                                        <td>Juli</td>
+                                        <td>Agustus</td>
+                                        <td>September</td>
+                                        <td>Oktober</td>
+                                        <td>November</td>
+                                        <td>Desember</td>
+                                    </tr>
+
+                                    <tr height="50px">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                            </table>
+                        </div>
                     </div>
-
-
                 </div>
-            </div>
         </div>
     </div>
+
 </div>
+</div>
+@endsection
+@section('script')
+<script type="text/javascript">
+// tahun
+    $(document).ready(function(){
+	$('#thn').text(thn);
+});
+var thn = 2021;
+    function next(){
+
+    //   thn = ++thn;
+    //   $('#thn').text(thn);
+    // $('#increment').html(thn);
+//  console.log(thn);
+
+        $.post("{{ route('Laporan.increment') }}", {'_method' : 'PATCH'}, function(data) {
+            console.log(data);
+            location.reload();
+         }, "JSON").fail(function(data){
+            console.log(data);
+        });
+
+    }
+
+    function reev(){
+    // thn =  --thn;
+    // $('#thn').text(thn);
+    //  $('#decrement').html(thn);
+    // $('#tahun').html(thn);
+
+    // console.log(thn);
+    $.post("{{ route('Laporan.decretment') }}", {'_method' : 'PATCH'}, function(data) {
+            console.log(data);
+            location.reload();
+         }, "JSON").fail(function(data){
+            console.log(data);
+        });
+
+
+    }
+
+
+</script>
+
 @endsection

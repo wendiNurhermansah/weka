@@ -135,6 +135,11 @@ Route::group(['middleware' => ['auth']], function () {
             Route::resource('laporanPenjualan', 'LaporanpenjualanController');
             Route::post('laporanPenjualan/api', 'LaporanpenjualanController@api')->name('laporanPenjualan.api');
 
+            //laporan bulanan increment decretment tahun
+
+            Route::patch('increment/tahun', 'LaporanController@increment')->name('increment');
+            Route::patch('decretment/tahun', 'LaporanController@decretment')->name('decretment');
+
 
     });
 
@@ -149,13 +154,13 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Route::resource('produk', 'productsController');
 
-    Route::get('tes', function(){
-        return response()->json([
-            'status' => 1,
-            'message' => 'sukses'
+    // Route::get('tes', function(){
+    //     return response()->json([
+    //         'status' => 1,
+    //         'message' => 'sukses'
 
-        ]);
-    })->name('tes');
+    //     ]);
+    // })->name('tes');
 
 });
 
