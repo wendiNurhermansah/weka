@@ -48,7 +48,7 @@
                                         <th>Kuantitas</th>
                                         <th>Biaya Satuan</th>
                                         <th>Sub Total</th>
-                                        <th width="60">Tindakan</th>
+                                        <th width="60"><i class="fas fa-trash-alt"></i></th>
                                     </tr>
 
                                     </thead>
@@ -92,7 +92,7 @@
                                     <select class="select2 form-control r-0 light s-12" name="pemasok" id="pemasok" autocomplete="off">
                                         <option value="">Pilih Pemasok :</option>
                                         @foreach ($Pemasok as $i)
-                                        <option value="{{$i->id}}" @if($Pembelian->pemasok == '{{$i->id}}') selected @endif>{{$i->nama}}</option>
+                                        <option value="{{$i->id}}" @if($i->pemasok == '{{$i->id}}') selected @endif>{{$i->nama}}</option>
                                         @endforeach
 
                                     </select>
@@ -200,8 +200,7 @@
                                                 <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="biaya_satuan">
                                             </td>
                                             <td>
-                                                <input type="text"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total" >
-
+                                                <input type="text"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total">
                                             </td>
                                             <td>
 
