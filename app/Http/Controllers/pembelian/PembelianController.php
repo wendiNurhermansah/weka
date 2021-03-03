@@ -276,4 +276,11 @@ class PembelianController extends Controller
     public function price($id){
         return product::find($id);
     }
+
+    public function showDataModal($id)
+    {
+        $Pembelian = Pembelian::find($id);
+
+        return $Pembelian;
+    }
 }

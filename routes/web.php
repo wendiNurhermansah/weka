@@ -109,6 +109,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('tambahPembelian', 'PembelianController@tambahPembelian')->name('tambahPembelian');
             Route::post('produk', 'PembelianController@produk')->name('produk');
             Route::get('price/{id}', 'PembelianController@price')->name('pembelian.price');
+            Route::get('show-data-modal/{id}', 'PembelianController@showDataModal')->name('pembelian.showDataModal');
 
 
             //biaya

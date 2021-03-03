@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Kategori;
 use DataTables;
 use File;
+
 class DaftarkategoriController extends Controller
 {
     protected $path  = 'images/ava/';
@@ -38,7 +39,7 @@ class DaftarkategoriController extends Controller
     public function api()
     {
         $Kategori = Kategori::all();
-        return Datatables::of($Kategori)
+        return DataTables::of($Kategori)
 
             ->addColumn('action', function ($p) {
                 return "
