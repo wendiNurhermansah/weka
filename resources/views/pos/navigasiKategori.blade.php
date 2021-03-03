@@ -1,5 +1,5 @@
 @push('modal')
-    <aside class="control-sidebar fixed white ">
+    <aside class="control-sidebar fixed bg-dark">
         <div class="slimScroll">
             <div class="p-3">
                 <input id="cariKategori" type="text" class="form-control col-md-11">

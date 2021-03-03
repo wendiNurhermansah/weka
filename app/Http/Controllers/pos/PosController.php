@@ -55,7 +55,7 @@ class PosController extends Controller
 
     public function kartu()
     {
-        $kartu = product::paginate(15);
+        $kartu = product::paginate(12);
         return $kartu;
     }
 
@@ -124,9 +124,12 @@ class PosController extends Controller
                 // loop through the result array
                 foreach ($data as $row){
                     // concatenate output to the array
-                    $output .= '<li class="list-group-item">'. 
-                                    '<img src="../kategori/images/ava/'.$row->gambar.'" alt="" style="height:30px;width:30px;" class="img-fluid img-responsive">' 
-                                .'<span class="ml-2">'.$row->nama.'<span>'.'</li>';
+                    $output .=  '<li class="list-group-item"> 
+                                    <a class="btn">
+                                        <img src="../kategori/images/ava/'.$row->gambar.'" alt="" style="height:30px;width:30px;" class="img-fluid img-responsive">' 
+                                        .'<span class="ml-2">'.$row->nama.'<span>'.'
+                                    </a>
+                                </li>';
                 }
                 // end of output
                 $output .= '</ul>';
