@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@include('pos.navigasiKategori')
+@include('pos.pelanggan')
 @include('pos.pajak')
 @include('pos.diskon')
 @include('pos.hadiah')
@@ -41,22 +43,10 @@
     <a id="tutupDaftar-nav" data-toggle='modal' data-target='#tutupDaftar'>Close Register</a>
 </li>
 <li id="kategori-nav-li" type="none" class="mx-2 fs-13 text-white">
-    <a id="kategori-nav" data-toggle="" data-target="#nav-kategori"><i class="icon-file"></i></a>
+    <a id="kategori-nav"data-toggle="control-sidebar"><i class="icon-file"></i></a>
 </li>
 @endsection
 @section('content')
-<aside id="nav-kategori" class="fixed float-right" data-toggle='nav-kategori'>
-    <section class="">
-        <div class=" mt-3 mb-3">
-            <img src="{{asset('images/logo.png')}}" class="mx-auto d-block" width="100" alt="Logo Top">
-        </div>
-        <div class="relative">
-            <a data-toggle="collapse" href="#userSettingsCollapse" role="button" class="btn-fab btn-fab-sm absolute fab-right-bottom fab-top btn-primary shadow1 ">
-                <i class="icon icon-cogs"></i>
-            </a>
-        </div>
-    </section>
-</aside>
 <div class="page has-sidebar-left height-full">
     <header class="blue accent-3 relative nav-sticky">
         <div class="container-fluid text-white">
@@ -99,7 +89,7 @@
                                 <option value="{{$p->nama}}">{{$p->nama}}</option>
                             @endforeach
                         </select>
-                        <a class="btn border"><i class="icon icon-add"></i></a>
+                        <a class="btn border" data-toggle="modal" data-target="#pelanggan"><i class="icon icon-add"></i></a>
                     </div>
                     <div class="form-group">
                         <input type="text" id="note" name="note" class="form-control" placeholder="Rerefence Note">
@@ -157,29 +147,13 @@
             </div>
             <div class="col-md-7">
                 <div class="product-card">
-                    {{-- <div class="row">
-                    @foreach ($kartu as $k)
-                        <div class="col-md-2">
-                            <div class="card text-center">
-                                <img class="card-img-top" src="{{asset($path.$k->gambar)}}" alt="" width="40" height="80">
-                                <div class="card-body">
-                                  <p class="card-title"><small>{{$k->nama}}</small></p>
-                                  <p class="card-text"><small>harga</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                    </div> --}}
                     @foreach ($kartu as $k)
                     <button type="button" class="col-md-2 btn btn-light m-1">
-                        <div class="col-md-12">
-                            <img src="{{asset($path.$k->gambar)}}" alt=""  width="40" height="80">
-                        </div>
-                        <div class="col-md-4">
-                            {{$k->nama}}
-                        </div>
-
-                        <br>
+                        <img class="card-img-top" src="{{asset('produk/images/ava/'.$k->gambar)}}" alt=""  width="40" height="80">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{{$k->nama}}</li>
+                            <li class="list-group-item">{{$k->harga}}</li>
+                        </ul>
                     </button>
                     @endforeach
                 </div>
@@ -255,7 +229,6 @@
         </div>
     </div>
 </div>
-
 @stack('modal')
 @endsection
 @section('script')
@@ -296,6 +269,7 @@
                 select: function (event, ui) {
                     // Set selection
                     $('#kategori').val(ui.item.label); // display the selected text
+                    // $('tbody').html(data);
                     return false;
                 }
             });

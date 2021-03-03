@@ -98,7 +98,7 @@
                     </div>
                     <div class="col-md-3">
                         <button id="uangPas" onclick="bayarPas()" class="border uang btn btn-primary"></button><br>
-                        <button onclick="bayar10()" class="border uang btn btn-warning">
+                    <button onclick="bayar10()" class="border uang btn btn-warning">
                             <span id="uang10">10</span>
                             <span id="notif10" class="badge badge-dark">0</span>
                         </button> <br>
