@@ -81,7 +81,7 @@
                                           <th></th>
                                           <th></th>
                                           <th>
-                                            <input type="text"  id="total_" onkeyup="Total()" value="" style="width: 100px; text-align: center; border:none;" name="total">
+                                            <input type="text"  id="total_" change="Total()" value="" style="width: 100px; text-align: center; border:none;" name="total">
                                           </th>
                                           <th></th>
                                         </tr>
@@ -156,7 +156,7 @@
 
    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $(document).ready(function(){
-
+            $('#total_').val(0);
             // ajax get product
             $( "#id1" ).autocomplete({
                 source: function( request, response ) {
@@ -220,20 +220,27 @@
 
                                     `;
 
+
+
          $.get(url, function (res) {
-            // console.log(res);
-            //  console.log(res.kode);
-            // $('#produk_0').val(res.nama);
-            // $('#id3').val(res.kode);
+
+
             $('#appendd').append(html);
 
             $('#produk_'+formAdd).val(res.nama);
             $('#kuantitas_'+formAdd).val(res.kuantitas);
             $('#biaya_satuan_'+formAdd).val(res.biaya);
 
-            // $.each(res.data, function(index, value){
+            // penjumlahan
 
-            // });
+            var subTotal = res.kuantitas*res.biaya;
+
+             $('#sub_total_'+formAdd).val(subTotal);
+
+             var total = $('#total_').val();
+             total = parseInt(total) + parseInt(subTotal);
+             $('#total_').val(total);
+
         }, 'JSON').done(function () {
             console.log('Done');
         }).fail(function(e){
@@ -244,32 +251,34 @@
 
         }
 
+
+
     //delete table
     function hapusTable(formAdd){
         $('#trTable_'+formAdd).remove();
     }
 
     // penjumlahan
-var total2 = 0 ;
-    function hitungKuantitas(){
-        var kuantitas  = $("#kuantitas_"+formAdd).val();
-        // console.log(kuantitas);
-        var biaya = $("#biaya_satuan_"+formAdd).val();
-        // console.log(biaya);
-        var total = kuantitas * biaya;
+// var total2 = 0 ;
+//     function hitungKuantitas(){
+//         var kuantitas  = $("#kuantitas_"+formAdd).val();
+//         console.log(kuantitas);
+//         var biaya = $("#biaya_satuan_"+formAdd).val();
+//          console.log(biaya);
+//         var total = kuantitas * biaya;
 
-        total2 += total;
-        // console.log(total);
-        $("#sub_total_"+formAdd).val(total);
+//         total2 += total;
+//         // console.log(total);
+//         $("#sub_total_"+formAdd).val(total);
 
-        var sum = 0;
-        $("#sub_total_"+formAdd).each(function() {
-        sum += Number($(this).val());
-        $('#total_').val(total2);
+//         var sum = 0;
+//         $("#sub_total_"+formAdd).each(function() {
+//         sum += Number($(this).val());
+//         $('#total_').val(total2);
 
-    });
+//     });
 
-    }
+//     }
 
     // total semua
 

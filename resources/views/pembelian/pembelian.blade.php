@@ -53,15 +53,15 @@
                             <thead>
                                 <tr>
                                     <td>Tanggal</td>
-                                    <td>qwqwqewrwfrwedsda</td>
+                                    <td id="tanggal_"></td>
                                 </tr>
                                 <tr>
                                     <td>Referensi</td>
-                                    <td>2</td>
+                                    <td id="referensi_"></td>
                                 </tr>
                                 <tr>
                                     <td>Catatan</td>
-                                    <td>2</td>
+                                    <td id="catatan_"></td>
                                 </tr>
                             </thead>
 
@@ -70,7 +70,6 @@
                         <table class="table" style="margin: 10px;">
                             <thead class="table-active">
                               <tr>
-                                <th scope="col">No</th>
                                 <th scope="col">Produk</th>
                                 <th scope="col">Kuantitas</th>
                                 <th scope="col">Biaya Satuan</th>
@@ -79,11 +78,10 @@
                             </thead>
                             <tbody>
                               <tr>
-                                <th scope="row"></th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="_produk"></td>
+                                <td id="_kuantitas"></td>
+                                <td id="_biayaSatuan"></td>
+                                <td id="_subTotal"></td>
                               </tr>
                             </tbody>
                             <tfoot class="table-active">
@@ -91,9 +89,8 @@
                                   <th>Total</th>
                                   <th></th>
                                   <th></th>
-                                  <th></th>
                                   <th>
-                                      <span>0.00</span>
+                                      <span id="_total"></span>
                                   </th>
 
                                 </tr>
@@ -167,6 +164,19 @@
 
     function list(id){
         $('#modal1').modal('show');
+        $.get("{{ route('Pembelian.pembelian.showDataModal', ':id') }}".replace(':id', id), function(data){
+            $('#tanggal_').text(data.tanggal);
+            $('#referensi_').text(data.referensi);
+            $('#catatan_').text(data.catatan);
+            $('#_produk').text(data.produk);
+            $('#_kuantitas').text(data.kuantitas);
+            $('#_biayaSatuan').text(data.biaya_satuan);
+            $('#_subTotal').text(data.sub_total);
+            $('#_total').text(data.total);
+
+        }, "JSON").fail(function(){
+            reload();
+        });
     }
 
 </script>
