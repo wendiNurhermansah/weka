@@ -59,7 +59,9 @@ class PembelianController extends Controller
 
     public function api()
     {
+
         $Pembelian = Pembelian::all();
+
         return Datatables::of($Pembelian)
 
             ->addColumn('action', function ($p) {
@@ -68,6 +70,7 @@ class PembelianController extends Controller
                     <a href='" . route('Pembelian.pembelian.edit', $p->id) . "' onclick='edit(" . $p->id . ")' title='Edit Role'><i class='icon-pencil mr-1'></i></a>
                     <a href='#' onclick='remove(" . $p->id . ")' class='text-danger' title='Hapus data'><i class='icon-remove'></i></a>";
             })
+
 
             ->addColumn('catatan', function ($c) {
                 return $c->catatan;
@@ -310,9 +313,9 @@ class PembelianController extends Controller
     public function showDataModal($id)
     {
         $Pembelian = Pembelian::find($id);
-        $pembelian_details = Pembelian_details::where('tmpembelian_id', $id)->get();
-        $produks = product::find($id);
+        $pembelian_details = Pembelian_details::with('product')->where('tmpembelian_id', $id)->get();
 
-        return [$Pembelian, $pembelian_details, $produks];
+
+        return [$Pembelian, $pembelian_details];
     }
 }
