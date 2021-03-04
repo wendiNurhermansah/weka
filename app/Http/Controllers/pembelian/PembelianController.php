@@ -10,6 +10,8 @@ use App\Models\Kategori;
 use App\Models\product;
 use File;
 use App\Models\Pemasok;
+use App\Models\Pembelian_details;
+
 
 class PembelianController extends Controller
 {
@@ -51,7 +53,7 @@ class PembelianController extends Controller
         foreach($product as $k){
            $response[] = array("label"=>$k->nama, "id"=>$k->id, );
         }
-
+        // dd(response()->json($response));
         return response()->json($response);
     }
 
@@ -97,13 +99,14 @@ class PembelianController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+
+
         $request->validate([
             'tanggal' => 'required',
             'referensi' => 'required',
             'total' => 'required',
             'catatan' => 'required',
-            'produk' => 'required',
+            'produk_id' => 'required',
             'kuantitas' => 'required',
             'biaya_satuan' => 'required',
             'sub_total' => 'required',
@@ -120,27 +123,49 @@ class PembelianController extends Controller
             $fileName='';
         }
 
-            foreach($request->produk as $key => $produk){
+            // foreach($request->produk as $key => $produk){
 
 
 
-                $tmpembelian = new Pembelian();
-                $tmpembelian->tanggal = $request->tanggal;
-                $tmpembelian->referensi = $request->referensi;
-                $tmpembelian->total = $request->total;
-                $tmpembelian->catatan = $request->catatan;
+            //     $tmpembelian = new Pembelian();
+            //     $tmpembelian->tanggal = $request->tanggal;
+            //     $tmpembelian->referensi = $request->referensi;
+            //     $tmpembelian->total = $request->total;
+            //     $tmpembelian->catatan = $request->catatan;
 
-                $tmpembelian->produk = $produk;
-                $tmpembelian->kuantitas = $request->input('kuantitas')[$key];
-                $tmpembelian->biaya_satuan = $request->input('biaya_satuan')[$key];
-                $tmpembelian->sub_total = $request->input('sub_total')[$key];
+            //     $tmpembelian->produk = $produk;
+            //     $tmpembelian->kuantitas = $request->input('kuantitas')[$key];
+            //     $tmpembelian->biaya_satuan = $request->input('biaya_satuan')[$key];
+            //     $tmpembelian->sub_total = $request->input('sub_total')[$key];
 
 
-                $tmpembelian->pemasok = $request->pemasok;
-                $tmpembelian->diterima = $request->diterima;
-                $tmpembelian->lampiran = $fileName;
-                $tmpembelian->save();
+            //     $tmpembelian->pemasok = $request->pemasok;
+            //     $tmpembelian->diterima = $request->diterima;
+            //     $tmpembelian->lampiran = $fileName;
+            //     $tmpembelian->save();
+            // }
+
+            $tmpembelian = new Pembelian();
+            $tmpembelian->tanggal = $request->tanggal;
+            $tmpembelian->referensi = $request->referensi;
+            $tmpembelian->total = $request->total;
+            $tmpembelian->catatan = $request->catatan;
+            $tmpembelian->pemasok = $request->pemasok;
+            $tmpembelian->diterima = $request->diterima;
+            $tmpembelian->lampiran = $fileName;
+            $tmpembelian->save();
+
+            foreach($request->produk_id as $key => $produk_id){
+            $pembelian_details = new Pembelian_details();
+
+            $pembelian_details->produk_id = $produk_id;
+            $pembelian_details->tmpembelian_id = $tmpembelian->id;
+            $pembelian_details->kuantitas = $request->input('kuantitas')[$key];
+            $pembelian_details->biaya_satuan = $request->input('biaya_satuan')[$key];
+            $pembelian_details->sub_total = $request->input('sub_total')[$key];
+            $pembelian_details->save();
             }
+
 
 
 
@@ -264,9 +289,14 @@ class PembelianController extends Controller
      */
     public function destroy($id)
 
+
     {
+
+        Pembelian_details::where('tmpembelian_id', $id)->delete($id);
+
         $gambar = Pembelian::where('id',$id)->first();
         File::delete('Dokumen/lampiran/'.$gambar->lampiran);
+
         Pembelian::destroy($id);
         return response()->json([
             'message' => 'Data berhasil di hapus.'
@@ -280,7 +310,9 @@ class PembelianController extends Controller
     public function showDataModal($id)
     {
         $Pembelian = Pembelian::find($id);
+        $pembelian_details = Pembelian_details::where('tmpembelian_id', $id)->get();
+        $produks = product::find($id);
 
-        return $Pembelian;
+        return [$Pembelian, $pembelian_details, $produks];
     }
 }

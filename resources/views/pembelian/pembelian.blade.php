@@ -165,14 +165,19 @@
     function list(id){
         $('#modal1').modal('show');
         $.get("{{ route('Pembelian.pembelian.showDataModal', ':id') }}".replace(':id', id), function(data){
-            $('#tanggal_').text(data.tanggal);
-            $('#referensi_').text(data.referensi);
-            $('#catatan_').text(data.catatan);
-            $('#_produk').text(data.produk);
-            $('#_kuantitas').text(data.kuantitas);
-            $('#_biayaSatuan').text(data.biaya_satuan);
-            $('#_subTotal').text(data.sub_total);
-            $('#_total').text(data.total);
+            console.log(data);
+            $('#tanggal_').html(data[0].tanggal);
+            $('#referensi_').text(data[0].referensi);
+            $('#catatan_').html(data[0].catatan);
+            for(var i=0;i<data[1].length;i++){
+                $('#_produk').html(data[1][i].id);
+                $('#_kuantitas').text(data[1][i].kuantitas);
+                // console.log('k='+kuantitas);
+                $('#_biayaSatuan').text(data[1][i].biaya_satuan);
+                // console.log('b='+biaya);
+                $('#_subTotal').text(data[1][i].sub_total);
+            }
+            $('#_total').text(data[0].total);
 
         }, "JSON").fail(function(){
             reload();

@@ -24,7 +24,7 @@
                     {{ method_field('POST') }}
                     @csrf
                     <input type="hidden" id="id" name="id"/>
-                    <h4 id="formTitle">Tambah Pembelian</h4><hr>
+                    <h4 id="formTitle"><strong>Tambah Pembelian</strong> </h4><hr>
 
                     <div class="form-row">
                         <div class="col md-6">
@@ -173,6 +173,7 @@
                         // console.log(data);
                         response( data );
                     }
+
                     });
                 },
                 select: function (event, ui) {
@@ -198,8 +199,8 @@
         var html = `
         <tr id="trTable_`+formAdd+`">
                                             <td style="width: 300px; text-align: left;">
-
-                                                <input type="text" id="produk_`+formAdd+`" name="produk[]" style="width: 400px; border: none;">
+                                                <input type="text" id="produk_id`+formAdd+`" name="produk_id[]" hidden>
+                                                <input type="text" id="produk_`+formAdd+`" name="produk_[]" style="width: 400px; border: none;">
 
                                             </td>
                                             <td>
@@ -226,7 +227,7 @@
 
 
             $('#appendd').append(html);
-
+            $('#produk_id'+formAdd).val(res.id);
             $('#produk_'+formAdd).val(res.nama);
             $('#kuantitas_'+formAdd).val(res.kuantitas);
             $('#biaya_satuan_'+formAdd).val(res.biaya);
