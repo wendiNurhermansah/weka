@@ -112,6 +112,28 @@
 
     <li class="treeview ">
         <a href="#">
+            <i class="icon icon-folder-open text-lime s-18"></i> <span>Penjualan</span>
+            <i class="icon icon-angle-left s-18 pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li class="no-b">
+                <a href="{{ route('/')}}">
+                    <i class="icon icon-list red-text s-18"></i>
+                    <span>Daftar Penjualan</span>
+                </a>
+            </li>
+
+            <li class="no-b">
+                <a href="{{ route('/') }}">
+                    <i class="icon icon-list blue-text s-18"></i>
+                    <span>Daftar Opened Bills</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="treeview ">
+        <a href="#">
             <i class="icon icon-user text-lime s-18"></i> <span>Orang</span>
             <i class="icon icon-angle-left s-18 pull-right"></i>
         </a>
@@ -273,3 +295,4 @@
 
     @endcan
 </ul>
+
