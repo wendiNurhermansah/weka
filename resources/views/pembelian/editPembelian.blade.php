@@ -48,7 +48,7 @@
                                         <th>Kuantitas</th>
                                         <th>Biaya Satuan</th>
                                         <th>Sub Total</th>
-                                        <th width="60">Tindakan</th>
+                                        <th width="60"><i class="fas fa-trash-alt"></i></th>
                                     </tr>
 
                                     </thead>
@@ -65,11 +65,11 @@
                                             </td>
                                             <td>
                                                 <input type="text"  id="id4"  style="width: 100px; text-align: center; border: none;" name="sub_total" value="{{ $Pembelian->sub_total }}">
-
                                             </td>
-                                            <td></td>
+                                            <td>
+                                                <a href='#' onclick='hapusTable(`+formAdd+`)' class='text-danger' title='Hapus data'><i class="fas fa-trash-alt"></i>  </a>
+                                            </td>
                                         </tr>
-
                                     </tbody>
                                     <tfoot style="text-align: center;">
                                         <tr>
@@ -77,9 +77,9 @@
                                           <th></th>
                                           <th></th>
                                           <th>
-                                            <input type="text"  id="total_" style="width: 100px; text-align: center; border: none;" name="total" value="{{ $Pembelian->total }}">
+                                            <input type="text" style="width: 100px; text-align: center; border: none;" name="total" value="{{ $Pembelian->total }}">
                                           </th>
-                                          <th></th>
+                                          <th> </th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -92,9 +92,9 @@
                                     <select class="select2 form-control r-0 light s-12" name="pemasok" id="pemasok" autocomplete="off">
                                         <option value="">Pilih Pemasok :</option>
                                         @foreach ($Pemasok as $i)
-                                        <option value="{{$i->id}}" @if($Pembelian->pemasok == '{{$i->id}}') selected @endif>{{$i->nama}}</option>
+                                        <option value="{{$i->id}}"
+                                            @if($Pembelian->pemasok == $i->id) selected @endif>{{$i->nama}}</option>
                                         @endforeach
-
                                     </select>
                                 </div>
                             </div>
@@ -147,7 +147,7 @@
 
    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $(document).ready(function(){
-
+            $('#total_').val(0);
             // ajax get product
             $( "#id1" ).autocomplete({
                 source: function( request, response ) {
@@ -190,17 +190,17 @@
         <tr id="trTable_`+formAdd+`">
                                             <td style="width: 300px; text-align: left;">
 
-                                                <input type="text" id="produk_`+formAdd+`" name="produk" style="width: 400px; border: none;">
+                                                <input type="text" id="produk_`+formAdd+`" name="produk[]" style="width: 400px; border: none;">
 
                                             </td>
                                             <td>
-                                                <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="kuantitas">
+                                                <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="kuantitas[]">
                                             </td>
                                             <td>
-                                                <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="biaya_satuan">
+                                                <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="biaya_satuan[]">
                                             </td>
                                             <td>
-                                                <input type="text"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total" >
+                                                <input type="text"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total[]" >
 
                                             </td>
                                             <td>
@@ -211,17 +211,27 @@
 
                                     `;
 
+
+
          $.get(url, function (res) {
-            // console.log(res);
-            //  console.log(res.kode);
-            // $('#produk_0').val(res.nama);
-            // $('#id3').val(res.kode);
+
+
             $('#appendd').append(html);
 
             $('#produk_'+formAdd).val(res.nama);
-            // $.each(res.data, function(index, value){
+            $('#kuantitas_'+formAdd).val(res.kuantitas);
+            $('#biaya_satuan_'+formAdd).val(res.biaya);
 
-            // });
+            // penjumlahan
+
+            var subTotal = res.kuantitas*res.biaya;
+
+             $('#sub_total_'+formAdd).val(subTotal);
+
+             var total = $('#total_').val();
+             total = parseInt(total) + parseInt(subTotal);
+             $('#total_').val(total);
+
         }, 'JSON').done(function () {
             console.log('Done');
         }).fail(function(e){
@@ -232,32 +242,13 @@
 
         }
 
+
+
     //delete table
     function hapusTable(formAdd){
         $('#trTable_'+formAdd).remove();
     }
 
-    // penjumlahan
-var total2 = 0 ;
-    function hitungKuantitas(){
-        var kuantitas  = $("#kuantitas_"+formAdd).val();
-        // console.log(kuantitas);
-        var biaya = $("#biaya_satuan_"+formAdd).val();
-        // console.log(biaya);
-        var total = kuantitas * biaya;
-
-        total2 += total;
-        // console.log(total);
-        $("#sub_total_"+formAdd).val(total);
-
-        var sum = 0;
-        $("#sub_total_"+formAdd).each(function() {
-        sum += Number($(this).val());
-        $('#total_').val(total2);
-
-    });
-
-    }
 
     </script>
 @endsection

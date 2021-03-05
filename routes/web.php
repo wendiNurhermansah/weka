@@ -56,6 +56,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('main', 'PosController');
         Route::post('main/api', 'PosController@api')->name('main.api');
         Route::post('kategori', 'PosController@kategori')->name('kategori');
+        Route::get('cariKategori', 'PosController@cariKategori')->name('cariKategori');
     });
 
     Route::prefix('Kategori')->namespace('kategori')->name('Kategori.')->group(function () {
@@ -108,6 +109,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('tambahPembelian', 'PembelianController@tambahPembelian')->name('tambahPembelian');
             Route::post('produk', 'PembelianController@produk')->name('produk');
             Route::get('price/{id}', 'PembelianController@price')->name('pembelian.price');
+            Route::get('show-data-modal/{id}', 'PembelianController@showDataModal')->name('pembelian.showDataModal');
 
 
             //biaya
@@ -135,6 +137,11 @@ Route::group(['middleware' => ['auth']], function () {
             Route::resource('laporanPenjualan', 'LaporanpenjualanController');
             Route::post('laporanPenjualan/api', 'LaporanpenjualanController@api')->name('laporanPenjualan.api');
 
+            //laporan bulanan increment decretment tahun
+
+            Route::patch('increment/tahun', 'LaporanController@increment')->name('increment');
+            Route::patch('decretment/tahun', 'LaporanController@decretment')->name('decretment');
+
 
     });
 
@@ -149,13 +156,13 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Route::resource('produk', 'productsController');
 
-    Route::get('tes', function(){
-        return response()->json([
-            'status' => 1,
-            'message' => 'sukses'
+    // Route::get('tes', function(){
+    //     return response()->json([
+    //         'status' => 1,
+    //         'message' => 'sukses'
 
-        ]);
-    })->name('tes');
+    //     ]);
+    // })->name('tes');
 
 });
 

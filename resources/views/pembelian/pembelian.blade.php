@@ -53,52 +53,36 @@
                             <thead>
                                 <tr>
                                     <td>Tanggal</td>
-                                    <td>qwqwqewrwfrwedsda</td>
+                                    <td id="tanggal_"></td>
                                 </tr>
                                 <tr>
                                     <td>Referensi</td>
-                                    <td>2</td>
+                                    <td id="referensi_"></td>
                                 </tr>
                                 <tr>
                                     <td>Catatan</td>
-                                    <td>2</td>
+                                    <td id="catatan_"></td>
                                 </tr>
                             </thead>
 
                         </table>
 
-                        <table class="table" style="margin: 10px;">
-                            <thead class="table-active">
-                              <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Produk</th>
-                                <th scope="col">Kuantitas</th>
-                                <th scope="col">Biaya Satuan</th>
-                                <th scope="col">Subtotal</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row"></th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                            </tbody>
+                        <table id="tes" class="table table-striped no-b" style="width:100%">
+                            <thead></thead>
+                            <tbody></tbody>
                             <tfoot class="table-active">
                                 <tr>
                                   <th>Total</th>
                                   <th></th>
                                   <th></th>
-                                  <th></th>
                                   <th>
-                                      <span>0.00</span>
+                                      <span id="_total"></span>
                                   </th>
 
                                 </tr>
                             </tfoot>
                           </table>
+
                     </div>
                   </div>
                 </div>
@@ -111,7 +95,7 @@
 @section('script')
 
     <script type="text/javascript">
-
+// table data table
 
         var table = $('#dataTable').dataTable({
             processing: true,
@@ -135,7 +119,7 @@
             ]
     });
 
-
+// hapus
 
     function remove(id){
         $.confirm({
@@ -164,9 +148,71 @@
             }
         });
     }
-
+ // menampilkan modal
     function list(id){
         $('#modal1').modal('show');
+        $.get("{{ route('Pembelian.pembelian.showDataModal', ':id') }}".replace(':id', id), function(data){
+            console.log(data);
+            $('#tanggal_').html(data[0].tanggal);
+            $('#referensi_').text(data[0].referensi);
+            $('#catatan_').html(data[0].catatan);
+        // $.each(data[1][0], function( index, value ) {
+        //     console.log()
+        // });
+
+            // $('#_produk').html(data[1][0].produk_id);
+            // $('#_kuantitas').text(data[1][0].kuantitas);
+            // $('#_biayaSatuan').text(data[1][0].biaya_satuan);
+            // $('#_subTotal').text(data[1][0].sub_total);
+
+            // tes menampilkan modal
+            var dkrTable = $('#tes').DataTable({
+            retrieve: true,
+            destroy: true,
+            columns: [
+
+            {
+                title: 'Produk',
+                data: 'produk',
+            },
+            {
+                title: 'Kuantitas',
+                data: 'kuantitas',
+            },
+            {
+                title: 'Biaya',
+                data: 'biaya',
+            },
+            {
+                title: 'Sub Total',
+                data: 'sub',
+            },
+
+
+        ]
+       });
+       dkrTable.clear().destroy();
+       $.each(data[1], function (index, value) {
+           //    console.log(value);
+           dkrTable.row.add({
+
+               'produk' : value.product.nama,
+               'kuantitas' : value.kuantitas,
+               'biaya' : value.biaya_satuan,
+               'sub' : value.sub_total,
+
+           });
+       });
+       dkrTable.draw();
+
+
+
+
+            $('#_total').text(data[0].total);
+
+        }, "JSON").fail(function(){
+            reload();
+        });
     }
 
 </script>

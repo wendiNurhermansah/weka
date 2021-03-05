@@ -60,7 +60,7 @@
 
                     </div>
 
-                    <div>
+                    <div style="margin-top: 50px;">
                         <div class="container-fluid relative animatedParent animateOnce p-0">
                             <div class="white p-5" style="min-height:100px; max-height: 80vh;overflow:auto;border:none">
                                 <div class="table-responsive" style="padding-right:5px;min-height:350px">

@@ -24,7 +24,7 @@
                     {{ method_field('POST') }}
                     @csrf
                     <input type="hidden" id="id" name="id"/>
-                    <h4 id="formTitle">Tambah Pembelian</h4><hr>
+                    <h4 id="formTitle"><strong>Tambah Pembelian</strong> </h4><hr>
 
                     <div class="form-row">
                         <div class="col md-6">
@@ -81,7 +81,7 @@
                                           <th></th>
                                           <th></th>
                                           <th>
-                                            <input type="text"  id="total_" onkeyup="Total()" value="" style="width: 100px; text-align: center; border:none;" name="total">
+                                            <input type="text"  id="total_" change="Total()" value="" style="width: 100px; text-align: center; border:none;" name="total">
                                           </th>
                                           <th></th>
                                         </tr>
@@ -109,7 +109,7 @@
                             <div class="form-group">
                                 <label for="diterima">Diterima</label>
                                 <div class=" p-0 bg-light">
-                                    <select class="select2 form-control r-0 light s-12" name="diterima" id="diterima" autocomplete="off">
+                                    <select class="select2 form-control r-0 light s-12" name="diterima" id="diterima" autocomplete="off" required>
                                         <option value="Diterima">Diterima</option>
                                         <option value="Belum Diterima">Belum Diterima</option>
                                     </select>
@@ -119,7 +119,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="lampiran">Lampiran</label>
-                                <input type="file" class="form-control @error('lampiran') is-invalid @enderror" id="lampiran" placeholder="cari produk dengan kode atau nama" name="lampiran" value="{{ old('lampiran') }}" >
+                                <input type="file" class="form-control @error('lampiran') is-invalid @enderror" id="lampiran" placeholder="cari produk dengan kode atau nama" name="lampiran" value="{{ old('lampiran') }}">
 
                             </div>
                         </div>
@@ -156,7 +156,7 @@
 
    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $(document).ready(function(){
-
+            $('#total_').val(0);
             // ajax get product
             $( "#id1" ).autocomplete({
                 source: function( request, response ) {
@@ -173,6 +173,7 @@
                         // console.log(data);
                         response( data );
                     }
+
                     });
                 },
                 select: function (event, ui) {
@@ -198,18 +199,18 @@
         var html = `
         <tr id="trTable_`+formAdd+`">
                                             <td style="width: 300px; text-align: left;">
+                                                <input type="text" id="produk_id`+formAdd+`" name="produk_id[]" hidden>
+                                                <input type="text" id="produk_`+formAdd+`" name="produk_[]" style="width: 400px; border: none;">
 
-                                                <input type="text" id="produk_`+formAdd+`" name="produk" style="width: 400px; border: none;">
-
                                             </td>
                                             <td>
-                                                <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="kuantitas">
+                                                <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="kuantitas[]">
                                             </td>
                                             <td>
-                                                <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="biaya_satuan">
+                                                <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="biaya_satuan[]">
                                             </td>
                                             <td>
-                                                <input type="text"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total" >
+                                                <input type="text"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total[]" >
 
                                             </td>
                                             <td>
@@ -220,17 +221,27 @@
 
                                     `;
 
+
+
          $.get(url, function (res) {
-            // console.log(res);
-            //  console.log(res.kode);
-            // $('#produk_0').val(res.nama);
-            // $('#id3').val(res.kode);
+
+
             $('#appendd').append(html);
-
+            $('#produk_id'+formAdd).val(res.id);
             $('#produk_'+formAdd).val(res.nama);
-            // $.each(res.data, function(index, value){
+            $('#kuantitas_'+formAdd).val(res.kuantitas);
+            $('#biaya_satuan_'+formAdd).val(res.biaya);
 
-            // });
+            // penjumlahan
+
+            var subTotal = res.kuantitas*res.biaya;
+
+             $('#sub_total_'+formAdd).val(subTotal);
+
+             var total = $('#total_').val();
+             total = parseInt(total) + parseInt(subTotal);
+             $('#total_').val(total);
+
         }, 'JSON').done(function () {
             console.log('Done');
         }).fail(function(e){
@@ -241,32 +252,34 @@
 
         }
 
+
+
     //delete table
     function hapusTable(formAdd){
         $('#trTable_'+formAdd).remove();
     }
 
     // penjumlahan
-var total2 = 0 ;
-    function hitungKuantitas(){
-        var kuantitas  = $("#kuantitas_"+formAdd).val();
-        // console.log(kuantitas);
-        var biaya = $("#biaya_satuan_"+formAdd).val();
-        // console.log(biaya);
-        var total = kuantitas * biaya;
+// var total2 = 0 ;
+//     function hitungKuantitas(){
+//         var kuantitas  = $("#kuantitas_"+formAdd).val();
+//         console.log(kuantitas);
+//         var biaya = $("#biaya_satuan_"+formAdd).val();
+//          console.log(biaya);
+//         var total = kuantitas * biaya;
 
-        total2 += total;
-        // console.log(total);
-        $("#sub_total_"+formAdd).val(total);
+//         total2 += total;
+//         // console.log(total);
+//         $("#sub_total_"+formAdd).val(total);
 
-        var sum = 0;
-        $("#sub_total_"+formAdd).each(function() {
-        sum += Number($(this).val());
-        $('#total_').val(total2);
+//         var sum = 0;
+//         $("#sub_total_"+formAdd).each(function() {
+//         sum += Number($(this).val());
+//         $('#total_').val(total2);
 
-    });
+//     });
 
-    }
+//     }
 
     // total semua
 
