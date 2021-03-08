@@ -259,6 +259,7 @@
     function hapusTable(formAdd){
 
         $('#trTable_'+formAdd).remove();
+<<<<<<< HEAD
         var row = $('#dataTable > tbody > tr').length;
         total1 =0;
     for (let index = 1; index <= row; index++) {
@@ -266,6 +267,16 @@
         var total1 = parseInt(total1) + parseInt(sub);
          $('#total_').val(total1);
     }
+=======
+
+        sub = $('#sub_total_'+formAdd).val();
+        console.log(sub)
+        var total = $('#total_').val();
+        console.log(total)
+        totals = parseInt(total) - parseInt(sub);
+        console.log(totals)
+        $('#total_').val(totals);
+>>>>>>> dab9e76e8b9205d47f19200f81a721f07ec37997
     }
 
     // penjumlahan

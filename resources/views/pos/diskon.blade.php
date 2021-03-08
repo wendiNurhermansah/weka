@@ -33,8 +33,121 @@
 @push('script')
 <script>
     $("#inputDiskon").keypress(function (e) {
-        if (String.fromCharCode(e.keyCode).match(/[^0-9-%]/g)) return false;
+        if (String.fromCharCode(e.keyCode).match(/[^0-9.%]/g)) return false;
+        // makeUnique($("#inputDiskon").val()); 
+
+        var areUnique = true;
+        $.each($("#inputDiskon",function(){
+            var val = $(this).val();
+            $.each($("#inputDiskon",function(){
+                 if(val == $(this).val()){areUnique = false;}
+            });
+        }));
+
+        var keyCode = e.which;
+        if ( keyCode == 46 || keyCode == 37) { 
+            var nyot = []
+            var tmpTitik = 0;
+            var tmpDiskon = 0;
+
+            nyot.push($('#inputDiskon').val());
+            console.log(nyot)
+            var nyet = $('#inputDiskon').val().length;
+            console.log('nyet='+nyet)
+
+            for (i = 0; i < nyet; i++) {
+                if(nyot[i] == '.'||nyot[i] == '%'){
+                    if(tmpTitik==1 || tmpDiskon==1){
+                        return false;   
+                        event.preventDefault();    
+                    }
+                    tmpTitik++;
+                    console.log('titik='+tmpTitik)
+                    tmpDiskon++;
+                    console.log('Diskon='+tmpDiskon)
+                }
+            //    nyat.push(nyot[i])
+            //    console.log(nyat);
+            //    if(nyat.length>1){
+            //        console.log(nyat);
+            //        return false;
+            //    }
+            }
+        }
     });
+
+    // $("#inputDiskon").keypress(function(e){
+    //     var keyCode = e.which;
+    //     if ( keyCode == 46 || keyCode == 37) { 
+    //         var nyot = []
+    //         var tmpTitik = 0;
+    //         var tmpDiskon = 0;
+
+    //         nyot.push($('#inputDiskon').val());
+    //         console.log('nyot='.nyot)
+    //         var nyet = $('#inputDiskon').val().length;
+    //         console.log('nyot='.nyet)
+
+    //         for (i = 0; i < nyet; i++) {
+    //             if(nyot[i] == '.'||nyot[i] == '%'){
+    //                 if(tmpTitik>0 || tmpDiskon>0){
+    //                     return false    
+    //                 }
+    //                 tmpTitik++;
+    //                 console.log('titik='.titik)
+    //                 tmpDiskon++;
+    //                 console.log('Diskon='.diskon)
+    //             }
+    //         //    nyat.push(nyot[i])
+    //         //    console.log(nyat);
+    //         //    if(nyat.length>1){
+    //         //        console.log(nyat);
+    //         //        return false;
+    //         //    }
+    //         }
+    //     }
+    // });
+
+    // $('#inputDiskon').keyup(function(){
+    //     var nyot = []
+    //     nyot.push($('#inputDiskon').val());
+    //     var nyet = $('#inputDiskon').val().length;
+    //     console.log(nyet);
+    //     console.log(nyot);
+    //     console.log('break');
+
+    //     var inputDiskon = $('#inputDiskon').val();
+    //     var keyCode = inputDiskon.which;
+    //     if(keyCode == 46 || keyCode == 37){
+    //         console.log(keyCode)
+    //         if(tmpDiskon>0||tmpTitik>0){return false;}
+    //         tmpDiskon++;
+    //         tmpTitik++;
+    //     }
+        
+    //     // $("#age").keypress(function(){
+    //     //     var keyCode = e.which;
+        
+    //     //     if ( (keyCode) { 
+    //     //         return false;
+    //     //     }
+    //     // });
+    //     // for (i = 0; i < nyet; i++) {
+    //     //     if(nyot[i] == 46 || nyot[i] == 37){
+    //     //        nyat.push(nyot[i])
+    //     //        console.log(nyat);
+    //     //        if(nyat.length>1){
+    //     //            console.log(nyat);
+    //     //            return false;
+    //     //        }
+    //     //     }
+    //     // }
+
+    // });
+
+    var nyet = $('#inputDiskon').val();
+        console.log(nyet);
+        
     $("#nilaiDiskon").html('0');
     $("#hasilDiskon").html('0');
 
