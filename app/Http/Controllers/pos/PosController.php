@@ -25,7 +25,7 @@ class PosController extends Controller
     protected $route = 'Pos.main.';
     protected $view  = 'pos.';
     protected $title = 'POS';
-    protected $path  = 'produk/images/ava/';
+    protected $path  = 'produk/images/ava/'; 
 
     public function index()
     {
@@ -78,7 +78,7 @@ class PosController extends Controller
   
         $response = array();
         foreach($kategori as $k){
-           $response[] = array("label"=>$k->nama);
+           $response[] = array("value"=>$k->id,"label"=>$k->nama);
         }
   
         return response()->json($response);

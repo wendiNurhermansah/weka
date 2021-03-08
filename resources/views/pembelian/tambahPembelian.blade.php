@@ -257,6 +257,14 @@
     //delete table
     function hapusTable(formAdd){
         $('#trTable_'+formAdd).remove();
+
+        sub = $('#sub_total_'+formAdd).val();
+        console.log(sub)
+        var total = $('#total_').val();
+        console.log(total)
+        totals = parseInt(total) - parseInt(sub);
+        console.log(totals)
+        $('#total_').val(totals);
     }
 
     // penjumlahan
