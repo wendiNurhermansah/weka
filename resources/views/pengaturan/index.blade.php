@@ -113,41 +113,41 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="namaPelanggan" class="font-weight-bold">Nama situs</label>
-                            <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
                             <label for="namaPelanggan" class="font-weight-bold">Beberapa Toko</label>
                             <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="namaPelanggan" class="font-weight-bold">Kategori Default</label>
                             <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="namaPelanggan" class="font-weight-bold">Kode mata uang</label>
+                            <label for="namaPelanggan" class="font-weight-bold">Kode Mata Uang</label>
                             <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="namaPelanggan" class="font-weight-bold">Pelanggan Default</label>
                             <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="namaPelanggan" class="font-weight-bold">Tanda Terima Cetak Otomatis</label>
+                            <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="namaPelanggan" class="font-weight-bold">Timezone</label>
                             <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
                         </div>
                     </div>
@@ -155,7 +155,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="namaPelanggan" class="font-weight-bold">Timezone</label>
+                            <label for="namaPelanggan" class="font-weight-bold">Halaman Purna Jual</label>
                             <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
                         </div>
                     </div>
@@ -165,6 +165,7 @@
                             <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
                         </div>
                     </div>
+
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -211,35 +212,21 @@
                 {{-- barcode --}}
                 <div class="bg-light p-4 mb-3">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="namaPelanggan" class="font-weight-bold">Baris per halaman </label>
-                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="namaPelanggan" class="font-weight-bold">Dukungan RTL</label>
-                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="namaPelanggan" class="font-weight-bold">Baris per halaman </label>
+                                <label for="namaPelanggan" class="font-weight-bold">ws barcode type </label>
                                 <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="namaPelanggan" class="font-weight-bold">Dukungan RTL</label>
+                                <label for="namaPelanggan" class="font-weight-bold">ws barcode chars </label>
                                 <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="namaPelanggan" class="font-weight-bold">Dukungan RTL</label>
+                                <label for="namaPelanggan" class="font-weight-bold">flag chars</label>
                                 <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
                             </div>
                         </div>
@@ -247,13 +234,33 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="namaPelanggan" class="font-weight-bold">Baris per halaman </label>
+                                <label for="namaPelanggan" class="font-weight-bold">item code stars</label>
                                 <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="namaPelanggan" class="font-weight-bold">Dukungan RTL</label>
+                                <label for="namaPelanggan" class="font-weight-bold">item code chars</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">weight stars</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">weight chars</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">weight divide by</label>
                                 <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
                             </div>
                         </div>
@@ -262,20 +269,85 @@
                 {{-- email --}}
                 <div class="bg-light p-4 mb-3">
                     <div class="form-group bg-muted">
-                        <label for="namaPelanggan" class="font-weight-bold">Dukungan RTL</label>
+                        <label for="namaPelanggan" class="font-weight-bold">Protokol Email</label>
                         <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
                     </div>
                 </div>
-                <div class="bg-light p-4">
-                    <div class="form-group bg-muted">
-                        <label for="namaPelanggan" class="font-weight-bold">Dukungan RTL</label>
-                        <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                <div class="bg-light p-4 mb-3">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">desimal</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">desimal kuantitas</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">format mata uang</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">pemisah desimal</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">ribuan pemisah</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold"> tampilkan simbol mata uang</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">simbol mata uang</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-light p-4 mb-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">Stripe</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">Stripe Secret Key</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">Stripe Kunci yang Dapat Dipublikasikan</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 @section('script')
 @endsection
