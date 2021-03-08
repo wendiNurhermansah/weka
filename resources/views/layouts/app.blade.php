@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/buttons.dataTables.min.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
     {{-- kalender --}}
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.css' rel='stylesheet'/>
     <link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>
@@ -99,7 +100,7 @@
     {{-- kalender --}}
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js'></script>
 
-    <script src="https://cdn.tiny.cloud/1/bahzlaw51md174lh1m8b240y7rd7571ovae6p1veskzrui7h/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/gwhzxg2hxxfszzwi3glrbamdaytpyslrg1y6yenfe2mw1b34/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script type="text/javascript">
         $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
     </script>
