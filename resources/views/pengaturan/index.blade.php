@@ -273,6 +273,7 @@
                         <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
                     </div>
                 </div>
+                {{-- DESIMAL --}}
                 <div class="bg-light p-4 mb-3">
                     <div class="row">
                         <div class="col-md-4">
@@ -321,6 +322,7 @@
                         </div>
                     </div>
                 </div>
+                {{-- STRIPE --}}
                 <div class="bg-light p-4 mb-3">
                     <div class="row">
                         <div class="col-md-6">
@@ -340,6 +342,79 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="namaPelanggan" class="font-weight-bold">Stripe Kunci yang Dapat Dipublikasikan</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- SHORTKEY --}}
+                <div class="bg-light p-4 mb-3">
+                    <div class="mb-3">
+                        Silakan atur pintasan sesuka Anda, Anda dapat menggunakan F1 - F2 atau kombinasi tombol lainnya dengan Crtl, Alt dan Shift.
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">Fokus tambahkan / cari input barang</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">Tambahkan Pelanggan</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">Toggle Category Slider</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">Batalkan Penjualan</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">Tangguhkan Penjualan</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">Cetak Pesanan</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">Cetak Bill</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">Finalisasi Penjualan</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">Penjualan Hari Ini</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div><div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">Tagihan Terbuka</label>
+                                <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="namaPelanggan" class="font-weight-bold">Tutup Penjualan</label>
                                 <input class="form-control" type="text" value="" id="namaPelanggan" name="namaPelanggan">
                             </div>
                         </div>
