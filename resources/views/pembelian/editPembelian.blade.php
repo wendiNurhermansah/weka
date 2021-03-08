@@ -48,28 +48,37 @@
                                         <th>Kuantitas</th>
                                         <th>Biaya Satuan</th>
                                         <th>Sub Total</th>
-                                        <th width="60"><i class="fas fa-trash-alt"></i></th>
+                                        <th width="60"><i class="fas fa-trash-alt"></i></i></th>
                                     </tr>
 
                                     </thead>
                                     <tbody style="text-align: center;" id="appendd">
-                                        <tr>
+                                        @foreach ($Pembelian_details as $i)
+                                        <tr id="hapus_">
+
+
                                             <td style="width: 300px; text-align: left;">
-                                                <input type="text" id="id2" name="produk" style="width: 400px; border: none;" value="{{ $Pembelian->produk }}">
+                                                <input type="text" id="produk_id`+formAdd+`" name="produk_id[]" hidden>
+                                                <input type="text" id="produk_`+formAdd+`" name="produk_[]" style="width: 400px; border: none;" value="{{$i->product->nama}}">
+
                                             </td>
                                             <td>
-                                                <input type="text" id="id3" style="width: 200px; text-align: center;" name="kuantitas" value="{{ $Pembelian->kuantitas }}">
+                                                <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas(`+formAdd+`)" onkeypress="hitungTotal(`+formAdd+`)" style="width: 200px; text-align: center;" name="kuantitas[]" value="{{$i->kuantitas}}">
                                             </td>
                                             <td>
-                                                <input type="text"  id="id4" style="width: 200px; text-align: center;" name="biaya_satuan" value="{{ $Pembelian->biaya_satuan }}">
+                                                <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas(`+formAdd+`)" onkeypress="hitungTotal(`+formAdd+`)" style="width: 200px; text-align: center;" name="biaya_satuan[]" value="{{$i->biaya_satuan}}">
                                             </td>
                                             <td>
-                                                <input type="text"  id="id4"  style="width: 100px; text-align: center; border: none;" name="sub_total" value="{{ $Pembelian->sub_total }}">
+                                                <input type="text"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total[]" readonly value="{{$i->sub_total}}">
+
                                             </td>
                                             <td>
-                                                <a href='#' onclick='hapusTable(`+formAdd+`)' class='text-danger' title='Hapus data'><i class="fas fa-trash-alt"></i>  </a>
+                                                <a href='#' onclick='remove({{$i->id}})' class='text-danger' title='Hapus data'><i class="fas fa-trash-alt"></i>  </a>
                                             </td>
+
+
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                     <tfoot style="text-align: center;">
                                         <tr>
@@ -77,7 +86,7 @@
                                           <th></th>
                                           <th></th>
                                           <th>
-                                            <input type="text" style="width: 100px; text-align: center; border: none;" name="total" value="{{ $Pembelian->total }}">
+                                            <input type="text" id="total_" style="width: 100px; text-align: center; border: none;" name="total" value="{{ $Pembelian->total }}">
                                           </th>
                                           <th> </th>
                                         </tr>
@@ -136,7 +145,7 @@
 @endsection
 @section('script')
     <script type="text/javascript">
-        tinymce.init({
+       tinymce.init({
       selector: 'textarea',
       plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
       toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
@@ -145,9 +154,12 @@
       tinycomments_author: 'Author name',
    });
 
+
+
+
    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $(document).ready(function(){
-            $('#total_').val(0);
+            // $('#total_').val(0);
             // ajax get product
             $( "#id1" ).autocomplete({
                 source: function( request, response ) {
@@ -164,6 +176,7 @@
                         // console.log(data);
                         response( data );
                     }
+
                     });
                 },
                 select: function (event, ui) {
@@ -181,7 +194,7 @@
 
         function price(id) {
         formAdd++;
-        console.log(formAdd);
+        // console.log(formAdd);
         // console.log(price());
 
         var url = "{{ route('Pembelian.pembelian.price', ':id') }}".replace(':id', id);
@@ -189,18 +202,18 @@
         var html = `
         <tr id="trTable_`+formAdd+`">
                                             <td style="width: 300px; text-align: left;">
+                                                <input type="text" id="produk_id`+formAdd+`" name="produk_id[]" hidden>
+                                                <input type="text" id="produk_`+formAdd+`" name="produk_[]" style="width: 400px; border: none;">
 
-                                                <input type="text" id="produk_`+formAdd+`" name="produk[]" style="width: 400px; border: none;">
-
                                             </td>
                                             <td>
-                                                <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="kuantitas[]">
+                                                <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas(`+formAdd+`)" onkeypress="hitungTotal(`+formAdd+`)" style="width: 200px; text-align: center;" name="kuantitas[]">
                                             </td>
                                             <td>
-                                                <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="biaya_satuan[]">
+                                                <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas(`+formAdd+`)" onkeypress="hitungTotal(`+formAdd+`)" style="width: 200px; text-align: center;" name="biaya_satuan[]">
                                             </td>
                                             <td>
-                                                <input type="text"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total[]" >
+                                                <input type="text"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total[]" readonly>
 
                                             </td>
                                             <td>
@@ -217,7 +230,7 @@
 
 
             $('#appendd').append(html);
-
+            $('#produk_id'+formAdd).val(res.id);
             $('#produk_'+formAdd).val(res.nama);
             $('#kuantitas_'+formAdd).val(res.kuantitas);
             $('#biaya_satuan_'+formAdd).val(res.biaya);
@@ -225,8 +238,8 @@
             // penjumlahan
 
             var subTotal = res.kuantitas*res.biaya;
-
              $('#sub_total_'+formAdd).val(subTotal);
+            //  console.log(subTotal);
 
              var total = $('#total_').val();
              total = parseInt(total) + parseInt(subTotal);
@@ -244,10 +257,114 @@
 
 
 
+
     //delete table
+
     function hapusTable(formAdd){
+
         $('#trTable_'+formAdd).remove();
+        var row = $('#dataTable > tbody > tr').length;
+        total1 =0;
+    for (let index = 1; index <= row; index++) {
+        var sub = $("#sub_total_"+index).val();
+        var total1 = parseInt(total1) + parseInt(sub);
+         $('#total_').val(total1);
     }
+    }
+
+    function remove(id){
+        $('#hapus_').remove();
+        $('#trTable_'+formAdd).remove();
+        var row = $('#dataTable > tbody > tr').length;
+        total1 =0;
+    for (let index = 1; index <= row; index++) {
+        var sub = $("#sub_total_"+index).val();
+        var total1 = parseInt(total1) + parseInt(sub);
+         $('#total_').val(total1);
+    }
+    }
+
+    // penjumlahan
+var total2 = 0 ;
+    function hitungKuantitas(i){
+        var kuantitas  = $("#kuantitas_"+i).val();
+        // console.log(kuantitas);
+        var biaya = $("#biaya_satuan_"+i).val();
+        //  console.log(biaya);
+        var total = kuantitas * biaya
+        $("#sub_total_"+i).val(total);
+
+    }
+
+    // total semua jika di ganti
+function hitungTotal(j){
+    var row = $('#dataTable > tbody > tr').length;
+    total1 =0;
+    for (let index = 1; index <= row; index++) {
+        var sub = $("#sub_total_"+index).val();
+        var total1 = parseInt(total1) + parseInt(sub);
+         $('#total_').val(total1);
+    }
+}
+
+
+
+
+
+  //submit
+  function reset(){
+        $('#form').trigger('reset');
+        $('#preview').attr({ 'src': '-', 'alt': ''});
+        $('#changeText').html('Browser Image')
+    }
+
+        function add(){
+        save_method = "add";
+        $('#form').trigger('reset');
+        $('#formTitle').html('Tambah Data');
+        $('input[name=_method]').val('POST');
+        $('#txtAction').html('');
+        $('#reset').show();
+        $('#name').focus();
+    }
+
+    $('#form').on('submit', function (e) {
+        if ($(this)[0].checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        else{
+            $('#alert').html('');
+            url = "{{ route('Pembelian.pembelian.store') }}",
+            $.ajax({
+                url : url,
+                type : 'POST',
+                data: new FormData(($(this)[0])),
+                contentType: false,
+                processData: false,
+                success : function(data) {
+                    console.log(data);
+                    $('#alert').html("<div role='alert' class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Success!</strong> " + data.message + "</div>");
+                   add();
+                },
+                error : function(data){
+                    err = '';
+                    respon = data.responseJSON;
+                    if(respon.errors){
+                        $.each(respon.errors, function( index, value ) {
+                            err = err + "<li>" + value +"</li>";
+                        });
+                    }
+                    $('#alert').html("<div role='alert' class='alert alert-danger alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Error!</strong> " + respon.message + "<ol class='pl-3 m-0'>" + err + "</ol></div>");
+                }
+            });
+            return false;
+        }
+        $(this).addClass('was-validated');
+    });
+
+    //delete table
+
 
 
     </script>

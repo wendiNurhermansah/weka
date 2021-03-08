@@ -198,7 +198,8 @@ class PembelianController extends Controller
     {
         $Pembelian = Pembelian::findOrfail($id);
         $Pemasok = Pemasok::all();
-        return view('pembelian.editPembelian', compact('Pembelian', 'Pemasok'));
+        $Pembelian_details =  Pembelian_details::with('product')->where('tmpembelian_id', $id)->get();
+        return view('pembelian.editPembelian', compact('Pembelian', 'Pemasok', 'Pembelian_details'));
     }
 
     /**
