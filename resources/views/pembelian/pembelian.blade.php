@@ -67,23 +67,9 @@
 
                         </table>
 
-                        <table class="table" style="margin: 10px;">
-                            <thead class="table-active">
-                              <tr>
-                                <th scope="col">Produk</th>
-                                <th scope="col">Kuantitas</th>
-                                <th scope="col">Biaya Satuan</th>
-                                <th scope="col">Subtotal</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td id="_produk"></td>
-                                <td id="_kuantitas"></td>
-                                <td id="_biayaSatuan"></td>
-                                <td id="_subTotal"></td>
-                              </tr>
-                            </tbody>
+                        <table id="tes" class="table table-striped no-b" style="width:100%">
+                            <thead></thead>
+                            <tbody></tbody>
                             <tfoot class="table-active">
                                 <tr>
                                   <th>Total</th>
@@ -96,6 +82,7 @@
                                 </tr>
                             </tfoot>
                           </table>
+
                     </div>
                   </div>
                 </div>
@@ -108,7 +95,7 @@
 @section('script')
 
     <script type="text/javascript">
-
+// table data table
 
         var table = $('#dataTable').dataTable({
             processing: true,
@@ -132,7 +119,7 @@
             ]
     });
 
-
+// hapus
 
     function remove(id){
         $.confirm({
@@ -161,7 +148,7 @@
             }
         });
     }
-
+ // menampilkan modal
     function list(id){
         $('#modal1').modal('show');
         $.get("{{ route('Pembelian.pembelian.showDataModal', ':id') }}".replace(':id', id), function(data){
@@ -173,22 +160,57 @@
             $('#tanggal_').html(data[0].tanggal);
             $('#referensi_').text(data[0].referensi);
             $('#catatan_').html(data[0].catatan);
-            
-            for(var i=0;i<data[1].length;i++){
-                // console.log(data[1][i])
-                console.log(data[2][i])
-                // $('#_produk').html(data[2][i].nama);
-                // $('#_kuantitas').text(data[1][i].kuantitas);
-                // // console.log('k='+kuantitas);
-                // $('#_biayaSatuan').text(data[1][i].biaya_satuan);
-                // // console.log('b='+biaya);
-                // $('#_subTotal').text(data[1][i].sub_total);
-            }
+        // $.each(data[1][0], function( index, value ) {
+        //     console.log()
+        // });
 
-            // data[2].forEach(function(item){
-            //     console.log(item);
-            //     $('#_produk').html(item.nama);
-            // });
+            // $('#_produk').html(data[1][0].produk_id);
+            // $('#_kuantitas').text(data[1][0].kuantitas);
+            // $('#_biayaSatuan').text(data[1][0].biaya_satuan);
+            // $('#_subTotal').text(data[1][0].sub_total);
+
+            // tes menampilkan modal
+            var dkrTable = $('#tes').DataTable({
+            retrieve: true,
+            destroy: true,
+            columns: [
+
+            {
+                title: 'Produk',
+                data: 'produk',
+            },
+            {
+                title: 'Kuantitas',
+                data: 'kuantitas',
+            },
+            {
+                title: 'Biaya',
+                data: 'biaya',
+            },
+            {
+                title: 'Sub Total',
+                data: 'sub',
+            },
+
+
+        ]
+       });
+       dkrTable.clear().destroy();
+       $.each(data[1], function (index, value) {
+           //    console.log(value);
+           dkrTable.row.add({
+
+               'produk' : value.product.nama,
+               'kuantitas' : value.kuantitas,
+               'biaya' : value.biaya_satuan,
+               'sub' : value.sub_total,
+
+           });
+       });
+       dkrTable.draw();
+
+
+
 
             $('#_total').text(data[0].total);
 
