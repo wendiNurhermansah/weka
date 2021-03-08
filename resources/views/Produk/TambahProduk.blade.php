@@ -38,7 +38,7 @@
                             <label for="kategori">Kode</label>
                             <select class="custom-select" name="kategori">
                                 @foreach ($kategori as $i)
-                                <option value="{{$i->nama}}">{{$i->nama}}</option>
+                                <option value="{{$i->id}}">{{$i->nama}}</option>
                                 @endforeach
 
                             </select>

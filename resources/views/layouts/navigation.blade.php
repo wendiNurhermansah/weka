@@ -117,14 +117,14 @@
         </a>
         <ul class="treeview-menu">
             <li class="no-b">
-                <a href="{{ route('/')}}">
+                <a href="{{ route('Orang.pegawai.index')}}">
                     <i class="icon icon-list red-text s-18"></i>
                     <span>Daftar Penjualan</span>
                 </a>
             </li>
 
             <li class="no-b">
-                <a href="{{ route('/') }}">
+                <a href="{{ route('Orang.pegawai.index') }}">
                     <i class="icon icon-list blue-text s-18"></i>
                     <span>Daftar Opened Bills</span>
                 </a>
