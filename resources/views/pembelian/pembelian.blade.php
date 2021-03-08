@@ -165,18 +165,31 @@
     function list(id){
         $('#modal1').modal('show');
         $.get("{{ route('Pembelian.pembelian.showDataModal', ':id') }}".replace(':id', id), function(data){
+            // produk
+            
+
+
             console.log(data);
             $('#tanggal_').html(data[0].tanggal);
             $('#referensi_').text(data[0].referensi);
             $('#catatan_').html(data[0].catatan);
+            
             for(var i=0;i<data[1].length;i++){
-                $('#_produk').html(data[1][i].id);
-                $('#_kuantitas').text(data[1][i].kuantitas);
-                // console.log('k='+kuantitas);
-                $('#_biayaSatuan').text(data[1][i].biaya_satuan);
-                // console.log('b='+biaya);
-                $('#_subTotal').text(data[1][i].sub_total);
+                // console.log(data[1][i])
+                console.log(data[2][i])
+                // $('#_produk').html(data[2][i].nama);
+                // $('#_kuantitas').text(data[1][i].kuantitas);
+                // // console.log('k='+kuantitas);
+                // $('#_biayaSatuan').text(data[1][i].biaya_satuan);
+                // // console.log('b='+biaya);
+                // $('#_subTotal').text(data[1][i].sub_total);
             }
+
+            // data[2].forEach(function(item){
+            //     console.log(item);
+            //     $('#_produk').html(item.nama);
+            // });
+
             $('#_total').text(data[0].total);
 
         }, "JSON").fail(function(){

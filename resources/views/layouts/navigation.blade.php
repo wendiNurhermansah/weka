@@ -270,6 +270,51 @@
         </ul>
     </li>
 
+    <li class="treeview ">
+        <a href="#">
+            <i class="icon icon-payment text-lime s-18"></i> <span>Pengaturan</span>
+            <i class="icon icon-angle-left s-18 pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li class="no-b">
+                <a href="{{route('pengaturan.main.index')}}">
+                    <i class="icon icon-circle-o"></i>
+                    <span>Pengaturan</span>
+                </a>
+            </li>
+            <li class="no-b">
+                <a href="">
+                    <i class="icon icon-circle-o"></i>
+                    <span>Toko</span>
+                </a>
+            </li>
+            <li class="no-b">
+                <a href="">
+                    <i class="icon icon-circle-o"></i>
+                    <span>Tambah Toko</span>
+                </a>
+            </li>
+            <li class="no-b">
+                <a href="">
+                    <i class="icon icon-circle-o"></i>
+                    <span>Printer</span>
+                </a>
+            </li>
+            <li class="no-b">
+                <a href="">
+                    <i class="icon icon-circle-o"></i>
+                    <span>Tambah Printer</span>
+                </a>
+            </li>
+            <li class="no-b">
+                <a href="">
+                    <i class="icon icon-circle-o"></i>
+                    <span>Backup</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+
 
     @endcan
 </ul>

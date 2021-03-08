@@ -145,6 +145,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     });
 
+    Route::prefix('pengaturan')->namespace('pengaturan')->name('pengaturan.')->group(function () {
+        Route::resource('main', 'PengaturanController');
+    });
+
     // Produk
     // Route::get('/product', 'ProductsController@index');;
     // Route::get('/tambahproduk', 'AddProductsController@index');

@@ -311,8 +311,13 @@ class PembelianController extends Controller
     {
         $Pembelian = Pembelian::find($id);
         $pembelian_details = Pembelian_details::where('tmpembelian_id', $id)->get();
-        $produks = product::find($id);
+        $pembelianDetailArray = Pembelian_details::select('produk_id')->where('tmpembelian_id', $id)->get();
+        dd(collect($pembelianDetailArray));
+        $produks = product::whereIn('id', collect($pembelianDetailArray))->get();
+        // dd($produks);
 
-        return [$Pembelian, $pembelian_details, $produks];
+        $data = [$Pembelian, $pembelian_details, $produks];
+        // dd($data);
+        return $data;
     }
 }
