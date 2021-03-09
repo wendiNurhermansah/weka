@@ -25,6 +25,13 @@
     .button-footer{
         width: 100px;
     }
+    .searchProduk{
+        width: 70px;
+        border:none;
+    }
+    .searchProduk:focus{
+        outline:none;
+    }
 </style>
 @stack('style')
 @endsection
@@ -96,18 +103,18 @@
                         <div class="form-group">
                                 <input class="form-control" type="text" id="kategori" onclick="" placeholder="Search product by code or name, you can scan barcode too">
                         </div>
-                        <div class="form-group">
-                            <table>
+                        <div class="form-group table-responsive-sm">
+                            <table style="width:50%;">
                                 <thead>
-                                    <tr>
-                                        <th>product</th>
-                                        <th>price</th>
-                                        <th>qty</th>
-                                        <th>Subtotal</th>
+                                    <tr class="bg-success text-black">
+                                        <th width="40" text-align="center">product</th>
+                                        <th width="10" text-align="center">price</th>
+                                        <th width="10" text-align="center">qty</th>
+                                        <th width="20"  text-align="center" >Subtotal</th>
+                                        <th width="5" text-align="center"><i class="icon-trash"></i></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <td></td>
+                                <tbody id="appendd">
                                 </tbody>
                                 <tfoot>
                                     <tr>
@@ -148,13 +155,15 @@
                     <div class="h-75 mb-5">
                         <div class="row ml-4 pl-2">
                             @foreach ($kartu as $k)
+                            <a href="#">
                                 <div class="card m-1" style="width: 10rem;">
-                                        <img class="card-img-top" src="{{asset('produk/images/ava/'.$k->gambar)}}" alt=""  width="10" height="40">
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item"><small>{{$k->nama}}</small></li>
-                                            <li class="list-group-item"><small>{{$k->harga}}</small></li>
-                                        </ul>
+                                    <img class="card-img-top" src="{{asset('produk/images/ava/'.$k->gambar)}}" alt=""  width="10" height="40">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"><small>{{$k->nama}}</small></li>
+                                        <li class="list-group-item"><small>{{$k->harga}}</small></li>
+                                    </ul>
                                 </div>
+                            </a>
                             @endforeach
                         </div>
                     </div>
@@ -240,7 +249,7 @@
 
             $(document).ready(function(){
                 // total
-                $("#tabelTotal").html(90);
+                $("#tabelTotal").html(0);
 
                 // totalPayable
                 $("#totalPayable").html('0');
@@ -262,18 +271,133 @@
                             search: request.term
                         },
                         success: function( data ) {
+                            // console.log(data);
                             response( data );
                         }
                         });
                     },
                     select: function (event, ui) {
                         // Set selection
-                        $('#kategori').val(ui.item.label); // display the selected text
+                        searchProduk(ui.item.id);
+                        // console.log(ui.item.id);
+                        // $('#kategori').val(ui.item.value);
+                        // $('#kategori').val(ui.item.label); 
+                        // display the selected text
                         // $('tbody').html(data);
                         return false;
                     }
                 });
             });
+
+            var formAdd = 0;
+
+            function searchProduk(id){
+                formAdd++;
+
+                var url = "{{ route('Pembelian.pembelian.price', ':id') }}".replace(':id', id);
+                // console.log(url);
+                var html = `
+                <tr id="trTable_`+formAdd+`" class="bg-gradient-danger">
+                                                    <td text-align: left;">
+                                                        <input type="text" class="searchProduk" id="produk_id`+formAdd+`" name="produk_id[]" hidden>
+                                                        <input type="text" id="produk_`+formAdd+`" name="produk_[]" class="searchProduk" style="width:160px;" readonly>
+
+                                                    </td>
+                                                    <td>
+                                                        <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas()" class="searchProduk" style="width:70px;" float: right;" name="biaya_satuan[]">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas()" class="searchProduk" style="width:30px;" text-align: center;" name="kuantitas[]">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text"  id="sub_total_`+formAdd+`"  class="searchProduk" style="width:70px;" float: right; border: none;" name="sub_total[]" >
+                                                    </td>
+                                                    <td>
+
+                                                        <a href='#' onclick='hapusTable(`+formAdd+`)' title='Hapus data'><i class="icon-trash text-danger"></i>  </a>
+                                                    </td>
+                                                </tr>
+
+                                            `;
+
+
+
+                $.get(url, function (res) {
+                    var kuantitas = 1;
+                    
+                    $('#appendd').append(html);
+                    $('#produk_id'+formAdd).val(res.id);
+                    $('#produk_'+formAdd).val(res.nama);
+                    $('#biaya_satuan_'+formAdd).val(res.biaya);
+                    $('#kuantitas_'+formAdd).val(kuantitas);
+                    var subTotal = kuantitas*res.biaya;
+                    $('#sub_total_'+formAdd).val(subTotal);
+                    
+                    produkSesudah = $("#produk_id"+formAdd).val();
+                    console.log('1:'+produkSesudah);
+                    
+                    tr = $("#appendd tr").length;
+                    console.log("tr:"+tr);
+                    for (i = 1; i < tr; i++) {
+                        console.log('i'+i)
+                        produkSebelum = $("#produk_id"+i).val();
+                        console.log('2:'+produkSebelum);
+                        var qty = $('#kuantitas_'+i).val();
+                        console.log('qty:'+qty);
+                        if(produkSebelum == produkSesudah && qty>0){
+                                console.log('i='+i);
+                                qty++;
+                                $('#kuantitas_'+i).val(qty);
+                                console.log('formAdd3:'+formAdd);
+                                var subTotal = qty*res.biaya;
+                                $('#sub_total_'+i).val(subTotal);
+                                $("#trTable_"+formAdd).remove();    
+                        }else{
+                            $('#kuantitas_'+formAdd).val(kuantitas);
+                            var subTotal = kuantitas*res.biaya;
+                            $('#sub_total_'+formAdd).val(subTotal);
+                        }
+                    }
+                    // produkSesudah = 
+                    // if()
+
+                    // penjumlahan
+
+                    var total = $('#tabelTotal').html();
+                    console.log(subTotal);
+                    console.log(total);
+                    total = parseInt(total) + parseInt(subTotal);
+                    $('#tabelTotal').html(total);
+
+
+
+                }, 'JSON').done(function () {
+                    console.log('Done');
+                }).fail(function(e){
+                    console.log('Error');
+                });
+            }
+
+            function hapusTable(formAdd){
+                sub = $('#sub_total_'+formAdd).val();
+                console.log('-'+sub)
+                var total = $('#tabelTotal').html();
+                console.log(total)
+                totals = parseInt(total) - parseInt(sub);
+                console.log(totals)
+                $('#tabelTotal').html(totals);
+                $('#trTable_'+formAdd).remove();
+            }
+
+            function hitungTotal(j){
+                var row = $('#dataTable > tbody > tr').length;
+                total1 =0;
+                for (let index = 1; index <= row; index++) {
+                    var sub = $("#sub_total_"+index).val();
+                    var total1 = parseInt(total1) + parseInt(sub);
+                    $('#tabelTotal').val(total1);
+                }
+            }
 
             var table = $('#dataTable').dataTable({
                 processing: true,

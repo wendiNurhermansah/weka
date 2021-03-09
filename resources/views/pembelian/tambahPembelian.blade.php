@@ -81,7 +81,7 @@
                                           <th></th>
                                           <th></th>
                                           <th>
-                                            <input type="text"  id="total_"  value="" style="width: 100px; text-align: center; border:none;" name="total">
+                                            <input type="text"  id="total_" change="Total()" value="" style="width: 100px; text-align: center; border:none;" name="total">
                                           </th>
                                           <th></th>
                                         </tr>
@@ -142,7 +142,7 @@
 @endsection
 @section('script')
     <script type="text/javascript">
-       tinymce.init({
+        tinymce.init({
       selector: 'textarea',
       plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
       toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
@@ -191,7 +191,7 @@
 
         function price(id) {
         formAdd++;
-        // console.log(formAdd);
+        console.log(formAdd);
         // console.log(price());
 
         var url = "{{ route('Pembelian.pembelian.price', ':id') }}".replace(':id', id);
@@ -204,13 +204,13 @@
 
                                             </td>
                                             <td>
-                                                <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas(`+formAdd+`)" onkeypress="hitungTotal(`+formAdd+`)" style="width: 200px; text-align: center;" name="kuantitas[]">
+                                                <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="kuantitas[]">
                                             </td>
                                             <td>
-                                                <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas(`+formAdd+`)" onkeypress="hitungTotal(`+formAdd+`)" style="width: 200px; text-align: center;" name="biaya_satuan[]">
+                                                <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="biaya_satuan[]">
                                             </td>
                                             <td>
-                                                <input type="text"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total[]" readonly>
+                                                <input type="text"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total[]" >
 
                                             </td>
                                             <td>
@@ -235,6 +235,7 @@
             // penjumlahan
 
             var subTotal = res.kuantitas*res.biaya;
+
              $('#sub_total_'+formAdd).val(subTotal);
 
              var total = $('#total_').val();
@@ -253,21 +254,9 @@
 
 
 
-
     //delete table
-
     function hapusTable(formAdd){
-
         $('#trTable_'+formAdd).remove();
-<<<<<<< HEAD
-        var row = $('#dataTable > tbody > tr').length;
-        total1 =0;
-    for (let index = 1; index <= row; index++) {
-        var sub = $("#sub_total_"+index).val();
-        var total1 = parseInt(total1) + parseInt(sub);
-         $('#total_').val(total1);
-    }
-=======
 
         sub = $('#sub_total_'+formAdd).val();
         console.log(sub)
@@ -276,31 +265,32 @@
         totals = parseInt(total) - parseInt(sub);
         console.log(totals)
         $('#total_').val(totals);
->>>>>>> dab9e76e8b9205d47f19200f81a721f07ec37997
     }
 
     // penjumlahan
-var total2 = 0 ;
-    function hitungKuantitas(i){
-        var kuantitas  = $("#kuantitas_"+i).val();
-        // console.log(kuantitas);
-        var biaya = $("#biaya_satuan_"+i).val();
-        //  console.log(biaya);
-        var total = kuantitas * biaya
-        $("#sub_total_"+i).val(total);
+// var total2 = 0 ;
+//     function hitungKuantitas(){
+//         var kuantitas  = $("#kuantitas_"+formAdd).val();
+//         console.log(kuantitas);
+//         var biaya = $("#biaya_satuan_"+formAdd).val();
+//          console.log(biaya);
+//         var total = kuantitas * biaya;
 
-    }
+//         total2 += total;
+//         // console.log(total);
+//         $("#sub_total_"+formAdd).val(total);
 
-    // total semua jika di ganti
-function hitungTotal(j){
-    var row = $('#dataTable > tbody > tr').length;
-    total1 =0;
-    for (let index = 1; index <= row; index++) {
-        var sub = $("#sub_total_"+index).val();
-        var total1 = parseInt(total1) + parseInt(sub);
-         $('#total_').val(total1);
-    }
-}
+//         var sum = 0;
+//         $("#sub_total_"+formAdd).each(function() {
+//         sum += Number($(this).val());
+//         $('#total_').val(total2);
+
+//     });
+
+//     }
+
+    // total semua
+
 
 
 
