@@ -126,27 +126,7 @@ class PembelianController extends Controller
             $fileName='';
         }
 
-            // foreach($request->produk as $key => $produk){
-
-
-
-            //     $tmpembelian = new Pembelian();
-            //     $tmpembelian->tanggal = $request->tanggal;
-            //     $tmpembelian->referensi = $request->referensi;
-            //     $tmpembelian->total = $request->total;
-            //     $tmpembelian->catatan = $request->catatan;
-
-            //     $tmpembelian->produk = $produk;
-            //     $tmpembelian->kuantitas = $request->input('kuantitas')[$key];
-            //     $tmpembelian->biaya_satuan = $request->input('biaya_satuan')[$key];
-            //     $tmpembelian->sub_total = $request->input('sub_total')[$key];
-
-
-            //     $tmpembelian->pemasok = $request->pemasok;
-            //     $tmpembelian->diterima = $request->diterima;
-            //     $tmpembelian->lampiran = $fileName;
-            //     $tmpembelian->save();
-            // }
+           
 
             $tmpembelian = new Pembelian();
             $tmpembelian->tanggal = $request->tanggal;
@@ -217,14 +197,12 @@ class PembelianController extends Controller
             'referensi' => 'required',
             'total' => 'required',
             'catatan' => 'required',
-            'produk' => 'required',
+            'produk_id' => 'required',
             'kuantitas' => 'required',
             'biaya_satuan' => 'required',
             'sub_total' => 'required',
             'pemasok' => 'required',
-            'diterima' => 'required',
-
-
+            'diterima' => 'required'
         ]);
 
         $tanggal = $request->tanggal;

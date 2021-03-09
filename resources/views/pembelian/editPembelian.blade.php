@@ -37,7 +37,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for=""></label>
-                                <input type="text"   class="form-control @error('produk') is-invalid @enderror" id="id1" placeholder="cari produk dengan kode atau nama" name="" value="s" required>
+                                <input type="text"   class="form-control @error('produk1') is-invalid @enderror" id="id1" placeholder="cari produk dengan kode atau nama" name="produk1" value="{{ old('produk1') }}" >
 
                             </div>
                             <div class="table-responsive">
@@ -53,30 +53,31 @@
 
                                     </thead>
                                     <tbody style="text-align: center;" id="appendd">
+                                        @php($a=1)
                                         @foreach ($Pembelian_details as $i)
-                                        <tr id="hapus_">
+                                        <tr id="hapus_{{$i->id}}">
 
 
                                             <td style="width: 300px; text-align: left;">
-                                                <input type="text" id="produk_id`+formAdd+`" name="produk_id[]" hidden>
-                                                <input type="text" id="produk_`+formAdd+`" name="produk_[]" style="width: 400px; border: none;" value="{{$i->product->nama}}">
+                                                <input type="text" id="produk_id{{$i->id}}" name="produk_id[]" hidden>
+                                                <input type="text" id="produk_{{$i->id}}" name="produk_[]" style="width: 400px; border: none;" value="{{$i->product->nama}}">
 
                                             </td>
                                             <td>
-                                                <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas(`+formAdd+`)" onkeypress="hitungTotal(`+formAdd+`)" style="width: 200px; text-align: center;" name="kuantitas[]" value="{{$i->kuantitas}}">
+                                                <input type="text" id="kuantitas_{{$i->id}}" onkeyup="hitungKuantitas({{$i->id}})" onkeypress="" style="width: 200px; text-align: center;" name="kuantitas[]" value="{{$i->kuantitas}}">
                                             </td>
                                             <td>
-                                                <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas(`+formAdd+`)" onkeypress="hitungTotal(`+formAdd+`)" style="width: 200px; text-align: center;" name="biaya_satuan[]" value="{{$i->biaya_satuan}}">
+                                                <input type="text"  id="biaya_satuan_{{$i->id}}"  onkeyup="hitungKuantitas({{$i->id}})" onkeypress="" style="width: 200px; text-align: center;" name="biaya_satuan[]" value="{{$i->biaya_satuan}}">
                                             </td>
                                             <td>
-                                                <input type="text"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total[]" readonly value="{{$i->sub_total}}">
+                                                <input type="text"  id="sub_total_{{$i->id}}" class="sub_{{$a}}" style="width: 100px; text-align: center; border: none;" name="sub_total[]" readonly value="{{$i->sub_total}}">
 
                                             </td>
                                             <td>
                                                 <a href='#' onclick='remove({{$i->id}})' class='text-danger' title='Hapus data'><i class="fas fa-trash-alt"></i>  </a>
                                             </td>
 
-
+                                            @php($a++)
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -192,8 +193,11 @@
 
         var formAdd = 0;
 
+        var b = "<?php echo $a; ?>";
+
         function price(id) {
         formAdd++;
+
         // console.log(formAdd);
         // console.log(price());
 
@@ -213,7 +217,7 @@
                                                 <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas(`+formAdd+`)" onkeypress="hitungTotal(`+formAdd+`)" style="width: 200px; text-align: center;" name="biaya_satuan[]">
                                             </td>
                                             <td>
-                                                <input type="text"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total[]" readonly>
+                                                <input type="text"  id="sub_total_`+formAdd+`" class="sub_`+b+`" style="width: 100px; text-align: center; border: none;" name="sub_total[]" readonly>
 
                                             </td>
                                             <td>
@@ -224,8 +228,9 @@
 
                                     `;
 
-
-
+        b++;
+        console.log(b);
+        // "<?php echo $a++; ?>";
          $.get(url, function (res) {
 
 
@@ -265,23 +270,25 @@
         $('#trTable_'+formAdd).remove();
         var row = $('#dataTable > tbody > tr').length;
         total1 =0;
-    for (let index = 1; index <= row; index++) {
-        var sub = $("#sub_total_"+index).val();
-        var total1 = parseInt(total1) + parseInt(sub);
-         $('#total_').val(total1);
-    }
+        for (let index = 1; index <= row; index++) {
+            var sub = $(".sub_"+index).val();
+            console.log(sub);
+            var total1 = parseInt(total1) + parseInt(sub);
+            $('#total_').val(total1);
+        }
     }
 
     function remove(id){
-        $('#hapus_').remove();
-        $('#trTable_'+formAdd).remove();
+        $('#hapus_'+id).remove();
+        // $('#trTable_'+formAdd).remove();
         var row = $('#dataTable > tbody > tr').length;
         total1 =0;
-    for (let index = 1; index <= row; index++) {
-        var sub = $("#sub_total_"+index).val();
-        var total1 = parseInt(total1) + parseInt(sub);
-         $('#total_').val(total1);
-    }
+        for (let index = 1; index <= row; index++) {
+            var sub = $(".sub_"+index).val();
+            console.log(sub);
+            var total1 = parseInt(total1) + parseInt(sub);
+            $('#total_').val(total1);
+        }
     }
 
     // penjumlahan
@@ -294,18 +301,28 @@ var total2 = 0 ;
         var total = kuantitas * biaya
         $("#sub_total_"+i).val(total);
 
+        var row = $('#dataTable > tbody > tr').length;
+        total1 =0;
+        for (let index = 1; index <= row; index++) {
+            var sub = $(".sub_"+index).val();
+            console.log(sub);
+            var total1 = parseInt(total1) + parseInt(sub);
+            $('#total_').val(total1);
+        }
+
     }
 
     // total semua jika di ganti
-function hitungTotal(j){
-    var row = $('#dataTable > tbody > tr').length;
-    total1 =0;
-    for (let index = 1; index <= row; index++) {
-        var sub = $("#sub_total_"+index).val();
-        var total1 = parseInt(total1) + parseInt(sub);
-         $('#total_').val(total1);
-    }
-}
+// function hitungTotal(){
+//     var row = $('#dataTable > tbody > tr').length;
+//     total1 =0;
+//     for (let index = 1; index <= row; index++) {
+//         var sub = $(".sub_"+index).val();
+//         console.log(sub);
+//         var total1 = parseInt(total1) + parseInt(sub);
+//          $('#total_').val(total1);
+//     }
+// }
 
 
 
