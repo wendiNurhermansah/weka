@@ -146,6 +146,10 @@
                     <!-- Profile -->
                     <li class="dropdown custom-dropdown user user-menu ">
                         <a href="#" class="nav-link" data-toggle="dropdown">
+                            <img src="{{asset('assets/img/dummy/u8.png')}}" class="user-image" alt="User Image">
+                            <i class="icon-more_vert "></i>
+                        </a>
+                        <a href="#" class="nav-link" data-toggle="dropdown">
                             <h6 class="font-weight-light mb-3 " style="color: cornsilk;">{{ Auth::user()->username }}</h6>
                             <i class="icon-more_vert "></i>
                         </a>
