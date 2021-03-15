@@ -81,7 +81,7 @@
                                           <th></th>
                                           <th></th>
                                           <th>
-                                            <input type="text"  id="total_"  value="" style="width: 100px; text-align: center; border:none;" name="total">
+                                            <input type="text"  id="total_"  value="" style="width: 100px; text-align: center; border:none;" name="total" readonly>
                                           </th>
                                           <th></th>
                                         </tr>
@@ -188,11 +188,11 @@
         });
 
         var formAdd = 0;
-       
+
 
         function price(id) {
         formAdd++;
-       
+
         // console.log(formAdd);
         // console.log(price());
 
@@ -206,10 +206,10 @@
 
                                             </td>
                                             <td>
-                                                <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas(`+formAdd+`)" onkeypress="hitungTotal(`+formAdd+`)" style="width: 200px; text-align: center;" name="kuantitas[]">
+                                                <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas(`+formAdd+`)"  style="width: 200px; text-align: center;" name="kuantitas[]">
                                             </td>
                                             <td>
-                                                <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas(`+formAdd+`)" onkeypress="hitungTotal(`+formAdd+`)" style="width: 200px; text-align: center;" name="biaya_satuan[]">
+                                                <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas(`+formAdd+`)"  style="width: 200px; text-align: center;" name="biaya_satuan[]">
                                             </td>
                                             <td>
                                                 <input type="text"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total[]" readonly>
@@ -229,7 +229,7 @@
 
 
             var kuantitas = 1;
-                    
+
                     $('#appendd').append(html);
                     $('#produk_id'+formAdd).val(res.id);
                     $('#produk_'+formAdd).val(res.nama);
@@ -239,7 +239,7 @@
                      $('#sub_total_'+formAdd).val(subTotal);
                     produkSesudah = $("#produk_"+formAdd).val();
                     // console.log('1:'+produkSesudah);
-                    
+
                     tr = $("#appendd tr").length;
                     // console.log("tr:"+tr);
                     for (let i = 1; i < tr; i++) {
@@ -254,24 +254,24 @@
                                 console.log('formAdd3:'+formAdd);
                                 var subTotal = qty*res.biaya;
                                 $('#sub_total_'+i).val(subTotal);
-                                $("#trTable_"+formAdd).remove();    
+                                $("#trTable_"+formAdd).remove();
                         }else{
                             $('#kuantitas_'+formAdd).val(kuantitas);
                         }
-                        
+
                     }
-            
-                
-           
-            
+
+
+
+
 
             // penjumlahan
 
-            var subTotal = kuantitas*res.biaya;
-             $('#sub_total_'+formAdd).val(subTotal);
+        var subTotal = kuantitas*res.biaya;
+         $('#sub_total_'+formAdd).val(subTotal);
 
-             var total = $('#total_').val();
-             total = parseInt(total) + parseInt(subTotal);
+         var total = $('#total_').val();
+        total = parseInt(total) + parseInt(subTotal);
              $('#total_').val(total);
 
         }, 'JSON').done(function () {
@@ -292,13 +292,15 @@
     function hapusTable(formAdd){
 
         $('#trTable_'+formAdd).remove();
-        var row = $('#dataTable > tbody > tr').length;
+        var row = $("#appendd tr").length;
+        console.log(row);
         total1 =0;
-    for (let index = 1; index <= row; index++) {
-        var sub = $("#sub_total_"+index).val();
-        var total1 = parseInt(total1) + parseInt(sub);
-         $('#total_').val(total1);
-    }
+        for (let index = 1; index <= row; index++) {
+            var sub = $("#sub_total_"+index).val();
+            console.log(sub);
+            var total1 = parseInt(total1) + parseInt(sub);
+            $('#total_').val(total1);
+        }
     }
 
     // penjumlahan
@@ -311,19 +313,30 @@
         var total = kuantitas * biaya
         $("#sub_total_"+i).val(total);
 
+        var row = $("#appendd tr").length;
+        console.log(row);
+        total1 =0;
+        for (let index = 1; index <= row; index++) {
+            var sub = $("#sub_total_"+index).val();
+            console.log(sub);
+            var total1 = parseInt(total1) + parseInt(sub);
+            $('#total_').val(total1);
+        }
+
     }
 
     // total semua jika di ganti
-function hitungTotal(j){
-    var row = $('#dataTable > tbody > tr').length;
-    total1 =0;
-    for (let index = 1; index <= row; index++) {
-        var sub = $("#sub_total_"+index).val();
-        console.log(sub);
-        var total1 = parseInt(total1) + parseInt(sub);
-         $('#total_').val(total1);
-    }
-}
+// function hitungTotal(j){
+//     var row = $("#appendd tr").length;
+//     console.log(row);
+//     total1 =0;
+//     for (let index = 1; index <= row; index++) {
+//         var sub = $("#sub_total_"+index).val();
+//         console.log(sub);
+//         var total1 = parseInt(total1) + parseInt(sub);
+//          $('#total_').html(total1);
+//     }
+// }
 
 
 
