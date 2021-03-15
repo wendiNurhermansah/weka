@@ -43,3 +43,29 @@
     </div>
 </div>
 @endsection
+@section('script')
+<script type="text/javascript">
+    var table = $('#dataTable').dataTable({
+            processing: true,
+            serverSide: true,
+            pageLength: 15,
+            order: [ 0, 'asc' ],
+            dom: 'Bfrtip',
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+            ajax: {
+                url: "{{ route('Laporan.laporanPembayaran.api') }}",
+                method: 'POST'
+            },
+
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, align: 'center', className: 'text-center'},
+                {data: 'tanggal', name: 'tanggal'},
+                {data: 'referensi', name: 'referensi'},
+                {data: 'tidak_dijual', name: 'tidak_dijual'},
+                {data: 'dibayar_dengan', name: 'dibayar_dengan'},
+                {data: 'jumlah', name: 'jumlah'},
+            ]
+    });
+</script>
+
+@endsection

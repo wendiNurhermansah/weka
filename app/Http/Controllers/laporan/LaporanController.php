@@ -5,6 +5,9 @@ namespace App\Http\Controllers\laporan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Tahun;
+use App\Models\Pembayaran;
+use App\Models\Laporan_produk;
+use DataTables;
 
 class LaporanController extends Controller
 {
@@ -22,12 +25,34 @@ class LaporanController extends Controller
         return view('laporan.laporanPembayaran');
     }
 
+    public function api()
+    {
+        $Pembayaran = Pembayaran::all();
+        return Datatables::of($Pembayaran)
+
+
+            ->addIndexColumn()
+            ->rawColumns(['action'])
+            ->toJson();
+    }
+
     public function laporanPendaftaran(){
         return view('laporan.laporanPendaftaran');
     }
 
     public function laporanProduk(){
         return view('laporan.laporanProduk');
+    }
+
+    public function apii()
+    {
+        $Laporan_produk = Laporan_produk::all();
+        return Datatables::of($Laporan_produk)
+
+
+            ->addIndexColumn()
+            ->rawColumns(['action'])
+            ->toJson();
     }
 
     //laporan bulanan kalender

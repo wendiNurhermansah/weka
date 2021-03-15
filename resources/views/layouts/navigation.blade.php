@@ -89,24 +89,14 @@
                     <span>Import Kategori</span>
                 </a>
             </li>
-            <li class="no-b">
-                <a href="{{ route('Kategori.toko.index') }}">
-                    <i class="icon icon-circle-o"></i>
-                    <span>Toko</span>
-                </a>
-            </li>
+
             <li class="no-b">
                 <a href="{{ route('Kategori.tambahkategori') }}">
                     <i class="icon icon-circle-o"></i>
                     <span>Tambahkan Kategori</span>
                 </a>
             </li>
-            <li class="no-b">
-                <a href="{{ route('Kategori.tambahToko') }}">
-                    <i class="icon icon-circle-o"></i>
-                    <span>Tambahkan Toko</span>
-                </a>
-            </li>
+
         </ul>
     </li>
 
@@ -278,7 +268,7 @@
                 </a>
             </li>
             <li class="no-b">
-                <a href="#">
+                <a href="{{route('Laporan.produkTeratas')}}">
                     <i class="icon icon-circle-o"></i>
                     <span>Produk Teratas</span>
                 </a>
