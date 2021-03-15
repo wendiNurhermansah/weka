@@ -1,6 +1,6 @@
 <div class="has-sidebar-left">
     <div class="sticky">
-        <div class="navbar navbar-expand navbar-dark d-flex justify-content-between bd-navbar blue accent-3">
+        <div class="navbar navbar-expand navbar-dark d-flex justify-content-between bd-navbar kongox accent-3">
             <div class="relative">
                 <div class="d-flex">
                     <div>

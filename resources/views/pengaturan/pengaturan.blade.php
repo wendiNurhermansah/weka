@@ -8,7 +8,7 @@
                 <div class="col">
                     <h4>
                         <i class="icon icon-gear mr-1"></i>
-                        PENGATURAN
+                        control your kontol
                     </h4>
                 </div>
             </div>

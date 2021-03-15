@@ -305,15 +305,15 @@
                 </a>
             </li>
             <li class="no-b">
-                <a href="">
+                <a href="{{ route('pengaturan.toko.index') }}">
                     <i class="icon icon-circle-o"></i>
                     <span>Toko</span>
                 </a>
             </li>
             <li class="no-b">
-                <a href="">
+                <a href="{{ route('Kategori.tambahkategori') }}">
                     <i class="icon icon-circle-o"></i>
-                    <span>Tambah Toko</span>
+                    <span>Tambahkan Kategori</span>
                 </a>
             </li>
             <li class="no-b">

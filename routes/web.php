@@ -146,7 +146,13 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::prefix('pengaturan')->namespace('pengaturan')->name('pengaturan.')->group(function () {
-        Route::resource('main', 'PengaturanController');
+        Route::resource('main', 'TokoController');
+
+        //Toko
+        Route::resource('toko', 'TokoController');
+        Route::post('toko/api', 'TokoController@api')->name('toko.api');
+        Route::get('tambahToko', 'TokoController@tambahToko')->name('tambahToko');
+
     });
 
     // Produk
@@ -169,5 +175,3 @@ Route::group(['middleware' => ['auth']], function () {
     // })->name('tes');
 
 });
-
-

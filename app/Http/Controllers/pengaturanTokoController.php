@@ -5,9 +5,9 @@ namespace App\Http\Controllers\kategori;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DataTables;
-use App\Models\Toko;
+use App\Models\pengaturanToko;
 
-class TokoController extends Controller
+class pengaturanTokoController extends Controller
 {
     /**
      * Display a listing of the resource.
