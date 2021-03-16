@@ -81,7 +81,8 @@
                                           <th></th>
                                           <th></th>
                                           <th>
-                                            <input type="text"  id="total_"  value="" style="width: 100px; text-align: center; border:none;" name="total" readonly>
+                                            <input type="hidden"  id="total_"  value="" style="width: 100px; text-align: center; border:none;" name="total" readonly>
+                                            <input type="text"  id="rptotal_"  value="" style="width: 100px; text-align: center; border:none;" readonly>
                                           </th>
                                           <th></th>
                                         </tr>
@@ -212,7 +213,8 @@
                                                 <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas(`+formAdd+`)"  style="width: 200px; text-align: center;" name="biaya_satuan[]">
                                             </td>
                                             <td>
-                                                <input type="text"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total[]" readonly>
+                                                <input type="hidden"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total[]" hidden>
+                                                <input type="text"  id="rpsub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" readonly>
 
                                             </td>
                                             <td>
@@ -237,6 +239,8 @@
                     $('#kuantitas_'+formAdd).val(kuantitas);
                     var subTotal = kuantitas*res.biaya;
                      $('#sub_total_'+formAdd).val(subTotal);
+
+                     $('#rpsub_total_'+formAdd).val(convert_to_rupiah(subTotal));
                     produkSesudah = $("#produk_"+formAdd).val();
                     // console.log('1:'+produkSesudah);
 
@@ -254,6 +258,7 @@
                                 console.log('formAdd3:'+formAdd);
                                 var subTotal = qty*res.biaya;
                                 $('#sub_total_'+i).val(subTotal);
+                                $('#rpsub_total_'+i).val(convert_to_rupiah(subTotal));
                                 $("#trTable_"+formAdd).remove();
                         }else{
                             $('#kuantitas_'+formAdd).val(kuantitas);
@@ -273,6 +278,7 @@
          var total = $('#total_').val();
         total = parseInt(total) + parseInt(subTotal);
              $('#total_').val(total);
+             $('#rptotal_').val(convert_to_rupiah(total));
 
         }, 'JSON').done(function () {
             console.log('Done');
@@ -300,6 +306,7 @@
             console.log(sub);
             var total1 = parseInt(total1) + parseInt(sub);
             $('#total_').val(total1);
+            $('#rptotal_').val(convert_to_rupiah(total1));
         }
     }
 
@@ -312,6 +319,7 @@
         //  console.log(biaya);
         var total = kuantitas * biaya
         $("#sub_total_"+i).val(total);
+        $("#rpsub_total_"+i).val(convert_to_rupiah(total));
 
         var row = $("#appendd tr").length;
         console.log(row);
@@ -321,6 +329,7 @@
             console.log(sub);
             var total1 = parseInt(total1) + parseInt(sub);
             $('#total_').val(total1);
+            $('#rptotal_').val(convert_to_rupiah(total1));
         }
 
     }

@@ -11,35 +11,16 @@
 
     <title>{{ config('app.name') }} @yield('title')</title>
 
-    <style>
-        .loader {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #F5F8FA;
-            z-index: 9998;
-            text-align: center;
-        }
-
-        .plane-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-        }
-    </style>
-
     <!-- CSS -->
     @yield('style')
     <link rel="stylesheet" href="{{ asset('css/util.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/myStyle.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/jquery-confirm.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/jquery-fancybox.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/buttons.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets2/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets2/css/myStyle.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets2/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets2/css/jquery-confirm.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets2/css/jquery-fancybox.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets2/css/buttons.dataTables.min.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
@@ -64,9 +45,7 @@
                 </a>
                 <div class="user-panel p-3 light mb-2">
                     <div>
-                        <div class="float-left image">
-                            <img class="user_avatar" src="{{ asset('assets/img/dummy/u8.png')}}" alt="User Image">
-                        </div>
+
                         <div class="float-left info mt-1">
                             <h6 class="font-weight-light mb-1">
                                 {{ Auth::user()->username }}
@@ -104,10 +83,10 @@
     <script type="text/javascript">
         var APP_URL = {!! json_encode(url('/').'/') !!}
     </script>
-    <script src="{{ asset('assets/js/app.js') }}"></script>
-    <script src="{{ asset('assets/js/myScript.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery-confirm.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery-fancybox.min.js') }}"></script>
+    <script src="{{ asset('assets2/js/app.js') }}"></script>
+    <script src="{{ asset('assets2/js/myScript.js') }}"></script>
+    <script src="{{ asset('assets2/js/jquery-confirm.min.js') }}"></script>
+    <script src="{{ asset('assets2/js/jquery-fancybox.min.js') }}"></script>
 
     <!-- script data tables-->
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
