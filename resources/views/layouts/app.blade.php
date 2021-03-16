@@ -45,6 +45,9 @@
                 </a>
                 <div class="user-panel p-3 light mb-2">
                     <div>
+                        <div class="float-left image">
+                            <img class="user_avatar" src="{{asset('assets/img/dummy/u8.png')}}" alt="User Image">
+                        </div>
 
                         <div class="float-left info mt-1">
                             <h6 class="font-weight-light mb-1">
