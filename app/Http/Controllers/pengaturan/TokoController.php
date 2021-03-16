@@ -20,7 +20,7 @@ class TokoController extends Controller
     }
 
     public function tambahToko(){
-        return view('Kategori.tambahToko');
+        return view('pengaturan.tambahToko');
     }
 
     public function api()
