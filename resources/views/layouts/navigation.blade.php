@@ -303,7 +303,7 @@
             <li class="no-b">
                 <a href="{{ route('Kategori.tambahkategori') }}">
                     <i class="icon icon-circle-o"></i>
-                    <span>Tambahkan Kategori</span>
+                    <span>Tambah Toko</span>
                 </a>
             </li>
             <li class="no-b">

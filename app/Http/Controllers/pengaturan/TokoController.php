@@ -132,7 +132,7 @@ class TokoController extends Controller
         $email = $request->email;
         $alamat = $request->alamat;
         $kota = $request->kota;
-        $Toko->update([
+        $pengaturanToko->update([
             'nama' => $nama,
             'kode' => $kode,
             'telepon' => $telepon,
