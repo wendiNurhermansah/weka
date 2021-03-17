@@ -116,7 +116,7 @@
     function show(id){
         $('#modal2').modal('show');
         $.get("{{ route('Kategori.daftarkategori.showDataModal', ':id') }}".replace(':id', id), function(data){
-            var path = "{{ asset('/kategori/images/ava') }}"+ "/" + data.gambar;
+            var path = "{{ config('app.sftp_src').'images' }}"+ "/" + data.gambar;
             console.log(data.gambar)
             $('#photo_').attr({'src': path});
         }, "JSON").fail(function(){

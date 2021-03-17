@@ -4,13 +4,14 @@ namespace App\Http\Controllers\kategori;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Kategori;
 use DataTables;
 use File;
 
 class DaftarkategoriController extends Controller
 {
-    protected $path  = 'images/ava/';
+
     /**
      * Display a listing of the resource.
      *
@@ -49,7 +50,7 @@ class DaftarkategoriController extends Controller
             })
             ->editColumn('gambar',  function ($p)  {
                 if ($p->gambar != null) {
-                    return "<img width='50' class='img-fluid mx-auto d-block rounded-circle' alt='foto' src='" . $this->path . $p->gambar . "'>";
+                    return "<img width='50' class='img-fluid mx-auto d-block rounded-circle' alt='foto' src='" . config('app.sftp_src').'images/' . $p->gambar . "'>";
                 } else {
                     return "<img width='50' class='rounded img-fluid mx-auto d-block' alt='foto' src='" . asset('images/404.png') . "'>";
                 }
@@ -80,14 +81,15 @@ class DaftarkategoriController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode' => 'required | unique',
+            'kode' => 'required',
             'nama' => 'required',
             'gambar' => 'required'
         ]);
 
         $file     = $request->file('gambar');
         $fileName = rand() . '.' . $file->getClientOriginalExtension();
-        $request->file('gambar')->move("kategori/images/ava/", $fileName);
+        // $request->file('gambar')->move("kategori/images/ava/", $fileName);
+        $request->file('gambar')->storeAs('images', $fileName, 'sftp', 'public');
 
         $tmkategori = new Kategori();
         $tmkategori->kode = $request->kode;
@@ -152,7 +154,7 @@ class DaftarkategoriController extends Controller
             // Proses Saved Foto
             $file     = $request->file('gambar');
             $fileName = rand() . '.' . $file->getClientOriginalExtension();
-            $request->file('gambar')->move("kategori/images/ava/", $fileName);
+            $request->file('gambar')->storeAs('images', $fileName, 'sftp', 'public');
 
             // Proses Delete Foto
             $exist = $Kategori->foto;
@@ -183,9 +185,17 @@ class DaftarkategoriController extends Controller
      */
     public function destroy($id)
     {
-        $gambar = Kategori::where('id',$id)->first();
-        File::delete('kategori/images/ava/'.$gambar->gambar);
+
+         $Kategori = Kategori::find($id);
+
+        // // File::delete('kategori/images/ava/'.$gambar->gambar);
+        $exist = $Kategori->gambar;
+
+
+        Storage::disk('sftp')->delete('images/' . $exist);
+
         Kategori::destroy($id);
+
         return response()->json([
             'massage' => 'data berhasil di hapus',
         ]);
