@@ -307,7 +307,7 @@
                 </a>
             </li>
             <li class="no-b">
-                <a href="">
+                <a href="{{ route('pengaturan.printer') }}">
                     <i class="icon icon-circle-o"></i>
                     <span>Printer</span>
                 </a>
