@@ -22,6 +22,10 @@ class TokoController extends Controller
         return view('pengaturan.toko');
     }
 
+    public function pengaturan()
+    {
+        return view('pengaturan.pengaturan');
+    }
     public function tambahToko(){
         return view('pengaturan.tambahToko');
     }
