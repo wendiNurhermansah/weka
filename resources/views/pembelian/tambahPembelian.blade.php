@@ -81,7 +81,8 @@
                                           <th></th>
                                           <th></th>
                                           <th>
-                                            <input type="text"  id="total_" change="Total()" value="" style="width: 100px; text-align: center; border:none;" name="total">
+                                            <input type="hidden"  id="total_"  value="" style="width: 100px; text-align: center; border:none;" name="total" readonly>
+                                            <input type="text"  id="rptotal_"  value="" style="width: 100px; text-align: center; border:none;" readonly>
                                           </th>
                                           <th></th>
                                         </tr>
@@ -188,11 +189,11 @@
         });
 
         var formAdd = 0;
-       
+
 
         function price(id) {
         formAdd++;
-       
+
         // console.log(formAdd);
         // console.log(price());
 
@@ -206,13 +207,14 @@
 
                                             </td>
                                             <td>
-                                                <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="kuantitas[]">
+                                                <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas(`+formAdd+`)"  style="width: 200px; text-align: center;" name="kuantitas[]">
                                             </td>
                                             <td>
-                                                <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas()" style="width: 200px; text-align: center;" name="biaya_satuan[]">
+                                                <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas(`+formAdd+`)"  style="width: 200px; text-align: center;" name="biaya_satuan[]">
                                             </td>
                                             <td>
-                                                <input type="text"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total[]" >
+                                                <input type="hidden"  id="sub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" name="sub_total[]" hidden>
+                                                <input type="text"  id="rpsub_total_`+formAdd+`"  style="width: 100px; text-align: center; border: none;" readonly>
 
                                             </td>
                                             <td>
@@ -229,7 +231,7 @@
 
 
             var kuantitas = 1;
-                    
+
                     $('#appendd').append(html);
                     $('#produk_id'+formAdd).val(res.id);
                     $('#produk_'+formAdd).val(res.nama);
@@ -237,9 +239,11 @@
                     $('#kuantitas_'+formAdd).val(kuantitas);
                     var subTotal = kuantitas*res.biaya;
                      $('#sub_total_'+formAdd).val(subTotal);
+
+                     $('#rpsub_total_'+formAdd).val(convert_to_rupiah(subTotal));
                     produkSesudah = $("#produk_"+formAdd).val();
                     // console.log('1:'+produkSesudah);
-                    
+
                     tr = $("#appendd tr").length;
                     // console.log("tr:"+tr);
                     for (let i = 1; i < tr; i++) {
@@ -254,25 +258,27 @@
                                 console.log('formAdd3:'+formAdd);
                                 var subTotal = qty*res.biaya;
                                 $('#sub_total_'+i).val(subTotal);
-                                $("#trTable_"+formAdd).remove();    
+                                $('#rpsub_total_'+i).val(convert_to_rupiah(subTotal));
+                                $("#trTable_"+formAdd).remove();
                         }else{
                             $('#kuantitas_'+formAdd).val(kuantitas);
                         }
-                        
+
                     }
-            
-                
-           
-            
+
+
+
+
 
             // penjumlahan
 
-            var subTotal = kuantitas*res.biaya;
-             $('#sub_total_'+formAdd).val(subTotal);
+        var subTotal = kuantitas*res.biaya;
+         $('#sub_total_'+formAdd).val(subTotal);
 
-             var total = $('#total_').val();
-             total = parseInt(total) + parseInt(subTotal);
+         var total = $('#total_').val();
+        total = parseInt(total) + parseInt(subTotal);
              $('#total_').val(total);
+             $('#rptotal_').val(convert_to_rupiah(total));
 
         }, 'JSON').done(function () {
             console.log('Done');
@@ -289,13 +295,15 @@
     //delete table
     function hapusTable(formAdd){
         $('#trTable_'+formAdd).remove();
-        var row = $('#dataTable > tbody > tr').length;
-        total1 =0 ;
-
+        var row = $("#appendd tr").length;
+        console.log(row);
+        total1 =0;
         for (let index = 1; index <= row; index++) {
             var sub = $("#sub_total_"+index).val();
+            console.log(sub);
             var total1 = parseInt(total1) + parseInt(sub);
             $('#total_').val(total1);
+            $('#rptotal_').val(convert_to_rupiah(total1));
         }
     }
 
@@ -308,6 +316,19 @@
         //  console.log(biaya);
         var total = kuantitas * biaya
         $("#sub_total_"+i).val(total);
+        $("#rpsub_total_"+i).val(convert_to_rupiah(total));
+
+        var row = $("#appendd tr").length;
+        console.log(row);
+        total1 =0;
+        for (let index = 1; index <= row; index++) {
+            var sub = $("#sub_total_"+index).val();
+            console.log(sub);
+            var total1 = parseInt(total1) + parseInt(sub);
+            $('#total_').val(total1);
+            $('#rptotal_').val(convert_to_rupiah(total1));
+        }
+
     }
 //         total2 += total;
 //         // console.log(total);
@@ -325,16 +346,17 @@
     // total semua
 
     // total semua jika di ganti
-function hitungTotal(j){
-    var row = $('#dataTable > tbody > tr').length;
-    total1 =0;
-    for (let index = 1; index <= row; index++) {
-        var sub = $("#sub_total_"+index).val();
-        console.log(sub);
-        var total1 = parseInt(total1) + parseInt(sub);
-         $('#total_').val(total1);
-    }
-}
+// function hitungTotal(j){
+//     var row = $("#appendd tr").length;
+//     console.log(row);
+//     total1 =0;
+//     for (let index = 1; index <= row; index++) {
+//         var sub = $("#sub_total_"+index).val();
+//         console.log(sub);
+//         var total1 = parseInt(total1) + parseInt(sub);
+//          $('#total_').html(total1);
+//     }
+// }
 
 
 

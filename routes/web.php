@@ -127,26 +127,47 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('Laporan')->namespace('laporan')->name('Laporan.')->group(function () {
             Route::get('PenjualanHarian', 'LaporanController@PenjualanHarian')->name('PenjualanHarian');
-            Route::get('PenjualanBulanan', 'LaporanController@PenjualanBulanan')->name('PenjualanBulanan');
-            Route::get('laporanPembayaran', 'LaporanController@laporanPembayaran')->name('laporanPembayaran');
+
+
             Route::get('laporanPendaftaran', 'LaporanController@laporanPendaftaran')->name('laporanPendaftaran');
-            Route::get('laporanProduk', 'LaporanController@laporanProduk')->name('laporanProduk');
 
             //laporan penjualan
 
             Route::resource('laporanPenjualan', 'LaporanpenjualanController');
             Route::post('laporanPenjualan/api', 'LaporanpenjualanController@api')->name('laporanPenjualan.api');
 
-            //laporan bulanan increment decretment tahun
+            // laporan pembayaran
+            Route::get('laporanPembayaran', 'LaporanController@laporanPembayaran')->name('laporanPembayaran');
+            Route::post('laporanPembayaran/api', 'LaporanController@api')->name('laporanPembayaran.api');
 
+            //laporan bulanan increment decretment tahun / laporan bulanan
+
+            Route::get('PenjualanBulanan', 'LaporanController@PenjualanBulanan')->name('PenjualanBulanan');
             Route::patch('increment/tahun', 'LaporanController@increment')->name('increment');
             Route::patch('decretment/tahun', 'LaporanController@decretment')->name('decretment');
+
+            // Laporan produk teratas
+            Route::get('produkTeratas', 'ProdukteratasController@produkTeratas')->name('produkTeratas');
+
+            // laporan produk
+            Route::get('laporanProduk', 'LaporanController@laporanProduk')->name('laporanProduk');
+            Route::post('laporanProduk/apii', 'LaporanController@apii')->name('laporanProduk.apii');
+
+
 
 
     });
 
     Route::prefix('pengaturan')->namespace('pengaturan')->name('pengaturan.')->group(function () {
-        Route::resource('main', 'PengaturanController');
+        Route::resource('main', 'TokoController');
+
+        //Toko
+        Route::resource('toko', 'TokoController');
+        Route::get('pengaturan', 'TokoController@pengaturan')->name('pengaturan');
+        Route::post('toko/api', 'TokoController@api')->name('toko.api');
+        Route::get('tambahToko', 'TokoController@tambahToko')->name('tambahToko');
+        Route::get('printer', 'TokoController@printer')->name('printer');
+        Route::post('toko/apiprinter', 'TokoController@apiprinter')->name('toko.apiprinter');
     });
 
     // Produk
@@ -169,5 +190,3 @@ Route::group(['middleware' => ['auth']], function () {
     // })->name('tes');
 
 });
-
-

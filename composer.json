@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2.5",
         "almasaeed2010/adminlte": "~2.4",
+        "facade/ignition-contracts": "1.0.1",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^6.3",
@@ -17,7 +18,10 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.2",
         "league/csv": "9.0",
+        "league/flysystem-aws-s3-v3": "~1.0",
+        "league/flysystem-sftp": "~1.0",
         "maatwebsite/excel": "^3.1",
+        "myclabs/php-enum": "1.7.7",
         "spatie/laravel-permission": "^3.16",
         "yajra/laravel-datatables-oracle": "~9.10"
     },

@@ -16,7 +16,12 @@ class pengaturanController extends Controller
      */
     public function index()
     {
-        return view('pengaturan.index');
+        return view('pengaturan.pengaturanToko');
+    }
+
+    public function create()
+    {
+        //
     }
 
 }

@@ -22,6 +22,7 @@
                     {{ method_field('PATCH') }}
                     @csrf
                     <input type="hidden" id="id" name="id" value="{{$Pembelian->id}}"/>
+
                     <h4 id="formTitle">Edit Pembelian</h4><hr>
                     <div id="alert"></div>
                     <div class="form-row">
@@ -59,8 +60,8 @@
 
 
                                             <td style="width: 300px; text-align: left;">
-                                                <input type="text" id="produk_id{{$i->id}}" name="produk_id[]" hidden>
-                                                <input type="text" id="produk_{{$i->id}}" name="produk_[]" style="width: 400px; border: none;" value="{{$i->product->nama}}">
+                                                <input type="text" id="produk_id{{$i->id}}" name="produk_id[]" value="{{$i->product->id}}" hidden>
+                                                <input type="text" id="produk_{{$i->id}}" name="produk_[]" style="width: 400px; border: none;" value="{{$i->product->nama}}" readonly>
 
                                             </td>
                                             <td>
@@ -70,7 +71,7 @@
                                                 <input type="text"  id="biaya_satuan_{{$i->id}}"  onkeyup="hitungKuantitas({{$i->id}})" onkeypress="" style="width: 200px; text-align: center;" name="biaya_satuan[]" value="{{$i->biaya_satuan}}">
                                             </td>
                                             <td>
-                                                <input type="text"  id="sub_total_{{$i->id}}" class="sub_{{$a}}" style="width: 100px; text-align: center; border: none;" name="sub_total[]" readonly value="{{$i->sub_total}}">
+                                                <input type="text"  id="sub_total_{{$i->id}}" class="sub_{{$a}}" style="width: 100px; text-align: center; border: none;" name="sub_total[]" readonly value="{{$i->sub_total}}" readonly>
 
                                             </td>
                                             <td>
@@ -87,7 +88,7 @@
                                           <th></th>
                                           <th></th>
                                           <th>
-                                            <input type="text" id="total_" style="width: 100px; text-align: center; border: none;" name="total" value="{{ $Pembelian->total }}">
+                                            <input type="text" id="total_" style="width: 100px; text-align: center; border: none;" name="total" value="{{ $Pembelian->total }}" readonly>
                                           </th>
                                           <th> </th>
                                         </tr>
@@ -207,14 +208,14 @@
         <tr id="trTable_`+formAdd+`">
                                             <td style="width: 300px; text-align: left;">
                                                 <input type="text" id="produk_id`+formAdd+`" name="produk_id[]" hidden>
-                                                <input type="text" id="produk_`+formAdd+`" name="produk_[]" style="width: 400px; border: none;">
+                                                <input type="text" id="produk_`+formAdd+`" name="produk_[]" style="width: 400px; border: none;" readonly>
 
                                             </td>
                                             <td>
-                                                <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas(`+formAdd+`)" onkeypress="hitungTotal(`+formAdd+`)" style="width: 200px; text-align: center;" name="kuantitas[]">
+                                                <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas(`+formAdd+`)"  style="width: 200px; text-align: center;" name="kuantitas[]">
                                             </td>
                                             <td>
-                                                <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas(`+formAdd+`)" onkeypress="hitungTotal(`+formAdd+`)" style="width: 200px; text-align: center;" name="biaya_satuan[]">
+                                                <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas(`+formAdd+`)"  style="width: 200px; text-align: center;" name="biaya_satuan[]">
                                             </td>
                                             <td>
                                                 <input type="text"  id="sub_total_`+formAdd+`" class="sub_`+b+`" style="width: 100px; text-align: center; border: none;" name="sub_total[]" readonly>
@@ -234,20 +235,88 @@
          $.get(url, function (res) {
 
 
-            $('#appendd').append(html);
-            $('#produk_id'+formAdd).val(res.id);
-            $('#produk_'+formAdd).val(res.nama);
-            $('#kuantitas_'+formAdd).val(res.kuantitas);
-            $('#biaya_satuan_'+formAdd).val(res.biaya);
+        //     $('#appendd').append(html);
+        //     $('#produk_id'+formAdd).val(res.id);
+        //     $('#produk_'+formAdd).val(res.nama);
+        //     $('#kuantitas_'+formAdd).val(res.kuantitas);
+        //     $('#biaya_satuan_'+formAdd).val(res.biaya);
+
+        //     // penjumlahan
+
+        //     var subTotal = res.kuantitas*res.biaya;
+        //      $('#sub_total_'+formAdd).val(subTotal);
+        //     //  console.log(subTotal);
+
+        //      var total = $('#total_').val();
+        //      total = parseInt(total) + parseInt(subTotal);
+        //      $('#total_').val(total);
+
+        // }, 'JSON').done(function () {
+        //     console.log('Done');
+        // }).fail(function(e){
+        //     console.log('Error');
+        // });
+        var kuantitas = 1;
+                    tr = $('#dataTable > tbody > tr').length;
+                     console.log("tr:"+tr);
+
+
+                    $('#appendd').append(html);
+                    $('#produk_id'+formAdd).val(res.id);
+                    $('#produk_'+formAdd).val(res.nama);
+                    $('#biaya_satuan_'+formAdd).val(res.biaya);
+                    $('#kuantitas_'+formAdd).val(kuantitas);
+                    var subTotal = kuantitas*res.biaya;
+                     $('#sub_total_'+formAdd).val(subTotal);
+                    produkSesudah = $("#produk_"+formAdd).val();
+                    console.log('1:'+produkSesudah);
+                    for (let index = 0; index < tr; index++) {
+                        console.log(index)
+                        produkSebelum = $("#appendd tr:eq("+index+") > td:eq(0) > input:eq(1)").val();
+                        console.log('2:'+produkSebelum);
+                        if(produkSesudah == produkSebelum){
+                            qty = $("#appendd tr:eq("+index+") > td:eq(1) > input").val();
+                            qty++;
+                            $("#appendd tr:eq("+index+") > td:eq(1) > input").val(qty);
+                            var subTotal = qty*res.biaya;
+                            console.log(subTotal);
+                            $("#appendd tr:eq("+index+") > td:eq(3) > input").val(subTotal);
+                            $("#trTable_"+formAdd).remove();
+                        }
+                    }
+                    // produkSebelum = $("#appendd tr:eq(0) > td:eq(0) > input:eq(1).val();
+                    //     console.log('2:'+produkSebelum);
+                    //     produkSudah = $("#appendd tr:eq(0) > td:eq(0) > input:eq(1).val();
+                    //     console.log('2:'+produkSudah);
+                    // for (let i = 0; i < tr; i++) {
+
+                    //     var qty = $('#kuantitas_'+i).val();
+                    //     console.log('qty:'+qty);
+                    //     if(produkSebelum == produkSesudah && qty>0){
+                    //             console.log('i='+i);
+                    //             qty++;
+                    //             $('#kuantitas_'+i).val(qty);
+                    //             console.log('formAdd3:'+formAdd);
+                    //             var subTotal = qty*res.biaya;
+                    //             $('#sub_total_'+i).val(subTotal);
+                    //             $("#trTable_"+formAdd).remove();
+                    //     }else{
+                    //         $('#kuantitas_'+formAdd).val(kuantitas);
+                    //     }
+
+                    // }
+
+
+
+
 
             // penjumlahan
 
-            var subTotal = res.kuantitas*res.biaya;
-             $('#sub_total_'+formAdd).val(subTotal);
-            //  console.log(subTotal);
+        var subTotal = kuantitas*res.biaya;
+         $('#sub_total_'+formAdd).val(subTotal);
 
-             var total = $('#total_').val();
-             total = parseInt(total) + parseInt(subTotal);
+         var total = $('#total_').val();
+        total = parseInt(total) + parseInt(subTotal);
              $('#total_').val(total);
 
         }, 'JSON').done(function () {
@@ -255,7 +324,6 @@
         }).fail(function(e){
             console.log('Error');
         });
-
 
 
         }

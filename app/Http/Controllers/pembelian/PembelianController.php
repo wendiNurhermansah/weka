@@ -126,7 +126,7 @@ class PembelianController extends Controller
             $fileName='';
         }
 
-           
+
 
             $tmpembelian = new Pembelian();
             $tmpembelian->tanggal = $request->tanggal;
@@ -191,7 +191,11 @@ class PembelianController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $Pembelian = Pembelian::find($id);
+        // dd($request->all());
+        $Pembelian = Pembelian::findOrFail($id);
+        $pembelian_details = Pembelian_details::where('produk_id', $id)->get();
+        // dd($pembelian_details);
+        // $pembelian_details = pembelian_details::findOrFail($id);
         $request->validate([
             'tanggal' => 'required',
             'referensi' => 'required',
@@ -204,6 +208,58 @@ class PembelianController extends Controller
             'pemasok' => 'required',
             'diterima' => 'required'
         ]);
+        //     $c = count($request->produk_id);
+
+        // $pembelian_details = new Pembelian_details();
+        // for ($i=0; $i < $c; $i++) {
+
+        // }
+
+
+        foreach($request->produk_id as $key => $produk_id){
+            $pembelian_details = Pembelian_details::where('produk_id', $produk_id)->first();
+
+            if($pembelian_details != null){
+
+                $pembelian_details->update([
+                  'produk_id' => $produk_id,
+                  'tmpembelian_id' => $request->id,
+                  'kuantitas' => $request->input('kuantitas')[$key],
+                  'biaya_satuan' => $request->input('biaya_satuan')[$key],
+                  'sub_total' => $request->input('sub_total')[$key],
+                ]);
+            }else{
+
+                // $pembelian_details->produk_id = $produk_id;
+                // $pembelian_details->tmpembelian_id = $request->id;
+                // $pembelian_details->kuantitas = $request->input('kuantitas')[$key];
+                // $pembelian_details->biaya_satuan = $request->input('biaya_satuan')[$key];
+                // $pembelian_details->sub_total = $request->input('sub_total')[$key];
+                // $pembelian_details->save();
+                Pembelian_details::create([
+                    'produk_id' => $produk_id,
+                    'tmpembelian_id' => $request->id,
+                    'kuantitas' => $request->input('kuantitas')[$key],
+                    'biaya_satuan' => $request->input('biaya_satuan')[$key],
+                    'sub_total' => $request->input('sub_total')[$key],
+                  ]);
+            }
+
+
+            }
+
+
+        // foreach($request->produk_id as $key => $produk_id){
+
+        //     $pembelian_details->produk_id = $produk_id;
+        //     $pembelian_details->tmpembelian_id = $request->id;
+        //     $pembelian_details->kuantitas = $request->input('kuantitas')[$key];
+        //     $pembelian_details->biaya_satuan = $request->input('biaya_satuan')[$key];
+        //     $pembelian_details->sub_total = $request->input('sub_total')[$key];
+        //     $pembelian_details->save();
+        //     }
+
+// proses edit
 
         $tanggal = $request->tanggal;
         $referensi = $request->referensi;
@@ -215,6 +271,10 @@ class PembelianController extends Controller
         $sub_total = $request->sub_total;
         $pemasok = $request->pemasok;
         $diterima = $request->diterima;
+
+
+
+
 
         if ($request->foto != null) {
 
@@ -260,6 +320,8 @@ class PembelianController extends Controller
 
             ]);
         }
+
+
         return redirect('Pembelian/pembelian')->with('status', 'data mahasiswa berhasil diubah');
     }
 

@@ -125,6 +125,8 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'sftp_src' => env('SFTP_SRC'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

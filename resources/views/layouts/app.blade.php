@@ -15,12 +15,12 @@
     @yield('style')
     <link rel="stylesheet" href="{{ asset('css/util.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/myStyle.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/jquery-confirm.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/jquery-fancybox.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/buttons.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets2/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets2/css/myStyle.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets2/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets2/css/jquery-confirm.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets2/css/jquery-fancybox.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets2/css/buttons.dataTables.min.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
@@ -45,6 +45,9 @@
                 </a>
                 <div class="user-panel p-3 light mb-2">
                     <div>
+                        <div class="float-left image">
+                            <img class="user_avatar" src="{{asset('assets/img/dummy/u8.png')}}" alt="User Image">
+                        </div>
 
                         <div class="float-left info mt-1">
                             <h6 class="font-weight-light mb-1">
@@ -83,10 +86,10 @@
     <script type="text/javascript">
         var APP_URL = {!! json_encode(url('/').'/') !!}
     </script>
-    <script src="{{ asset('assets/js/app.js') }}"></script>
-    <script src="{{ asset('assets/js/myScript.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery-confirm.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery-fancybox.min.js') }}"></script>
+    <script src="{{ asset('assets2/js/app.js') }}"></script>
+    <script src="{{ asset('assets2/js/myScript.js') }}"></script>
+    <script src="{{ asset('assets2/js/jquery-confirm.min.js') }}"></script>
+    <script src="{{ asset('assets2/js/jquery-fancybox.min.js') }}"></script>
 
     <!-- script data tables-->
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
@@ -104,6 +107,8 @@
     <script type="text/javascript">
         $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
     </script>
+    {{-- cdn autonumeric --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autonumeric/4.1.0/autoNumeric.min.js" integrity="sha512-U0/lvRgEOjWpS5e0JqXK6psnAToLecl7pR+c7EEnndsVkWq3qGdqIGQGN2qxSjrRnCyBJhoaktKXTVceVG2fTw==" crossorigin="anonymous"></script>
 
     {{-- <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script> --}}
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
