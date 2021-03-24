@@ -188,10 +188,12 @@
         });
 
         var formAdd = 0;
+       
 
         function price(id) {
         formAdd++;
-        console.log(formAdd);
+       
+        // console.log(formAdd);
         // console.log(price());
 
         var url = "{{ route('Pembelian.pembelian.price', ':id') }}".replace(':id', id);
@@ -226,16 +228,46 @@
          $.get(url, function (res) {
 
 
-            $('#appendd').append(html);
-            $('#produk_id'+formAdd).val(res.id);
-            $('#produk_'+formAdd).val(res.nama);
-            $('#kuantitas_'+formAdd).val(res.kuantitas);
-            $('#biaya_satuan_'+formAdd).val(res.biaya);
+            var kuantitas = 1;
+                    
+                    $('#appendd').append(html);
+                    $('#produk_id'+formAdd).val(res.id);
+                    $('#produk_'+formAdd).val(res.nama);
+                    $('#biaya_satuan_'+formAdd).val(res.biaya);
+                    $('#kuantitas_'+formAdd).val(kuantitas);
+                    var subTotal = kuantitas*res.biaya;
+                     $('#sub_total_'+formAdd).val(subTotal);
+                    produkSesudah = $("#produk_"+formAdd).val();
+                    // console.log('1:'+produkSesudah);
+                    
+                    tr = $("#appendd tr").length;
+                    // console.log("tr:"+tr);
+                    for (let i = 1; i < tr; i++) {
+                        produkSebelum = $("#produk_"+i).val();
+                        console.log('2:'+produkSebelum);
+                        var qty = $('#kuantitas_'+i).val();
+                        console.log('qty:'+qty);
+                        if(produkSebelum == produkSesudah && qty>0){
+                                console.log('i='+i);
+                                qty++;
+                                $('#kuantitas_'+i).val(qty);
+                                console.log('formAdd3:'+formAdd);
+                                var subTotal = qty*res.biaya;
+                                $('#sub_total_'+i).val(subTotal);
+                                $("#trTable_"+formAdd).remove();    
+                        }else{
+                            $('#kuantitas_'+formAdd).val(kuantitas);
+                        }
+                        
+                    }
+            
+                
+           
+            
 
             // penjumlahan
 
-            var subTotal = res.kuantitas*res.biaya;
-
+            var subTotal = kuantitas*res.biaya;
              $('#sub_total_'+formAdd).val(subTotal);
 
              var total = $('#total_').val();
@@ -257,25 +289,26 @@
     //delete table
     function hapusTable(formAdd){
         $('#trTable_'+formAdd).remove();
+        var row = $('#dataTable > tbody > tr').length;
+        total1 =0 ;
 
-        sub = $('#sub_total_'+formAdd).val();
-        console.log(sub)
-        var total = $('#total_').val();
-        console.log(total)
-        totals = parseInt(total) - parseInt(sub);
-        console.log(totals)
-        $('#total_').val(totals);
+        for (let index = 1; index <= row; index++) {
+            var sub = $("#sub_total_"+index).val();
+            var total1 = parseInt(total1) + parseInt(sub);
+            $('#total_').val(total1);
+        }
     }
 
     // penjumlahan
 // var total2 = 0 ;
-//     function hitungKuantitas(){
-//         var kuantitas  = $("#kuantitas_"+formAdd).val();
-//         console.log(kuantitas);
-//         var biaya = $("#biaya_satuan_"+formAdd).val();
-//          console.log(biaya);
-//         var total = kuantitas * biaya;
-
+    function hitungKuantitas(i){
+        var kuantitas  = $("#kuantitas_"+i).val();
+        //  console.log(kuantitas);
+        var biaya = $("#biaya_satuan_"+i).val();
+        //  console.log(biaya);
+        var total = kuantitas * biaya
+        $("#sub_total_"+i).val(total);
+    }
 //         total2 += total;
 //         // console.log(total);
 //         $("#sub_total_"+formAdd).val(total);
@@ -291,6 +324,17 @@
 
     // total semua
 
+    // total semua jika di ganti
+function hitungTotal(j){
+    var row = $('#dataTable > tbody > tr').length;
+    total1 =0;
+    for (let index = 1; index <= row; index++) {
+        var sub = $("#sub_total_"+index).val();
+        console.log(sub);
+        var total1 = parseInt(total1) + parseInt(sub);
+         $('#total_').val(total1);
+    }
+}
 
 
 

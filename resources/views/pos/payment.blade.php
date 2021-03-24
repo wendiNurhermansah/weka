@@ -93,7 +93,7 @@
                           </div>
                           <div class="">
                                 <label for="notePembayaran" class="form-label">Payment Note</label>
-                                <input type="textarea" value="" class="form-control" id="notePembayran" name="notePembayran">
+                                <input type="textarea" value="" class="form-control" id="catatanPembayaran" name="catatanPembayaran">
                           </div>
                     </div>
                     <div class="col-md-3">

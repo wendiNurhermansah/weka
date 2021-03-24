@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @include('pos.navigasiKategori')
+@include('pos.notePayable')
 @include('pos.pelanggan')
 @include('pos.pajak')
 @include('pos.diskon')
@@ -104,7 +105,7 @@
                                 <input class="form-control" type="text" id="kategori" onclick="" placeholder="Search product by code or name, you can scan barcode too">
                         </div>
                         <div class="form-group table-responsive-sm">
-                            <table style="width:50%;">
+                            <table id="tableProduk" style="width:50%;">
                                 <thead>
                                     <tr class="bg-success text-black">
                                         <th width="40" text-align="center">product</th>
@@ -130,7 +131,7 @@
                                         <th>(<span id="nilaiPajak"></span>%)<span id="hasilPajak"></span></th>
                                     </tr>
                                     <tr>
-                                        <th>Total Payable <a data-toggle="modal" data-target="#catatan"><i class="text-primary icon-comment"></i></a></th>
+                                        <th>Total Payable <a data-toggle="modal" data-target="#modalNotePayable"><i class="text-primary icon-comment"></i></a></th>
                                         <th class="text-right"><span id="totalPayable"></span></th>
                                     </tr>
                                 </tfoot>
@@ -155,7 +156,7 @@
                     <div class="h-75 mb-5">
                         <div class="row ml-4 pl-2">
                             @foreach ($kartu as $k)
-                            <a href="#">
+                            <a href="#" onclick="searchProduk({{$k->id}})">
                                 <div class="card m-1" style="width: 10rem;">
                                     <img class="card-img-top" src="{{asset('produk/images/ava/'.$k->gambar)}}" alt=""  width="10" height="40">
                                     <ul class="list-group list-group-flush">
@@ -201,26 +202,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="catatan" role="dialog">
-        <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="text-black modal-title">Note</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <input class="form-control" type="text" value="" id="note" name="note">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light mr-auto border" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Update</button>
-                </div>
-            </div>
-        </div>
-    </div>
+   
     <div class="modal fade" id="cancel" role="dialog">
         <div class="modal-dialog">
 
@@ -304,10 +286,10 @@
 
                                                     </td>
                                                     <td>
-                                                        <input type="text"  id="biaya_satuan_`+formAdd+`"  onkeyup="hitungKuantitas()" class="searchProduk" style="width:70px;" float: right;" name="biaya_satuan[]">
+                                                        <input type="text"  id="biaya_satuan_`+formAdd+`" class="searchProduk" style="width:70px;" float: right;" name="biaya_satuan[]" readonly>
                                                     </td>
                                                     <td>
-                                                        <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas()" class="searchProduk" style="width:30px;" text-align: center;" name="kuantitas[]">
+                                                        <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas(`+formAdd+`)" class="searchProduk" style="width:30px;" text-align: center;" name="kuantitas[]">
                                                     </td>
                                                     <td>
                                                         <input type="text"  id="sub_total_`+formAdd+`"  class="searchProduk" style="width:70px;" float: right; border: none;" name="sub_total[]" >
@@ -325,13 +307,19 @@
                 $.get(url, function (res) {
                     var kuantitas = 1;
                     
-                    $('#appendd').append(html);
-                    $('#produk_id'+formAdd).val(res.id);
-                    $('#produk_'+formAdd).val(res.nama);
-                    $('#biaya_satuan_'+formAdd).val(res.biaya);
-                    $('#kuantitas_'+formAdd).val(kuantitas);
-                    var subTotal = kuantitas*res.biaya;
-                    $('#sub_total_'+formAdd).val(subTotal);
+                    $('#appendd').append(html);//tambah item
+                    $('#produk_id'+formAdd).val(res.id);//ambil id
+                    var p = $('#produk_'+formAdd).val(res.nama);//ambil nama
+                    $('#biaya_satuan_'+formAdd).val(res.biaya);//ambil biaya
+                    $('#kuantitas_'+formAdd).val(kuantitas);//ambil kuantitias
+                    var subTotal = kuantitas*res.biaya; 
+                    $('#sub_total_'+formAdd).val(subTotal);//subtotal
+
+                    var total = $('#tabelTotal').html();//ambil total lama
+                    console.log(subTotal);
+                    console.log(total);
+                    total = parseInt(total) + parseInt(subTotal);//total lama + sub total produk baru
+                    $('#tabelTotal').html(total);
                     
                     produkSesudah = $("#produk_id"+formAdd).val();
                     console.log('1:'+produkSesudah);
@@ -351,6 +339,8 @@
                                 console.log('formAdd3:'+formAdd);
                                 var subTotal = qty*res.biaya;
                                 $('#sub_total_'+i).val(subTotal);
+                                total = parseInt(total) - parseInt(subTotal);
+                                $('#tabelTotal').html(total);
                                 $("#trTable_"+formAdd).remove();    
                         }else{
                             $('#kuantitas_'+formAdd).val(kuantitas);
@@ -363,11 +353,7 @@
 
                     // penjumlahan
 
-                    var total = $('#tabelTotal').html();
-                    console.log(subTotal);
-                    console.log(total);
-                    total = parseInt(total) + parseInt(subTotal);
-                    $('#tabelTotal').html(total);
+                    
 
 
 
@@ -376,6 +362,30 @@
                 }).fail(function(e){
                     console.log('Error');
                 });
+            }
+
+            function hitungKuantitas(i){
+                var kuantitas  = $("#kuantitas_"+i).val();
+                console.log(i);
+                 console.log(kuantitas);
+                var biaya = $("#biaya_satuan_"+i).val();
+                 console.log(biaya);
+                var total = kuantitas * biaya
+                $("#sub_total_"+i).val(total);
+                console.log(total);
+                var row = $('#appendd tr').length;
+                console.log(row);
+                total1 =0;
+                // var ini = $("#appendd tr:eq(0) td:eq(3) input").val();
+                // console.log(ini)
+                for (index = 1; index <= row; index++) {
+                    console.log(index); 
+                    var sub = $('#tableProduk tr:eq('+index+') > td:eq(3) input').val();
+                    console.log('sub'+sub);
+                    var total1 = parseInt(total1) + parseInt(sub);
+                    console.log(total1)
+                    $('#tabelTotal').html(total1);
+                }
             }
 
             function hapusTable(formAdd){
