@@ -34,7 +34,7 @@
                             <th>Harga Pabrik</th>
                             <th>Discount</th>
                             <th>Harga Jual</th>
-                            <th>Total</th>
+                            <th>Harga Nett</th>
                             <th>Stock</th>
                         <th width="60">Tindakan</th>
                         </thead>
