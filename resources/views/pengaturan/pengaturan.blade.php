@@ -8,7 +8,7 @@
                 <div class="col">
                     <h4>
                         <i class="icon icon-gear mr-1"></i>
-                        control your kontol
+                        Harap perbarui informasi di bawah ini
                     </h4>
                 </div>
             </div>

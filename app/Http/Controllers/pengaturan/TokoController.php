@@ -5,9 +5,12 @@ namespace App\Http\Controllers\pengaturan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DataTables;
+
 use App\Models\pengaturanToko;
+use App\Models\printer;
 
 class TokoController extends Controller
+
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +22,16 @@ class TokoController extends Controller
         return view('pengaturan.toko');
     }
 
+    public function pengaturan()
+    {
+        return view('pengaturan.pengaturan');
+    }
     public function tambahToko(){
         return view('pengaturan.tambahToko');
+    }
+
+    public function printer(){
+        return view('pengaturan.printer');
     }
 
     public function api()
@@ -40,6 +51,25 @@ class TokoController extends Controller
             ->rawColumns(['action'])
             ->toJson();
     }
+
+    public function apiprinter()
+    {
+        $printer = printer::all();
+        return Datatables::of($printer)
+
+            ->addColumn('action', function ($p) {
+                return "
+                    <a href='" . route('pengaturan.toko.editprinter', $p->id) . "' onclick='edit(" . $p->id . ")' title='Edit Role'><i class='icon-pencil mr-1'></i></a>
+                   ";
+            })
+
+
+
+            ->addIndexColumn()
+            ->rawColumns(['action'])
+            ->toJson();
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -105,6 +135,12 @@ class TokoController extends Controller
     {
         $pengaturanToko = pengaturanToko::find($id);
         return view('pengaturan.editToko', compact('Toko'));
+    }
+
+    public function editprinter($id)
+    {
+        $printer = printer::find($id);
+        return view('pengaturan.printer', compact('printer'));
     }
 
     /**

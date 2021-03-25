@@ -290,7 +290,7 @@
         </a>
         <ul class="treeview-menu">
             <li class="no-b">
-                <a href="{{route('pengaturan.main.index')}}">
+                <a href="{{route('pengaturan.pengaturan')}}">
                     <i class="icon icon-circle-o"></i>
                     <span>Pengaturan</span>
                 </a>
@@ -308,7 +308,7 @@
                 </a>
             </li>
             <li class="no-b">
-                <a href="">
+                <a href="{{ route('pengaturan.printer') }}">
                     <i class="icon icon-circle-o"></i>
                     <span>Printer</span>
                 </a>

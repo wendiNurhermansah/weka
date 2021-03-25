@@ -163,9 +163,11 @@ Route::group(['middleware' => ['auth']], function () {
 
         //Toko
         Route::resource('toko', 'TokoController');
+        Route::get('pengaturan', 'TokoController@pengaturan')->name('pengaturan');
         Route::post('toko/api', 'TokoController@api')->name('toko.api');
         Route::get('tambahToko', 'TokoController@tambahToko')->name('tambahToko');
-
+        Route::get('printer', 'TokoController@printer')->name('printer');
+        Route::post('toko/apiprinter', 'TokoController@apiprinter')->name('toko.apiprinter');
     });
 
     // Produk
