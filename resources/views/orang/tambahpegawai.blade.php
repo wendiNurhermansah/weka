@@ -16,6 +16,9 @@
     </header>
 
     <div class="container-fluid my-3">
+        <div id="alert">
+            
+        </div>
         <div class="card">
             <div class="card-body">
                 <form class="needs-validation" id="form" method="POST"  novalidate>
