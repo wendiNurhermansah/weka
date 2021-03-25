@@ -65,12 +65,10 @@ class PosController extends Controller
 
         if($search == ''){
            $kategori = product::orderby('nama','asc')
-                        ->select('nama')
                         ->limit(5)
                         ->get();
         }else{
            $kategori = product::orderby('nama','asc')
-                        ->select('nama')
                         ->where('nama', 'like', '%' .$search . '%')
                         ->limit(5)
                         ->get();
@@ -78,10 +76,14 @@ class PosController extends Controller
   
         $response = array();
         foreach($kategori as $k){
-           $response[] = array("value"=>$k->id,"label"=>$k->nama);
+           $response[] = array("id"=>$k->id,"label"=>$k->nama);
         }
   
         return response()->json($response);
+    }
+
+    public function produk(){
+        return product::find($id);
     }
 
     // public function cariKategori(Request $request)
@@ -125,12 +127,13 @@ class PosController extends Controller
                 foreach ($data as $row){
                     // concatenate output to the array
                     $output .=  '<li class="list-group-item"> 
-                                    <a class="btn">
-                                        <img src="../kategori/images/ava/'.$row->gambar.'" alt="" style="height:30px;width:30px;" class="img-fluid img-responsive">' 
-                                        .'<span class="ml-2">'.$row->nama.'<span>'.'
-                                    </a>
-                                </li>';
-                }
+                                        <input type="text" value="'.$row->id.'" hidden>
+                                        <a class="btn">
+                                            <img src="../kategori/images/ava/'.$row->gambar.'" alt="" style="height:30px;width:30px;" class="img-fluid img-responsive">' 
+                                            .'<span class="ml-2">'.$row->nama.'<span>'.'
+                                        </a>
+                                    </li>';
+                    }
                 // end of output
                 $output .= '</ul>';
             }

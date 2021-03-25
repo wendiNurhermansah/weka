@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\product;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use DataTables;
 
 class ProductsController extends Controller
 
@@ -16,24 +17,25 @@ class ProductsController extends Controller
      */
     public function api()
     {
-        $Pembelian = Pembelian::all();
-        return Datatables::of($Pembelian)
+        $produk = product::all();
+        return DataTables::of($produk)
 
             ->addColumn('action', function ($p) {
                 return "
-                     <a href='#' onclick='show(" . $p->id . ")' class='text-danger' title='Show data'><i class='icon-list'></i></a>
-                    <a href='" . route('Orang.pelanggan.edit', $p->id) . "' onclick='edit(" . $p->id . ")' title='Edit Role'><i class='icon-pencil mr-1'></i></a>
+                    <a href='#' onclick='show(" . $p->id . ")' class='text-danger' title='lihat'><i class='icon-image'></i></a>
+                    <a href='" . route('product.edit', $p->id) . "' onclick='edit(" . $p->id . ")' title='Edit Role'><i class='icon-pencil mr-1'></i></a>
                     <a href='#' onclick='remove(" . $p->id . ")' class='text-danger' title='Hapus data'><i class='icon-remove'></i></a>";
             })
             ->editColumn('gambar',  function ($p)  {
                 if ($p->gambar != null) {
-                    return "<img width='50' class='img-fluid mx-auto d-block rounded-circle' alt='foto' src='" . $this->path . $p->gambar . "'>";
+                    return "<img width='50' class='img-fluid mx-auto d-block rounded-circle' alt='foto' src='" . config('app.sftp_src').'images/' . $p->gambar . "'>";
                 } else {
                     return "<img width='50' class='rounded img-fluid mx-auto d-block' alt='foto' src='" . asset('images/404.png') . "'>";
                 }
             })
-
-
+            // editColumn('harga_nett', function ($p) {
+            //     if ($p->harga_nett )
+            // })
 
 
             ->addIndexColumn()
@@ -45,7 +47,7 @@ class ProductsController extends Controller
     {
         $produk = product::all();
 
-        return view ('Produk.DaftarProduk', compact('produk'));
+        return view('Produk.DaftarProduk', compact('produk'));
     }
 
     /**
@@ -55,8 +57,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $kategori = Kategori::all();
-        return view('Produk.TambahProduk', compact('kategori'));
+        $produk = product::all();
+        return view('Produk.TambahProduk', compact('produk'));
 
 
     }
@@ -84,12 +86,13 @@ class ProductsController extends Controller
         // dd($fileName);
 
         $produk = new product();
-        $produk->nama     = $request->nama;
-        $produk->kategori = $request->kategori;
+        $produk->nama = $request->nama;
+        $produk->kategori_id = $request->kategori_id;
+        $produk->harga_pabrik = $request->harga_pabrik;
         $produk->kuantitas = $request->kuantitas;
-        $produk->pajak = $request->pajak;
-        $produk->biaya = $request->biaya;
-        $produk->harga = $request->harga;
+        $produk->harga_nett = $request->harga_nett;
+        $produk->harga_jual = $request->harga_jual;
+        $produk->stock = $request->stock;
         $produk->gambar = $fileName;
         $produk->save();
 
@@ -104,7 +107,14 @@ class ProductsController extends Controller
     //  */
     public function show(product $produk)
     {
-        return view ('Produk.edit', compact ('produk'));
+        return view('Produk.edit', compact ('produk'));
+    }
+
+    public function showDataModal($id)
+    {
+        $produk = product::find($id);
+
+        return $produk;
     }
 
     /**
@@ -116,7 +126,8 @@ class ProductsController extends Controller
     public function edit(product $produk, $id)
     {
         $produk = product::where('id', $id)->first();
-        return view ('Produk.edit', compact('produk'));
+        $kategori = Kategori::all();
+        return view('Produk.edit', compact('produk', 'kategori'));
     }
 
     /**
@@ -130,9 +141,8 @@ class ProductsController extends Controller
         {
         $request->validate([
             'nama' => 'required',
-            'kategori' => 'required',
+            'kategori_id' => 'required',
             'kuantitas' => 'required',
-            'pajak' => 'required',
             'biaya' => 'required',
             'harga' => 'required'
         ]);
@@ -140,7 +150,7 @@ class ProductsController extends Controller
         product::where('id', $id)
             ->update([
                 'nama' => $request->nama,
-                'kategori' => $request->kategori,
+                'kategori_id' => $request->kategori_id,
                 'kuantitas' => $request->kuantitas,
                 'pajak' => $request->pajak,
                 'biaya' => $request->biaya,
@@ -161,5 +171,4 @@ class ProductsController extends Controller
         $produks -> delete();
         return redirect('/product')->with('status', 'Data Berhasil Dihapus');
     }
-// }
-    }
+}

@@ -36,13 +36,13 @@
         if (String.fromCharCode(e.keyCode).match(/[^0-9.%]/g)) return false;
         // makeUnique($("#inputDiskon").val()); 
 
-        var areUnique = true;
-        $.each($("#inputDiskon",function(){
-            var val = $(this).val();
-            $.each($("#inputDiskon",function(){
-                 if(val == $(this).val()){areUnique = false;}
-            });
-        }));
+        // var areUnique = true;
+        // $.each($("#inputDiskon",function(){
+        //     var val = $(this).val();
+        //     $.each($("#inputDiskon",function(){
+        //          if(val == $(this).val()){areUnique = false;}
+        //     }));
+        // }));
 
         var keyCode = e.which;
         if ( keyCode == 46 || keyCode == 37) { 

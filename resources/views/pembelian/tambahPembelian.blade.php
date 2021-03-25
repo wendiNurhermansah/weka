@@ -143,7 +143,7 @@
 @endsection
 @section('script')
     <script type="text/javascript">
-       tinymce.init({
+        tinymce.init({
       selector: 'textarea',
       plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
       toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
@@ -292,11 +292,8 @@
 
 
 
-
     //delete table
-
     function hapusTable(formAdd){
-
         $('#trTable_'+formAdd).remove();
         var row = $("#appendd tr").length;
         console.log(row);
@@ -333,6 +330,20 @@
         }
 
     }
+//         total2 += total;
+//         // console.log(total);
+//         $("#sub_total_"+formAdd).val(total);
+
+//         var sum = 0;
+//         $("#sub_total_"+formAdd).each(function() {
+//         sum += Number($(this).val());
+//         $('#total_').val(total2);
+
+//     });
+
+//     }
+
+    // total semua
 
     // total semua jika di ganti
 // function hitungTotal(j){

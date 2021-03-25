@@ -29,9 +29,11 @@
 
                         <div class="form-group">
                             <label for="kategori">Kategori</label>
-                            <select class="custom-select @error('kategori') is-invalid @enderror" id="kategori" placeholder="Masukkan kategori" name="kategori" value="{{$produk -> kategori}}">
-                                <option selected>Makanan</option>
-                                <option value="Minuman">Minuman</option>
+                            <select class="custom-select @error('kategori_id') is-invalid @enderror" id="kategori" placeholder="Masukkan kategori" name="kategori_id" value="{{$produk -> kategori_id}}">
+                               @foreach ($kategori as $k)
+                                <option value="{{$k->id}}" selected>{{$k->nama}}</option>
+                               @endforeach
+
                             </select>
                         </div>
 
