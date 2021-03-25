@@ -33,9 +33,9 @@ class ProductsController extends Controller
                     return "<img width='50' class='rounded img-fluid mx-auto d-block' alt='foto' src='" . asset('images/404.png') . "'>";
                 }
             })
-            // editColumn('harga_nett', function ($p) {
-            //     if ($p->harga_nett )
-            // })
+            ->addColumn('total', function ($p) {
+               return $p->harga_jual - $p->harga_pabrik;
+            })
 
 
             ->addIndexColumn()

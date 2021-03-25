@@ -33,8 +33,8 @@
                             <th>Kode</th>
                             <th>Harga Pabrik</th>
                             <th>Discount</th>
-                            <th>Harga Nett</th>
                             <th>Harga Jual</th>
+                            <th>Total</th>
                             <th>Stock</th>
                         <th width="60">Tindakan</th>
                         </thead>
@@ -87,8 +87,8 @@
                 {data: 'kategori_id', name: 'kategori_id'},
                 {data: 'harga_pabrik', name: 'harga_pabrik'},
                 {data: 'discount', name: 'discount'},
-                {data: 'harga_nett', name: 'harga_nett'},
                 {data: 'harga_jual', name: 'harga_jual'},
+                {data: 'total', name: 'total'},
                 {data: 'stock', name: 'stock'},
                 {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
             ]
