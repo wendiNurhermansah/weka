@@ -17,7 +17,8 @@
             </li>
             <li><a href="{{ route('permission.index') }}"><i class="icon icon-clipboard-list2 text-success s-18"></i>Permission</a>
             </li>
-            <li><a href="{{ url('pengguna.index') }}"><i class="icon icon-user blue-text s-18"></i>Pengguna</a>
+            <li><a href="{{ route('pengguna.index') }}"><i class="icon icon-user blue-text s-18"></i>Pengguna</a>
+            </li>
         </ul>
     </li>
 
