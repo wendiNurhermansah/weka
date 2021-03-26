@@ -161,7 +161,7 @@
                                     <img class="card-img-top" src="{{asset('produk/images/ava/'.$k->gambar)}}" alt=""  width="10" height="40">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item"><small>{{$k->nama}}</small></li>
-                                        <li class="list-group-item"><small>{{$k->harga}}</small></li>
+                                        <li class="list-group-item"><small>{{$k->harga_jual}}</small></li>
                                     </ul>
                                 </div>
                             </a>
