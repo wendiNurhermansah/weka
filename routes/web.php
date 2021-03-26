@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('main/api', 'PosController@api')->name('main.api');
         Route::post('kategori', 'PosController@kategori')->name('kategori');
         Route::get('cariKategori', 'PosController@cariKategori')->name('cariKategori');
+        Route::get('produkKartu', 'PosController@fetch_kartu')->name('produkKartu');
     });
 
     Route::prefix('Kategori')->namespace('kategori')->name('Kategori.')->group(function () {

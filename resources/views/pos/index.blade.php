@@ -152,7 +152,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-7" id="data_kartu">
                     <div class="h-75 mb-5">
                         <div class="row ml-4 pl-2">
                             @foreach ($kartu as $k)
@@ -169,13 +169,14 @@
                         </div>
                     </div>
                     <div class="product-nav row text-white w-100 mt-4 pt-2">
-                        <a href="{{ $kartu->previousPageUrl() }}" class="btn btn-secondary col-md-4 font-weight-bold"><</a>
+                        <a to="{!! $kartu->previousPageUrl() !!}" onclick="pageLink(1)" id="pagePrevious" class="btn btn-secondary col-md-4 font-weight-bold"><</a>
                         <button class="btn btn-success col-md-4 font-weight-bold" data-toggle="modal" data-target="#hadiah">
                             <i class="icon icon-folder"></i>Sell Gift Card
                         </button>
                         {{-- modal --}}
-                        <a href="{{ $kartu->nextPageUrl() }}" class="btn btn-secondary col-md-4 font-weight-bold">></a>
+                        <a to="{{ $kartu->nextPageUrl() }}" onclick="pageLink(2)" id="pageNext" class="pageNext btn btn-secondary col-md-4 font-weight-bold">></a>
                     </div>
+                    {{-- {!! $kartu->links() !!} --}}
                 </div>
             </div>
         </div>
@@ -229,7 +230,79 @@
             function tambahProduk() {
             }
 
+            function pageLink(n){
+                    if(n==2){
+                        // alert("yes")
+                        var page = $('.pageNext').attr('to').split('page=')[1];
+                        console.log(page)
+                    }else{
+                        // alert('no')
+                        var page = $('.pagePrevious').attr('to').split('page=')[1];
+                        console.log(page)
+                    }
+
+                    $.ajax({
+                        url:"{{route('Pos.produkKartu')}}",
+                        method: "GET",
+                        data: {_token: CSRF_TOKEN, page:page},
+                        success:function(data){
+                            $('#data_kartu').html(data)
+
+                            if(n==2){
+                                // alert("yes")
+                                var link = $(".pageNext").attr('to')
+                            }else{
+                                // alert("no")
+                                var link = $(".pagePrevious").attr('to')
+                            }
+                            links = link.replace('produkKartu','main')
+                            // console.log("ps",link)
+                            if(n==2){
+                                $(".pageNext").attr('to',links)
+                            }else{
+                                $(".pagePrevious").attr('to',links)
+                            }
+                        }
+                    })
+            }
+
             $(document).ready(function(){
+                //page links
+                // $('#pageNext').click(function(e){
+
+                    // e.preventDefault()
+               
+                // })
+
+                // $('#pagePrevious').click(function(e){
+                //     e.preventDefault()
+                //     var page = $(this).attr('href').split('page=')[1];
+                //     console.log(page)
+                //     fetch_previous(page)
+                // })
+
+                // function fetch_previous(page){
+                //     $.ajax({
+                //         url:"{{route('Pos.produkKartu')}}",
+                //         method: "GET",
+                //         data: {_token: CSRF_TOKEN, page:page},
+                //         success:function(data){
+                //             $('#data_kartu').html(data)
+                //         }
+                //     })
+                // }
+
+                // function fetch_next(pageNext){
+                //     $.ajax({
+                //         url:"{{route('Pos.produkKartu')}}",
+                //         method: "GET",
+                //         data: {_token: CSRF_TOKEN, page:pageNext},
+                //         success:function(data){
+                //             $('#data_kartu').html(data)
+                //         }
+                //     })
+                // }
+
                 // total
                 $("#tabelTotal").html(0);
 
@@ -310,9 +383,9 @@
                     $('#appendd').append(html);//tambah item
                     $('#produk_id'+formAdd).val(res.id);//ambil id
                     var p = $('#produk_'+formAdd).val(res.nama);//ambil nama
-                    $('#biaya_satuan_'+formAdd).val(res.biaya);//ambil biaya
+                    $('#biaya_satuan_'+formAdd).val(res.harga);//ambil biaya
                     $('#kuantitas_'+formAdd).val(kuantitas);//ambil kuantitias
-                    var subTotal = kuantitas*res.biaya; 
+                    var subTotal = kuantitas*res.harga; 
                     $('#sub_total_'+formAdd).val(subTotal);//subtotal
 
                     var total = $('#tabelTotal').html();//ambil total lama
@@ -337,14 +410,16 @@
                                 qty++;
                                 $('#kuantitas_'+i).val(qty);
                                 console.log('formAdd3:'+formAdd);
-                                var subTotal = qty*res.biaya;
+                                var subTotal = qty*res.harga;
                                 $('#sub_total_'+i).val(subTotal);
-                                total = parseInt(total) - parseInt(subTotal);
+                                console.log('subsebelum',total)
+                                // total = parseInt(total) + parseInt(subTotal);
+                                // console.log('totatambah',total)
                                 $('#tabelTotal').html(total);
                                 $("#trTable_"+formAdd).remove();    
                         }else{
                             $('#kuantitas_'+formAdd).val(kuantitas);
-                            var subTotal = kuantitas*res.biaya;
+                            var subTotal = kuantitas*res.harga;
                             $('#sub_total_'+formAdd).val(subTotal);
                         }
                     }

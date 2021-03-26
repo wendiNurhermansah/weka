@@ -55,8 +55,41 @@ class PosController extends Controller
 
     public function kartu()
     {
-        $kartu = product::paginate(12);
+        $kartu = product::simplePaginate(12);
         return $kartu;
+    }
+
+    function fetch_kartu(Request $request){
+        if($request->ajax()){
+            $kartu = product::simplePaginate(12);
+            
+            $output = '<div class="h-75 mb-5">
+                            <div class="row ml-4 pl-2">';
+            // loop through the result array
+            foreach ($kartu as $k){
+                // concatenate output to the array
+                $output .=  '<a href="#" onclick="searchProduk('.$k->id.')">
+                                <div class="card m-1" style="width: 10rem;">
+                                    <img class="card-img-top" src="../produk/images/ava/'.$k->gambar.'" alt=""  width="10" height="40">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"><small>'.$k->nama.'</small></li>
+                                        <li class="list-group-item"><small>'.$k->harga.'</small></li>
+                                    </ul>
+                                </div>
+                            </a>';
+                }
+            // end of output
+            $output .= '    </div>
+                        </div>
+                        <div class="product-nav row text-white w-100 mt-4 pt-2">
+                            <a to="'.$kartu->previousPageUrl().'" onclick="pageLink(1)" id="pagePrevious" class="pagePrevious btn btn-secondary col-md-4 font-weight-bold"><</a>
+                            <button class="btn btn-success col-md-4 font-weight-bold" data-toggle="modal" data-target="#hadiah">
+                                <i class="icon icon-folder"></i>Sell Gift Card
+                            </button>
+                            <a to ="'.$kartu->nextPageUrl().'" onclick="pageLink(2)" id="pageNext" class="pageNext btn btn-secondary col-md-4 font-weight-bold">></a>
+                        </div>';
+            return $output;
+        }
     }
 
     public function kategori(Request $request)
