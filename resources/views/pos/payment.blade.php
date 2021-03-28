@@ -134,7 +134,8 @@
 
 @push('script')
     <script>
-        function payment(){
+        $( "#buttonPayment" ).click(function() {
+        // function payment(){
             totalPayable = $('#totalPayable').text();
             $('#uangPas').html(totalPayable);
             $('#totalPayable_Payment').html(totalPayable);
@@ -143,7 +144,7 @@
             $('#saldo').html(saldo);
             $('.badge').html(0);
             $('.badge').hide();
-        }
+        })
 
         function bayar10(){
             totalPaying = $("#totalPaying").text();

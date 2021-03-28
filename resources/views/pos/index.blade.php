@@ -143,11 +143,11 @@
                                 <button href="" class="btn btn-danger button-footer" data-toggle="modal" data-target="#cancel">Cancel</button>
                             </div>
                             <div class="col-md-4">
-                                <a href="" class="btn btn-primary h-50 button-footer" data-toggle="modal" data-target="#printOrder">Print Order</a>
-                                <a href="" class="btn btn-dark h-50 button-footer" data-toggle="modal" data-target="#bill">Print Bill</a>
+                                <button href="" class="btn btn-primary h-50 button-footer" data-toggle="modal" data-target="#printOrder">Print Order</button>
+                                <button href="" class="btn btn-dark h-50 button-footer" data-toggle="modal" data-target="#bill">Print Bill</button>
                             </div>
                             <div class="col-md-4">
-                                <a href="" class="btn btn-success py-4 button-footer" data-toggle="modal" data-target="#payment" onclick="payment()">Payment</a>
+                                <button href="" class="btn btn-success py-4 button-footer" data-toggle="modal" data-target="#payment" id="buttonPayment">Payment</button>
                             </div>
                         </div>
                     </div>
@@ -156,25 +156,25 @@
                     <div class="h-75 mb-5">
                         <div class="row ml-4 pl-2">
                             @foreach ($kartu as $k)
-                            <a href="#" onclick="searchProduk({{$k->id}})">
-                                <div class="card m-1" style="width: 10rem;">
-                                    <img class="card-img-top" src="{{asset('produk/images/ava/'.$k->gambar)}}" alt=""  width="10" height="40">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item"><small>{{$k->nama}}</small></li>
-                                        <li class="list-group-item"><small>{{$k->harga_jual}}</small></li>
-                                    </ul>
-                                </div>
-                            </a>
+                            <div class="m-1">
+                                    <button id="klik-kartu" class="card m-1 border-0" onclick="searchProduk({{$k->id}})" style="width: 10rem;">
+                                        <img class="card-img-top" src="{{asset('produk/images/ava/'.$k->gambar)}}" alt=""  width="10" height="40">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><small>{{$k->nama}}</small></li>
+                                            <li class="list-group-item"><small>{{$k->harga_jual}}</small></li>
+                                        </ul>
+                                    </button>
+                            </div>
                             @endforeach
                         </div>
                     </div>
                     <div class="product-nav row text-white w-100 mt-4 pt-2">
-                        <a to="{!! $kartu->previousPageUrl() !!}" onclick="pageLink(1)" id="pagePrevious" class="btn btn-secondary col-md-4 font-weight-bold"><</a>
+                        <button to="{!! $kartu->previousPageUrl() !!}" onclick="pageLink(1)" id="pagePrevious" class="btn btn-secondary col-md-4 font-weight-bold border-0"><</button>
                         <button class="btn btn-success col-md-4 font-weight-bold" data-toggle="modal" data-target="#hadiah">
                             <i class="icon icon-folder"></i>Sell Gift Card
                         </button>
                         {{-- modal --}}
-                        <a to="{{ $kartu->nextPageUrl() }}" onclick="pageLink(2)" id="pageNext" class="pageNext btn btn-secondary col-md-4 font-weight-bold">></a>
+                        <button to="{{ $kartu->nextPageUrl() }}" onclick="pageLink(2)" id="pageNext" class="pageNext btn btn-secondary col-md-4 font-weight-bold border-0">></button>
                     </div>
                     {{-- {!! $kartu->links() !!} --}}
                 </div>
@@ -346,7 +346,16 @@
 
             var formAdd = 0;
 
+            
             function searchProduk(id){
+                // $("#klik-kartu").prop('disabled', true);
+                // $('#klik-kartu').bind('click');     
+                // $('#data_kartu *[onclick]').removeAttr('onclick');
+                $('*[onclick]').prop('disabled',true);
+                $('*[data-toggle="modal"]').prop('disabled',true)
+                    // $($(this).data('target')).toggleClass('in');
+            
+   
                 formAdd++;
 
                 var url = "{{ route('Pembelian.pembelian.price', ':id') }}".replace(':id', id);
@@ -383,9 +392,9 @@
                     $('#appendd').append(html);//tambah item
                     $('#produk_id'+formAdd).val(res.id);//ambil id
                     var p = $('#produk_'+formAdd).val(res.nama);//ambil nama
-                    $('#biaya_satuan_'+formAdd).val(res.harga);//ambil biaya
+                    $('#biaya_satuan_'+formAdd).val(res.harga_jual);//ambil biaya
                     $('#kuantitas_'+formAdd).val(kuantitas);//ambil kuantitias
-                    var subTotal = kuantitas*res.harga; 
+                    var subTotal = kuantitas*res.harga_jual; 
                     $('#sub_total_'+formAdd).val(subTotal);//subtotal
 
                     var total = $('#tabelTotal').html();//ambil total lama
@@ -394,14 +403,14 @@
                     total = parseInt(total) + parseInt(subTotal);//total lama + sub total produk baru
                     $('#tabelTotal').html(total);
                     
-                    produkSesudah = $("#produk_id"+formAdd).val();
-                    console.log('1:'+produkSesudah);
+                    produkSesudah = $("#produk_"+formAdd).val();
+                    console.log('sesudah:'+produkSesudah);
                     
                     tr = $("#appendd tr").length;
                     console.log("tr:"+tr);
                     for (i = 1; i < tr; i++) {
                         console.log('i'+i)
-                        produkSebelum = $("#produk_id"+i).val();
+                        produkSebelum = $("#produk_"+i).val();
                         console.log('2:'+produkSebelum);
                         var qty = $('#kuantitas_'+i).val();
                         console.log('qty:'+qty);
@@ -410,7 +419,7 @@
                                 qty++;
                                 $('#kuantitas_'+i).val(qty);
                                 console.log('formAdd3:'+formAdd);
-                                var subTotal = qty*res.harga;
+                                var subTotal = qty*res.harga_jual;
                                 $('#sub_total_'+i).val(subTotal);
                                 console.log('subsebelum',total)
                                 // total = parseInt(total) + parseInt(subTotal);
@@ -419,10 +428,12 @@
                                 $("#trTable_"+formAdd).remove();    
                         }else{
                             $('#kuantitas_'+formAdd).val(kuantitas);
-                            var subTotal = kuantitas*res.harga;
+                            var subTotal = kuantitas*res.harga_jual;
                             $('#sub_total_'+formAdd).val(subTotal);
                         }
                     }
+                    $('*[onclick]').prop('disabled',false);
+                    $('*[data-toggle="modal"]').prop('disabled',false)
                     // produkSesudah = 
                     // if()
 

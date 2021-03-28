@@ -162,7 +162,7 @@ class PosController extends Controller
                     $output .=  '<li class="list-group-item"> 
                                         <input type="text" value="'.$row->id.'" hidden>
                                         <a class="btn">
-                                            <img src="../kategori/images/ava/'.$row->gambar.'" alt="" style="height:30px;width:30px;" class="img-fluid img-responsive">' 
+                                            <img src="'.config('app.sftp_src').'images/'.$row->gambar.'" alt="" style="height:30px;width:30px;" class="img-fluid img-responsive">' 
                                             .'<span class="ml-2">'.$row->nama.'<span>'.'
                                         </a>
                                     </li>';
