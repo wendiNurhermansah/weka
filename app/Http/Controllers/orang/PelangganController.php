@@ -67,8 +67,6 @@ class PelangganController extends Controller
             'nama' => 'required',
             'telepon' => 'required',
             'email' => 'required',
-            'ccf_1' => 'required',
-            'ccf_2' => 'required'
         ]);
 
 

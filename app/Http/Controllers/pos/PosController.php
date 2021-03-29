@@ -169,8 +169,7 @@ class PosController extends Controller
                     }
                 // end of output
                 $output .= '</ul>';
-            }
-            else {
+            }else {
                 // if there's no matching results according to the input
                 $output .= '<li class="list-group-item">'.'No results'.'</li>';
             }

@@ -48,7 +48,7 @@
 
             $(document).ready(function () {
                 // keyup function looks at the keys typed on the search box
-                $('#cariKategori').on('keyup',function() {
+                $('#cariKategori').focus(function() {
                     // the text typed in the input field is assigned to a variable 
                     var query = $(this).val();
                     // call to an ajax function
