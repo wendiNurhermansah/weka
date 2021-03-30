@@ -45,7 +45,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="harga_pabrik">harga_pabrik</label>
+                            <label for="harga_pabrik">Harga Pabrik</label>
                             <input type="text" class="form-control @error('harga_pabrik') is-invalid @enderror" id="harga_pabrik" placeholder="Masukkan Kuantitas" name="harga_pabrik" value="{{old('harga_pabrik')}}">
                         </div>
 

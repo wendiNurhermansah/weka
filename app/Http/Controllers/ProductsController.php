@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+
+use Illuminate\Support\Facades\Storage;
 use App\Models\product;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use DataTables;
+
 
 class ProductsController extends Controller
 
@@ -28,7 +31,7 @@ class ProductsController extends Controller
             })
             ->editColumn('gambar',  function ($p)  {
                 if ($p->gambar != null) {
-                    return "<img width='50' class='img-fluid mx-auto d-block rounded-circle' alt='foto' src='" . config('app.sftp_src').'images/produk/images/ava/' . $p->gambar . "'>";
+                    return "<img width='50' class='img-fluid mx-auto d-block rounded-circle' alt='foto' src='" . config('app.sftp_src').'images/' . $p->gambar . "'>";
                 } else {
                     return "<img width='50' class='rounded img-fluid mx-auto d-block' alt='foto' src='" . asset('images/404.png') . "'>";
                 }
@@ -82,21 +85,22 @@ class ProductsController extends Controller
         // ]);
         $file     = $request->file('gambar');
         $fileName = rand() . '.' . $file->getClientOriginalExtension();
-        $request->file('gambar')->move("produk/images/ava/", $fileName);
+        // $request->file('gambar')->move("kategori/images/ava/", $fileName);
+        $request->file('gambar')->storeAs('images', $fileName, 'sftp', 'public');
         // dd($fileName);
 
         $produk = new product();
         $produk->nama = $request->nama;
         $produk->kategori_id = $request->kategori_id;
         $produk->harga_pabrik = $request->harga_pabrik;
-        $produk->kuantitas = $request->kuantitas;
+        // $produk->kuantitas = $request->kuantitas;
         $produk->harga_nett = $request->harga_nett;
         $produk->harga_jual = $request->harga_jual;
         $produk->stock = $request->stock;
         $produk->gambar = $fileName;
         $produk->save();
 
-        return redirect()->route('product.index')->withSuccess('data berhasil ditambahkan');
+        return redirect()->route('product.index')->with('status', 'data berhasil ditambahkan');
     }
 
     /**
