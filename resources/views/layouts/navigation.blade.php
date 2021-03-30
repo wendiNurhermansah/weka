@@ -15,7 +15,7 @@
         <ul class="treeview-menu">
             <li><a href="{{ route('role.index') }}"><i class="icon icon-key4 amber-text s-18"></i>Role</a>
             </li>
-            <li><a href="{{ route('permission.index') }}"><i class="icon icon-clipboard-list2 text-success s-18"></i>Permission</a>
+        <li><a href="{{ route('permission.index') }}"><i class="icon icon-clipboard-list2 text-success s-18"></i>Permission</a>
             </li>
             <li><a href="{{ route('pengguna.index') }}"><i class="icon icon-user blue-text s-18"></i>Pengguna</a>
             </li>

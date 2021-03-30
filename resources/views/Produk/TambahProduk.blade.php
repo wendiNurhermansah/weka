@@ -35,29 +35,32 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="kategori">Kode</label>
-                            <select class="custom-select" name="kategori">
+                            <label for="produk">Kode</label>
+                            <select class="custom-select" name="produk">
                                 @foreach ($kategori as $i)
-                                <option value="{{$i->id}}">{{$i->nama}}</option>
+                                <option value="{{$i->id}}">{{$i->nama}} [{{$i->kode}}]</option>
                                 @endforeach
 
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="kuantitas">Kuantitas</label>
-                            <input type="text" class="form-control @error('kuantitas') is-invalid @enderror" id="kuantitas" placeholder="Masukkan Kuantitas" name="kuantitas" value="{{old('kuantitas')}}">
+                            <label for="harga_pabrik">harga_pabrik</label>
+                            <input type="text" class="form-control @error('harga_pabrik') is-invalid @enderror" id="harga_pabrik" placeholder="Masukkan Kuantitas" name="harga_pabrik" value="{{old('harga_pabrik')}}">
                         </div>
 
                         <div class="form-group">
-                            <label for="biaya">Biaya</label>
-                            <input type="text" class="form-control @error('harga') is-invalid @enderror" id="harga" placeholder="Biaya" name="biaya">
+                            <label for="discount">Discount</label>
+                            <input type="text" class="form-control @error('discount') is-invalid @enderror" id="discount" placeholder="Masukkan Discount" name="discount">
                         </div>
                         <div class="form-group">
-                            <label for="harga">Harga</label>
-                            <input type="text" class="form-control @error('harga') is-invalid @enderror" id="harga" placeholder="Harga" name="harga">
+                            <label for="harga_jual">Harga Jual</label>
+                            <input type="text" class="form-control @error('harga_jual') is-invalid @enderror" id="harga_jual" placeholder="Masukkan Harga Jual" name="harga_jual">
                         </div>
-
+                        <div class="form-group">
+                            <label for="stock">Stock</label>
+                            <input type="text" class="form-control @error('stock') is-invalid @enderror" id="stock" placeholder="Masukkan Stock" name="stock">
+                        </div>
 
                         <button type="submit" class="btn btn-primary">Tambah Data</button>
                 </form>

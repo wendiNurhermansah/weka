@@ -34,7 +34,7 @@ class ProductsController extends Controller
                 }
             })
             ->addColumn('total', function ($p) {
-               return $p->harga_jual - $p->harga_pabrik;
+               return $p->harga_jual - $p->discount - $p->harga_pabrik;
             })
 
 
@@ -57,9 +57,9 @@ class ProductsController extends Controller
      */
     public function create()
     {
+        $kategori = Kategori::all();
         $produk = product::all();
-        return view('Produk.TambahProduk', compact('produk'));
-
+        return view('Produk.TambahProduk', compact('produk','kategori'));
 
     }
 
@@ -139,25 +139,81 @@ class ProductsController extends Controller
     //  */
     public function update(Request $request, $id)
         {
-        $request->validate([
-            'nama' => 'required',
-            'kategori_id' => 'required',
-            'kuantitas' => 'required',
-            'biaya' => 'required',
-            'harga' => 'required'
+        $produk = product::find($id);
+        // $request->validate([
+        //     'nama' => 'required',
+        //     'harga_pabrik' => 'required',
+        //     'discount' => 'required',
+        //     'harga_jual' => 'required',
+        //     'harga_nett' => 'required',
+        //     'stock' => 'required',
+        //     ]);
+
+        $nama = $request->nama;
+        $harga_pabrik = $request->harga_pabrik;
+        $discount = $request->discount;
+        $harga_jual = $request->harga_jual;
+        $harga_nett = $request->harga_nett;
+        $stock = $request->stock;
+        if ($request->foto != null) {
+            $request->validate([
+                'gambar' => 'required|mimes:png,jpg,jpeg|max:1024'
+            ]);
+
+        // proses saved foto
+        $file = $request->file('gambar');
+        $fileName = rand() . '.' . $file->getClientOriginalExtension();
+        $request->file('gambar')->storeAs('images', $fileName, 'sftp', 'public');
+
+        // Proses Delete Foto
+        $exist = $produk->foto;
+        $path  = "produk/images/ava/" . $exist;
+        \File::delete(public_path($path));
+
+        $produk->update([
+            'nama' => $nama,
+            'harga_pabrik' => $harga_pabrik,
+            'discount' => $discount,
+            'harga_jual' => $harga_jual,
+            'harga_nett' => $harga_nett,
+            'stock' => $stock,
+            'gambar' => $fileName
         ]);
 
-        product::where('id', $id)
-            ->update([
-                'nama' => $request->nama,
-                'kategori_id' => $request->kategori_id,
-                'kuantitas' => $request->kuantitas,
-                'pajak' => $request->pajak,
-                'biaya' => $request->biaya,
-                'harga' => $request->harga,
+        } else {
+            $produk->update([
+                'nama' => $nama,
+                'harga_pabrik' => $harga_pabrik,
+                'discount' => $discount,
+                'harga_jual' => $harga_jual,
+                'harga_nett' => $harga_nett,
+                'stock' => $stock
             ]);
-         return redirect()->route('product.index')->withSuccess('data berhasil diubah');
+        }
+        return view('Produk.DaftarProduk')->with('status', 'Data Berhasil diubah');
     }
+
+
+    //     $request->validate([
+    //         'nama' => 'required',
+    //         'harga_pabrik' => 'required',
+    //         'discount' => 'required',
+    //         'harga_jual' => 'required',
+    //         'harga_nett' => 'required',
+    //         'stock' => 'required'
+    //     ]);
+
+    //     product::where('id', $id)
+    //         ->update([
+    //             'nama' => $request->nama,
+    //             'harga_pabrik' => $request->harga_pabrik,
+    //             'discount' => $request->discount,
+    //             'harga_jual' => $request->harga_jual,
+    //             'harga_nett' => $request->harga_nett,
+    //             'stock' => $request->stock
+    //         ]);
+    //      return redirect()->route('product.index')->withSuccess('data berhasil diubah');
+    // }
 
     // /**
     //  * Remove the specified resource from storage.
