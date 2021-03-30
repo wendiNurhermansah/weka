@@ -42,7 +42,7 @@ class ProductsController extends Controller
 
 
             ->addIndexColumn()
-            ->rawColumns(['action', 'gambar' ])
+            ->rawColumns(['action', 'gambar'])
             ->toJson();
     }
 

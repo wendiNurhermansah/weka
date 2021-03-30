@@ -176,7 +176,7 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::get('/tambahproduk', 'AddProductsController@index');
     // Route::post('/product/add', 'AddProductsController@store')->name('addProduct');
     // Route::get('/importproduk', 'ImportProductsController@index');
-    Route::post('product/api', 'productsController@api')->name('product.api');
+    Route::post('product/api', 'ProductsController@api')->name('product.api');
     Route::resource('product', 'ProductsController');
     Route::get('tambahproduk', 'ProductsController@create')->name('tambahproduk');
     Route::get('show-data-modal/{id}', 'ProductsController@showDataModal')->name('product.showDataModal');
