@@ -36,7 +36,7 @@
 
                         <div class="form-group">
                             <label for="produk">Kode</label>
-                            <select class="custom-select" name="produk">
+                            <select class="custom-select" name="kategori_id">
                                 @foreach ($kategori as $i)
                                 <option value="{{$i->id}}">{{$i->nama}} [{{$i->kode}}]</option>
                                 @endforeach
