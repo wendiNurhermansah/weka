@@ -94,7 +94,7 @@ class ProductsController extends Controller
         $produk->nama = $request->nama;
         $produk->kategori_id = $request->kategori_id;
         $produk->harga_pabrik = $request->harga_pabrik;
-        // $produk->kuantitas = $request->kuantitas;
+        $produk->discount = $request->discount;
         $produk->harga_nett = $request->harga_nett;
         $produk->harga_jual = $request->harga_jual;
         $produk->stock = $request->stock;
@@ -155,6 +155,7 @@ class ProductsController extends Controller
         //     ]);
 
         $nama = $request->nama;
+        $kode = $request->kode;
         $harga_pabrik = $request->harga_pabrik;
         $discount = $request->discount;
         $harga_jual = $request->harga_jual;
@@ -177,6 +178,7 @@ class ProductsController extends Controller
 
         $produk->update([
             'nama' => $nama,
+            'kode' => $kode,
             'harga_pabrik' => $harga_pabrik,
             'discount' => $discount,
             'harga_jual' => $harga_jual,
@@ -188,6 +190,7 @@ class ProductsController extends Controller
         } else {
             $produk->update([
                 'nama' => $nama,
+                'kode' => $kode,
                 'harga_pabrik' => $harga_pabrik,
                 'discount' => $discount,
                 'harga_jual' => $harga_jual,
