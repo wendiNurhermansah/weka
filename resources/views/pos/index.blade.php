@@ -91,7 +91,7 @@
                             </table>
                         </div> -->
                         <div class="form-group">
-                            <select class="form-control" id="">
+                            <select class="form-control" id="cariPelanggan">
                                 @foreach ($pelanggan as $p)
                                     <option value="{{$p->nama}}">{{$p->nama}}</option>
                                 @endforeach
@@ -318,9 +318,9 @@
                     source: function( request, response ) {
                         // Fetch data
                         $.ajax({
-                        url:"{{route('Pos.kategori')}}",
+                        url:"{{route('Pos.cariProduk')}}",
                         type: 'post',
-                        dataType: "json",
+                        dataType: "json", 
                         data: {
                             _token: CSRF_TOKEN,
                             search: request.term

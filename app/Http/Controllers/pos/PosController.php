@@ -92,7 +92,7 @@ class PosController extends Controller
         }
     }
 
-    public function kategori(Request $request)
+    public function produk(Request $request)
     {
         $search = $request->search;
 
@@ -114,7 +114,7 @@ class PosController extends Controller
         return response()->json($response);
     }
 
-    public function produk(){
+    public function cariProduk(){
         return product::find($id);
     }
 

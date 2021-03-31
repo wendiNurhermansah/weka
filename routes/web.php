@@ -55,7 +55,7 @@ Route::group(['middleware' => ['auth']], function () {
         //Pos
         Route::resource('main', 'PosController');
         Route::post('main/api', 'PosController@api')->name('main.api');
-        Route::post('kategori', 'PosController@kategori')->name('kategori');
+        Route::post('cariProduk', 'PosController@cariProduk')->name('cariProduk');
         Route::get('cariKategori', 'PosController@cariKategori')->name('cariKategori');
         Route::get('produkKartu', 'PosController@fetch_kartu')->name('produkKartu');
     });
