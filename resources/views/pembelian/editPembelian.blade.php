@@ -264,9 +264,9 @@
                     $('#appendd').append(html);
                     $('#produk_id'+formAdd).val(res.id);
                     $('#produk_'+formAdd).val(res.nama);
-                    $('#biaya_satuan_'+formAdd).val(res.biaya);
+                    $('#biaya_satuan_'+formAdd).val(res.harga_jual);
                     $('#kuantitas_'+formAdd).val(kuantitas);
-                    var subTotal = kuantitas*res.biaya;
+                    var subTotal = kuantitas*res.harga_jual;
                      $('#sub_total_'+formAdd).val(subTotal);
                     produkSesudah = $("#produk_"+formAdd).val();
                     console.log('1:'+produkSesudah);
@@ -278,33 +278,13 @@
                             qty = $("#appendd tr:eq("+index+") > td:eq(1) > input").val();
                             qty++;
                             $("#appendd tr:eq("+index+") > td:eq(1) > input").val(qty);
-                            var subTotal = qty*res.biaya;
+                            var subTotal = qty*res.harga_jual;
                             console.log(subTotal);
                             $("#appendd tr:eq("+index+") > td:eq(3) > input").val(subTotal);
                             $("#trTable_"+formAdd).remove();
                         }
                     }
-                    // produkSebelum = $("#appendd tr:eq(0) > td:eq(0) > input:eq(1).val();
-                    //     console.log('2:'+produkSebelum);
-                    //     produkSudah = $("#appendd tr:eq(0) > td:eq(0) > input:eq(1).val();
-                    //     console.log('2:'+produkSudah);
-                    // for (let i = 0; i < tr; i++) {
 
-                    //     var qty = $('#kuantitas_'+i).val();
-                    //     console.log('qty:'+qty);
-                    //     if(produkSebelum == produkSesudah && qty>0){
-                    //             console.log('i='+i);
-                    //             qty++;
-                    //             $('#kuantitas_'+i).val(qty);
-                    //             console.log('formAdd3:'+formAdd);
-                    //             var subTotal = qty*res.biaya;
-                    //             $('#sub_total_'+i).val(subTotal);
-                    //             $("#trTable_"+formAdd).remove();
-                    //     }else{
-                    //         $('#kuantitas_'+formAdd).val(kuantitas);
-                    //     }
-
-                    // }
 
 
 
@@ -312,7 +292,7 @@
 
             // penjumlahan
 
-        var subTotal = kuantitas*res.biaya;
+        var subTotal = kuantitas*res.harga_jual;
          $('#sub_total_'+formAdd).val(subTotal);
 
          var total = $('#total_').val();
@@ -366,7 +346,7 @@ var total2 = 0 ;
         // console.log(kuantitas);
         var biaya = $("#biaya_satuan_"+i).val();
         //  console.log(biaya);
-        var total = kuantitas * biaya
+        var total = kuantitas * harga_jual
         $("#sub_total_"+i).val(total);
 
         var row = $('#dataTable > tbody > tr').length;

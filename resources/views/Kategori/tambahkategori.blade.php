@@ -25,18 +25,18 @@
                     <h4 id="formTitle">Tambah Kategori</h4><hr>
                     <div class="form-row">
                         <div class="col-md-12">
-                            <div class="form-group col-md-8">
+                            <div class="form-group col-md-6">
                                 <label for="kode">KODE</label>
-                                <input type="text" class="form-control @error('kode') is-invalid @enderror" id="kode" placeholder="masukan kode" name="kode" value="{{ old('kode') }}" required>
+                                <input type="text" class="form-control @error('kode') is-invalid @enderror" id="kode" placeholder="masukan kode 4 karakter" name="kode" value="{{ old('kode') }}" maxlength="4" required>
                                 @error('kode')
                                     <div class="valid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
-                            <div class="form-group col-md-8">
+                            <div class="form-group col-md-6">
                                 <label for="nama">NAMA</label>
-                                <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="masukan nama" name="nama" value="{{ old('nama') }}" required>
+                                <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="masukan nama" name="nama" value="{{ old('nama') }}" size="20" required>
                                 @error('nama')
                                     <div class="valid-feedback">
                                         {{ $message }}
@@ -44,18 +44,21 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group m-0 col-md-8">
+                            <div class="form-group m-0 col-md-6">
                                 <label for="gambar" class="col-form-label s-12 col-md-2">
                                     Gambar
                                     <a class="ml-1 mt-1" data-toggle="popover" title="Required" data-html="true" data-content="Max File: 2MB<br/>Format File: (png, jpg, jpeg)<br/>Width: 500 pixel<br/>Height: 500 pixel">
                                         <i class="icon icon-information2 s-18 red-text"></i>
                                     </a>
                                 </label>
-                                <input type="file" name="gambar" id="file" class="input-file" onchange="tampilkanPreview(this,'preview')">
-                                <label for="file" class="btn-tertiary js-labelFile col-md-6">
+                                <input type="file" name="gambar" id="file" class="input-file" onchange="tampilkanPreview(this,'preview')" size="60">
+                                <label for="file" class="btn-tertiary js-labelFile col-md-12">
                                     <i class="icon icon-image mr-2 m-b-1"></i>
                                     <span id="changeText" class="js-fileName">Browse Image</span>
                                 </label>
+                                <img id="result" class="d-none" width="150">
+                                <img width="150" class="rounded img-fluid m-l-100 mt-1 mb-1" id="preview"
+                                            alt="" />
                             </div>
 
 
@@ -93,6 +96,10 @@
     })();
 
     function tampilkanPreview(gambar, idpreview) {
+        $('#result').attr({
+        'src': '-',
+        'alt': ''
+    });
         var gb = gambar.files;
         for (var i = 0; i < gb.length; i++) {
             var gbPreview = gb[i];
@@ -107,10 +114,11 @@
                     };
                 })(preview);
                 reader.readAsDataURL(gbPreview);
+
             } else {
                 $.confirm({
                     title: '',
-                    content: 'Tipe file tidak boleh! haruf format gambar (png, jpg)',
+                    content: 'Tipe file tidak boleh! harus format gambar (png, jpg)',
                     icon: 'icon icon-close',
                     theme: 'modern',
                     closeIcon: true,
@@ -143,6 +151,15 @@
         $('#txtAction').html('');
         $('#reset').show();
         $('#name').focus();
+        $('#result').attr({
+            'src': '-',
+            'alt': ''
+         });
+         $('#changeText').html('Browse Image');
+         $('#preview').attr({
+        'src': '-',
+        'alt': ''
+    });
     }
 
 

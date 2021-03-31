@@ -139,6 +139,21 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-body">
+              <p>Data tidak di temukan!</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
 </div>
 @endsection
 @section('script')
@@ -171,6 +186,9 @@
                         search: request.term
                     },
                     success: function( data ) {
+                        if(data[0] == null){
+                            $("#myModal").modal();
+                            }
                         // console.log(data);
                         response( data );
                     }
@@ -228,6 +246,7 @@
 
 
          $.get(url, function (res) {
+            //  console.log(res);
 
 
             var kuantitas = 1;
@@ -235,9 +254,9 @@
                     $('#appendd').append(html);
                     $('#produk_id'+formAdd).val(res.id);
                     $('#produk_'+formAdd).val(res.nama);
-                    $('#biaya_satuan_'+formAdd).val(res.biaya);
+                    $('#biaya_satuan_'+formAdd).val(res.harga_jual);
                     $('#kuantitas_'+formAdd).val(kuantitas);
-                    var subTotal = kuantitas*res.biaya;
+                    var subTotal = kuantitas*res.harga_jual;
                      $('#sub_total_'+formAdd).val(subTotal);
 
                      $('#rpsub_total_'+formAdd).val(convert_to_rupiah(subTotal));
@@ -256,7 +275,7 @@
                                 qty++;
                                 $('#kuantitas_'+i).val(qty);
                                 console.log('formAdd3:'+formAdd);
-                                var subTotal = qty*res.biaya;
+                                var subTotal = qty*res.harga_jual;
                                 $('#sub_total_'+i).val(subTotal);
                                 $('#rpsub_total_'+i).val(convert_to_rupiah(subTotal));
                                 $("#trTable_"+formAdd).remove();
@@ -272,7 +291,7 @@
 
             // penjumlahan
 
-        var subTotal = kuantitas*res.biaya;
+        var subTotal = kuantitas*res.harga_jual;
          $('#sub_total_'+formAdd).val(subTotal);
 
          var total = $('#total_').val();
@@ -314,7 +333,7 @@
         //  console.log(kuantitas);
         var biaya = $("#biaya_satuan_"+i).val();
         //  console.log(biaya);
-        var total = kuantitas * biaya
+        var total = kuantitas * harga_jual
         $("#sub_total_"+i).val(total);
         $("#rpsub_total_"+i).val(convert_to_rupiah(total));
 
@@ -330,33 +349,6 @@
         }
 
     }
-//         total2 += total;
-//         // console.log(total);
-//         $("#sub_total_"+formAdd).val(total);
-
-//         var sum = 0;
-//         $("#sub_total_"+formAdd).each(function() {
-//         sum += Number($(this).val());
-//         $('#total_').val(total2);
-
-//     });
-
-//     }
-
-    // total semua
-
-    // total semua jika di ganti
-// function hitungTotal(j){
-//     var row = $("#appendd tr").length;
-//     console.log(row);
-//     total1 =0;
-//     for (let index = 1; index <= row; index++) {
-//         var sub = $("#sub_total_"+index).val();
-//         console.log(sub);
-//         var total1 = parseInt(total1) + parseInt(sub);
-//          $('#total_').html(total1);
-//     }
-// }
 
 
 

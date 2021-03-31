@@ -81,7 +81,7 @@ class DaftarkategoriController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode' => 'required',
+            'kode' => 'required|unique:tmkategori|max:4',
             'nama' => 'required',
             'gambar' => 'required'
         ]);
