@@ -54,9 +54,7 @@ class ImportController extends Controller
             //FILE TERSEBUT DISIMPAN KEDALAM FOLDER
             // STORAGE > APP > PUBLIC > IMPORT
             //DENGAN MENGGUNAKAN METHOD storeAs()
-            $file->storeAs(
-                'public/import', $filename
-            );
+            $request->file('gambar')->storeAs('import', $fileName, 'sftp', 'public');
 
             //MEMBUAT INSTRUKSI JOB QUEUE
             ImportJob::dispatch($filename);
