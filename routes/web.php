@@ -172,23 +172,9 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     // Produk
-    // Route::get('/product', 'ProductsController@index');;
-    // Route::get('/tambahproduk', 'AddProductsController@index');
-    // Route::post('/product/add', 'AddProductsController@store')->name('addProduct');
-    // Route::get('/importproduk', 'ImportProductsController@index');
-    Route::post('product/api', 'ProductsController@api')->name('product.api');
     Route::resource('product', 'ProductsController');
+    Route::post('product/api', 'ProductsController@api')->name('product.api');
     Route::get('tambahproduk', 'ProductsController@create')->name('tambahproduk');
     Route::get('show-data-modal/{id}', 'ProductsController@showDataModal')->name('product.showDataModal');
-
-    // Route::resource('produk', 'productsController');
-
-    // Route::get('tes', function(){
-    //     return response()->json([
-    //         'status' => 1,
-    //         'message' => 'sukses'
-
-    //     ]);
-    // })->name('tes');
 
 });

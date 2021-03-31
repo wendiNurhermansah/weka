@@ -95,7 +95,7 @@
         });
 
 
-        function remove(id){
+    function remove(id){
         $.confirm({
             title: '',
             content: 'Apakah Anda yakin akan menghapus data ini ?',
@@ -112,7 +112,6 @@
                     action: function(){
                         $.post("{{ route('product.destroy', ':id') }}".replace(':id', id), {'_method' : 'DELETE'}, function(data) {
                            table.api().ajax.reload();
-                            if(id == $('#id').val()) add();
                         }, "JSON").fail(function(){
                             reload();
                         });

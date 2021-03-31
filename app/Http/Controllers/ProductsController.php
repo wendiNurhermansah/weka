@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use App\Models\product;
 use App\Models\Kategori;
+use App\Models\Pembelian_details;
 use Illuminate\Http\Request;
 use DataTables;
 
@@ -227,8 +228,21 @@ class ProductsController extends Controller
     //  */
     public function destroy($id)
     {
-        $produks = product::find($id);
-        $produks -> delete();
-        return redirect('/product')->with('status', 'Data Berhasil Dihapus');
+        $product = product::find($id);
+
+
+        // // File::delete('kategori/images/ava/'.$gambar->gambar);
+        $exist = $product->gambar;
+
+
+        Storage::disk('sftp')->delete('images/' . $exist);
+        Pembelian_details::where('produk_id', $id)->delete();
+
+        product::destroy($id);
+
+
+        return response()->json([
+            'message' => 'data berhasil di hapus',
+        ]);
     }
 }
