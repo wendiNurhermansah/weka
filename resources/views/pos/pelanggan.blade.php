@@ -7,11 +7,9 @@
                     <h4 class="text-black modal-title">Tambahkan Pelanggan</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="container">
-                    <div id="alert"></div>
-                </div>
                 <form class="" id="formPelanggan" method="POST"  novalidate>
                     <div class="modal-body">
+                        <div id="alertPelanggan"></div>
                         <div class="form-group">
                              <label for="namaPelanggan" class="font-weight-bold">Name</label>
                              <input class="form-control  @error('nama') is-invalid @enderror" type="text" value="" id="nama" name="nama" required>
@@ -19,7 +17,7 @@
                          <div class="form-group row">
                              <div class="col-md-6">
                                  <label for="emailPelanggan" class="font-weight-bold">Email</label>
-                                 <input class="form-control @error('email') is-invalid @enderror" type="text" value="" id="email" name="email" required>
+                                 <input class="form-control @error('email') is-invalid @enderror" type="email" value="" id="email" name="email" required>
                              </div>
                              <div class="col-md-6">
                                  <label for="teleponPelanggan" class="font-weight-bold">Telepon</label>
@@ -54,7 +52,7 @@
             $('input[name=_method]').val('POST');
         }
 
-        $('#form').on('submit', function (e) {
+        $('#formPelanggan').on('submit', function (e) {
             if ($(this)[0].checkValidity() === false) {
                 event.preventDefault();
                 event.stopPropagation();
@@ -71,7 +69,7 @@
                     processData: false,
                     success : function(data) {
                         console.log(data);
-                        $('#alert').html("<div role='alert' class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Success!</strong> " + data.message + "</div>");
+                        $('#alertPelangggan').html("<div role='alert' class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Success!</strong> " + data.message + "</div>");
                         add();
                     },
                     error : function(data){
@@ -82,7 +80,7 @@
                                 err = err + "<li>" + value +"</li>";
                             });
                         }
-                        $('#alert').html("<div role='alert' class='alert alert-danger alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Error!</strong> " + respon.message + "<ol class='pl-3 m-0'>" + err + "</ol></div>");
+                        $('#alertPelanggan').html("<div role='alert' class='alert alert-danger alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Error!</strong> " + respon.message + "<ol class='pl-3 m-0'>" + err + "</ol></div>");
                     }
                 });
                 return false;

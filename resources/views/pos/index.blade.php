@@ -326,6 +326,10 @@
                             search: request.term
                         },
                         success: function( data ) {
+                            console.log(data)
+                            if(data[0] == null){
+                                data[0] = 'Data tidak ditemukan'
+                            }
                             // console.log(data);
                             response( data );
                         }

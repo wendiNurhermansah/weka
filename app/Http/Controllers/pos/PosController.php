@@ -23,7 +23,7 @@ class PosController extends Controller
      */
 
     protected $route = 'Pos.main.';
-    protected $view  = 'pos.';
+    protected $view  = 'pos.';  
     protected $title = 'POS';
     protected $path  = 'produk/images/ava/'; 
 
@@ -105,13 +105,12 @@ class PosController extends Controller
                         ->where('nama', 'like', '%' .$search . '%')
                         ->limit(5)
                         ->get();
+
+            $response = array();
+            foreach($kategori as $k){
+                $response[] = array("id"=>$k->id,"label"=>$k->nama);
+            }        
         }
-  
-        $response = array();
-        foreach($kategori as $k){
-           $response[] = array("id"=>$k->id,"label"=>$k->nama);
-        }
-  
         return response()->json($response);
     }
 
@@ -169,7 +168,7 @@ class PosController extends Controller
                     }
                 // end of output
                 $output .= '</ul>';
-            }else {
+            }else{
                 // if there's no matching results according to the input
                 $output .= '<li class="list-group-item">'.'No results'.'</li>';
             }
