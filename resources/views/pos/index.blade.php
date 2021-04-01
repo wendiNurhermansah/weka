@@ -91,18 +91,14 @@
                             </table>
                         </div> -->
                         <div class="form-group">
-                            <select class="form-control" id="cariPelanggan">
-                                @foreach ($pelanggan as $p)
-                                    <option value="{{$p->nama}}">{{$p->nama}}</option>
-                                @endforeach
-                            </select>
+                            <input class="form-control" type="text" id="cariPelanggan">
                             <a class="btn border" data-toggle="modal" data-target="#pelanggan"><i class="icon icon-add"></i></a>
                         </div>
                         <div class="form-group">
                             <input type="text" id="note" name="note" class="form-control" placeholder="Rerefence Note">
                         </div>
                         <div class="form-group">
-                                <input class="form-control" type="text" id="kategori" onclick="" placeholder="Search product by code or name, you can scan barcode too">
+                                <input class="form-control" type="text" id="cariProduk" onclick="" placeholder="Search product by code or name, you can scan barcode too">
                         </div>
                         <div class="form-group table-responsive-sm">
                             <table id="tableProduk" style="width:50%;">
@@ -227,9 +223,6 @@
     <script type="text/javascript">
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
-            function tambahProduk() {
-            }
-
             function pageLink(n){
                     if(n==2){
                         // alert("yes")
@@ -314,213 +307,209 @@
                 // $("#navigasi").add("<li id='shortcut-nav-li' type='none' class='mx-2 fs-13 text-white'><a id='shortcut' href='' data-toggle='modal' data-target='#shortcut'><i class='icon-key'></i></a></li>").appendTo("#navigasi");          
                 
                 // ajax get product
-                $( "#kategori" ).autocomplete({
-                    source: function( request, response ) {
-                        // Fetch data
-                        $.ajax({
-                        url:"{{route('Pos.cariProduk')}}",
-                        type: 'post',
-                        dataType: "json", 
-                        data: {
-                            _token: CSRF_TOKEN,
-                            search: request.term
-                        },
-                        success: function( data ) {
-                            console.log(data)
-                            if(data[0] == null){
-                                data[0] = 'Data tidak ditemukan'
+                $( "#cariProduk" ).autocomplete({
+                        source: function( request, response ) {
+                            // Fetch data
+                            $.ajax({
+                            url:"{{route('Pos.cariProduk')}}",
+                            method: "GET",
+                            type: 'get',
+                            dataType: "json", 
+                            data: {
+                                _token: CSRF_TOKEN,
+                                search: request.term
+                            },
+                            success: function( data ) {
+                                console.log(data)
+                                if(data[0] == null){
+                                    data[0] = 'Data tidak ditemukan'
+                                }
+                                // console.log(data);
+                                response( data );
                             }
-                            // console.log(data);
-                            response( data );
+                            });
+                        },
+                        select: function (event, ui) {
+                            // Set selection
+                            searchProduk(ui.item.id);
+                            // console.log(ui.item.id);
+                            // $('#kategori').val(ui.item.value);
+                            // $('#kategori').val(ui.item.label); 
+                            // display the selected text
+                            // $('tbody').html(data);
+                            return false;
                         }
-                        });
-                    },
-                    select: function (event, ui) {
-                        // Set selection
-                        searchProduk(ui.item.id);
-                        // console.log(ui.item.id);
-                        // $('#kategori').val(ui.item.value);
-                        // $('#kategori').val(ui.item.label); 
-                        // display the selected text
-                        // $('tbody').html(data);
-                        return false;
-                    }
                 });
-            });
 
-            var formAdd = 0;
+                var formAdd = 0;
+                
+                function searchProduk(id){
+                    console.log('pro')
+                    // $("#klik-kartu").prop('disabled', true);
+                    // $('#klik-kartu').bind('click');     
+                    // $('#data_kartu *[onclick]').removeAttr('onclick');
+                    $('*[onclick]').prop('disabled',true);
+                    $('*[data-toggle="modal"]').prop('disabled',true)
+                        // $($(this).data('target')).toggleClass('in');
+                
+    
+                    formAdd++;
 
-            
-            function searchProduk(id){
-                // $("#klik-kartu").prop('disabled', true);
-                // $('#klik-kartu').bind('click');     
-                // $('#data_kartu *[onclick]').removeAttr('onclick');
-                $('*[onclick]').prop('disabled',true);
-                $('*[data-toggle="modal"]').prop('disabled',true)
-                    // $($(this).data('target')).toggleClass('in');
-            
-   
-                formAdd++;
+                    var url = "{{ route('Pos.produk', ':id') }}".replace(':id', id);
+                    // console.log(url);
+                    var html = `
+                    <tr id="trTable_`+formAdd+`" class="bg-gradient-danger">
+                                                        <td text-align: left;">
+                                                            <input type="text" class="searchProduk" id="produk_id`+formAdd+`" name="produk_id[]" hidden>
+                                                            <input type="text" id="produk_`+formAdd+`" name="produk_[]" class="searchProduk" style="width:160px;" readonly>
 
-                var url = "{{ route('Pembelian.pembelian.price', ':id') }}".replace(':id', id);
-                // console.log(url);
-                var html = `
-                <tr id="trTable_`+formAdd+`" class="bg-gradient-danger">
-                                                    <td text-align: left;">
-                                                        <input type="text" class="searchProduk" id="produk_id`+formAdd+`" name="produk_id[]" hidden>
-                                                        <input type="text" id="produk_`+formAdd+`" name="produk_[]" class="searchProduk" style="width:160px;" readonly>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text"  id="biaya_satuan_`+formAdd+`" class="searchProduk" style="width:70px;" float: right;" name="biaya_satuan[]" readonly>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas(`+formAdd+`)" class="searchProduk" style="width:30px;" text-align: center;" name="kuantitas[]">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text"  id="sub_total_`+formAdd+`"  class="searchProduk" style="width:70px;" float: right; border: none;" name="sub_total[]" >
+                                                        </td>
+                                                        <td>
 
-                                                    </td>
-                                                    <td>
-                                                        <input type="text"  id="biaya_satuan_`+formAdd+`" class="searchProduk" style="width:70px;" float: right;" name="biaya_satuan[]" readonly>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas(`+formAdd+`)" class="searchProduk" style="width:30px;" text-align: center;" name="kuantitas[]">
-                                                    </td>
-                                                    <td>
-                                                        <input type="text"  id="sub_total_`+formAdd+`"  class="searchProduk" style="width:70px;" float: right; border: none;" name="sub_total[]" >
-                                                    </td>
-                                                    <td>
+                                                            <a href='#' onclick='hapusTable(`+formAdd+`)' title='Hapus data'><i class="icon-trash text-danger"></i>  </a>
+                                                        </td>
+                                                    </tr>
 
-                                                        <a href='#' onclick='hapusTable(`+formAdd+`)' title='Hapus data'><i class="icon-trash text-danger"></i>  </a>
-                                                    </td>
-                                                </tr>
-
-                                            `;
-
+                    `;
 
 
-                $.get(url, function (res) {
-                    var kuantitas = 1;
-                    
-                    $('#appendd').append(html);//tambah item
-                    $('#produk_id'+formAdd).val(res.id);//ambil id
-                    var p = $('#produk_'+formAdd).val(res.nama);//ambil nama
-                    $('#biaya_satuan_'+formAdd).val(res.harga_jual);//ambil biaya
-                    $('#kuantitas_'+formAdd).val(kuantitas);//ambil kuantitias
-                    var subTotal = kuantitas*res.harga_jual; 
-                    $('#sub_total_'+formAdd).val(subTotal);//subtotal
 
-                    var total = $('#tabelTotal').html();//ambil total lama
-                    console.log(subTotal);
+                    $.get(url, function (res) {
+                            var kuantitas = 1;
+                            
+                            $('#appendd').append(html);//tambah item
+                            $('#produk_id'+formAdd).val(res.id);//ambil id
+                            var p = $('#produk_'+formAdd).val(res.nama);//ambil nama
+                            $('#biaya_satuan_'+formAdd).val(res.harga_jual);//ambil biaya
+                            $('#kuantitas_'+formAdd).val(kuantitas);//ambil kuantitias
+                            var subTotal = kuantitas*res.harga_jual; 
+                            $('#sub_total_'+formAdd).val(subTotal);//subtotal
+
+                            var total = $('#tabelTotal').html();//ambil total lama
+                            console.log(subTotal);
+                            console.log(total);
+                            total = parseInt(total) + parseInt(subTotal);//total lama + sub total produk baru
+                            $('#tabelTotal').html(total);
+                            
+                            produkSesudah = $("#produk_"+formAdd).val();
+                            console.log('sesudah:'+produkSesudah);
+                            
+                            tr = $("#appendd tr").length;
+                            console.log("tr:"+tr);
+                            for (i = 1; i < tr; i++) {
+                                console.log('i'+i)
+                                produkSebelum = $("#produk_"+i).val();
+                                console.log('2:'+produkSebelum);
+                                var qty = $('#kuantitas_'+i).val();
+                                console.log('qty:'+qty);
+                                if(produkSebelum == produkSesudah && qty>0){
+                                        console.log('i='+i);
+                                        qty++;
+                                        $('#kuantitas_'+i).val(qty);
+                                        console.log('formAdd3:'+formAdd);
+                                        var subTotal = qty*res.harga_jual;
+                                        $('#sub_total_'+i).val(subTotal);
+                                        console.log('subsebelum',total)
+                                        // total = parseInt(total) + parseInt(subTotal);
+                                        // console.log('totatambah',total)
+                                        $('#tabelTotal').html(total);
+                                        $("#trTable_"+formAdd).remove();    
+                                }else{
+                                    $('#kuantitas_'+formAdd).val(kuantitas);
+                                    var subTotal = kuantitas*res.harga_jual;
+                                    $('#sub_total_'+formAdd).val(subTotal);
+                                }
+                            }
+                            $('*[onclick]').prop('disabled',false);
+                            $('*[data-toggle="modal"]').prop('disabled',false)
+                            // produkSesudah = 
+                            // if()
+
+                            // penjumlahan
+
+                    }, 'JSON').done(function () {
+                            console.log('Done');
+                    }).fail(function(e){
+                            console.log('Error');
+                    });
+                };
+                
+                function hitungKuantitas(i){
+                    var kuantitas  = $("#kuantitas_"+i).val();
+                    console.log(i);
+                    console.log(kuantitas);
+                    var biaya = $("#biaya_satuan_"+i).val();
+                    console.log(biaya);
+                    var total = kuantitas * biaya
+                    $("#sub_total_"+i).val(total);
                     console.log(total);
-                    total = parseInt(total) + parseInt(subTotal);//total lama + sub total produk baru
-                    $('#tabelTotal').html(total);
-                    
-                    produkSesudah = $("#produk_"+formAdd).val();
-                    console.log('sesudah:'+produkSesudah);
-                    
-                    tr = $("#appendd tr").length;
-                    console.log("tr:"+tr);
-                    for (i = 1; i < tr; i++) {
-                        console.log('i'+i)
-                        produkSebelum = $("#produk_"+i).val();
-                        console.log('2:'+produkSebelum);
-                        var qty = $('#kuantitas_'+i).val();
-                        console.log('qty:'+qty);
-                        if(produkSebelum == produkSesudah && qty>0){
-                                console.log('i='+i);
-                                qty++;
-                                $('#kuantitas_'+i).val(qty);
-                                console.log('formAdd3:'+formAdd);
-                                var subTotal = qty*res.harga_jual;
-                                $('#sub_total_'+i).val(subTotal);
-                                console.log('subsebelum',total)
-                                // total = parseInt(total) + parseInt(subTotal);
-                                // console.log('totatambah',total)
-                                $('#tabelTotal').html(total);
-                                $("#trTable_"+formAdd).remove();    
-                        }else{
-                            $('#kuantitas_'+formAdd).val(kuantitas);
-                            var subTotal = kuantitas*res.harga_jual;
-                            $('#sub_total_'+formAdd).val(subTotal);
-                        }
+                    var row = $('#appendd tr').length;
+                    console.log(row);
+                    total1 =0;
+                    // var ini = $("#appendd tr:eq(0) td:eq(3) input").val();
+                    // console.log(ini)
+                    for (index = 1; index <= row; index++) {
+                        console.log(index); 
+                        var sub = $('#tableProduk tr:eq('+index+') > td:eq(3) input').val();
+                        console.log('sub'+sub);
+                        var total1 = parseInt(total1) + parseInt(sub);
+                        console.log(total1)
+                        $('#tabelTotal').html(total1);
                     }
-                    $('*[onclick]').prop('disabled',false);
-                    $('*[data-toggle="modal"]').prop('disabled',false)
-                    // produkSesudah = 
-                    // if()
+                }
 
-                    // penjumlahan
+                function hapusTable(formAdd){
+                    sub = $('#sub_total_'+formAdd).val();
+                    console.log('-'+sub)
+                    var total = $('#tabelTotal').html();
+                    console.log(total)
+                    totals = parseInt(total) - parseInt(sub);
+                    console.log(totals)
+                    $('#tabelTotal').html(totals);
+                    $('#trTable_'+formAdd).remove();
+                }
 
-                    
+                function hitungTotal(j){
+                    var row = $('#dataTable > tbody > tr').length;
+                    total1 =0;
+                    for (let index = 1; index <= row; index++) {
+                        var sub = $("#sub_total_"+index).val();
+                        var total1 = parseInt(total1) + parseInt(sub);
+                        $('#tabelTotal').val(total1);
+                    }
+                }
 
+                var table = $('#dataTable').dataTable({
+                    processing: true,
+                    serverSide: true,
+                    pageLength: 15,
+                    order: [ 0, 'asc' ],
+                    dom: 'Bfrtip',
+                    buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+                    ajax: {
+                        url: "{{ route($route.'api') }}",
+                        method: 'POST'
+                    },
 
-
-                }, 'JSON').done(function () {
-                    console.log('Done');
-                }).fail(function(e){
-                    console.log('Error');
+                    columns: [
+                        {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, align: 'center', className: 'text-center'},
+                        {data: 'tanggal', name: 'tanggal'},
+                        {data: 'referensi', name: 'referensi'},
+                        {data: 'total', name: 'total'},
+                        {data: 'catatan', name: 'catatan'},
+                        {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
+                    ]
                 });
-            }
-
-            function hitungKuantitas(i){
-                var kuantitas  = $("#kuantitas_"+i).val();
-                console.log(i);
-                 console.log(kuantitas);
-                var biaya = $("#biaya_satuan_"+i).val();
-                 console.log(biaya);
-                var total = kuantitas * biaya
-                $("#sub_total_"+i).val(total);
-                console.log(total);
-                var row = $('#appendd tr').length;
-                console.log(row);
-                total1 =0;
-                // var ini = $("#appendd tr:eq(0) td:eq(3) input").val();
-                // console.log(ini)
-                for (index = 1; index <= row; index++) {
-                    console.log(index); 
-                    var sub = $('#tableProduk tr:eq('+index+') > td:eq(3) input').val();
-                    console.log('sub'+sub);
-                    var total1 = parseInt(total1) + parseInt(sub);
-                    console.log(total1)
-                    $('#tabelTotal').html(total1);
-                }
-            }
-
-            function hapusTable(formAdd){
-                sub = $('#sub_total_'+formAdd).val();
-                console.log('-'+sub)
-                var total = $('#tabelTotal').html();
-                console.log(total)
-                totals = parseInt(total) - parseInt(sub);
-                console.log(totals)
-                $('#tabelTotal').html(totals);
-                $('#trTable_'+formAdd).remove();
-            }
-
-            function hitungTotal(j){
-                var row = $('#dataTable > tbody > tr').length;
-                total1 =0;
-                for (let index = 1; index <= row; index++) {
-                    var sub = $("#sub_total_"+index).val();
-                    var total1 = parseInt(total1) + parseInt(sub);
-                    $('#tabelTotal').val(total1);
-                }
-            }
-
-            var table = $('#dataTable').dataTable({
-                processing: true,
-                serverSide: true,
-                pageLength: 15,
-                order: [ 0, 'asc' ],
-                dom: 'Bfrtip',
-                buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
-                ajax: {
-                    url: "{{ route($route.'api') }}",
-                    method: 'POST'
-                },
-
-                columns: [
-                    {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, align: 'center', className: 'text-center'},
-                    {data: 'tanggal', name: 'tanggal'},
-                    {data: 'referensi', name: 'referensi'},
-                    {data: 'total', name: 'total'},
-                    {data: 'catatan', name: 'catatan'},
-                    {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
-                ]
             });
-
 
 
     //   $( function() {

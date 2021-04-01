@@ -96,10 +96,7 @@
     })();
 
     function tampilkanPreview(gambar, idpreview) {
-        $('#result').attr({
-        'src': '-',
-        'alt': ''
-    });
+        
         var gb = gambar.files;
         for (var i = 0; i < gb.length; i++) {
             var gbPreview = gb[i];
@@ -143,7 +140,7 @@
         $('#changeText').html('Browser Image')
     }
 
-        function add(){
+    function add(){
         save_method = "add";
         $('#form').trigger('reset');
         $('#formTitle').html('Tambah Data');
@@ -159,7 +156,7 @@
          $('#preview').attr({
         'src': '-',
         'alt': ''
-    });
+        });
     }
 
 

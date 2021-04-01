@@ -52,6 +52,29 @@
             $('input[name=_method]').val('POST');
         }
 
+        $( "#cariPelanggan" ).autocomplete({
+                    source: function( request, response ) {
+                        // Fetch data
+                        $.ajax({
+                        url:"{{route('Pos.cariPelanggan')}}",
+                        type: 'post',
+                        dataType: "json", 
+                        data: {
+                            _token: CSRF_TOKEN,
+                            search: request.term
+                        },
+                        success: function( data ) {
+                            console.log(data)
+                            if(data[0] == null){
+                                data[0] = 'Data tidak ditemukan'
+                            }
+                            // console.log(data);
+                            response( data );
+                        }
+                        });
+                    }
+        });
+
         $('#formPelanggan').on('submit', function (e) {
             if ($(this)[0].checkValidity() === false) {
                 event.preventDefault();

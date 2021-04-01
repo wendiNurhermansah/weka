@@ -92,7 +92,7 @@ class PosController extends Controller
         }
     }
 
-    public function produk(Request $request)
+    public function cariProduk(Request $request)
     {
         $search = $request->search;
 
@@ -114,7 +114,29 @@ class PosController extends Controller
         return response()->json($response);
     }
 
-    public function cariProduk(){
+    public function cariPelanggan(Request $request)
+    {
+        $search = $request->search;
+
+        if($search == ''){
+           $kategori = Pelanggan::orderby('nama','asc')
+                        ->limit(5)
+                        ->get();
+        }else{
+           $kategori = Pelanggan::orderby('nama','asc')
+                        ->where('nama', 'like', '%' .$search . '%')
+                        ->limit(5)
+                        ->get();
+
+            $response = array();
+            foreach($kategori as $k){
+                $response[] = array("id"=>$k->id,"label"=>$k->nama);
+            }        
+        }
+        return response()->json($response);
+    }
+
+    public function produk(){
         return product::find($id);
     }
 
