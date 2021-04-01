@@ -108,14 +108,14 @@
         </a>
         <ul class="treeview-menu">
             <li class="no-b">
-                <a href="{{ route('Orang.pegawai.index')}}">
+                <a href="{{ route('Orang.pengguna.index')}}">
                     <i class="icon icon-list red-text s-18"></i>
                     <span>Daftar Penjualan</span>
                 </a>
             </li>
 
             <li class="no-b">
-                <a href="{{ route('Orang.pegawai.index') }}">
+                <a href="{{ route('Orang.pengguna.index') }}">
                     <i class="icon icon-list blue-text s-18"></i>
                     <span>Daftar Opened Bills</span>
                 </a>
@@ -130,9 +130,9 @@
         </a>
         <ul class="treeview-menu">
             <li class="no-b">
-                <a href="{{route('Orang.pegawai.index')}}">
+                <a href="{{route('Orang.pengguna.index')}}">
                     <i class="icon icon-circle-o"></i>
-                    <span>Daftar Pegawai</span>
+                    <span>Daftar Pengguna</span>
                 </a>
             </li>
 
@@ -152,9 +152,9 @@
 
 
             <li class="no-b">
-                <a href="{{route('Orang.tambahpegawai')}}">
+                <a href="{{route('Orang.tambahpengguna')}}">
                     <i class="icon icon-circle-o"></i>
-                    <span>Tambah Pegawai</span>
+                    <span>Tambah Pengguna</span>
                 </a>
             </li>
             <li class="no-b">
