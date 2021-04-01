@@ -75,15 +75,15 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required',
-            'kategori' => 'required',
-            'kuantitas' => 'required',
-            'pajak' => 'required',
-            'biaya' => 'required',
-            'harga' => 'required',
-            'gambar' => 'required|mimes:png,jpeg,png|max:2024'
-        ]);
+        // $request->validate([
+        //     'nama' => 'required',
+        //     'kategori' => 'required',
+        //     'kuantitas' => 'required',
+        //     'pajak' => 'required',
+        //     'biaya' => 'required',
+        //     'harga' => 'required',
+        //     'gambar' => 'required|mimes:png,jpeg,png|max:2024'
+        // ]);
         $file     = $request->file('gambar');
         $fileName = rand() . '.' . $file->getClientOriginalExtension();
         // $request->file('gambar')->move("kategori/images/ava/", $fileName);
@@ -145,14 +145,14 @@ class ProductsController extends Controller
     public function update(Request $request, $id){
 
         $produk = product::find($id);
-        $request->validate([
-            'nama' => 'required',
-            'harga_pabrik' => 'required',
-            'discount' => 'required',
-            'harga_jual' => 'required',
-            'harga_nett' => 'required',
-            'stock' => 'required',
-            ]);
+        // $request->validate([
+        //     'nama' => 'required',
+        //     'harga_pabrik' => 'required',
+        //     'discount' => 'required',
+        //     'harga_jual' => 'required',
+        //     'harga_nett' => 'required',
+        //     'stock' => 'required',
+        //     ]);
 
         $nama = $request->nama;
         $kode = $request->kode;
