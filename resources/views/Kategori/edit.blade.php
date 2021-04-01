@@ -27,7 +27,7 @@
                         <div class="col-md-12">
                             <div class="form-group col-md-8">
                                 <label for="kode">Kode</label>
-                                <input type="textarea" class="form-control @error('kode') is-invalid @enderror" id="kode" placeholder="masukan kode" name="kode" value="{{ $Kategori->kode }}" required>
+                                <input type="textarea" class="form-control @error('kode') is-invalid @enderror" id="kode" placeholder="masukan kode" name="kode" value="{{ $Kategori->kode }}" maxlength="4" required>
                                 @error('kode')
                                     <div class="valid-feedback">
                                         {{ $message }}
@@ -44,7 +44,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group m-0 col-md-8">
+                            {{-- <div class="form-group m-0 col-md-8">
                                 <label for="gambar" class="col-form-label s-12 col-md-2">
                                     Gambar
                                     <a class="ml-1 mt-1" data-toggle="popover" title="Required" data-html="true" data-content="Max File: 2MB<br/>Format File: (png, jpg, jpeg)<br/>Width: 500 pixel<br/>Height: 500 pixel">
@@ -56,6 +56,26 @@
                                     <i class="icon icon-image mr-2 m-b-1"></i>
                                     <span id="changeText" class="js-fileName" >Browse Image</span>
                                 </label>
+                            </div> --}}
+                            <div class="form-group m-0 col-md-8">
+                                <label for="gambar" class="col-form-label s-12 col-md-2">Foto</label>
+                                <input type="file" name="gambar" id="file" class="input-file" onchange="tampilkanPreview(this,'preview')">
+                                <label for="file" class="btn-tertiary js-labelFile col-md-12">
+                                    <i class="icon icon-image mr-2 m-b-1"></i>
+                                    <span class="js-fileName">Browse Image</span>
+                                </label>
+                            </div>
+                            <div class="form-group m-0">
+                                <label class="col-form-label s-12 col-md-2"></label>
+                                @if ($Kategori->gambar != null)
+                                <img width="150" src="{{config('app.sftp_src').'images/' . $Kategori->gambar}}" class="rounded img-fluid mt-2" alt=""/>
+                                @else
+                                <img width="150" src="{{ asset('images/404.png') }}" class="rounded img-fluid mt-2" alt=""/>
+                                @endif
+                            </div>
+                            <div class="form-group m-0">
+                                <label class="col-form-label s-12 col-md-2"></label>
+                                <img width="150" class="rounded img-fluid mt-2 mb-2" id="preview" alt=""/>
                             </div>
 
                             <div class="mt-2 col-md-8" style="">

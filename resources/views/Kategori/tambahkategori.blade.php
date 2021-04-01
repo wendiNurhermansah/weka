@@ -25,9 +25,9 @@
                     <h4 id="formTitle">Tambah Kategori</h4><hr>
                     <div class="form-row">
                         <div class="col-md-12">
-                            <div class="form-group col-md-6">
+                            <div id="validasiKode" class="form-group col-md-6">
                                 <label for="kode">KODE</label>
-                                <input type="text" class="form-control @error('kode') is-invalid @enderror" id="kode" placeholder="masukan kode 4 karakter" name="kode" value="{{ old('kode') }}" maxlength="4" required>
+                                <input type="text" class="form-control @error('kode') is-invalid @enderror" id="kode" placeholder="masukan kode 4 karakter" name="kode" value="{{ old('kode') }}"  maxlength="4" required>
                                 @error('kode')
                                     <div class="valid-feedback">
                                         {{ $message }}
