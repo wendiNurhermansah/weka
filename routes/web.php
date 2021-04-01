@@ -87,9 +87,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('Orang')->namespace('orang')->name('Orang.')->group(function () {
 
             //pegawai
-            Route::resource('pegawai', 'PegawaiController');
-            Route::post('pegawai/api', 'PegawaiController@api')->name('pegawai.api');
-            Route::get('tambahpegawai', 'PegawaiController@tambahpegawai')->name('tambahpegawai');
+            Route::resource('pengguna', 'PegawaiController');
+            Route::post('pegawai/api', 'PegawaiController@api')->name('pengguna.api');
+            Route::get('tambahpengguna', 'PegawaiController@tambahpegawai')->name('tambahpengguna');
 
 
             //pelanggan

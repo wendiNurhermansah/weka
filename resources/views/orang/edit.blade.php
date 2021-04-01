@@ -18,7 +18,7 @@
     <div class="container-fluid my-3">
         <div class="card">
             <div class="card-body">
-                <form class="needs-validation" action="{{ route('Orang.pegawai.update', $Pegawai->id) }}" method="POST" enctype="multipart/form-data">
+                <form class="needs-validation" action="{{ route('Orang.pengguna.update', $Pegawai->id) }}" method="POST" enctype="multipart/form-data">
                     {{ method_field('PATCH') }}
                     @csrf
                     <input type="hidden" id="id" name="id" value="{{$Pegawai->id}}"/>

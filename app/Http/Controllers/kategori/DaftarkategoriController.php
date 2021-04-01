@@ -140,16 +140,16 @@ class DaftarkategoriController extends Controller
     {
         $Kategori = Kategori::find($id);
         $request->validate([
-            'kode' => 'required|unique:tmkategori|max:4|min:4',
+            'kode' => 'required|max:4|min:4',
             'nama' => 'required',
 
         ]);
 
         $kode = $request->kode;
         $nama = $request->nama;
-        if ($request->foto != null) {
+        if ($request->gambar != null) {
             $request->validate([
-                'gambar' => 'required|mimes:png,jpg,jpeg|max:1024'
+                'gambar' => 'required'
             ]);
 
             // Proses Saved Foto
@@ -158,9 +158,9 @@ class DaftarkategoriController extends Controller
             $request->file('gambar')->storeAs('images', $fileName, 'sftp', 'public');
 
             // Proses Delete Foto
-            $exist = $Kategori->foto;
-            $path  = "kategori/images/ava/" . $exist;
-            \File::delete(public_path($path));
+            $exist = $Kategori->gambar;
+
+            Storage::disk('sftp')->delete('images/' . $exist);
 
             $Kategori->update([
                'kode' => $kode,

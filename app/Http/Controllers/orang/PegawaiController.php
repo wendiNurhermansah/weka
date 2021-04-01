@@ -16,11 +16,11 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        return view ('orang.pegawai');
+        return view ('orang.pengguna');
     }
 
     public function tambahpegawai(){
-        return view ('orang.tambahpegawai');
+        return view ('orang.tambahpengguna');
     }
 
     public function api()
@@ -30,11 +30,9 @@ class PegawaiController extends Controller
 
             ->addColumn('action', function ($p) {
                 return "
-                    <a href='" . route('Orang.pegawai.edit', $p->id) . "' onclick='edit(" . $p->id . ")' title='Edit Role'><i class='icon-pencil mr-1'></i></a>
+                    <a href='" . route('Orang.pengguna.edit', $p->id) . "' onclick='edit(" . $p->id . ")' title='Edit Role'><i class='icon-pencil mr-1'></i></a>
                     <a href='#' onclick='remove(" . $p->id . ")' class='text-danger' title='Hapus data'><i class='icon-remove'></i></a>";
             })
-
-
 
 
             ->addIndexColumn()
