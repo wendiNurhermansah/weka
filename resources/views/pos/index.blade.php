@@ -116,7 +116,7 @@
                                 <tfoot>
                                     <tr>
                                         <th>Total Items</th>
-                                        <th>0</th>
+                                        <th><span id="totalItems">0</span></th>
                                         <th>Total</th>
                                         <th><span id="tabelTotal"></span></th>
                                     </tr>
@@ -154,7 +154,7 @@
                             @foreach ($kartu as $k)
                             <div class="m-1">
                                     <button id="klik-kartu" class="card m-1 border-0" onclick="searchProduk({{$k->id}})" style="width: 10rem;">
-                                        <img class="card-img-top" src="{{asset('produk/images/ava/'.$k->gambar)}}" alt=""  width="10" height="40">
+                                        <img class="card-img-top" src="{{config('app.sftp_src').'images/'.$k->gambar}}" alt=""  width="10" height="40">
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item"><small>{{$k->nama}}</small></li>
                                             <li class="list-group-item"><small>{{$k->harga_jual}}</small></li>
@@ -259,6 +259,8 @@
                     })
             }
 
+            var formAdd = 0;
+
             $(document).ready(function(){
                 //page links
                 // $('#pageNext').click(function(e){
@@ -340,108 +342,6 @@
                             return false;
                         }
                 });
-
-                var formAdd = 0;
-                
-                function searchProduk(id){
-                    console.log('pro')
-                    // $("#klik-kartu").prop('disabled', true);
-                    // $('#klik-kartu').bind('click');     
-                    // $('#data_kartu *[onclick]').removeAttr('onclick');
-                    $('*[onclick]').prop('disabled',true);
-                    $('*[data-toggle="modal"]').prop('disabled',true)
-                        // $($(this).data('target')).toggleClass('in');
-                
-    
-                    formAdd++;
-
-                    var url = "{{ route('Pos.produk', ':id') }}".replace(':id', id);
-                    // console.log(url);
-                    var html = `
-                    <tr id="trTable_`+formAdd+`" class="bg-gradient-danger">
-                                                        <td text-align: left;">
-                                                            <input type="text" class="searchProduk" id="produk_id`+formAdd+`" name="produk_id[]" hidden>
-                                                            <input type="text" id="produk_`+formAdd+`" name="produk_[]" class="searchProduk" style="width:160px;" readonly>
-
-                                                        </td>
-                                                        <td>
-                                                            <input type="text"  id="biaya_satuan_`+formAdd+`" class="searchProduk" style="width:70px;" float: right;" name="biaya_satuan[]" readonly>
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas(`+formAdd+`)" class="searchProduk" style="width:30px;" text-align: center;" name="kuantitas[]">
-                                                        </td>
-                                                        <td>
-                                                            <input type="text"  id="sub_total_`+formAdd+`"  class="searchProduk" style="width:70px;" float: right; border: none;" name="sub_total[]" >
-                                                        </td>
-                                                        <td>
-
-                                                            <a href='#' onclick='hapusTable(`+formAdd+`)' title='Hapus data'><i class="icon-trash text-danger"></i>  </a>
-                                                        </td>
-                                                    </tr>
-
-                    `;
-
-
-
-                    $.get(url, function (res) {
-                            var kuantitas = 1;
-                            
-                            $('#appendd').append(html);//tambah item
-                            $('#produk_id'+formAdd).val(res.id);//ambil id
-                            var p = $('#produk_'+formAdd).val(res.nama);//ambil nama
-                            $('#biaya_satuan_'+formAdd).val(res.harga_jual);//ambil biaya
-                            $('#kuantitas_'+formAdd).val(kuantitas);//ambil kuantitias
-                            var subTotal = kuantitas*res.harga_jual; 
-                            $('#sub_total_'+formAdd).val(subTotal);//subtotal
-
-                            var total = $('#tabelTotal').html();//ambil total lama
-                            console.log(subTotal);
-                            console.log(total);
-                            total = parseInt(total) + parseInt(subTotal);//total lama + sub total produk baru
-                            $('#tabelTotal').html(total);
-                            
-                            produkSesudah = $("#produk_"+formAdd).val();
-                            console.log('sesudah:'+produkSesudah);
-                            
-                            tr = $("#appendd tr").length;
-                            console.log("tr:"+tr);
-                            for (i = 1; i < tr; i++) {
-                                console.log('i'+i)
-                                produkSebelum = $("#produk_"+i).val();
-                                console.log('2:'+produkSebelum);
-                                var qty = $('#kuantitas_'+i).val();
-                                console.log('qty:'+qty);
-                                if(produkSebelum == produkSesudah && qty>0){
-                                        console.log('i='+i);
-                                        qty++;
-                                        $('#kuantitas_'+i).val(qty);
-                                        console.log('formAdd3:'+formAdd);
-                                        var subTotal = qty*res.harga_jual;
-                                        $('#sub_total_'+i).val(subTotal);
-                                        console.log('subsebelum',total)
-                                        // total = parseInt(total) + parseInt(subTotal);
-                                        // console.log('totatambah',total)
-                                        $('#tabelTotal').html(total);
-                                        $("#trTable_"+formAdd).remove();    
-                                }else{
-                                    $('#kuantitas_'+formAdd).val(kuantitas);
-                                    var subTotal = kuantitas*res.harga_jual;
-                                    $('#sub_total_'+formAdd).val(subTotal);
-                                }
-                            }
-                            $('*[onclick]').prop('disabled',false);
-                            $('*[data-toggle="modal"]').prop('disabled',false)
-                            // produkSesudah = 
-                            // if()
-
-                            // penjumlahan
-
-                    }, 'JSON').done(function () {
-                            console.log('Done');
-                    }).fail(function(e){
-                            console.log('Error');
-                    });
-                };
                 
                 function hitungKuantitas(i){
                     var kuantitas  = $("#kuantitas_"+i).val();
@@ -521,6 +421,111 @@
     //       source: availableTags
     //     });
     //   } );
+    function searchProduk(id){
+                    console.log('pro')
+                    // $("#klik-kartu").prop('disabled', true);
+                    // $('#klik-kartu').bind('click');     
+                    // $('#data_kartu *[onclick]').removeAttr('onclick');
+                    $('*[onclick]').prop('disabled',true);
+                    $('*[data-toggle="modal"]').prop('disabled',true)
+                        // $($(this).data('target')).toggleClass('in');
+                
+    
+                    formAdd++;
+
+                    var url = "{{ route('Pos.produk', ':id') }}".replace(':id', id);
+                    // console.log(url);
+                    var html = `
+                    <tr id="trTable_`+formAdd+`" class="bg-gradient-danger">
+                                                        <td text-align: left;">
+                                                            <input type="text" class="searchProduk" id="produk_id`+formAdd+`" name="produk_id[]" hidden>
+                                                            <input type="text" id="produk_`+formAdd+`" name="produk_[]" class="searchProduk" style="width:160px;" readonly>
+
+                                                        </td>
+                                                        <td>
+                                                            <input type="text"  id="biaya_satuan_`+formAdd+`" class="searchProduk" style="width:70px;" float: right;" name="biaya_satuan[]" readonly>
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas(`+formAdd+`)" class="searchProduk" style="width:30px;" text-align: center;" name="kuantitas[]">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text"  id="sub_total_`+formAdd+`"  class="searchProduk" style="width:70px;" float: right; border: none;" name="sub_total[]" >
+                                                        </td>
+                                                        <td>
+
+                                                            <a href='#' onclick='hapusTable(`+formAdd+`)' title='Hapus data'><i class="icon-trash text-danger"></i>  </a>
+                                                        </td>
+                                                    </tr>
+
+                    `;
+
+
+
+                    $.get(url, function (res) {
+                            var kuantitas = 1;
+                            
+                            $('#appendd').append(html);//tambah item
+                            $('#produk_id'+formAdd).val(res.id);//ambil id
+                            var p = $('#produk_'+formAdd).val(res.nama);//ambil nama
+                            $('#biaya_satuan_'+formAdd).val(res.harga_jual);//ambil biaya
+                            $('#kuantitas_'+formAdd).val(kuantitas);//ambil kuantitias
+                            var subTotal = kuantitas*res.harga_jual; 
+                            $('#sub_total_'+formAdd).val(subTotal);//subtotal
+
+                            var total = $('#tabelTotal').html();//ambil total lama
+                            console.log(subTotal);
+                            console.log(total);
+                            total = parseInt(total) + parseInt(subTotal);//total lama + sub total produk baru
+                            $('#tabelTotal').html(total);
+                            
+                            produkSesudah = $("#produk_"+formAdd).val();
+                            console.log('sesudah:'+produkSesudah);
+                            
+                            tr = $("#appendd tr").length;
+                            console.log("tr:"+tr);
+                            for (i = 1; i < tr; i++) {
+                                console.log('i'+i)
+                                produkSebelum = $("#produk_"+i).val();
+                                console.log('2:'+produkSebelum);
+                                var qty = $('#kuantitas_'+i).val();
+                                console.log('qty:'+qty);
+                                if(produkSebelum == produkSesudah && qty>0){
+                                        console.log('i='+i);
+                                        qty++;
+                                        $('#kuantitas_'+i).val(qty);
+                                        console.log('formAdd3:'+formAdd);
+                                        var subTotal = qty*res.harga_jual;
+                                        $('#sub_total_'+i).val(subTotal);
+                                        console.log('subsebelum',total)
+                                        // total = parseInt(total) + parseInt(subTotal);
+                                        // console.log('totatambah',total)
+                                        $('#tabelTotal').html(total);
+                                        $("#trTable_"+formAdd).remove(); 
+                                        console.log('masuk sini')   
+                                }else{
+                                    $('#kuantitas_'+formAdd).val(kuantitas);
+                                    var subTotal = kuantitas*res.harga_jual;
+                                    $('#sub_total_'+formAdd).val(subTotal);
+                                    item = $('#totalItems').html()
+                                    item++;
+                                    $('#totalItems').html(item)
+                                    console.log('masuk sono')
+                                }
+                            }
+
+                            $('*[onclick]').prop('disabled',false);
+                            $('*[data-toggle="modal"]').prop('disabled',false)
+                            // produkSesudah = 
+                            // if()
+
+                            // penjumlahan
+
+                    }, 'JSON').done(function () {
+                            console.log('Done');
+                    }).fail(function(e){
+                            console.log('Error');
+                    });
+                };
     </script>
 @stack('script')
 @endsection

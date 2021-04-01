@@ -70,7 +70,7 @@ class PosController extends Controller
                 // concatenate output to the array
                 $output .=  '<a href="#" onclick="searchProduk('.$k->id.')">
                                 <div class="card m-1" style="width: 10rem;">
-                                    <img class="card-img-top" src="../produk/images/ava/'.$k->gambar.'" alt=""  width="10" height="40">
+                                    <img class="card-img-top" src="'.config('app.sftp_src')."images/".$k->gambar.'" alt=""  width="10" height="40">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item"><small>'.$k->nama.'</small></li>
                                         <li class="list-group-item"><small>'.$k->harga_jual.'</small></li>
@@ -136,7 +136,7 @@ class PosController extends Controller
         return response()->json($response);
     }
 
-    public function produk(){
+    public function produk($id){
         return product::find($id);
     }
 
