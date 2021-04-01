@@ -124,7 +124,7 @@ class DaftarkategoriController extends Controller
     public function edit($id)
     {
         $Kategori = Kategori::find($id);
-        return view('kategori.editkategori', compact(
+        return view('Kategori.editkategori', compact(
         'Kategori'
         ));
     }
