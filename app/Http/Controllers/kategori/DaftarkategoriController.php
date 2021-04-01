@@ -81,7 +81,7 @@ class DaftarkategoriController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode' => 'required|unique:tmkategori|max:4',
+            'kode' => 'required|unique:tmkategori|max:4|min:4',
             'nama' => 'required',
             'gambar' => 'required'
         ]);
@@ -99,6 +99,7 @@ class DaftarkategoriController extends Controller
 
         return response()->json([
             'message' => 'Data berhasil tersimpan.'
+
         ]);
 
     }
@@ -139,7 +140,7 @@ class DaftarkategoriController extends Controller
     {
         $Kategori = Kategori::find($id);
         $request->validate([
-            'kode' => 'required',
+            'kode' => 'required|unique:tmkategori|max:4|min:4',
             'nama' => 'required',
 
         ]);
