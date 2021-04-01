@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', ' | Daftar Pegawai')
+@section('title', ' | Daftar Pengguna')
 @section('content')
 <div class="page has-sidebar-left height-full">
     <header class="blue accent-3 relative nav-sticky">
@@ -8,7 +8,7 @@
                 <div class="col">
                     <h4>
                         <i class="icon icon-users mr-1"></i>
-                        DAFTAR PEGAWAI
+                        DAFTAR PENGGUNA
                     </h4>
                 </div>
             </div>
@@ -55,6 +55,7 @@
                 url: "{{ route('Orang.pengguna.api') }}",
                 method: 'POST'
             },
+
 
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, align: 'center', className: 'text-center'},

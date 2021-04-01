@@ -35,6 +35,7 @@ class PegawaiController extends Controller
             })
 
 
+
             ->addIndexColumn()
             ->rawColumns(['action'])
             ->toJson();
