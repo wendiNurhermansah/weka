@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Tambah Produk')
+@section('title', '| Tambah Produk')
 @section('content')
 <div class="page has-sidebar-left height-full">
     <header class="blue accent-3 relative nav-sticky">
@@ -104,7 +104,7 @@
             $('#result').attr({
             'src': '-',
             'alt': ''
-        });
+            });
             var gb = gambar.files;
             for (var i = 0; i < gb.length; i++) {
                 var gbPreview = gb[i];
@@ -119,7 +119,7 @@
                         };
                     })(preview);
                     reader.readAsDataURL(gbPreview);
-
+                    console.log(element.src);
                 } else {
                     $.confirm({
                         title: '',
@@ -140,6 +140,25 @@
                     });
                 }
             }
+        }
+
+        function add(){
+            save_method = "add";
+            $('#form').trigger('reset');
+            $('#formTitle').html('Tambah Data');
+            $('input[name=_method]').val('POST');
+            $('#txtAction').html('');
+            $('#reset').show();
+            $('#name').focus();
+            $('#result').attr({
+                'src': '-',
+                'alt': ''
+            });
+            $('#changeText').html('Browse Image');
+            $('#preview').attr({
+            'src': '-',
+            'alt': ''
+            });
         }
 </script>
 @endsection

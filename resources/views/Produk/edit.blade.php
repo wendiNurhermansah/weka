@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'EDIT')
+@section('title', '| EDIT')
 @section('content')
 <div class="page has-sidebar-left height-full">
     <header class="blue accent-3 relative nav-sticky">
@@ -29,7 +29,7 @@
                                     <i class="icon icon-information2 s-18 red-text"></i>
                                 </a>
                             </label>
-                            <input type="file" name="gambar" id="file" class="input-file @error('gambar') is-invalid @enderror" onchange="tampilkanPreview(this,'preview')" size="60" value="{{$produk->gambar}}">
+                            <input type="file" name="gambar" id="file" class="input-file @error('gambar') is-invalid @enderror" onchange="tampilkanPreview(this,'preview')" size="60">
                             <label for="file" class="btn-tertiary js-labelFile col-md-12">
                                 <i class="icon icon-image mr-2 m-b-1"></i>
                                 <span id="changeText" class="js-fileName">Browse Image</span>
@@ -109,7 +109,7 @@
         });
     })();
 
-    function tampilkanPreview(foto, idpreview) {
+    function tampilkanPreview(gambar, idpreview) {
         $('#result').attr({
             'src': '-',
             'alt': ''
@@ -148,6 +148,25 @@
                     });
                 }
             }
+        }
+
+        function add(){
+            save_method = "add";
+            $('#form').trigger('reset');
+            $('#formTitle').html('Tambah Data');
+            $('input[name=_method]').val('POST');
+            $('#txtAction').html('');
+            $('#reset').show();
+            $('#name').focus();
+            $('#result').attr({
+                'src': '-',
+                'alt': ''
+            });
+            $('#changeText').html('Browse Image');
+            $('#preview').attr({
+            'src': '-',
+            'alt': ''
+            });
         }
 </script>
 @endsection
