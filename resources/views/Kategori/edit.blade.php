@@ -92,6 +92,8 @@
 @endsection
 @section('script')
  <script type="text/javascript">
+
+
     (function () {
         'use strict';
         $('.input-file').each(function () {
@@ -108,7 +110,7 @@
         });
     })();
 
-    function tampilkanPreview(foto, idpreview) {
+    function tampilkanPreview(gambar, idpreview) {
         var gb = gambar.files;
         for (var i = 0; i < gb.length; i++) {
             var gbPreview = gb[i];
@@ -137,13 +139,21 @@
                             text: "ok!",
                             btnClass: 'btn-primary',
                             keys: ['enter'],
-                            action: add()
+                            action: reset()
+
                         }
                     }
                 });
             }
         }
     }
+
+    function reset(){
+        $('#form').trigger('reset');
+        $('#preview').attr({ 'src': '-', 'alt': ''});
+        $('#changeText').html('Browse Image')
+    }
+
 
 
  </script>

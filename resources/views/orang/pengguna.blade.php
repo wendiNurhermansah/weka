@@ -52,7 +52,7 @@
             pageLength: 15,
             order: [ 0, 'asc' ],
             ajax: {
-                url: "{{ route('Orang.pegawai.api') }}",
+                url: "{{ route('Orang.pengguna.api') }}",
                 method: 'POST'
             },
 
@@ -82,7 +82,7 @@
                     btnClass: 'btn-primary',
                     keys: ['enter'],
                     action: function(){
-                        $.post("{{ route('Orang.pegawai.destroy', ':id') }}".replace(':id', id), {'_method' : 'DELETE'}, function(data) {
+                        $.post("{{ route('Orang.pengguna.destroy', ':id') }}".replace(':id', id), {'_method' : 'DELETE'}, function(data) {
                            table.api().ajax.reload();
                             if(id == $('#id').val()) add();
                         }, "JSON").fail(function(){
