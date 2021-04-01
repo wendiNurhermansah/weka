@@ -69,7 +69,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('daftarketegori/api', 'DaftarkategoriController@api')->name('daftarkategori.api');
             Route::get('tambahkategori', 'DaftarkategoriController@tambahkategori')->name('tambahkategori');
             Route::get('show-data-modal/{id}', 'DaftarkategoriController@showDataModal')->name('daftarkategori.showDataModal');
-
+                
 
             //tambah kategori
 

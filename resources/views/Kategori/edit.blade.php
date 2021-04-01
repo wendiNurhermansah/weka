@@ -68,9 +68,9 @@
                             <div class="form-group m-0">
                                 <label class="col-form-label s-12 col-md-2"></label>
                                 @if ($Kategori->gambar != null)
-                                <img width="150" src="{{config('app.sftp_src').'images/' . $Kategori->gambar}}" class="rounded img-fluid mt-2" alt=""/>
+                                <img id="result" width="150" src="{{config('app.sftp_src').'images/' . $Kategori->gambar}}" class="rounded img-fluid mt-2" alt=""/>
                                 @else
-                                <img width="150" src="{{ asset('images/404.png') }}" class="rounded img-fluid mt-2" alt=""/>
+                                <img id="result" width="150" src="{{ asset('images/404.png') }}" class="rounded img-fluid mt-2" alt=""/>
                                 @endif
                             </div>
                             <div class="form-group m-0">
@@ -111,6 +111,10 @@
     })();
 
     function tampilkanPreview(gambar, idpreview) {
+        $('#result').attr({
+            'src': '-',
+            'alt': ''
+        });
         var gb = gambar.files;
         for (var i = 0; i < gb.length; i++) {
             var gbPreview = gb[i];
