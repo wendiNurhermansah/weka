@@ -96,7 +96,14 @@
     })();
 
     function tampilkanPreview(gambar, idpreview) {
+<<<<<<< HEAD
         
+=======
+        $('#result').attr({
+        'src': '-',
+        'alt': ''
+        });
+>>>>>>> 69a8ccfaf2110d9674f23bcf6aa34a898e0ec721
         var gb = gambar.files;
         for (var i = 0; i < gb.length; i++) {
             var gbPreview = gb[i];

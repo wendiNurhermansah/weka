@@ -75,15 +75,15 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'nama' => 'required',
-        //     'kategori' => 'required',
-        //     'kuantitas' => 'required',
-        //     'pajak' => 'required',
-        //     'biaya' => 'required',
-        //     'harga' => 'required',
-        //     'gambar' => 'required|mimes:png,jpeg,png|max:2024'
-        // ]);
+        $request->validate([
+            'nama' => 'required',
+            'kategori' => 'required',
+            'kuantitas' => 'required',
+            'pajak' => 'required',
+            'biaya' => 'required',
+            'harga' => 'required',
+            'gambar' => 'required|mimes:png,jpeg,png|max:2024'
+        ]);
         $file     = $request->file('gambar');
         $fileName = rand() . '.' . $file->getClientOriginalExtension();
         // $request->file('gambar')->move("kategori/images/ava/", $fileName);
@@ -142,17 +142,17 @@ class ProductsController extends Controller
     //  * @param  \App\Models\product
     //  * @return \Illuminate\Http\Response
     //  */
-    public function update(Request $request, $id)
-        {
+    public function update(Request $request, $id){
+
         $produk = product::find($id);
-        // $request->validate([
-        //     'nama' => 'required',
-        //     'harga_pabrik' => 'required',
-        //     'discount' => 'required',
-        //     'harga_jual' => 'required',
-        //     'harga_nett' => 'required',
-        //     'stock' => 'required',
-        //     ]);
+        $request->validate([
+            'nama' => 'required',
+            'harga_pabrik' => 'required',
+            'discount' => 'required',
+            'harga_jual' => 'required',
+            'harga_nett' => 'required',
+            'stock' => 'required',
+            ]);
 
         $nama = $request->nama;
         $kode = $request->kode;
@@ -161,31 +161,35 @@ class ProductsController extends Controller
         $harga_jual = $request->harga_jual;
         $harga_nett = $request->harga_nett;
         $stock = $request->stock;
-        if ($request->foto != null) {
+        if ($request->gambar != null) {
             $request->validate([
-                'gambar' => 'required|mimes:png,jpg,jpeg|max:1024'
+                'gambar' => 'required|mimes:png,jpg,jpeg,jfif|max:1024'
             ]);
 
-        // proses saved foto
-        $file = $request->file('gambar');
-        $fileName = rand() . '.' . $file->getClientOriginalExtension();
-        $request->file('gambar')->storeAs('images', $fileName, 'sftp', 'public');
+            // proses saved foto
+            $file = $request->file('gambar');
+            $fileName = rand() . '.' . $file->getClientOriginalExtension();
+            $request->file('gambar')->storeAs('images', $fileName, 'sftp', 'public');
 
-        // Proses Delete Foto
-        $exist = $produk->foto;
-        $path  = "produk/images/ava/" . $exist;
-        \File::delete(public_path($path));
+            // Proses Delete Foto
+            $exist = $produk->gambar;
 
-        $produk->update([
-            'nama' => $nama,
-            'kode' => $kode,
-            'harga_pabrik' => $harga_pabrik,
-            'discount' => $discount,
-            'harga_jual' => $harga_jual,
-            'harga_nett' => $harga_nett,
-            'stock' => $stock,
-            'gambar' => $fileName
-        ]);
+
+        Storage::disk('sftp')->delete('images/' . $exist);
+            // $exist = $produk->gambar;
+            // $path  = "images/" . $exist;
+            // \File::delete(public_path($path));
+
+            $produk->update([
+                'nama' => $nama,
+                'kode' => $kode,
+                'harga_pabrik' => $harga_pabrik,
+                'discount' => $discount,
+                'harga_jual' => $harga_jual,
+                'harga_nett' => $harga_nett,
+                'stock' => $stock,
+                'gambar' => $fileName
+            ]);
 
         } else {
             $produk->update([
