@@ -142,8 +142,8 @@ class ProductsController extends Controller
     //  * @param  \App\Models\product
     //  * @return \Illuminate\Http\Response
     //  */
-    public function update(Request $request, $id){
-
+    public function update(Request $request, $id)
+    {
         $produk = product::find($id);
         // $request->validate([
         //     'nama' => 'required',
