@@ -99,7 +99,7 @@
         $('#result').attr({
         'src': '-',
         'alt': ''
-    });
+        });
         var gb = gambar.files;
         for (var i = 0; i < gb.length; i++) {
             var gbPreview = gb[i];
