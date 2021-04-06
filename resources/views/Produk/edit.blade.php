@@ -18,7 +18,7 @@
     <div class="container mt-3">
         <div class="row">
             <div class="col-10">
-                <form method="POST" action="/product/{{ $produk->id }}">
+                <form method="POST" action="{{route('product.update',$produk->id)}}" enctype="multipart/form-data">
                     @method('patch')
                     @csrf
 
@@ -29,7 +29,7 @@
                                     <i class="icon icon-information2 s-18 red-text"></i>
                                 </a>
                             </label>
-                            <input type="file" name="gambar" id="file" class="input-file @error('gambar') is-invalid @enderror" onchange="tampilkanPreview(this,'preview')" size="60">
+                            <input type="file" name="gambar" id="file" class="input-file" onchange="tampilkanPreview(this,'preview')" size="60">
                             <label for="file" class="btn-tertiary js-labelFile col-md-12">
                                 <i class="icon icon-image mr-2 m-b-1"></i>
                                 <span id="changeText" class="js-fileName">Browse Image</span>

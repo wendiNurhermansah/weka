@@ -54,20 +54,20 @@
 
                         <div class="form-group">
                             <label for="harga_pabrik">Harga Pabrik</label>
-                            <input type="text" class="form-control @error('harga_pabrik') is-invalid @enderror" id="harga_pabrik" placeholder="Masukkan Kuantitas" name="harga_pabrik" value="{{old('harga_pabrik')}}">
+                            <input type="number" class="form-control @error('harga_pabrik') is-invalid @enderror" id="harga_pabrik" placeholder="Masukkan Kuantitas" name="harga_pabrik" value="{{old('harga_pabrik')}}">
                         </div>
 
                         <div class="form-group">
                             <label for="discount">Discount</label>
-                            <input type="text" class="form-control @error('discount') is-invalid @enderror" id="discount" placeholder="Masukkan Discount" name="discount">
+                            <input type="number" class="form-control @error('discount') is-invalid @enderror" id="discount" placeholder="Masukkan Discount" name="discount">
                         </div>
                         <div class="form-group">
                             <label for="harga_jual">Harga Jual</label>
-                            <input type="text" class="form-control @error('harga_jual') is-invalid @enderror" id="harga_jual" placeholder="Masukkan Harga Jual" name="harga_jual">
+                            <input type="number" class="form-control @error('harga_jual') is-invalid @enderror" id="harga_jual" placeholder="Masukkan Harga Jual" name="harga_jual">
                         </div>
                         <div class="form-group">
                             <label for="stock">Stock</label>
-                            <input type="text" class="form-control @error('stock') is-invalid @enderror" id="stock" placeholder="Masukkan Stock" name="stock">
+                            <input type="number" class="form-control @error('stock') is-invalid @enderror" id="stock" placeholder="Masukkan Stock" name="stock">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Tambah Data</button>

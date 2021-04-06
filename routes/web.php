@@ -69,7 +69,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('daftarketegori/api', 'DaftarkategoriController@api')->name('daftarkategori.api');
             Route::get('tambahkategori', 'DaftarkategoriController@tambahkategori')->name('tambahkategori');
             Route::get('show-data-modal/{id}', 'DaftarkategoriController@showDataModal')->name('daftarkategori.showDataModal');
-                
+
 
             //tambah kategori
 
@@ -178,5 +178,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('product/api', 'ProductsController@api')->name('product.api');
     Route::get('tambahproduk', 'ProductsController@create')->name('tambahproduk');
     Route::get('show-data-modal/{id}', 'ProductsController@showDataModal')->name('product.showDataModal');
-
+    Route::get('qrcode', 'ProductsController@qrcode')->name('qrcode');
 });

@@ -68,6 +68,9 @@
             <li><a href="{{ url('tambahproduk') }}"><i class="icon icon-circle-o"></i>Tambahkan Produk</a>
             </li>
             <li><a href="{{ url('importproduk') }}"><i class="icon icon-circle-o"></i>Import Produk</a>
+            </li>
+            <li><a href="{{ url('qrcode') }}"><i class="icon icon-circle-o"></i>Barcode</a>
+            </li>
         </ul>
     </li>
 
