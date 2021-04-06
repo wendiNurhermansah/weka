@@ -41,7 +41,7 @@ class ProductsController extends Controller
                return $p->harga_jual - $p->discount - $p->harga_pabrik;
             })
             ->addColumn('qr_code', function($p) {
-                $b = base64_encode(\SimpleSoftwareIO\QrCode\Facades\QrCode::format('png')->size(900)->errorCorrection('H')->margin(0)->generate($p->nama .' '. $p->harga_nett));
+                $b = base64_encode(\SimpleSoftwareIO\QrCode\Facades\QrCode::format('png')->size(900)->errorCorrection('H')->margin(0)->generate($p->nama .'  '. $p->harga_nett));
                 $img = '<img src="data:image/png;base64, ' . $b . '" alt="" />';
                 return $img;
             })
