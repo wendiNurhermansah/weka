@@ -1,4 +1,4 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 @section('title', ' | Laporan Penjualan')
 @section('content')
 <div class="page has-sidebar-left height-full">
@@ -25,7 +25,7 @@
 
 
         <div class="card">
-            <div class="container" style="text-align: right; margin-top: 10px;">
+            {{-- <div class="container" style="text-align: right; margin-top: 10px;">
                   <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     Tammpilkan / Sembunyikan Folmulir
                   </button>
@@ -73,7 +73,7 @@
                     </form>
                   </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="card-body">
                 <div class="table-responsive">

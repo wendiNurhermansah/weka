@@ -74,6 +74,26 @@
             </div>
         </div>
     </div>
+    <div class="modal" tabindex="-1" role="dialog" id="calendarModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalTitle"></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Modal body text goes here.</p>
+              <p id="modalTitle"></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
 </div>
 @endsection
 
@@ -86,9 +106,43 @@
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             themeSystem: 'bootstrap',
-            height: 650
+            height: 650,
+            events: [ {
+                title  : 'wendi',
+                start  : '2021-04-01'
+                },
+                {
+                title  : 'event2',
+                start  : '2021-04-05',
+                end    : '2021-04-07'
+                },
+                {
+                title  : 'event3',
+                start  : '2021-04-09T12:30:00',
+                allDay : false // will make the time show
+            }],
+
+        //     eventClick:  function(event, jsEvent, view) {
+        //         console.log(event);
+        //     $('#modalTitle').html(event.title);
+
+        //     $('#calendarModal').modal();
+        // },
+        eventClick: function(info) {
+            $('#calendarModal').modal();
+            $('#modalTitle').html(info.event.title);
+    // alert('Event: ' + info.event.title);
+
+
+    // change the border color just for fun
+    info.el.style.borderColor = 'red';
+  }
+
         });
         calendar.render();
+        calendar.setOption('locale', 'id');
+
     });
+
 </script>
 @endsection
