@@ -12,10 +12,10 @@
 @push('modal')
 <div class="modal fade" id="payment" role="dialog">
     <div class="modal-dialog">
-        <form action="{{route('Pos.main.store')}}">
-
-        
-    <!-- Modal content-->
+    
+        <form id="formPayment" action="{{route('Pos.main.store')}}" method="POST">
+            @csrf
+        <!-- Modal content-->
         <div class="modal-content text-white">
             <div class="modal-header bg-green">
                 <h4 class="text-black modal-title">Payment</h4>
@@ -24,6 +24,9 @@
             <div class="modal-body bg-success">
                 <div class="row px-1">
                     <div class="col-md-9">
+                        <input type="text" id="idPelanggan" name="idPelanggan">
+                        <span id="dataProduk"></span>
+                        <input type="text" id="membayar" name="membayar">
                         {{-- <table class="table-bordered">
                             <tbody>
                                 <tr>
@@ -72,7 +75,7 @@
                           </table>
                           <div class="">
                                 <label for="noteSebelumPembayaran" class="form-label">Note</label>
-                                <textarea id="noteSebelumPembayaran" name="noteSebelumPembayaran" class="form-control w-100" value="" required></textarea>
+                                <textarea id="noteSebelumPembayaran" name="noteSebelumPembayaran" class="form-control w-100" value=""></textarea>
                           </div>
                           <div class="row">
                             <div class="col-md-6">
@@ -97,45 +100,86 @@
                           </div>
                     </div>
                     <div class="col-md-3">
-                        <button id="uangPas" onclick="bayarPas()" class="border uang btn btn-primary"></button><br>
-                    <button onclick="bayar10()" class="border uang btn btn-warning">
+                        <button type="button" id="uangPas" onclick="bayarPas()" class="border uang btn btn-primary"></button><br>
+                    <button type="button" onclick="bayar10()" class="border uang btn btn-warning">
                             <span id="uang10">10</span>
                             <span id="notif10" class="badge badge-dark">0</span>
                         </button> <br>
-                        <button onclick="bayar20()" class="border uang btn btn-warning">
+                        <button type="button" onclick="bayar20()" class="border uang btn btn-warning">
                             <span id="uang20">20</span>
                             <span id="notif20" class="badge badge-dark">0</span>
                         </button> <br>
-                        <button onclick="bayar50()" class="border uang btn btn-warning">
+                        <button type="button" onclick="bayar50()" class="border uang btn btn-warning">
                             <span id="uang50">50</span>
                             <span id="notif50" class="badge badge-dark">0</span>
                         </button>    <br>
-                        <button id="uang100" onclick="bayar100()" class="border uang btn btn-warning">
+                        <button type="button" id="uang100" onclick="bayar100()" class="border uang btn btn-warning">
                             <span id="uang100">100</span>
                             <span id="notif100" class="badge badge-dark">0</span>
                         </button> <br>
-                        <button id="uang500"  onclick="bayar500()" class="border uang btn btn-warning">
+                        <button type="button" id="uang500"  onclick="bayar500()" class="border uang btn btn-warning">
                             <span id="uang500">500</span>
                             <span id="notif500" class="badge badge-dark">0</span>
                         </button> <br>
-                        <button id="clear" onclick="hapus()" class="border uang btn btn-danger">clear</button>   <br>                     
+                        <button type="button" id="clear" onclick="hapus()" class="border uang btn btn-danger">clear</button>   <br>                     
                     </div>
                 </div>
+            
             </div>
             <div class="modal-footer bg-green">
                 <button type="button" class="btn btn-light mr-auto border" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
-    </form>
+        </form>
     </div>
 </div>
 @endpush
 
 @push('script')
     <script>
+        // function dibayar(){
+        //     console.log('dibayar',$('#totalPaying').text())
+        //     $('#dibayar').val($('#totalPaying').text())
+        // }
+            
+        
+        // $('#formPelanggan').on('submit', function (e) {
+        //     $('#namaPelanggan').val($('#cariPelanggan').val())
+        // })
+
         $( "#buttonPayment" ).click(function() {
+            $('#membayar').val($('#tabelTotal').html())
+            $('#jumlah').val(0)
+            // $('#dataProduk').hide()
         // function payment(){
+            // $('#idPelanggan').val($('#cariPelanggan').val())
+            // $('#dataProduk').html($('#tableProduk').html())
+            panjang = $('#appendd tr').length;
+            for(var i=1;i<=panjang;i++){
+                var produk = `<div>
+                                    <input id="payment_produk_id`+i+`" name="payment_produk_id`+i+`">
+                                    <input id="payment_biaya`+i+`" name="payment_biaya`+i+`">
+                                    <input id="payment_kuantitas`+i+`" name="payment_kuantitas`+i+`">
+                                    <input id="payment_sub_total`+i+`" name="payment_sub_total`+i+`">
+                                <div>`; 
+                $('#dataProduk').append(produk)
+
+                $('#payment_produk_id'+i).val($('#produk_id'+i).val())
+                $('#payment_biaya'+i).val($('#biaya_satuan_'+i).val())
+                $('#payment_kuantitas'+i).val($('#kuantitas_'+i).val())
+                $('#payment_sub_total'+i).val($('#sub_total_'+i).val())
+            }
+
+            var payment_diskon=`<input id="payment_diskon" name="payment_diskon">`
+            $('#dataProduk').append(payment_diskon)
+            var payment_pajak =`<input id="payment_pajak" name="payment_pajak">`
+            $('#dataProduk').append(payment_pajak)
+
+            $('#payment_diskon').val($('#hasilDiskon').html())
+            $('#payment_pajak').val($('#hasilPajak').html())
+            // $('#dibayar').val(0)
+
             totalPayable = $('#totalPayable').text();
             $('#uangPas').html(totalPayable);
             $('#totalPayable_Payment').html(totalPayable);

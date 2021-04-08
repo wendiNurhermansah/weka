@@ -13,6 +13,8 @@ use App\Models\Pembelian;
 use App\Models\Pelanggan;
 use App\Models\Kategori;
 use App\Models\product;
+use App\Models\TransaksiPelanggan;
+use App\Models\TransaksiPelangganDetail;
 
 class PosController extends Controller
 {
@@ -43,7 +45,7 @@ class PosController extends Controller
             'path', 
             'pelanggan',
             'kartu',
-            'getKartu'
+            'getKartu',
         ));
     }
 
@@ -130,7 +132,7 @@ class PosController extends Controller
 
             $response = array();
             foreach($kategori as $k){
-                $response[] = array("id"=>$k->id,"label"=>$k->nama);
+                $response[] = array("value"=>$k->id,"label"=>$k->nama);
             }        
         }
         return response()->json($response);
@@ -244,7 +246,24 @@ class PosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $transaksi = new TransaksiPelanggan();
+        $transaksi->pelanggan_id = $request->idPelanggan;
+        $transaksi->diskon = $request->payment_diskon;
+        $transaksi->pajak = $request->payment_pajak;
+        $transaksi->total = $request->membayar;
+        $transaksi->dibayar = $request->jumlah;
+        $transaksi->catatan = $request->catatan;
+        $transaksi->save();
+        
+        $transaksiDetail = new TransaksiPelangganDetail();
+        
+        // $transaksiDetail->catatan = $request->catatan;
+        // $transaksiDetail->catatan = $request->catatan;
+        // $transaksiDetail->catatan = $request->catatan;
+        // $transaksiDetail->catatan = $request->catatan;
+
+        return redirect()->route('Pos.main.index');   
     }
 
     /**

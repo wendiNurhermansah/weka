@@ -8,6 +8,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <form class="" id="formPelanggan" method="POST"  novalidate>
+                    @csrf
                     <div class="modal-body">
                         <div id="alertPelanggan"></div>
                         <div class="form-group">
@@ -64,15 +65,20 @@
                             search: request.term
                         },
                         success: function( data ) {
-                            console.log(data)
                             if(data[0] == null){
                                 data[0] = 'Data tidak ditemukan'
                             }
-                            // console.log(data);
                             response( data );
                         }
                         });
+                    },
+                    select: function (event, ui) {
+                       // Set selection
+                        $('#cariPelanggan').val(ui.item.label); // display the selected text
+                        $('#idPelanggan').val(ui.item.value); // save selected id to input
+                        return false;
                     }
+
         });
 
         $('#formPelanggan').on('submit', function (e) {

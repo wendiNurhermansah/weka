@@ -1,28 +1,46 @@
+@push('style')
+    <style>
+        .form-check-input:checked{
+            content: "\f00c";
+            font-family: 'FontAwesome';
+        }
+    </style>
+@endpush
+
 @push('modal')
     <div class="modal fade" id="modalDiskon" role="dialog">
         <div class="modal-dialog">
-        
         <!-- Modal content-->
-        <form action=""></form>
             <div class="modal-content w-50 mx-auto">
                 <div class="modal-header">
                     <h4 class="text-black modal-title">Discount (5 or 5%)</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
+                        <div id="alert"></div>
+                    </div>
+                    <div class="form-group">
                         <input type="text" id="inputDiskon" name="inputDiskon" class="form-control" placeholder="" value="0" onclick="">
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input border rounded-circle" type="checkbox" id="orderTotal" value="orderTotal">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadio" id="orderTotal">
+                        <label class="form-check-label" for="orderTotal">Apply to order total</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadio" id="allOrder">
+                        <label class="form-check-label" for="allOrder">Apply to all order items</label>
+                      </div>
+                    {{-- <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="orderTotal">
                         <label class="form-check-label" for="orderTotal">Apply to order total</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="allOrder" value="allOrder">
+                        <input class="form-check-input" type="radio" id="allOrder">
                         <label class="form-check-label" for="allOrder">Apply to all order items</label>
-                    </div>
+                    </div> --}}
                 </div> 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light mr-auto border" data-dismiss="modal">Close</button>
+                    <button type="button" id="close" class="btn btn-light mr-auto border" data-dismiss="modal">Close</button>
                     <button type="button" onclick="updateDiskon()" class="btn btn-primary">Update</button>
                 </div>
             </div>
@@ -74,6 +92,17 @@
             //    }
             }
         }
+    });
+
+    $('#orderTotal :checkbox').change(function() {
+        if (this.checked) {
+            $('#allOrder').remove('checked')
+        } 
+    });
+    $('#allOrder :checkbox').change(function() {
+        if (this.checked) {
+            $('#orderTotal').remove('checked')
+        } 
     });
 
     // $("#inputDiskon").keypress(function(e){
@@ -154,12 +183,32 @@
     function updateDiskon()
         {
             var diskon = $('#inputDiskon').val();
-            $('#nilaiDiskon').html(diskon);
-            var total = $('#tabelTotal').text();
+
+            all = $('#allOrder').prop('checked')
+            
+            total = $('#orderTotal').prop('checked')
+            count = $('#appendd tr').length;
+            if(all){
+                // console.log('sini',count)
+                
+            }else if(total){
+                // console.log('sono',count)
+                $('#nilaiDiskon').html(diskon);
+                var total = $('#tabelTotal').text();
+                hasilDiskon = total * diskon / 100 ;
+                $('#hasilDiskon').html(hasilDiskon);
+            }else{
+                $('#alert').html("<div role='alert' class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Pilih Diskon atau Close</strong></div>")
+                updateDiskon()
+            }
+
+            
+            
+            
             // 100  
-            hasilDiskon = total * diskon / 100 ;
+            
             // 10
-            $('#hasilDiskon').html(hasilDiskon);
+            
             // 10
             var nilaiPajak = $('#nilaiPajak').text();
             // 1%

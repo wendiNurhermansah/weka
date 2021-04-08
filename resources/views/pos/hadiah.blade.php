@@ -11,7 +11,8 @@
             <div class="modal-body">
             <div id="alertHadiah"></div>
             <p>Please fill in the information below</p>
-            <form class="needs-validation" id="form" method="POST"  novalidate>
+            <form class="needs-validation" id="formHadiah" method="POST"  novalidate>
+                @csrf
                 <div class="form-group">
                     <label for="nomorKartu" class="font-weight-bold">Card No</label>
                     <input class="form-control @error('card') is-invalid @enderror" type="text" value="" id="card" name="card" required>
@@ -28,6 +29,7 @@
                 <div class="form-group">
                     <label for="tanggalKedaluwarsa" class="font-weight-bold">Expiry Date</label>
                     <input class="form-control @error('kedaluwarsa') is-invalid @enderror" type="date" value="" id="kedaluwarsa" name="kedaluwarsa" max="2030-12-12" required>
+                    <span>Tahun < 2031</span>
                 </div>
                 </div>
                 <div class="modal-footer">
@@ -52,17 +54,17 @@
          // limit nomor kartu
          $("#card").attr('maxlength','16');
         //  limit tanggal
-         $('#kedaluwarsa').keyup(function (e) { 
-            kd = $('#kedaluwarsa').val()
-            console.log(kd)
-         });
+        //  $('#kedaluwarsa').keyup(function (e) { 
+        //     kd = $('#kedaluwarsa').val()
+        //     console.log(kd)
+        //  });
 
         // no.card
         $("#card").keypress(function (e) {
             if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
         });
 
-        $('#form').on('submit', function (e) {
+        $('#formHadiah').on('submit', function (e) {
             if ($(this)[0].checkValidity() === false) {
                 event.preventDefault();
                 event.stopPropagation();
@@ -107,13 +109,15 @@
                         
                         card = $('#card').val()
                         $('#produk_'+formAdd).val('Git Card ( '+card+' )');//ambil id
-                        
                         harga = $("#harga").val()
+
                         $('#biaya_satuan_'+formAdd).val(harga);//ambil biaya
-                        
-                        $('#kuantitas_'+formAdd).val(1);//ambil kuantitias
-                        
+                        $('#kuantitas_'+formAdd).val(1);//ambil kuantitias                        
                         $('#sub_total_'+formAdd).val(harga);//subtotal
+
+                        $("alertHadiah").html()
+                        $("#formHadiah").trigger("reset")                                
+                        $('#hadiah').modal('toggle')
 
                     },
                     error : function(data){

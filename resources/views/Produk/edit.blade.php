@@ -18,7 +18,7 @@
     <div class="container mt-3">
         <div class="row">
             <div class="col-10">
-                <form method="POST" action="/product/{{ $produk->id }}">
+                <form class="needs-validation" id="form" method="POST" enctype="multipart/form-data" novalidate>
                     @method('patch')
                     @csrf
 
@@ -29,7 +29,7 @@
                                     <i class="icon icon-information2 s-18 red-text"></i>
                                 </a>
                             </label>
-                            <input type="file" name="gambar" id="file" class="input-file @error('gambar') is-invalid @enderror" onchange="tampilkanPreview(this,'preview')" size="60">
+                            <input type="file" name="gambar" id="file" class="input-file" onchange="tampilkanPreview(this,'preview')" size="60">
                             <label for="file" class="btn-tertiary js-labelFile col-md-12">
                                 <i class="icon icon-image mr-2 m-b-1"></i>
                                 <span id="changeText" class="js-fileName">Browse Image</span>
@@ -142,7 +142,7 @@
                                 text: "ok!",
                                 btnClass: 'btn-primary',
                                 keys: ['enter'],
-                                action: add()
+                                action: reset()
                             }
                         }
                     });
@@ -150,24 +150,46 @@
             }
         }
 
-        function add(){
-            save_method = "add";
-            $('#form').trigger('reset');
-            $('#formTitle').html('Tambah Data');
-            $('input[name=_method]').val('POST');
-            $('#txtAction').html('');
-            $('#reset').show();
-            $('#name').focus();
-            $('#result').attr({
-                'src': '-',
-                'alt': ''
-            });
-            $('#changeText').html('Browse Image');
-            $('#preview').attr({
-            'src': '-',
-            'alt': ''
-            });
+        function reset(){
+        $('#form').trigger('reset');
+        $('#preview').attr({ 'src': '-', 'alt': ''});
+        $('#changeText').html('Browse Image')
+    }
+
+    $('#form').on('submit', function (e) {
+        if ($(this)[0].checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
         }
+        else{
+            $('#alert').html('');
+            url = "{{ route('product.store') }}",
+            $.ajax({
+                url : url,
+                type : 'POST',
+                data: new FormData(($(this)[0])),
+                contentType: false,
+                processData: false,
+                success : function(data) {
+                    console.log(data);
+                    $('#alert').html("<div role='alert' class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Success!</strong> " + data.message + "</div>");
+                    add();
+                },
+                error : function(data){
+                    err = '';
+                    respon = data.responseJSON;
+                    if(respon.errors){
+                        $.each(respon.errors, function( index, value ) {
+                            err = err + "<li>" + value +"</li>";
+                        });
+                    }
+                    $('#alert').html("<div role='alert' class='alert alert-danger alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Error!</strong> " + respon.message + "<ol class='pl-3 m-0'>" + err + "</ol></div>");
+                }
+            });
+            return false;
+        }
+        $(this).addClass('was-validated');
+    });
 </script>
 @endsection
 
