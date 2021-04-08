@@ -143,7 +143,7 @@ class pengaturanController extends Controller
             'tutup_penjualan' => $tutup_penjualan
         ]);
 
-        return redirect('/pengaturan');
+        return redirect()->route('pengaturan.index');
 
 
     }

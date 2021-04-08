@@ -570,7 +570,7 @@
                             <div class="form-group">
                                 <label for="cetak_pesanan" class="font-weight-bold">Cetak Pesanan</label>
                                 <input class="form-control" type="text" value="{{$pengaturan->cetak_pesanan}}" id="cetak_pesanan" name="cetak_pesanan">
-                            </div>cetakPesanan
+                            </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
