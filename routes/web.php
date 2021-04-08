@@ -130,6 +130,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('Laporan')->namespace('laporan')->name('Laporan.')->group(function () {
             Route::get('PenjualanHarian', 'LaporanController@PenjualanHarian')->name('PenjualanHarian');
+            Route::get('data', 'LaporanController@data')->name('PenjualanHarian.data');
+
 
 
             Route::get('laporanPendaftaran', 'LaporanController@laporanPendaftaran')->name('laporanPendaftaran');
