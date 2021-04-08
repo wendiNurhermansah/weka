@@ -21,43 +21,50 @@
             <div class="card-body">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-3">
-                            <div class="blue counter-box p-40">
-                                <div class="float-right" style="color:white;">
-                                    <span class="icon icon-shopping-cart s-48"></span>
+                        <div class="col-md-3" style="cursor:pointer">
+                            <div class="counter-box blue r-5 p-3" style="height: 110%">
+                                <div class="p-4">
+                                    <div class="float-right"  style="color:white;">
+                                        <span class="icon icon-shopping-cart  s-48"></span>
+                                    </div>
+                                    <h5 class=" mt-3" style="color:white;">{{number_format($sum1)}}</h5>
+                                    <div class="counter-title"  style="color:white;">Nilai Penjualan</div>
                                 </div>
-                                <div class="sc-counter s-36 counter-animated text" style="color:white;" >1,200</div>
-                                <h6 class="counter-title" style="color:white;">Nilai Penjualan</h6>
                             </div>
                         </div>
-                        <div class="col-lg-3">
-                            <div class="orange counter-box p-40">
-                                <div class="float-right" style="color:white;">
-                                    <span class="icon icon-plus s-48"></span>
+                       <div class="col-md-3" style="cursor:pointer">
+                            <div class="counter-box orange r-5 p-3" style="height: 110%">
+                                <div class="p-4">
+                                    <div class="float-right"  style="color:white;">
+                                        <span class="icon icon-plus s-48"></span>
+                                    </div>
+                                    <h5 class=" mt-3" style="color:white;">{{number_format($sum2)}}</h5>
+                                <div class="counter-title"  style="color:white;">Nilai Pembelian</div>
                                 </div>
-                                <div class="sc-counter s-36 counter-animated" style="color:white;">1,200</div>
-                                <h6 class="counter-title" style="color:white;">Nilai Pembelian</h6>
                             </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="red counter-box p-40">
-                                <div class="float-right" style="color:white;">
-                                    <span class="icon icon-chevron-circle-up s-48"></span>
+                       </div>
+                       <div class="col-md-3" style="cursor:pointer">
+                            <div class="counter-box red r-5 p-3" style="height: 110%">
+                                <div class="p-4">
+                                    <div class="float-right"  style="color:white;">
+                                        <span class="icon icon-chevron-circle-up s-48"></span>
+                                    </div>
+                                    <h5 class=" mt-3" style="color:white;">{{number_format($sum1)}}</h5>
+                                    <h6 class="counter-title" style="color:white;">Nilai Biaya</h6>
                                 </div>
-                                <div class="sc-counter s-36 counter-animated" style="color:white;">1,200</div>
-                                <h6 class="counter-title" style="color:white;">Nilai Biaya</h6>
                             </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="green counter-box p-40">
-                                <div class="float-right" style="color:white;">
-                                    <span class="icon icon-dollar s-48"></span>
+                       </div>
+                       <div class="col-md-3" style="cursor:pointer">
+                            <div class="counter-box green r-5 p-3" style="height: 110%">
+                                <div class="p-4">
+                                    <div class="float-right" style="color:white;">
+                                        <span class="icon icon-dollar s-48"></span>
+                                    </div>
+                                    <h5 class=" mt-3" style="color:white;">{{number_format($sum2)}}</h5>
+                                    <h6 class="counter-title" style="color:white;">Untung</h6>
                                 </div>
-                                <div class="sc-counter s-36 counter-animated" style="color:white;">1,200</div>
-                                <h6 class="counter-title" style="color:white;">Untung</h6>
                             </div>
-                        </div>
-
+                       </div>
                     </div>
 
                     <div style="margin-top: 50px;">
@@ -84,12 +91,39 @@
               </button>
             </div>
             <div class="modal-body">
-              <p>Modal body text goes here.</p>
-              <p id="modalTitle"></p>
+              <table border="2" class="table table-dark">
+                <thead>
+                    <tr>
+                       <th>Total</th>
+                       <th>Pajak</th>
+                       <th>Pajak Pesanan</th>
+                       <th>Diskon</th>
+                       <th>Grand Total</th>
+                       <th>Dibayar</th>
+                       <th>Saldo</th>
+                   </tr>
+                </thead>
+                <tbody>
+                    @foreach ($kategori1 as $item)
+                    <tr>
+                        <td id="total">{{$item->kode}}</td>
+                        <td id="pajak"></td>
+                        <td id="pajakPesanan"></td>
+                        <td id="diskon"></td>
+                        <td id="granTotal"></td>
+                        <td id="dibayar"></td>
+                        <td id="saldo"></td>
+                    </tr>
+                    @endforeach
+
+                </tbody>
+
+
+
+              </table>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Save changes</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="icon icon-close ml-10 p-3"></i></button>
             </div>
           </div>
         </div>
@@ -102,35 +136,23 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+
         var calendarEl = document.getElementById('calendar');
+
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             themeSystem: 'bootstrap',
             height: 650,
-            events: [ {
-                title  : 'wendi',
-                start  : '2021-04-01'
-                },
-                {
-                title  : 'event2',
-                start  : '2021-04-05',
-                end    : '2021-04-07'
-                },
-                {
-                title  : 'event3',
-                start  : '2021-04-09T12:30:00',
-                allDay : false // will make the time show
-            }],
+            events: {!! json_encode($data) !!},
+            eventColor: 'white',
 
-        //     eventClick:  function(event, jsEvent, view) {
-        //         console.log(event);
-        //     $('#modalTitle').html(event.title);
-
-        //     $('#calendarModal').modal();
-        // },
         eventClick: function(info) {
             $('#calendarModal').modal();
             $('#modalTitle').html(info.event.title);
+            // $('#modalTitle').val(info.event.data[0]['kode']);
+
+
+
     // alert('Event: ' + info.event.title);
 
 
@@ -139,6 +161,7 @@
   }
 
         });
+
         calendar.render();
         calendar.setOption('locale', 'id');
 
