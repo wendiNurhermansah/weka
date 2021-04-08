@@ -27,7 +27,7 @@
                                     <div class="float-right"  style="color:white;">
                                         <span class="icon icon-shopping-cart  s-48"></span>
                                     </div>
-                                    <h5 class=" mt-3" style="color:white;"></h5>
+                                    <h5 class=" mt-3" style="color:white;">{{number_format($sum1)}}</h5>
                                     <div class="counter-title"  style="color:white;">Nilai Penjualan</div>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                     <div class="float-right" style="color:white;">
                                         <span class="icon icon-dollar s-48"></span>
                                     </div>
-                                    <h5 class=" mt-3" style="color:white;"></h5>
+                                    <h5 class=" mt-3" style="color:white;">{{number_format($sum2)}}</h5>
                                     <h6 class="counter-title" style="color:white;">Untung</h6>
                                 </div>
                             </div>
@@ -92,34 +92,34 @@
             </div>
             <div class="modal-body">
               <table border="2" class="table table-dark">
-                 <tr>
-                     <td>Total</td>
-                     <td></td>
-                 </tr>
-                 <tr>
-                     <td>Pajak</td>
-                     <td></td>
-                </tr>
-                <tr>
-                    <td>Pajak Pesanan</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Diskon</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Grand Total</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Dibayar</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Saldo</td>
-                    <td></td>
-                </tr>
+                <thead>
+                    <tr>
+                       <th>Total</th>
+                       <th>Pajak</th>
+                       <th>Pajak Pesanan</th>
+                       <th>Diskon</th>
+                       <th>Grand Total</th>
+                       <th>Dibayar</th>
+                       <th>Saldo</th>
+                   </tr>
+                </thead>
+                <tbody>
+                    @foreach ($kategori1 as $item)
+                    <tr>
+                        <td id="total">{{$item->kode}}</td>
+                        <td id="pajak"></td>
+                        <td id="pajakPesanan"></td>
+                        <td id="diskon"></td>
+                        <td id="granTotal"></td>
+                        <td id="dibayar"></td>
+                        <td id="saldo"></td>
+                    </tr>
+                    @endforeach
+
+                </tbody>
+
+
+
               </table>
             </div>
             <div class="modal-footer">
@@ -149,6 +149,10 @@
         eventClick: function(info) {
             $('#calendarModal').modal();
             $('#modalTitle').html(info.event.title);
+            // $('#modalTitle').val(info.event.data[0]['kode']);
+
+
+
     // alert('Event: ' + info.event.title);
 
 
