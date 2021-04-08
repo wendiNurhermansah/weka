@@ -333,7 +333,8 @@
         //  console.log(kuantitas);
         var biaya = $("#biaya_satuan_"+i).val();
         //  console.log(biaya);
-        var total = kuantitas * harga_jual
+
+        var total = kuantitas * biaya
         $("#sub_total_"+i).val(total);
         $("#rpsub_total_"+i).val(convert_to_rupiah(total));
 

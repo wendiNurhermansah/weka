@@ -69,7 +69,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('daftarketegori/api', 'DaftarkategoriController@api')->name('daftarkategori.api');
             Route::get('tambahkategori', 'DaftarkategoriController@tambahkategori')->name('tambahkategori');
             Route::get('show-data-modal/{id}', 'DaftarkategoriController@showDataModal')->name('daftarkategori.showDataModal');
-                
+
 
             //tambah kategori
 
@@ -130,6 +130,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('Laporan')->namespace('laporan')->name('Laporan.')->group(function () {
             Route::get('PenjualanHarian', 'LaporanController@PenjualanHarian')->name('PenjualanHarian');
+            Route::get('data', 'LaporanController@data')->name('PenjualanHarian.data');
+
 
 
             Route::get('laporanPendaftaran', 'LaporanController@laporanPendaftaran')->name('laporanPendaftaran');
@@ -157,26 +159,23 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('laporanProduk/apii', 'LaporanController@apii')->name('laporanProduk.apii');
 
 
-
-
     });
 
-    Route::prefix('pengaturan')->namespace('pengaturan')->name('pengaturan.')->group(function () {
-        Route::resource('main', 'TokoController');
+        //Pengaturan
+    // Route::prefix('Pengaturan')->namespace('pengaturan')->name('Pengaturan.')->group(function () {
+        Route::resource('pengaturan', 'pengaturan\pengaturanController');
+        // Route::get('pengaturan', 'pengaturanController@index')->name('pengaturan');
+        // Route::post('toko/api', 'TokoController@api')->name('toko.api');
+        // Route::get('tambahToko', 'TokoController@tambahToko')->name('tambahToko');
+        // Route::get('printer', 'TokoController@printer')->name('printer');
+        // Route::post('toko/apiprinter', 'TokoController@apiprinter')->name('toko.apiprinter');
+    // });
 
-        //Toko
-        Route::resource('toko', 'TokoController');
-        Route::get('pengaturan', 'TokoController@pengaturan')->name('pengaturan');
-        Route::post('toko/api', 'TokoController@api')->name('toko.api');
-        Route::get('tambahToko', 'TokoController@tambahToko')->name('tambahToko');
-        Route::get('printer', 'TokoController@printer')->name('printer');
-        Route::post('toko/apiprinter', 'TokoController@apiprinter')->name('toko.apiprinter');
-    });
 
     // Produk
     Route::resource('product', 'ProductsController');
     Route::post('product/api', 'ProductsController@api')->name('product.api');
     Route::get('tambahproduk', 'ProductsController@create')->name('tambahproduk');
     Route::get('show-data-modal/{id}', 'ProductsController@showDataModal')->name('product.showDataModal');
-
-});
+    Route::get('qrcode', 'ProductsController@qrcode')->name('qrcode');
+    });

@@ -37,13 +37,18 @@ class ProductsController extends Controller
                     return "<img width='50' class='rounded img-fluid mx-auto d-block' alt='foto' src='" . asset('images/404.png') . "'>";
                 }
             })
-            ->addColumn('total', function ($p) {
+            ->addColumn('harga_nett', function ($p) {
                return $p->harga_jual - $p->discount - $p->harga_pabrik;
+            })
+            ->addColumn('qr_code', function($p) {
+                $b = base64_encode(\SimpleSoftwareIO\QrCode\Facades\QrCode::format('png')->size(900)->errorCorrection('H')->margin(0)->generate($p->nama .'  '. $p->harga_nett));
+                $img = '<img src="data:image/png;base64, ' . $b . '" alt="" />';
+                return $img;
             })
 
 
             ->addIndexColumn()
-            ->rawColumns(['action', 'gambar'])
+            ->rawColumns(['action', 'gambar', 'qr_code'])
             ->toJson();
     }
 
@@ -90,13 +95,16 @@ class ProductsController extends Controller
         $request->file('gambar')->storeAs('images', $fileName, 'sftp', 'public');
         // dd($fileName);
 
+        // $harga_pabrik = ''
+        // $harga_nett = ''
+
         $produk = new product();
         $produk->nama = $request->nama;
         $produk->kategori_id = $request->kategori_id;
         $produk->harga_pabrik = $request->harga_pabrik;
         $produk->discount = $request->discount;
-        $produk->harga_nett = $request->harga_nett;
         $produk->harga_jual = $request->harga_jual;
+        $produk->harga_nett = $request->harga_jual - $request->harga_pabrik - $request->discount;
         $produk->stock = $request->stock;
         $produk->gambar = $fileName;
         $produk->save();
@@ -107,9 +115,9 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      *
-    //  * @param  \App\Models\Employee  $employee
-    //  * @return \Illuminate\Http\Response
-    //  */
+     * @param  \App\Models\Employee  $employee
+     * @return \Illuminate\Http\Response
+     */
     public function show(product $produk)
     {
         return view('Produk.edit', compact ('produk'));
@@ -125,9 +133,9 @@ class ProductsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-    //  * @param  \App\Models\Employee  $employee
-    //  * @return \Illuminate\Http\Response
-    //  */
+     * @param  \App\Models\Employee  $employee
+     * @return \Illuminate\Http\Response
+     */
     public function edit(product $produk, $id)
     {
         $produk = product::where('id', $id)->first();
@@ -138,10 +146,10 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  \App\Models\product
-    //  * @return \Illuminate\Http\Response
-    //  */
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\product
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
     {
         $produk = product::find($id);
@@ -202,7 +210,7 @@ class ProductsController extends Controller
                 'stock' => $stock
             ]);
         }
-        return view('Produk.DaftarProduk')->with('status', 'Data Berhasil diubah');
+        return view('Produk/DaftarProduk')->with('status', 'data berhasil diubah');
     }
 
 
@@ -251,5 +259,12 @@ class ProductsController extends Controller
         return response()->json([
             'message' => 'data berhasil di hapus',
         ]);
+    }
+
+    public function qrcode()
+    {
+        $qrcode = product::all();
+        return view('Produk.qrcode');
+
     }
 }

@@ -68,6 +68,9 @@
             <li><a href="{{ url('tambahproduk') }}"><i class="icon icon-circle-o"></i>Tambahkan Produk</a>
             </li>
             <li><a href="{{ url('importproduk') }}"><i class="icon icon-circle-o"></i>Import Produk</a>
+            </li>
+            <li><a href="{{ url('qrcode') }}"><i class="icon icon-circle-o"></i>Barcode</a>
+            </li>
         </ul>
     </li>
 
@@ -290,25 +293,25 @@
         </a>
         <ul class="treeview-menu">
             <li class="no-b">
-                <a href="{{route('pengaturan.pengaturan')}}">
+            <a href="{{url('pengaturan')}}">
                     <i class="icon icon-circle-o"></i>
                     <span>Pengaturan</span>
                 </a>
             </li>
             <li class="no-b">
-                <a href="{{ route('pengaturan.toko.index') }}">
+                <a href="">
                     <i class="icon icon-circle-o"></i>
                     <span>Toko</span>
                 </a>
             </li>
             <li class="no-b">
-                <a href="{{ route('pengaturan.tambahToko') }}">
+                <a href="">
                     <i class="icon icon-circle-o"></i>
                     <span>Tambah Toko</span>
                 </a>
             </li>
             <li class="no-b">
-                <a href="{{ route('pengaturan.printer') }}">
+                <a href="">
                     <i class="icon icon-circle-o"></i>
                     <span>Printer</span>
                 </a>

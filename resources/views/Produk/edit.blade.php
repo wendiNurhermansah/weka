@@ -18,7 +18,11 @@
     <div class="container mt-3">
         <div class="row">
             <div class="col-10">
+<<<<<<< HEAD
                 <form class="needs-validation" id="form" method="POST" enctype="multipart/form-data" novalidate>
+=======
+                <form method="POST" action="{{route('product.update',$produk->id)}}" enctype="multipart/form-data">
+>>>>>>> eee1e23fa06c057f2d7948744db95c99a4d28325
                     @method('patch')
                     @csrf
 

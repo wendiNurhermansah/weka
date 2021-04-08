@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Produk')
+@section('title', ' | Produk')
 @section('content')
 <div class="page has-sidebar-left height-full">
     <header class="blue accent-3 relative nav-sticky">
@@ -53,16 +53,15 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                        <div class="modal-body">
-                            <div>
-                                <img id="photo_" alt="">
-                            </div>
+                    <div class="modal-body">
+                        <div>
+                            <img id="photo_" alt="">
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-</div>
+    </div>
 @endsection
 @section('script')
 <script type="text/javascript">
@@ -88,7 +87,7 @@
                 {data: 'harga_pabrik', name: 'harga_pabrik'},
                 {data: 'discount', name: 'discount'},
                 {data: 'harga_jual', name: 'harga_jual'},
-                {data: 'total', name: 'total'},
+                {data: 'harga_nett', name: 'harga_nett'},
                 {data: 'stock', name: 'stock'},
                 {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
             ]
