@@ -293,7 +293,7 @@
         </a>
         <ul class="treeview-menu">
             <li class="no-b">
-                <a href="{{url('pengaturan')}}">
+            <a href="{{url('pengaturan')}}">
                     <i class="icon icon-circle-o"></i>
                     <span>Pengaturan</span>
                 </a>
