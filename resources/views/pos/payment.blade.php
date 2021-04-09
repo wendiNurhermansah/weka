@@ -24,9 +24,10 @@
             <div class="modal-body bg-success">
                 <div class="row px-1">
                     <div class="col-md-9">
-                        <input type="text" id="idPelanggan" name="idPelanggan">
+                        <input type="hidden" id="idPelanggan" name="idPelanggan">
                         <span id="dataProduk"></span>
-                        <input type="text" id="membayar" name="membayar">
+                        <input type="hidden" id="membayar" name="membayar">
+                        <input type="hidden" id="jumlahItem" name="jumlahItem">
                         {{-- <table class="table-bordered">
                             <tbody>
                                 <tr>
@@ -149,19 +150,25 @@
         // })
 
         $( "#buttonPayment" ).click(function() {
+            if($('#cariPelanggan').val() == ''){
+                $('#payment').modal('hide'); 
+                console.log('close')
+                // alert('kosong')
+            }
             $('#membayar').val($('#tabelTotal').html())
             $('#jumlah').val(0)
             // $('#dataProduk').hide()
+            $('#jumlahItem').val($('#totalItems').html())
         // function payment(){
             // $('#idPelanggan').val($('#cariPelanggan').val())
             // $('#dataProduk').html($('#tableProduk').html())
             panjang = $('#appendd tr').length;
             for(var i=1;i<=panjang;i++){
                 var produk = `<div>
-                                    <input id="payment_produk_id`+i+`" name="payment_produk_id`+i+`">
-                                    <input id="payment_biaya`+i+`" name="payment_biaya`+i+`">
-                                    <input id="payment_kuantitas`+i+`" name="payment_kuantitas`+i+`">
-                                    <input id="payment_sub_total`+i+`" name="payment_sub_total`+i+`">
+                                    <input id="payment_produk_id`+i+`" name="payment_produk_id[]">
+                                    <input id="payment_biaya`+i+`" name="payment_biaya[]">
+                                    <input id="payment_kuantitas`+i+`" name="payment_kuantitas[]">
+                                    <input id="payment_sub_total`+i+`" name="payment_sub_total[]">
                                 <div>`; 
                 $('#dataProduk').append(produk)
 
