@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class TransaksiPelanggan extends Model
 {
     protected $table = 'tmtransaksi_pelanggan';
-    protected $fillable = ['pelanggan_id','total','diskon','pajak','dibayar','catatan'];
+    protected $fillable = ['pelanggan_id','total','diskon','pajak','dibayar','catatan','created_at','update_at'];
 }
