@@ -33,6 +33,9 @@
     .searchProduk:focus{
         outline:none;
     }
+    #tableProduk < thead tfoot{
+        position: sticky;
+    }
 </style>
 @stack('style')
 @endsection
@@ -102,8 +105,8 @@
                         <div class="form-group">
                                 <input class="form-control" type="text" id="cariProduk" onclick="" placeholder="Search product by code or name, you can scan barcode too">
                         </div>
-                        <div class="form-group table-responsive-sm">
-                            <table id="tableProduk" style="width:50%;">
+                        <div class="form-group table-responsive">
+                            <table id="tableProduk" class="table-responsive" style="height:180px">
                                 <thead>
                                     <tr class="bg-success text-black">
                                         <th width="40" text-align="center">product</th>
@@ -135,7 +138,7 @@
                                 </tfoot>
                             </table>
                         </div>
-                        <div class="row mt-5 pt-5">
+                        <div class="row">
                             <div class="col-md-4">
                                 <button type="button" class="btn btn-warning button-footer" data-toggle="modal" data-target="#hold">Hold</button>
                                 <button type="button" class="btn btn-danger button-footer" data-toggle="modal" data-target="#cancel">Cancel</button>

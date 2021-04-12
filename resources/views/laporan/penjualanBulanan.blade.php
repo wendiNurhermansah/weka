@@ -27,7 +27,7 @@
                                     <div class="float-right"  style="color:white;">
                                         <span class="icon icon-shopping-cart  s-48"></span>
                                     </div>
-                                    <h5 class=" mt-3" style="color:white;"></h5>
+                                    <h5 class=" mt-3" style="color:white;">{{number_format($sum8)}}</h5>
                                     <div class="counter-title"  style="color:white;">Nilai Penjualan</div>
                                 </div>
                             </div>
@@ -60,25 +60,21 @@
                                     <div class="float-right" style="color:white;">
                                         <span class="icon icon-dollar s-48"></span>
                                     </div>
-                                    <h5 class=" mt-3" style="color:white;"></h5>
+                                    <h5 class=" mt-3" style="color:white;">{{number_format($sum8)}}</h5>
                                     <h6 class="counter-title" style="color:white;">Untung</h6>
                                 </div>
                             </div>
                        </div>
-                        <div class="col-lg-3" style="margin-top: 50px;">
+                        <div class="table-responsive" style=" margin-top: 50px;">
 
                             <table class="table table-bordered" style="text-align: center; width: 1110px; ">
 
                                 <tr height="50px">
-                                   <td>
-                                       <a href="#"  onclick="reev()">< <</a>
+
+                                   <td colspan="12">
+                                      <span >{{$thn}}</span>
                                     </td>
-                                   <td colspan="10">
-                                      <span >{{$Tahun->tahun}}</span>
-                                    </td>
-                                   <td>
-                                       <a href="#" onclick="next()">> ></a>
-                                    </td>
+
                                 </tr>
 
                                     <tr height="50px"  width="50px" >
@@ -97,18 +93,363 @@
                                     </tr>
 
                                     <tr height="50px">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                       {{-- januari --}}
+                                        <td>
+                                            <table border="2" >
+
+                                                    <tr>
+                                                       <td>Total</td>
+
+                                                       <td>{{$laporan1}}</td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Pajak</td>
+                                                        <td>{{$pajak1}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Diskon</td>
+                                                        <td>{{$diskon1}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Grand Total</td>
+                                                        <td>{{$bulan1}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                       <td>Dibayar</td>
+                                                       <td>{{$bulan1}}</td>
+                                                    </tr>
+
+                                            </table>
+                                        </td>
+
+                                        {{-- februari --}}
+                                        <td>
+                                            <table border="2" >
+
+                                                <tr>
+                                                    <td>Total</td>
+
+                                                    <td>{{$laporan2}}</td>
+
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Pajak</td>
+                                                     <td>{{$pajak2}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Diskon</td>
+                                                     <td>{{$diskon2}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Grand Total</td>
+                                                     <td>{{$bulan2}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                    <td>Dibayar</td>
+                                                    <td>{{$bulan2}}</td>
+                                                 </tr>
+
+                                        </table>
+                                        </td>
+
+                                        {{-- maret --}}
+                                        <td>
+                                            <table border="2" >
+
+                                                <tr>
+                                                    <td>Total</td>
+
+                                                    <td>{{$laporan3}}</td>
+
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Pajak</td>
+                                                     <td>{{$pajak3}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Diskon</td>
+                                                     <td>{{$diskon3}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Grand Total</td>
+                                                     <td>{{$bulan3}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                    <td>Dibayar</td>
+                                                    <td>{{$bulan3}}</td>
+                                                 </tr>
+
+                                        </table>
+                                        </td>
+
+                                        {{-- april --}}
+                                        <td>
+                                            <table border="2" >
+
+                                                <tr>
+                                                    <td>Total</td>
+
+                                                    <td>{{$laporan4}}</td>
+
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Pajak</td>
+                                                     <td>{{$pajak4}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Diskon</td>
+                                                     <td>{{$diskon4}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Grand Total</td>
+                                                     <td>{{$bulan4}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                    <td>Dibayar</td>
+                                                    <td>{{$bulan4}}</td>
+                                                 </tr>
+                                        </table>
+                                        </td>
+
+                                        {{-- mei --}}
+                                        <td>
+                                            <table border="2" >
+
+                                                <tr>
+                                                    <td>Total</td>
+
+                                                    <td>{{$laporan5}}</td>
+
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Pajak</td>
+                                                     <td>{{$pajak5}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Diskon</td>
+                                                     <td>{{$diskon5}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Grand Total</td>
+                                                     <td>{{$bulan5}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                    <td>Dibayar</td>
+                                                    <td>{{$bulan5}}</td>
+                                                 </tr>
+
+                                        </table>
+                                        </td>
+
+                                        {{-- juni --}}
+                                        <td>
+                                            <table border="2" >
+
+                                                <tr>
+                                                    <td>Total</td>
+
+                                                    <td>{{$laporan6}}</td>
+
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Pajak</td>
+                                                     <td>{{$pajak6}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Diskon</td>
+                                                     <td>{{$diskon6}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Grand Total</td>
+                                                     <td>{{$bulan6}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                    <td>Dibayar</td>
+                                                    <td>{{$bulan6}}</td>
+                                                 </tr>
+
+                                        </table>
+                                        </td>
+
+                                        {{-- juli --}}
+                                        <td>
+                                            <table border="2" >
+
+                                                <tr>
+                                                    <td>Total</td>
+
+                                                    <td>{{$laporan7}}</td>
+
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Pajak</td>
+                                                     <td>{{$pajak7}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Diskon</td>
+                                                     <td>{{$diskon7}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Grand Total</td>
+                                                     <td>{{$bulan7}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                    <td>Dibayar</td>
+                                                    <td>{{$bulan7}}</td>
+                                                 </tr>
+
+                                        </table>
+                                        </td>
+
+                                        {{-- agustus --}}
+                                        <td>
+                                            <table border="2" >
+
+                                                <tr>
+                                                    <td>Total</td>
+
+                                                    <td>{{$laporan8}}</td>
+
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Pajak</td>
+                                                     <td>{{$pajak8}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Diskon</td>
+                                                     <td>{{$diskon8}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Grand Total</td>
+                                                     <td>{{$bulan8}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                    <td>Dibayar</td>
+                                                    <td>{{$bulan8}}</td>
+                                                 </tr>
+
+                                        </table>
+                                        </td>
+
+                                        {{-- september --}}
+                                        <td>
+                                            <table border="2" >
+
+                                                <tr>
+                                                    <td>Total</td>
+
+                                                    <td>{{$laporan9}}</td>
+
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Pajak</td>
+                                                     <td>{{$pajak9}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Diskon</td>
+                                                     <td>{{$diskon9}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Grand Total</td>
+                                                     <td>{{$bulan9}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                    <td>Dibayar</td>
+                                                    <td>{{$bulan9}}</td>
+                                                 </tr>
+
+                                        </table>
+                                        </td>
+
+                                        {{-- oktober --}}
+                                        <td>
+                                            <table border="2" >
+
+                                                <tr>
+                                                    <td>Total</td>
+
+                                                    <td>{{$laporan10}}</td>
+
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Pajak</td>
+                                                     <td>{{$pajak10}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Diskon</td>
+                                                     <td>{{$diskon10}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Grand Total</td>
+                                                     <td>{{$bulan10}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                    <td>Dibayar</td>
+                                                    <td>{{$bulan10}}</td>
+                                                 </tr>
+                                        </table>
+                                        </td>
+
+                                        {{-- november --}}
+                                        <td>
+                                            <table border="2" >
+
+                                                <tr>
+                                                    <td>Total</td>
+
+                                                    <td>{{$laporan11}}</td>
+
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Pajak</td>
+                                                     <td>{{$pajak11}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Diskon</td>
+                                                     <td>{{$diskon11}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Grand Total</td>
+                                                     <td>{{$bulan11}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                    <td>Dibayar</td>
+                                                    <td>{{$bulan11}}</td>
+                                                 </tr>
+
+                                        </table>
+                                        </td>
+
+                                        {{-- desember --}}
+                                        <td>
+                                            <table border="2" >
+
+                                                <tr>
+                                                    <td>Total</td>
+
+                                                    <td>{{$laporan12}}</td>
+
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Pajak</td>
+                                                     <td>{{$pajak12}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Diskon</td>
+                                                     <td>{{$diskon12}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                     <td>Grand Total</td>
+                                                     <td>{{$bulan12}}</td>
+                                                 </tr>
+                                                 <tr>
+                                                    <td>Dibayar</td>
+                                                    <td>{{$bulan12}}</td>
+                                                 </tr>
+
+                                        </table>
+                                        </td>
                                     </tr>
                             </table>
                         </div>

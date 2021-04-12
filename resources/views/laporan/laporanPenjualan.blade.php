@@ -87,8 +87,7 @@
                             <th>Diskon</th>
                             <th>Grand Total</th>
                             <th>Dibayar</th>
-                            <th>Saldo</th>
-                            <th>Status</th>
+
                         </thead>
                         <tbody></tbody>
                         <tfoot class="table-active">
@@ -96,10 +95,10 @@
                                 <th></th>
                               <th>[Tanggal]</th>
                               <th>[Pelanggan]</th>
-                              <th><span>0.00</span></th>
-                              <th><span>0.00</span></th>
+                              <th><span>{{$total}}</span></th>
+                              <th><span>{{$pajak}}</span></th>
                               <th>
-                                  <span>0.00</span>
+                                  <span>{{$diskon}}</span>
                               </th>
                               <th>
                                 <span>0.00</span>
@@ -107,10 +106,7 @@
                             <th>
                                 <span>0.00</span>
                             </th>
-                            <th>
-                                <span>0.00</span>
-                            </th>
-                            <th></th>
+
                             </tr>
                         </tfoot>
                     </table>
@@ -124,6 +120,39 @@
 @section('script')
 <script type="text/javascript">
     var table = $('#dataTable').dataTable({
+        "footerCallback": function ( row, data, start, end, display ) {
+            var api = this.api(), data;
+
+            // converting to interger to find total
+            var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '')*1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+
+            // computing column Total of the complete result
+            var grandTotal = api
+                .column( 6 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+            var dibayar = api
+                .column( 7 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+
+            // Update footer by showing the total with the reference of the column index
+
+            $( api.column( 6 ).footer() ).html(grandTotal);
+            $( api.column( 7 ).footer() ).html(dibayar);
+
+        },
             processing: true,
             serverSide: true,
             pageLength: 15,
@@ -137,17 +166,20 @@
 
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, align: 'center', className: 'text-center'},
-                {data: 'tanggal', name: 'tanggal'},
-                {data: 'pelanggan', name: 'pelanggan'},
+                {data: 'created_at', name: 'created_at'},
+                {data: 'pelanggan_id', name: 'pelanggan_id'},
                 {data: 'total', name: 'total'},
                 {data: 'pajak', name: 'pajak'},
                 {data: 'diskon', name: 'diskon'},
-                {data: 'grand_total', name: 'grand_total'},
+                {data: 'grandTotal', name: 'grandTotal'},
                 {data: 'dibayar', name: 'dibayar'},
-                {data: 'saldo', name: 'saldo'},
-                {data: 'status', name: 'status'},
             ]
+
     });
+
+
+
+
 </script>
 
 @endsection
