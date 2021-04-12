@@ -157,7 +157,7 @@
             }
             $('#membayar').val($('#tabelTotal').html())
             $('#jumlah').val(0)
-            // $('#dataProduk').hide()
+            $('#dataProduk').hide()
             $('#jumlahItem').val($('#totalItems').html())
         // function payment(){
             // $('#idPelanggan').val($('#cariPelanggan').val())

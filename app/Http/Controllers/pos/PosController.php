@@ -253,7 +253,8 @@ class PosController extends Controller
         $transaksi->pajak = $request->payment_pajak;
         $transaksi->total = $request->membayar;
         $transaksi->dibayar = $request->jumlah;
-        $transaksi->catatan = $request->catatan;
+        $transaksi->metode = $request->metodePembayaran;
+        $transaksi->catatan = $request->catatanPembayaran;
         $transaksi->save();
         
         for($i=0;$i<$request->jumlahItem;$i++){
