@@ -99,20 +99,20 @@
                        <th>Diskon</th>
                        <th>Grand Total</th>
                        <th>Dibayar</th>
-                     
+
                    </tr>
                 </thead>
                 <tbody>
-                    @foreach ($kategori1 as $item)
+
                     <tr>
-                        <td id="total">{{$item->total}}</td>
-                        <td id="pajak">{{$item->pajak}}</td>
-                        <td id="diskon">{{$item->diskon}}</td>
-                        <td id="granTotal">{{$sum5}}</td>
-                        <td id="dibayar">{{$sum5}}</td>
-                       
+                        <td id="total">{{$total}}</td>
+                        <td id="pajak">{{$pajak}}</td>
+                        <td id="diskon">{{$diskon}}</td>
+                        <td id="granTotal">{{$grandtotal3}}</td>
+                        <td id="dibayar">{{$dibayar}}</td>
+
                     </tr>
-                    @endforeach
+
 
                 </tbody>
 

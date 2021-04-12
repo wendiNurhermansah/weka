@@ -117,7 +117,7 @@
                                                     </tr>
                                                     <tr>
                                                        <td>Dibayar</td>
-                                                       <td>{{$bulan1}}</td>
+                                                       <td>{{$dibayar1}}</td>
                                                     </tr>
 
                                             </table>
@@ -147,7 +147,7 @@
                                                  </tr>
                                                  <tr>
                                                     <td>Dibayar</td>
-                                                    <td>{{$bulan2}}</td>
+                                                    <td>{{$dibayar2}}</td>
                                                  </tr>
 
                                         </table>
@@ -177,7 +177,7 @@
                                                  </tr>
                                                  <tr>
                                                     <td>Dibayar</td>
-                                                    <td>{{$bulan3}}</td>
+                                                    <td>{{$dibayar3}}</td>
                                                  </tr>
 
                                         </table>
@@ -207,7 +207,7 @@
                                                  </tr>
                                                  <tr>
                                                     <td>Dibayar</td>
-                                                    <td>{{$bulan4}}</td>
+                                                    <td>{{$dibayar4}}</td>
                                                  </tr>
                                         </table>
                                         </td>
@@ -236,7 +236,7 @@
                                                  </tr>
                                                  <tr>
                                                     <td>Dibayar</td>
-                                                    <td>{{$bulan5}}</td>
+                                                    <td>{{$dibayar5}}</td>
                                                  </tr>
 
                                         </table>
@@ -266,7 +266,7 @@
                                                  </tr>
                                                  <tr>
                                                     <td>Dibayar</td>
-                                                    <td>{{$bulan6}}</td>
+                                                    <td>{{$dibayar6}}</td>
                                                  </tr>
 
                                         </table>
@@ -296,7 +296,7 @@
                                                  </tr>
                                                  <tr>
                                                     <td>Dibayar</td>
-                                                    <td>{{$bulan7}}</td>
+                                                    <td>{{$dibayar7}}</td>
                                                  </tr>
 
                                         </table>
@@ -326,7 +326,7 @@
                                                  </tr>
                                                  <tr>
                                                     <td>Dibayar</td>
-                                                    <td>{{$bulan8}}</td>
+                                                    <td>{{$dibayar8}}</td>
                                                  </tr>
 
                                         </table>
@@ -356,7 +356,7 @@
                                                  </tr>
                                                  <tr>
                                                     <td>Dibayar</td>
-                                                    <td>{{$bulan9}}</td>
+                                                    <td>{{$dibayar9}}</td>
                                                  </tr>
 
                                         </table>
@@ -386,7 +386,7 @@
                                                  </tr>
                                                  <tr>
                                                     <td>Dibayar</td>
-                                                    <td>{{$bulan10}}</td>
+                                                    <td>{{$dibayar10}}</td>
                                                  </tr>
                                         </table>
                                         </td>
@@ -415,7 +415,7 @@
                                                  </tr>
                                                  <tr>
                                                     <td>Dibayar</td>
-                                                    <td>{{$bulan11}}</td>
+                                                    <td>{{$dibayar11}}</td>
                                                  </tr>
 
                                         </table>
@@ -445,7 +445,7 @@
                                                  </tr>
                                                  <tr>
                                                     <td>Dibayar</td>
-                                                    <td>{{$bulan12}}</td>
+                                                    <td>{{$dibayar12}}</td>
                                                  </tr>
 
                                         </table>
