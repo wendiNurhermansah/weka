@@ -52,7 +52,7 @@
             save_method = "add";
             $('input[name=_method]').val('POST');
         }
-
+        
         $( "#cariPelanggan" ).autocomplete({
                     source: function( request, response ) {
                         // Fetch data

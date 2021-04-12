@@ -253,6 +253,7 @@ class PosController extends Controller
         $transaksi->pajak = $request->payment_pajak;
         $transaksi->total = $request->membayar;
         $transaksi->dibayar = $request->jumlah;
+        $transaksi->qty = $request->jumlahItem;
         $transaksi->metode = $request->metodePembayaran;
         $transaksi->catatan = $request->catatanPembayaran;
         $transaksi->save();
@@ -263,6 +264,9 @@ class PosController extends Controller
             $transaksiDetail->produk_id = $request->payment_produk_id[$i];
             $transaksiDetail->biaya_satuan = $request->payment_biaya[$i];
             $transaksiDetail->kuantitas = $request->payment_kuantitas[$i];
+            $produk = product::find($request->payment_produk_id[$i]);
+            $stock = $produk->stock-$request->payment_kuantitas[$i];
+            $produk->update(['stock' => $stock]);
             $transaksiDetail->sub_total = $request->payment_sub_total[$i];
             $transaksiDetail->save();
         }

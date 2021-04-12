@@ -96,7 +96,7 @@
                             </table>
                         </div> -->
                         <div class="form-group">
-                            <input class="form-control" type="text" id="cariPelanggan">
+                            <input class="form-control" type="text" id="cariPelanggan" placeholder="nama pelanggan">
                             <a class="btn border" data-toggle="modal" data-target="#pelanggan"><i class="icon icon-add"></i></a>
                         </div>
                         <div class="form-group">
@@ -336,6 +336,15 @@
             }
 
             $(document).ready(function(){
+                // $('#cariPelanggan').focus(function() {
+                //     if($('#cariPellangggan').val() == null){
+                //         alert('nama blom')
+                //     }else{
+                //         $('#cariPelanggan').keyup(){
+                //             alert('input')
+                //         }
+                //     }
+                // })
                 //page links
                 // $('#pageNext').click(function(e){
 

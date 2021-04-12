@@ -48,7 +48,7 @@
                                 <th>
                                     <span class="d-flex">
                                         <span>Total Items</span>
-                                        <span class="ml-auto">0</span>
+                                        <span id="totItems" class="ml-auto">0</span>
                                     </span>
                                 </th>
                                 <th>
@@ -151,50 +151,57 @@
 
         $( "#buttonPayment" ).click(function() {
             if($('#cariPelanggan').val() == ''){
-                $('#payment').modal('hide'); 
-                console.log('close')
-                // alert('kosong')
+                $('#buttonPayment').removeAttr('data-target'); 
+                alert('Silahkan isi nama')
+                $('#cariPelanggan').css('border','red solid 1px')
+            }else{
+                $("#payment").on("hidden", function () {
+                alert('ketutup')
+                });
+                $('#membayar').val($('#tabelTotal').html())
+                $('#totItems').html($('#totalItems').html())
+                $('#jumlah').val(0)
+                $('#dataProduk').hide()
+                $('#jumlahItem').val($('#totalItems').html())
+            // function payment(){
+                // $('#idPelanggan').val($('#cariPelanggan').val())
+                // $('#dataProduk').html($('#tableProduk').html())
+                panjang = $('#appendd tr').length;
+                for(var i=1;i<=panjang;i++){
+                    var produk = `<div>
+                                        <input id="payment_produk_id`+i+`" name="payment_produk_id[]">
+                                        <input id="payment_biaya`+i+`" name="payment_biaya[]">
+                                        <input id="payment_kuantitas`+i+`" name="payment_kuantitas[]">
+                                        <input id="payment_sub_total`+i+`" name="payment_sub_total[]">
+                                    <div>`; 
+                    $('#dataProduk').append(produk)
+
+                    $('#payment_produk_id'+i).val($('#produk_id'+i).val())
+                    $('#payment_biaya'+i).val($('#biaya_satuan_'+i).val())
+                    $('#payment_kuantitas'+i).val($('#kuantitas_'+i).val())
+                    $('#payment_sub_total'+i).val($('#sub_total_'+i).val())
+                }
+
+                var payment_diskon=`<input id="payment_diskon" name="payment_diskon">`
+                $('#dataProduk').append(payment_diskon)
+                var payment_pajak =`<input id="payment_pajak" name="payment_pajak">`
+                $('#dataProduk').append(payment_pajak)
+
+                $('#payment_diskon').val($('#hasilDiskon').html())
+                $('#payment_pajak').val($('#hasilPajak').html())
+                // $('#dibayar').val(0)
+
+                totalPayable = $('#totalPayable').text();
+                $('#uangPas').html(totalPayable);
+                $('#totalPayable_Payment').html(totalPayable);
+                totalPaying = $('#totalPaying').text();
+                saldo = parseFloat(totalPaying) - parseFloat(totalPayable);
+                $('#saldo').html(saldo);
+                $('.badge').html(0);
+                $('.badge').hide();
             }
-            $('#membayar').val($('#tabelTotal').html())
-            $('#jumlah').val(0)
-            $('#dataProduk').hide()
-            $('#jumlahItem').val($('#totalItems').html())
-        // function payment(){
-            // $('#idPelanggan').val($('#cariPelanggan').val())
-            // $('#dataProduk').html($('#tableProduk').html())
-            panjang = $('#appendd tr').length;
-            for(var i=1;i<=panjang;i++){
-                var produk = `<div>
-                                    <input id="payment_produk_id`+i+`" name="payment_produk_id[]">
-                                    <input id="payment_biaya`+i+`" name="payment_biaya[]">
-                                    <input id="payment_kuantitas`+i+`" name="payment_kuantitas[]">
-                                    <input id="payment_sub_total`+i+`" name="payment_sub_total[]">
-                                <div>`; 
-                $('#dataProduk').append(produk)
-
-                $('#payment_produk_id'+i).val($('#produk_id'+i).val())
-                $('#payment_biaya'+i).val($('#biaya_satuan_'+i).val())
-                $('#payment_kuantitas'+i).val($('#kuantitas_'+i).val())
-                $('#payment_sub_total'+i).val($('#sub_total_'+i).val())
-            }
-
-            var payment_diskon=`<input id="payment_diskon" name="payment_diskon">`
-            $('#dataProduk').append(payment_diskon)
-            var payment_pajak =`<input id="payment_pajak" name="payment_pajak">`
-            $('#dataProduk').append(payment_pajak)
-
-            $('#payment_diskon').val($('#hasilDiskon').html())
-            $('#payment_pajak').val($('#hasilPajak').html())
-            // $('#dibayar').val(0)
-
-            totalPayable = $('#totalPayable').text();
-            $('#uangPas').html(totalPayable);
-            $('#totalPayable_Payment').html(totalPayable);
-            totalPaying = $('#totalPaying').text();
-            saldo = parseFloat(totalPaying) - parseFloat(totalPayable);
-            $('#saldo').html(saldo);
-            $('.badge').html(0);
-            $('.badge').hide();
+            $('#buttonPayment').attr('data-target','#payment')
+            
         })
 
         function bayar10(){
