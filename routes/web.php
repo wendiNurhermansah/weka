@@ -133,9 +133,6 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('data', 'LaporanController@data')->name('PenjualanHarian.data');
 
 
-
-            Route::get('laporanPendaftaran', 'LaporanController@laporanPendaftaran')->name('laporanPendaftaran');
-
             //laporan penjualan
 
             Route::resource('laporanPenjualan', 'LaporanpenjualanController');
@@ -163,7 +160,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Penjualan
     Route::resource('daftarpenjualan','daftarPenjualanController');
-    Route::post('daftarpenjualan/api', 'daftarPenjualanController@api')->name('daftarpenjualan.api');
+    Route::post('daftarPenjualan/api', 'daftarPenjualanController@api')->name('daftarpenjualan.api');
     // Route::post('daftarpenjualan/index', 'daftarPenjualanController@index')->name('daftarpenjualan');
 
 
@@ -184,7 +181,7 @@ Route::group(['middleware' => ['auth']], function () {
     // });
 
 
-    // Produk
+    // Produkss
     Route::resource('product', 'ProductsController');
     Route::post('product/api', 'ProductsController@api')->name('product.api');
     Route::get('tambahproduk', 'ProductsController@create')->name('tambahproduk');

@@ -80,15 +80,14 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'nama' => 'required',
-        //     'kategori' => 'required',
-        //     'kuantitas' => 'required',
-        //     'pajak' => 'required',
-        //     'biaya' => 'required',
-        //     'harga' => 'required',
-        //     'gambar' => 'required|mimes:png,jpeg,png|max:2024'
-        // ]);
+        $request->validate([
+            'nama' => 'required',
+            'kategori_id' => 'required',
+            'harga_pabrik' => 'required',
+            'harga_jual' => 'required',
+            'stock' => 'required',
+            'gambar' => 'required'
+        ]);
         $file     = $request->file('gambar');
         $fileName = rand() . '.' . $file->getClientOriginalExtension();
         // $request->file('gambar')->move("kategori/images/ava/", $fileName);
@@ -155,15 +154,14 @@ class ProductsController extends Controller
         $produk = product::find($id);
         // $request->validate([
         //     'nama' => 'required',
+        //     'kategori_id' => 'required',
         //     'harga_pabrik' => 'required',
-        //     'discount' => 'required',
         //     'harga_jual' => 'required',
-        //     'harga_nett' => 'required',
         //     'stock' => 'required',
-        //     ]);
+        // ]);
 
         $nama = $request->nama;
-        $kode = $request->kode;
+        $produk->kategori_id = $request->kategori_id;
         $harga_pabrik = $request->harga_pabrik;
         $discount = $request->discount;
         $harga_jual = $request->harga_jual;
@@ -190,7 +188,7 @@ class ProductsController extends Controller
 
             $produk->update([
                 'nama' => $nama,
-                'kode' => $kode,
+                // 'kategori_id' => $kategori_id,
                 'harga_pabrik' => $harga_pabrik,
                 'discount' => $discount,
                 'harga_jual' => $harga_jual,
@@ -202,7 +200,7 @@ class ProductsController extends Controller
         } else {
             $produk->update([
                 'nama' => $nama,
-                'kode' => $kode,
+                // 'kategori_id' => $kategori_id,
                 'harga_pabrik' => $harga_pabrik,
                 'discount' => $discount,
                 'harga_jual' => $harga_jual,
@@ -243,17 +241,17 @@ class ProductsController extends Controller
     //  */
     public function destroy($id)
     {
-        $product = product::find($id);
+        $produk = product::find($id);
 
 
         // // File::delete('kategori/images/ava/'.$gambar->gambar);
-        $exist = $product->gambar;
+        $exist = $produk->gambar;
 
 
         Storage::disk('sftp')->delete('images/' . $exist);
-        Pembelian_details::where('produk_id', $id)->delete();
 
         product::destroy($id);
+
 
 
         return response()->json([

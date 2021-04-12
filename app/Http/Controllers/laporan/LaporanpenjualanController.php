@@ -34,9 +34,6 @@ class LaporanpenjualanController extends Controller
     {
         $TransaksiPelanggan = TransaksiPelanggan::all();
         return Datatables::of($TransaksiPelanggan)
-             ->editColumn('dibayar', function($p){
-                 return $p->total+$p->pajak;
-             })
 
              ->addColumn('grandTotal', function($p){
                 return $p->grandTotal;
