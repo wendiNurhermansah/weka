@@ -266,12 +266,6 @@
                 </a>
             </li>
             <li class="no-b">
-                <a href="{{route('Laporan.laporanPendaftaran')}}">
-                    <i class="icon icon-circle-o"></i>
-                    <span>Laporan Pendaftaran</span>
-                </a>
-            </li>
-            <li class="no-b">
                 <a href="{{route('Laporan.produkTeratas')}}">
                     <i class="icon icon-circle-o"></i>
                     <span>Produk Teratas</span>

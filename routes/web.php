@@ -133,9 +133,6 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('data', 'LaporanController@data')->name('PenjualanHarian.data');
 
 
-
-            Route::get('laporanPendaftaran', 'LaporanController@laporanPendaftaran')->name('laporanPendaftaran');
-
             //laporan penjualan
 
             Route::resource('laporanPenjualan', 'LaporanpenjualanController');

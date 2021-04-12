@@ -59,11 +59,11 @@
 
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, align: 'center', className: 'text-center'},
-                {data: 'tanggal', name: 'tanggal'},
-                {data: 'referensi', name: 'referensi'},
-                {data: 'tidak_dijual', name: 'tidak_dijual'},
-                {data: 'dibayar_dengan', name: 'dibayar_dengan'},
-                {data: 'jumlah', name: 'jumlah'},
+                {data: 'created_at', name: 'created_at'},
+                {data: 'catatan', name: 'catatan'},
+                {data: 'qty', name: 'qty'},
+                {data: 'metode', name: 'metode'},
+                {data: 'total', name: 'total'},
             ]
     });
 </script>
