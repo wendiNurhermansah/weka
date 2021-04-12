@@ -253,15 +253,19 @@ class PosController extends Controller
         $transaksi->pajak = $request->payment_pajak;
         $transaksi->total = $request->membayar;
         $transaksi->dibayar = $request->jumlah;
-        $transaksi->catatan = $request->catatan;
+        $transaksi->metode = $request->metodePembayaran;
+        $transaksi->catatan = $request->catatanPembayaran;
         $transaksi->save();
         
-        $transaksiDetail = new TransaksiPelangganDetail();
-        
-        // $transaksiDetail->catatan = $request->catatan;
-        // $transaksiDetail->catatan = $request->catatan;
-        // $transaksiDetail->catatan = $request->catatan;
-        // $transaksiDetail->catatan = $request->catatan;
+        for($i=0;$i<$request->jumlahItem;$i++){
+            $transaksiDetail = new TransaksiPelangganDetail();
+            $transaksiDetail->transaksi_detail_id = $transaksi->id;
+            $transaksiDetail->produk_id = $request->payment_produk_id[$i];
+            $transaksiDetail->biaya_satuan = $request->payment_biaya[$i];
+            $transaksiDetail->kuantitas = $request->payment_kuantitas[$i];
+            $transaksiDetail->sub_total = $request->payment_sub_total[$i];
+            $transaksiDetail->save();
+        }
 
         return redirect()->route('Pos.main.index');   
     }
