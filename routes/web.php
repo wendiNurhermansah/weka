@@ -158,6 +158,18 @@ Route::group(['middleware' => ['auth']], function () {
 
     });
 
+    // Penjualan
+    Route::resource('daftarpenjualan','daftarPenjualanController');
+    Route::post('daftarpenjualan/api', 'daftarPenjualanController@api')->name('daftarpenjualan.api');
+    // Route::post('daftarpenjualan/index', 'daftarPenjualanController@index')->name('daftarpenjualan');
+
+
+
+
+
+
+
+
         //Pengaturan
     // Route::prefix('Pengaturan')->namespace('pengaturan')->name('Pengaturan.')->group(function () {
         Route::resource('pengaturan', 'pengaturan\pengaturanController');
@@ -173,6 +185,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('product', 'ProductsController');
     Route::post('product/api', 'ProductsController@api')->name('product.api');
     Route::get('tambahproduk', 'ProductsController@create')->name('tambahproduk');
+    // Route::get('editproduk', 'ProductsController@edit')->name('editproduk');
     Route::get('show-data-modal/{id}', 'ProductsController@showDataModal')->name('product.showDataModal');
     Route::get('qrcode', 'ProductsController@qrcode')->name('qrcode');
-    });
+});

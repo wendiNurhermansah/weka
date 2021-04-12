@@ -110,12 +110,16 @@
             <i class="icon icon-angle-left s-18 pull-right"></i>
         </a>
         <ul class="treeview-menu">
-            <li class="no-b">
-                <a href="{{ route('Orang.pengguna.index')}}">
+
+            <li><a href="{{ url('daftarpenjualan') }}"><i class="icon icon-circle-o"></i>Daftar Penjualan</a>
+            </li>
+
+            {{-- <li class="no-b">
+                <a href="{{ route('daftarPenjualan.index')}}">
                     <i class="icon icon-list red-text s-18"></i>
                     <span>Daftar Penjualan</span>
                 </a>
-            </li>
+            </li> --}}
 
             <li class="no-b">
                 <a href="{{ route('Orang.pengguna.index') }}">

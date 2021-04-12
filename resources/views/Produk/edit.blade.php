@@ -18,11 +18,7 @@
     <div class="container mt-3">
         <div class="row">
             <div class="col-10">
-<<<<<<< HEAD
                 <form class="needs-validation" id="form" method="POST" enctype="multipart/form-data" novalidate>
-=======
-                <form method="POST" action="{{route('product.update',$produk->id)}}" enctype="multipart/form-data">
->>>>>>> eee1e23fa06c057f2d7948744db95c99a4d28325
                     @method('patch')
                     @csrf
 
@@ -160,40 +156,40 @@
         $('#changeText').html('Browse Image')
     }
 
-    $('#form').on('submit', function (e) {
-        if ($(this)[0].checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-        else{
-            $('#alert').html('');
-            url = "{{ route('product.store') }}",
-            $.ajax({
-                url : url,
-                type : 'POST',
-                data: new FormData(($(this)[0])),
-                contentType: false,
-                processData: false,
-                success : function(data) {
-                    console.log(data);
-                    $('#alert').html("<div role='alert' class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Success!</strong> " + data.message + "</div>");
-                    add();
-                },
-                error : function(data){
-                    err = '';
-                    respon = data.responseJSON;
-                    if(respon.errors){
-                        $.each(respon.errors, function( index, value ) {
-                            err = err + "<li>" + value +"</li>";
-                        });
-                    }
-                    $('#alert').html("<div role='alert' class='alert alert-danger alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Error!</strong> " + respon.message + "<ol class='pl-3 m-0'>" + err + "</ol></div>");
-                }
-            });
-            return false;
-        }
-        $(this).addClass('was-validated');
-    });
+    // $('#form').on('submit', function (e) {
+    //     if ($(this)[0].checkValidity() === false) {
+    //         event.preventDefault();
+    //         event.stopPropagation();
+    //     }
+    //     else{
+    //         $('#alert').html('');
+    //         url = "{{ route('product.store') }}",
+    //         $.ajax({
+    //             url : url,
+    //             type : 'POST',
+    //             data: new FormData(($(this)[0])),
+    //             contentType: false,
+    //             processData: false,
+    //             success : function(data) {
+    //                 console.log(data);
+    //                 $('#alert').html("<div role='alert' class='alert alert-success alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Success!</strong> " + data.message + "</div>");
+    //                 add();
+    //             },
+    //             error : function(data){
+    //                 err = '';
+    //                 respon = data.responseJSON;
+    //                 if(respon.errors){
+    //                     $.each(respon.errors, function( index, value ) {
+    //                         err = err + "<li>" + value +"</li>";
+    //                     });
+    //                 }
+    //                 $('#alert').html("<div role='alert' class='alert alert-danger alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>×</span></button><strong>Error!</strong> " + respon.message + "<ol class='pl-3 m-0'>" + err + "</ol></div>");
+    //             }
+    //         });
+    //         return false;
+    //     }
+    //     $(this).addClass('was-validated');
+    // });
 </script>
 @endsection
 
