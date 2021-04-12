@@ -27,7 +27,7 @@
                                     <div class="float-right"  style="color:white;">
                                         <span class="icon icon-shopping-cart  s-48"></span>
                                     </div>
-                                    <h5 class=" mt-3" style="color:white;">{{number_format($sum1)}}</h5>
+                                    <h5 class=" mt-3" style="color:white;">{{number_format($sum5)}}</h5>
                                     <div class="counter-title"  style="color:white;">Nilai Penjualan</div>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                     <div class="float-right" style="color:white;">
                                         <span class="icon icon-dollar s-48"></span>
                                     </div>
-                                    <h5 class=" mt-3" style="color:white;">{{number_format($sum2)}}</h5>
+                                    <h5 class=" mt-3" style="color:white;">{{number_format($sum5)}}</h5>
                                     <h6 class="counter-title" style="color:white;">Untung</h6>
                                 </div>
                             </div>
@@ -96,23 +96,21 @@
                     <tr>
                        <th>Total</th>
                        <th>Pajak</th>
-                       <th>Pajak Pesanan</th>
                        <th>Diskon</th>
                        <th>Grand Total</th>
                        <th>Dibayar</th>
-                       <th>Saldo</th>
+                     
                    </tr>
                 </thead>
                 <tbody>
                     @foreach ($kategori1 as $item)
                     <tr>
-                        <td id="total">{{$item->kode}}</td>
-                        <td id="pajak"></td>
-                        <td id="pajakPesanan"></td>
-                        <td id="diskon"></td>
-                        <td id="granTotal"></td>
-                        <td id="dibayar"></td>
-                        <td id="saldo"></td>
+                        <td id="total">{{$item->total}}</td>
+                        <td id="pajak">{{$item->pajak}}</td>
+                        <td id="diskon">{{$item->diskon}}</td>
+                        <td id="granTotal">{{$sum5}}</td>
+                        <td id="dibayar">{{$sum5}}</td>
+                       
                     </tr>
                     @endforeach
 

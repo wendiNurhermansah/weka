@@ -4,7 +4,8 @@ namespace App\Http\Controllers\laporan;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Penjualan;
+use App\Models\Pelanggan;
+use App\Models\TransaksiPelanggan;
 use DataTables;
 
 class LaporanpenjualanController extends Controller
@@ -15,19 +16,44 @@ class LaporanpenjualanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+
     {
-        return view('laporan.laporanPenjualan');
+        $pelanggan = Pelanggan::select('id', 'nama')->get();
+        $total = TransaksiPelanggan::sum('total');
+        $pajak = TransaksiPelanggan::sum('pajak');
+        $diskon = TransaksiPelanggan::sum('diskon');
+
+        // dd($pelanggan);
+
+
+        return view('laporan.laporanPenjualan', compact('total', 'pajak', 'diskon', 'pelanggan'));
     }
 
 
     public function api()
     {
-        $Penjualan = Penjualan::all();
-        return Datatables::of($Penjualan)
+        $TransaksiPelanggan = TransaksiPelanggan::all();
+        return Datatables::of($TransaksiPelanggan)
+             ->editColumn('dibayar', function($p){
+                 return $p->total+$p->pajak;
+             })
+
+             ->addColumn('grandTotal', function($p){
+                return $p->grandTotal;
+            })
+
+            ->editColumn('grandTotal', function($p){
+                return $p->total+$p->pajak;
+            })
+
+            ->editColumn('pelanggan_id', function($p){
+                return $p->Pelanggan->nama;
+            })
+
 
 
             ->addIndexColumn()
-            ->rawColumns(['action'])
+            ->rawColumns(['grandTotal', 'dibayar', 'pelanggan_id'])
             ->toJson();
     }
     /**
