@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
-// use App\Models\daftarPenjualan;
 use App\Models\TransaksiPelanggan;
 use Illuminate\Http\Request;
 use DataTables;
@@ -23,7 +22,7 @@ class daftarPenjualanController extends Controller
 
             ->addColumn('action', function ($p) {
                 return "
-                    <a href='#' onclick='show(" . $p->id . ")' class='text-danger' title='lihat'><i class='icon-image'></i></a>
+                    <a href='" . route('daftarpenjualan.index', $p->id) . "' onclick='edit(" . $p->id . ")' title='Edit Role'><i class='icon-pencil mr-1'></i></a>
                     <a href='#' onclick='remove(" . $p->id . ")' class='text-danger' title='Hapus data'><i class='icon-remove'></i></a>";
             })
             ->editColumn('gambar',  function ($p)  {

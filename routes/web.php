@@ -160,7 +160,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Penjualan
     Route::resource('daftarpenjualan','daftarPenjualanController');
-    Route::post('daftarpenjualan/api', 'daftarPenjualanController@api')->name('daftarpenjualan.api');
+    Route::post('daftarPenjualan/api', 'daftarPenjualanController@api')->name('daftarpenjualan.api');
     // Route::post('daftarpenjualan/index', 'daftarPenjualanController@index')->name('daftarpenjualan');
 
 
