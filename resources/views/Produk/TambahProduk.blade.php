@@ -27,7 +27,7 @@
                                     <i class="icon icon-information2 s-18 red-text"></i>
                                 </a>
                             </label>
-                            <input type="file" name="gambar" id="file" class="input-file" onchange="tampilkanPreview(this,'preview')" size="60">
+                            <input type="file" name="gambar" id="file" class="input-file" onchange="tampilkanPreview(this,'preview')" size="60" required>
                             <label for="file" class="btn-tertiary js-labelFile col-md-12">
                                 <i class="icon icon-image mr-2 m-b-1"></i>
                                 <span id="changeText" class="js-fileName">Browse Image</span>
@@ -39,7 +39,7 @@
 
                         <div class="form-group">
                             <label for="nama">Nama Makanan</label>
-                            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukkan Nama Makanan" name="nama" value="{{old('nama')}}">
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukkan Nama Makanan" name="nama" value="{{old('nama')}}" required>
                         </div>
 
                         <div class="form-group">
@@ -54,20 +54,20 @@
 
                         <div class="form-group">
                             <label for="harga_pabrik">Harga Pabrik</label>
-                            <input type="number" class="form-control @error('harga_pabrik') is-invalid @enderror" id="harga_pabrik" placeholder="Masukkan Kuantitas" name="harga_pabrik" value="{{old('harga_pabrik')}}">
+                            <input type="number" class="form-control @error('harga_pabrik') is-invalid @enderror" id="harga_pabrik" placeholder="Masukkan Harga Pabrik" name="harga_pabrik" value="{{old('harga_pabrik')}}" required>
                         </div>
 
                         <div class="form-group">
                             <label for="discount">Discount</label>
-                            <input type="number" class="form-control @error('discount') is-invalid @enderror" id="discount" placeholder="Masukkan Discount" name="discount">
+                            <input type="number" class="form-control @error('discount') is-invalid @enderror" id="discount" placeholder="Masukkan Discount" name="discount" required>
                         </div>
                         <div class="form-group">
                             <label for="harga_jual">Harga Jual</label>
-                            <input type="number" class="form-control @error('harga_jual') is-invalid @enderror" id="harga_jual" placeholder="Masukkan Harga Jual" name="harga_jual">
+                            <input type="number" class="form-control @error('harga_jual') is-invalid @enderror" id="harga_jual" placeholder="Masukkan Harga Jual" name="harga_jual" required>
                         </div>
                         <div class="form-group">
                             <label for="stock">Stock</label>
-                            <input type="number" class="form-control @error('stock') is-invalid @enderror" id="stock" placeholder="Masukkan Stock" name="stock">
+                            <input type="number" class="form-control @error('stock') is-invalid @enderror" id="stock" placeholder="Masukkan Stock" name="stock" required>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Tambah Data</button>
@@ -141,6 +141,11 @@
                 }
             }
         }
+        function reset(){
+        $('#form').trigger('reset');
+        $('#preview').attr({ 'src': '-', 'alt': ''});
+        $('#changeText').html('Browser Image')
+    }
 
         function add(){
             save_method = "add";

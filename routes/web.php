@@ -184,7 +184,7 @@ Route::group(['middleware' => ['auth']], function () {
     // });
 
 
-    // Produk
+    // Produkss
     Route::resource('product', 'ProductsController');
     Route::post('product/api', 'ProductsController@api')->name('product.api');
     Route::get('tambahproduk', 'ProductsController@create')->name('tambahproduk');
