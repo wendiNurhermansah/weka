@@ -40,17 +40,24 @@ class LaporanpenjualanController extends Controller
             })
 
             ->editColumn('grandTotal', function($p){
-                return $p->total+$p->pajak;
+                return $p->total+$p->pajak-$p->diskon;
             })
 
             ->editColumn('pelanggan_id', function($p){
                 return $p->Pelanggan->nama;
             })
 
+            ->addColumn('status', function($p){
+                if ($p->dibayar == $p->total + $p->pajak - $p->diskon) {
+                    return $p ='dibayar';
+                }
+                 else {return $p  ='belum dibayar';}
+            })
+
 
 
             ->addIndexColumn()
-            ->rawColumns(['grandTotal', 'dibayar', 'pelanggan_id'])
+            ->rawColumns(['grandTotal', 'dibayar', 'pelanggan_id', 'status'])
             ->toJson();
     }
     /**

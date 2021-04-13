@@ -19,18 +19,18 @@
 
         <div class="row">
             <div class="col-md-6">
-                <div class="card" style="height: 30rem;">
-                    <h5 class="card-header">Bulan ini :</h5>
-                    <div class="card-body">
+                <div class="card table-responsive" style="height: 30rem;">
+                    <h5 class="card-header">Bulan ini ({{$bulanTahun}}) : </h5>
+                    <div class="card-body table-responsive">
                         <div id="cart1"></div>
                     </div>
 
                   </div>
             </div>
             <div class="col-md-6">
-                <div class="card" style="height: 30rem;">
-                    <h5 class="card-header">Bulan Lalu :</h5>
-                    <div class="card-body">
+                <div class="card table-responsive" style="height: 30rem;">
+                    <h5 class="card-header">Bulan Lalu ({{$bulanTahun1}}) :</h5>
+                    <div class="card-body table-responsive">
                         <div id="chart2"></div>
                     </div>
 
@@ -40,18 +40,18 @@
 
         <div class="row" style="margin-top:30px; ">
             <div class="col-md-6">
-                <div class="card" style="height: 30rem;">
-                    <h5 class="card-header">3 Bulan Terakhir :</h5>
-                    <div class="card-body">
+                <div class="card " style="height: 30rem;">
+                    <h5 class="card-header">3 Bulan Terakhir (dari {{ $bulanTahun2}}):</h5>
+                    <div class="card-body table-responsive">
                         <div id="chart3"></div>
                     </div>
 
                   </div>
             </div>
             <div class="col-md-6">
-                <div class="card" style="height: 30rem;">
-                    <h5 class="card-header">12 Bulan Terakhir :</h5>
-                    <div class="card-body">
+                <div class="card " style="height: 30rem;">
+                    <h5 class="card-header">12 Bulan Terakhir (dari {{ $bulanTahun3}}) :</h5>
+                    <div class="card-body table-responsive">
                         <div id="chart4"></div>
                     </div>
 
@@ -76,9 +76,7 @@
    },
 
    xAxis: {
-       categories: [
-           'Feb-2021'
-       ],
+       categories: {!!json_encode($categories)!!} ,
        crosshair: true
    },
    yAxis: {
@@ -102,16 +100,8 @@
        }
    },
    series: [{
-       name: 'Pajak',
-       data: [49.9]
-
-   }, {
-       name: 'Diskon',
-       data: [83.6]
-
-   }, {
-       name: 'Penjualan',
-       data: [48.9]
+       name: 'Produk',
+       data: {!!json_encode($data)!!}
 
    }]
 });
@@ -128,9 +118,7 @@
    },
 
    xAxis: {
-       categories: [
-           'Feb-2021'
-       ],
+       categories: {!!json_encode($categories1)!!},
        crosshair: true
    },
    yAxis: {
@@ -154,16 +142,8 @@
        }
    },
    series: [{
-       name: 'Pajak',
-       data: [49.9]
-
-   }, {
-       name: 'Diskon',
-       data: [83.6]
-
-   }, {
-       name: 'Penjualan',
-       data: [48.9]
+       name: 'Produk',
+       data: {!!json_encode($data1)!!}
 
    }]
 });
@@ -179,9 +159,7 @@
    },
 
    xAxis: {
-       categories: [
-           'Feb-2021'
-       ],
+       categories: {!!json_encode($categories2)!!},
        crosshair: true
    },
    yAxis: {
@@ -205,17 +183,8 @@
        }
    },
    series: [{
-       name: 'Pajak',
-       data: [49.9]
-
-   }, {
-       name: 'Diskon',
-       data: [83.6]
-
-   }, {
-       name: 'Penjualan',
-       data: [48.9]
-
+       name: 'Produk',
+       data: {!!json_encode($data2)!!}
    }]
 });
 </script>
@@ -231,9 +200,7 @@
    },
 
    xAxis: {
-       categories: [
-           'Feb-2021'
-       ],
+       categories: {!!json_encode($categories3)!!},
        crosshair: true
    },
    yAxis: {
@@ -257,16 +224,8 @@
        }
    },
    series: [{
-       name: 'Pajak',
-       data: [49.9]
-
-   }, {
-       name: 'Diskon',
-       data: [83.6]
-
-   }, {
-       name: 'Penjualan',
-       data: [48.9]
+       name: 'Produk',
+       data: {!!json_encode($data3)!!}
 
    }]
 });
