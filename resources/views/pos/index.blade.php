@@ -148,7 +148,7 @@
                                 <button type="button" class="btn btn-dark h-50 button-footer" data-toggle="modal" data-target="#bill">Print Bill</button>
                             </div>
                             <div class="col-md-4">
-                                <button type="button" class="btn btn-success py-4 button-footer" data-toggle="modal" data-target="#payment" id="buttonPayment">Payment</button>
+                                <button type="button" class="btn btn-success py-4 button-footer" data-toggle="modal" data-target="#modalPayment" id="buttonPayment">Payment</button>
                             </div>
                         </div>
                     </div>
@@ -336,6 +336,10 @@
             }
 
             $(document).ready(function(){
+                $('#modalPayment').on('hidden.bs.modal', function () {
+                    $('#dataProduk > div').remove()
+                    $('#dataProduk > input').remove()
+                })
                 // $('#cariPelanggan').focus(function() {
                 //     if($('#cariPellangggan').val() == null){
                 //         alert('nama blom')
@@ -500,7 +504,7 @@
                                                         </td>
                                                         <td>
 
-                                                            <a href='#' onclick='hapusTable(`+formAdd+`)' title='Hapus data'><i class="icon-trash text-danger"></i>  </a>
+                                                            <a href='#' id="hapusTable_`+formAdd+`" onclick='hapusTable(`+formAdd+`)' title='Hapus data'><i class="icon-trash text-danger"></i>  </a>
                                                         </td>
                                                     </tr>
 
