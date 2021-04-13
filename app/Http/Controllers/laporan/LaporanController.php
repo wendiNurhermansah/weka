@@ -296,8 +296,9 @@ class LaporanController extends Controller
     {
         
         $Pembayaran = TransaksiPelanggan::all();
+        // dd($Pemba);
         return Datatables::of($Pembayaran)
-        
+
         ->editColumn('total', function($p){
             return $p->total+$p->pajak;
         })
