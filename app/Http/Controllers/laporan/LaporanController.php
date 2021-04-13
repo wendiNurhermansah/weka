@@ -11,6 +11,7 @@ use App\Models\Kategori;
 use App\Models\Biaya;
 use App\Models\Pembelian;
 use App\Models\TransaksiPelanggan;
+use App\Models\TransaksiPelangganDetail;
 use DataTables;
 use Carbon\Carbon;
 
@@ -293,11 +294,16 @@ class LaporanController extends Controller
 
     public function api()
     {
+        
         $Pembayaran = TransaksiPelanggan::all();
         return Datatables::of($Pembayaran)
+        
         ->editColumn('total', function($p){
             return $p->total+$p->pajak;
         })
+
+       
+
 
             ->addIndexColumn()
             ->rawColumns(['action'])

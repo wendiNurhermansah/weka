@@ -87,6 +87,7 @@
                             <th>Diskon</th>
                             <th>Grand Total</th>
                             <th>Dibayar</th>
+                            <th>Status</th>
 
                         </thead>
                         <tbody></tbody>
@@ -106,6 +107,7 @@
                             <th>
                                 <span>0.00</span>
                             </th>
+                            <th>[Status]</th>
 
                             </tr>
                         </tfoot>
@@ -173,6 +175,7 @@
                 {data: 'diskon', name: 'diskon'},
                 {data: 'grandTotal', name: 'grandTotal'},
                 {data: 'dibayar', name: 'dibayar'},
+                {data: 'status', name: 'status'},
             ]
 
     });
