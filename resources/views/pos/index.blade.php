@@ -118,19 +118,15 @@
                                     </tr>
                                 </thead>
                                 <tbody id="appendd">
-<<<<<<< HEAD
-
-=======
                                     @stack('penjualan')
                                     {{-- @if ($penjualan)
-                                        @foreach ($penjualan as $p)  
+                                        @foreach ($penjualan as $p)
                                             <tr>
                                                 <td>{{$p->produk_id}}</th>
                                                 <td>{{$p->kuantitas}}</th>
                                             </tr>
                                         @endforeach
                                     @endif --}}
->>>>>>> c81b5b4bb93b3741af9e7e3ca19e077c8a182389
                                 </tbody>
                                 <tfoot>
                                     <tr>
