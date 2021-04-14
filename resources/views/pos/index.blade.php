@@ -117,6 +117,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="appendd">
+
                                 </tbody>
                                 <tfoot>
                                     <tr>
@@ -204,7 +205,7 @@
             </div>
         </div>
     </div>
-   
+
     <div class="modal fade" id="cancel" role="dialog">
         <div class="modal-dialog">
 
@@ -282,7 +283,7 @@
                     // var ini = $("#appendd tr:eq(0) td:eq(3) input").val();
                     // console.log(ini)
                     for (index = 1; index <= row; index++) {
-                        console.log(index); 
+                        console.log(index);
                         var sub = $('#tableProduk tr:eq('+index+') > td:eq(3) input').val();
                         console.log('sub'+sub);
                         var total1 = parseInt(total1) + parseInt(sub);
@@ -303,7 +304,7 @@
                     // $('#totalPayable').html(bayar);
 
                     pajak = $('#nilaiPajak').html();
-                    var total = $('#tabelTotal').text();  
+                    var total = $('#tabelTotal').text();
                     hasilPajak = total * pajak / 100;
                     $('#hasilPajak').html(hasilPajak);
                     bayar = parseFloat(total - hasilDiskon) + parseFloat(hasilPajak);
@@ -328,7 +329,7 @@
                     $('#totalPayable').html(bayar);
 
                     pajak = $('#nilaiPajak').html();
-                    var total = $('#tabelTotal').text();  
+                    var total = $('#tabelTotal').text();
                     hasilPajak = total * pajak / 100;
                     $('#hasilPajak').html(hasilPajak);
                     bayar = parseFloat(total - hasilDiskon) + parseFloat(hasilPajak);
@@ -353,7 +354,7 @@
                 // $('#pageNext').click(function(e){
 
                     // e.preventDefault()
-               
+
                 // })
 
                 // $('#pagePrevious').click(function(e){
@@ -393,8 +394,8 @@
 
                 // nav
                 $("#pos-nav-li").remove();
-                // $("#navigasi").add("<li id='shortcut-nav-li' type='none' class='mx-2 fs-13 text-white'><a id='shortcut' href='' data-toggle='modal' data-target='#shortcut'><i class='icon-key'></i></a></li>").appendTo("#navigasi");          
-                
+                // $("#navigasi").add("<li id='shortcut-nav-li' type='none' class='mx-2 fs-13 text-white'><a id='shortcut' href='' data-toggle='modal' data-target='#shortcut'><i class='icon-key'></i></a></li>").appendTo("#navigasi");
+
                 // ajax get product
                 $( "#cariProduk" ).autocomplete({
                         source: function( request, response ) {
@@ -403,7 +404,7 @@
                             url:"{{route('Pos.cariProduk')}}",
                             method: "GET",
                             type: 'get',
-                            dataType: "json", 
+                            dataType: "json",
                             data: {
                                 _token: CSRF_TOKEN,
                                 search: request.term
@@ -423,7 +424,7 @@
                             searchProduk(ui.item.id);
                             // console.log(ui.item.id);
                             // $('#kategori').val(ui.item.value);
-                            // $('#kategori').val(ui.item.label); 
+                            // $('#kategori').val(ui.item.label);
                             // display the selected text
                             // $('tbody').html(data);
                             return false;
@@ -476,13 +477,13 @@
     //   } );
     function searchProduk(id){
                     // $("#klik-kartu").prop('disabled', true);
-                    // $('#klik-kartu').bind('click');     
+                    // $('#klik-kartu').bind('click');
                     // $('#data_kartu *[onclick]').removeAttr('onclick');
                     $('*[onclick]').prop('disabled',true);
                     $('*[data-toggle="modal"]').prop('disabled',true)
                         // $($(this).data('target')).toggleClass('in');
-                
-    
+
+
                     formAdd++;
 
                     var url = "{{ route('Pos.produk', ':id') }}".replace(':id', id);
@@ -514,23 +515,23 @@
 
                     $.get(url, function (res) {
                             var kuantitas = 1;
-                            
+
                             $('#appendd').append(html);//tambah item
                             $('#produk_id'+formAdd).val(res.id);//ambil id
                             var p = $('#produk_'+formAdd).val(res.nama);//ambil nama
                             $('#biaya_satuan_'+formAdd).val(res.harga_jual);//ambil biaya
                             $('#kuantitas_'+formAdd).val(kuantitas);//ambil kuantitias
-                            var subTotal = kuantitas*res.harga_jual; 
+                            var subTotal = kuantitas*res.harga_jual;
                             $('#sub_total_'+formAdd).val(subTotal);//subtotal
 
                             var total = $('#tabelTotal').html();//ambil total lama
                             total = parseInt(total) + parseInt(subTotal);//total lama + sub total produk baru
                             $('#tabelTotal').html(total);
-                            
+
                             produkSesudah = $("#produk_"+formAdd).val();
-                            
+
                             tr = $("#appendd tr").length;
-                           
+
                             for (i = 1; i < tr; i++) {
                                 console.log('i'+i)
                                 produkSebelum = $("#produk_"+i).val();
@@ -548,7 +549,7 @@
                                         // total = parseInt(total) + parseInt(subTotal);
                                         // console.log('totatambah',total)
                                         $('#tabelTotal').html(total);
-                                        $("#trTable_"+formAdd).remove();        
+                                        $("#trTable_"+formAdd).remove();
                                 }else{
                                     $('#kuantitas_'+formAdd).val(kuantitas);
                                     var subTotal = kuantitas*res.harga_jual;
@@ -569,17 +570,17 @@
                             $('#totalPayable').html(bayar);
 
                             var pajak = $('#nilaiPajak').html();
-                            var total = $('#tabelTotal').text();  
+                            var total = $('#tabelTotal').text();
                             hasilDiskon = $('#hasilDiskon').html();
                             hasilPajak = total * pajak / 100;
                             $('#hasilPajak').html(hasilPajak);
                             bayar = parseFloat(total - hasilDiskon) + parseFloat(hasilPajak);
                             $('#totalPayable').html(bayar);
-                        
+
                             $('*[onclick]').prop('disabled',false);
                             $('*[data-toggle="modal"]').prop('disabled',false)
-                            
-                            // produkSesudah = 
+
+                            // produkSesudah =
                             // if()
 
                             // penjumlahan

@@ -22,7 +22,7 @@ class daftarPenjualanController extends Controller
 
             ->addColumn('action', function ($p) {
                 return "
-                    <a href='" . route('pos.main.edit', $p->id) . "' onclick='edit(" . $p->id . ")' title='Edit Role'><i class='icon-pencil mr-1'></i></a>
+                    <a href='" . route('Pos.main.edit', $p->id) . "' onclick='edit(" . $p->id . ")' title='Edit Role'><i class='icon-pencil mr-1'></i></a>
                     <a href='#' onclick='remove(" . $p->id . ")' class='text-danger' title='Hapus data'><i class='icon-remove'></i></a>";
             })
             ->editColumn('gambar',  function ($p)  {

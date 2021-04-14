@@ -26,9 +26,9 @@ class PosController extends Controller
      */
 
     protected $route = 'Pos.main.';
-    protected $view  = 'pos.';  
+    protected $view  = 'pos.';
     protected $title = 'POS';
-    protected $path  = 'produk/images/ava/'; 
+    protected $path  = 'produk/images/ava/';
 
     public function index()
     {
@@ -44,7 +44,7 @@ class PosController extends Controller
         return view($this->view . 'index', compact(
             'route',
             'title',
-            'path', 
+            'path',
             'pelanggan',
             'kartu',
             'getKartu',
@@ -85,7 +85,7 @@ class PosController extends Controller
     function fetch_kartu(Request $request){
         if($request->ajax()){
             $kartu = product::simplePaginate(12);
-            
+
             $output = '<div class="h-75 mb-5">
                             <div class="row ml-4 pl-2">';
             // loop through the result array
@@ -132,7 +132,7 @@ class PosController extends Controller
             $response = array();
             foreach($kategori as $k){
                 $response[] = array("id"=>$k->id,"label"=>$k->nama);
-            }        
+            }
         }
         return response()->json($response);
     }
@@ -154,7 +154,7 @@ class PosController extends Controller
             $response = array();
             foreach($kategori as $k){
                 $response[] = array("value"=>$k->id,"label"=>$k->nama);
-            }        
+            }
         }
         return response()->json($response);
     }
@@ -179,12 +179,12 @@ class PosController extends Controller
     //                     ->limit(5)
     //                     ->get();
     //     }
-  
+
     //     $response = array();
     //     foreach($kategori as $k){
     //        $response[] = array("label"=>$k->nama);
     //     }
-  
+
     //     return response()->json($response);
     // }
 
@@ -203,10 +203,10 @@ class PosController extends Controller
                 // loop through the result array
                 foreach ($data as $row){
                     // concatenate output to the array
-                    $output .=  '<li class="list-group-item"> 
+                    $output .=  '<li class="list-group-item">
                                         <input type="text" value="'.$row->id.'" hidden>
                                         <a class="btn">
-                                            <img src="'.config('app.sftp_src').'images/'.$row->gambar.'" alt="" style="height:30px;width:30px;" class="img-fluid img-responsive">' 
+                                            <img src="'.config('app.sftp_src').'images/'.$row->gambar.'" alt="" style="height:30px;width:30px;" class="img-fluid img-responsive">'
                                             .'<span class="ml-2">'.$row->nama.'<span>'.'
                                         </a>
                                     </li>';
@@ -278,7 +278,7 @@ class PosController extends Controller
         $transaksi->metode = $request->metodePembayaran;
         $transaksi->catatan = $request->catatanPembayaran;
         $transaksi->save();
-        
+
         for($i=0;$i<$request->jumlahItem;$i++){
             $transaksiDetail = new TransaksiPelangganDetail();
             $transaksiDetail->transaksi_detail_id = $transaksi->id;
@@ -292,7 +292,7 @@ class PosController extends Controller
             $transaksiDetail->save();
         }
 
-        return redirect()->route('Pos.main.index');   
+        return redirect()->route('Pos.main.index');
     }
 
     /**
@@ -326,7 +326,7 @@ class PosController extends Controller
         return view($this->view . 'index', compact(
             'route',
             'title',
-            'path', 
+            'path',
             'pelanggan',
             'kartu',
             'getKartu',
