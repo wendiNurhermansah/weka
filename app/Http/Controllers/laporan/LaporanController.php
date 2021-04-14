@@ -14,6 +14,7 @@ use App\Models\TransaksiPelanggan;
 use App\Models\TransaksiPelangganDetail;
 use DataTables;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class LaporanController extends Controller
 {
@@ -294,7 +295,7 @@ class LaporanController extends Controller
 
     public function api()
     {
-        
+
         $Pembayaran = TransaksiPelanggan::all();
         // dd($Pemba);
         return Datatables::of($Pembayaran)
@@ -303,7 +304,8 @@ class LaporanController extends Controller
             return $p->total+$p->pajak;
         })
 
-       
+
+
 
 
             ->addIndexColumn()
@@ -320,8 +322,13 @@ class LaporanController extends Controller
 
     public function apii()
     {
-        $Laporan_produk = Laporan_produk::all();
+        $Laporan_produk = DB::select('SELECT *,count( tmtransaksi_pelanggan_detail.kuantitas  ) AS total , SUM(sub_total) as penghasilan , SUM(produks.harga_pabrik) as biaya FROM tmtransaksi_pelanggan_detail JOIN produks ON produks.id = tmtransaksi_pelanggan_detail.produk_id  GROUP BY tmtransaksi_pelanggan_detail.produk_id');
+        // dd($Laporan_produk);
         return Datatables::of($Laporan_produk)
+
+        ->editColumn('biaya_satuan', function($p){
+            return $p->penghasilan-$p->biaya;
+        })
 
 
 
@@ -335,24 +342,24 @@ class LaporanController extends Controller
 
     //laporan bulanan kalender
 
-    public function increment(){
-        $Tahun = Tahun::find(1);
+//     public function increment(){
+//         $Tahun = Tahun::find(1);
 
-        $Tahun->update([
-            'tahun' => (++$Tahun->tahun),
-        ]);
+//         $Tahun->update([
+//             'tahun' => (++$Tahun->tahun),
+//         ]);
 
-        return true;
-    }
+//         return true;
+//     }
 
-    public function decretment(){
-        $Tahun = Tahun::find(1);
+//     public function decretment(){
+//         $Tahun = Tahun::find(1);
 
-        $Tahun->update([
-            'tahun' => (--$Tahun->tahun),
-        ]);
+//         $Tahun->update([
+//             'tahun' => (--$Tahun->tahun),
+//         ]);
 
-        return true;
-    }
+//         return true;
+//     }
 
 }

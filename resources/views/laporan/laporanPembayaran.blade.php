@@ -61,7 +61,7 @@
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, align: 'center', className: 'text-center'},
                 {data: 'created_at', name: 'created_at'},
                 {data: 'catatan', name: 'catatan'},
-                {data: 'qty', name: 'qty'},
+                {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, align: 'center', className: 'text-center'},
                 {data: 'metode', name: 'metode'},
                 {data: 'total', name: 'total'},
             ]
