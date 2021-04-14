@@ -79,7 +79,7 @@ class ProdukteratasController extends Controller
 
 
 
-        return view('Laporan.produkTeratas', compact('categories7', 'data7','categories1',
+        return view('laporan.produkTeratas', compact('categories7', 'data7','categories1',
         'data1','data2', 'bulanTahun', 'last1','categories2','categories3',
         'bulanTahun2', 'bulanTahun3', 'data3'
 
