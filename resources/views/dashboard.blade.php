@@ -110,9 +110,9 @@
             <div class="col-md-4">
                 <div class="card" style="height: 40rem;">
                     <div class="card-body">
-                        <h5>Produk Teratas ( February 2021)</h5>
+                        <h5 style="text-align: center;"><strong>Kalender</strong></h5>
 
-                        <div id="chartProduk"></div>
+                        <div id="calendar"></div>
                     </div>
                 </div>
             </div>
@@ -133,9 +133,7 @@
     },
 
     xAxis: {
-        categories: [
-            'Feb-2021'
-        ],
+        categories: {!!json_encode($categories)!!},
         crosshair: true
     },
     yAxis: {
@@ -159,78 +157,31 @@
         }
     },
     series: [{
-        name: 'Pajak',
-        data: [49.9]
-
-    }, {
-        name: 'Diskon',
-        data: [83.6]
-
-    }, {
-        name: 'Penjualan',
-        data: [48.9]
+        name: 'Produk',
+        data: {!!json_encode($data)!!}
 
     }]
 });
- </script>
+
+document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            themeSystem: 'bootstrap',
+            height: 550,
+            displayEventTime: false,
+            editable: true,
+            selectable: true,
+            timeFormat: 'H(:mm)'
+        });
+        calendar.render();
+        calendar.setOption('locale', 'id');
+    });
 
 
-{{-- chart 2 --}}
- <script>
-     Highcharts.chart('chartProduk', {
-    chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
-    },
-    title: {
-        text: ''
-    },
-    tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-    accessibility: {
-        point: {
-            valueSuffix: '%'
-        }
-    },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: false
-            },
-            showInLegend: true
-        }
-    },
-    series: [{
-        name: 'Brands',
-        colorByPoint: true,
-        data: [{
-            name: 'Chrome',
-            y: 61.41,
-            sliced: true,
-            selected: true
-        }, {
-            name: 'Internet Explorer',
-            y: 11.84
-        }, {
-            name: 'Firefox',
-            y: 10.85
-        }, {
-            name: 'Edge',
-            y: 4.67
-        }, {
-            name: 'Safari',
-            y: 4.18
-        }, {
-            name: 'Other',
-            y: 7.05
-        }]
-    }]
-});
+
+
+
 
  </script>
 @endsection
