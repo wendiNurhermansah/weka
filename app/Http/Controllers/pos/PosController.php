@@ -15,6 +15,7 @@ use App\Models\Kategori;
 use App\Models\product;
 use App\Models\TransaksiPelanggan;
 use App\Models\TransaksiPelangganDetail;
+use App\Models\pengaturan;
 
 class PosController extends Controller
 {
@@ -38,6 +39,7 @@ class PosController extends Controller
         $pelanggan = $this->pelanggan();
         $kartu = $this->kartu();
         $getKartu = $this->getKategori();
+        $pengaturan = $this->pengaturan();
         // dd(Core::count());
         return view($this->view . 'index', compact(
             'route',
@@ -46,6 +48,7 @@ class PosController extends Controller
             'pelanggan',
             'kartu',
             'getKartu',
+            'pengaturan',
         ));
     }
 
@@ -53,6 +56,24 @@ class PosController extends Controller
     {
         $pelanggan = Pelanggan::all();
         return $pelanggan;
+    }
+
+    public function pengaturan()
+    {
+        $pengaturan = pengaturan::get([
+            'fokus_tambahkan_cari_input_barang',
+            'tambahkan_pelanggan',
+            'toggle_category_slider',
+            'batalkan_penjualan',
+            'tangguhkan_penjualan',
+            'cetak_pesanan',
+            'cetak_bill',
+            'finalisasi_penjualan',
+            'penjualan_hari_ini',
+            'tagihan_terbuka',
+            'tutup_penjualan']);
+
+        return $pengaturan;
     }
 
     public function kartu()
@@ -293,7 +314,27 @@ class PosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $route = $this->route;
+        $title = $this->title;
+        $path = $this->path;
+
+        $penjualan = TransaksiPelangganDetail::where('transaksi_detail_id',$id)->get();
+        
+        $pelanggan = $this->pelanggan();
+        $kartu = $this->kartu();
+        $getKartu = $this->getKategori();
+        $pengaturan = $this->pengaturan();
+        // dd(Core::count());
+        return view($this->view . 'index', compact(
+            'route',
+            'title',
+            'path', 
+            'pelanggan',
+            'kartu',
+            'getKartu',
+            'pengaturan',
+            'penjualan',
+        ));
     }
 
     /**

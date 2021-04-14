@@ -13,9 +13,66 @@
                             <th>Shortcut Keys</th>
                             <th>Actions</th>
                         </thead>
+                        <tbody>
+                            @foreach ($pengaturan as $p)                
+                                    <tr>
+                                        <td>{{$p->fokus_tambahkan_cari_input_barang}}</td>
+                                        <td>fokus_tambahkan_cari_input_barang</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{$p->tambahkan_pelanggan}}</td>
+                                        <td>tambahkan_pelanggan</td> 
+                                    </tr>
+                                    <tr>
+                                        <td>{{$p->toggle_category_slider}}</td>
+                                        <td>toggle_category_slider</td>  
+                                    </tr>
+                                    <tr>
+                                        <td>{{$p->batalkan_penjualan}}</td>
+                                        <td>batalkan_penjualan</td>
+                                    </tr> 
+                                    <tr>
+                                        <td>{{$p->tangguhkan_penjualan}}</td>
+                                        <td>tangguhkan_penjualan</td>    
+                                    </tr>
+                                    <tr>
+                                        <td>{{$p->cetak_pesanan}}</td>                        
+                                        <td>cetak_pesanan</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{$p->cetak_bill}}</td>                         
+                                        <td>cetak_bill</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{$p->finalisasi_penjualan}}</td>
+                                        <td>finalisasi_penjualan</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{$p->penjualan_hari_ini}}</td>
+                                        <td>penjualan_hari_ini</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{$p->tagihan_terbuka}}</td>
+                                        <td>tagihan_terbuka</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{$p->tutup_penjualan}}</td>
+                                        <td>tutup_penjualan</td>
+                                    </tr>                        
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+@endpush
+@push('name')
+<script>
+    $(document).ready(function(){
+        $(this).focus(String.fromCharCode(65)){
+            alert('kepencet')
+        }
+    })
+</script>
 @endpush

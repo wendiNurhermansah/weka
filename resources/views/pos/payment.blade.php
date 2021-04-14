@@ -129,7 +129,7 @@
             </div>
             <div class="modal-footer bg-green">
                 <button type="button" class="btn btn-light mr-auto border" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="submitPayment" class="btn btn-primary">Submit</button>
             </div>
         </div>
         </form>

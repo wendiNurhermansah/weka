@@ -34,7 +34,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light mr-auto border" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" onclick="add()">Save changes</button>
+                    <button type="submit" id="submitHadiah" class="btn btn-primary" onclick="add()">Save changes</button>
                 </div>
             </form>
         </div>
