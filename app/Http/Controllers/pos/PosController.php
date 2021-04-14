@@ -318,6 +318,8 @@ class PosController extends Controller
         $title = $this->title;
         $path = $this->path;
 
+        $penjualan = TransaksiPelangganDetail::where('transaksi_detail_id',$id)->get();
+        
         $pelanggan = $this->pelanggan();
         $kartu = $this->kartu();
         $getKartu = $this->getKategori();
@@ -331,6 +333,7 @@ class PosController extends Controller
             'kartu',
             'getKartu',
             'pengaturan',
+            'penjualan',
         ));
     }
 
