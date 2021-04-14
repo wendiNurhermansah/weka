@@ -28,22 +28,17 @@
                     <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                             <th width="30">NO</th>
-                            <th>Kode</th>
                             <th>Nama</th>
                             <th>Terjual</th>
-                            <th>Pajak</th>
                             <th>Biaya</th>
                             <th>Penghasilan</th>
                             <th>Untung</th>
+
                         </thead>
                         <tbody></tbody>
                         <tfoot >
                             <th></th>
-                            <th>[kode]</th>
                             <th>[Nama]</th>
-                            <th>
-                                <span>0</span>
-                            </th>
                             <th>
                                 <span>0</span>
                             </th>
@@ -68,6 +63,55 @@
 @section('script')
 <script type="text/javascript">
     var table = $('#dataTable').dataTable({
+        "footerCallback": function ( row, data, start, end, display ) {
+            var api = this.api(), data;
+
+            // converting to interger to find total
+            var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '')*1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+
+            // computing column Total of the complete result
+            var Terjual = api
+                .column( 2 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+            var biaya = api
+                .column(3)
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+            var Penghasilan = api
+                .column(4)
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+            var Untung = api
+                .column(5)
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+
+            // Update footer by showing the total with the reference of the column index
+
+            $( api.column( 2 ).footer() ).html(Terjual);
+            $( api.column( 3 ).footer() ).html(biaya);
+            $( api.column( 4 ).footer() ).html(Penghasilan);
+            $( api.column( 5 ).footer() ).html(Untung);
+
+        },
             processing: true,
             serverSide: true,
             pageLength: 15,
@@ -81,13 +125,11 @@
 
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false, align: 'center', className: 'text-center'},
-                {data: 'kode', name: 'kode'},
                 {data: 'nama', name: 'nama'},
-                {data: 'terjual', name: 'terjual'},
-                {data: 'pajak', name: 'pajak'},
+                {data: 'total', name: 'total'},
                 {data: 'biaya', name: 'biaya'},
                 {data: 'penghasilan', name: 'penghasilan'},
-                {data: 'untung', name: 'untung'},
+                {data: 'biaya_satuan', name: 'biaya_satuan'}
 
             ]
     });

@@ -19,7 +19,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                <div class="card table-responsive" style="height: 30rem;">
+                <div class="card table-responsive">
                     <h5 class="card-header">Bulan ini ({{$bulanTahun}}) : </h5>
                     <div class="card-body table-responsive">
                         <div id="cart1"></div>
@@ -28,8 +28,8 @@
                   </div>
             </div>
             <div class="col-md-6">
-                <div class="card table-responsive" style="height: 30rem;">
-                    <h5 class="card-header">Bulan Lalu ({{$bulanTahun1}}) :</h5>
+                <div class="card table-responsive">
+                    <h5 class="card-header">Bulan Lalu ({{$last1}}) :</h5>
                     <div class="card-body table-responsive">
                         <div id="chart2"></div>
                     </div>
@@ -40,7 +40,7 @@
 
         <div class="row" style="margin-top:30px; ">
             <div class="col-md-6">
-                <div class="card " style="height: 30rem;">
+                <div class="card " >
                     <h5 class="card-header">3 Bulan Terakhir (dari {{ $bulanTahun2}}):</h5>
                     <div class="card-body table-responsive">
                         <div id="chart3"></div>
@@ -49,7 +49,7 @@
                   </div>
             </div>
             <div class="col-md-6">
-                <div class="card " style="height: 30rem;">
+                <div class="card ">
                     <h5 class="card-header">12 Bulan Terakhir (dari {{ $bulanTahun3}}) :</h5>
                     <div class="card-body table-responsive">
                         <div id="chart4"></div>
@@ -76,7 +76,7 @@
    },
 
    xAxis: {
-       categories: {!!json_encode($categories)!!} ,
+       categories: {!!json_encode($categories7)!!} ,
        crosshair: true
    },
    yAxis: {
@@ -101,7 +101,7 @@
    },
    series: [{
        name: 'Produk',
-       data: {!!json_encode($data)!!}
+       data: {!!json_encode($data7)!!}
 
    }]
 });

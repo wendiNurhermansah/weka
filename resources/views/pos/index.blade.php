@@ -12,6 +12,7 @@
 @include('pos.printOrder')
 @include('pos.printBill')
 @include('pos.payment')
+@include('pos.penjualan')
 @section('title', ' | '.$title.'')
 @section('style')
 <style>
@@ -117,7 +118,19 @@
                                     </tr>
                                 </thead>
                                 <tbody id="appendd">
+<<<<<<< HEAD
 
+=======
+                                    @stack('penjualan')
+                                    {{-- @if ($penjualan)
+                                        @foreach ($penjualan as $p)  
+                                            <tr>
+                                                <td>{{$p->produk_id}}</th>
+                                                <td>{{$p->kuantitas}}</th>
+                                            </tr>
+                                        @endforeach
+                                    @endif --}}
+>>>>>>> c81b5b4bb93b3741af9e7e3ca19e077c8a182389
                                 </tbody>
                                 <tfoot>
                                     <tr>

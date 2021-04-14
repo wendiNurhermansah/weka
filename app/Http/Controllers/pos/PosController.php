@@ -106,7 +106,7 @@ class PosController extends Controller
                         </div>
                         <div class="product-nav row text-white w-100 mt-4 pt-2">
                             <a to="'.$kartu->previousPageUrl().'" onclick="pageLink(1)" id="pagePrevious" class="pagePrevious btn btn-secondary col-md-4 font-weight-bold"><</a>
-                            <button class="btn btn-success col-md-4 font-weight-bold" data-toggle="modal" data-target="#hadiah">
+                            <button type="button" class="btn btn-success col-md-4 font-weight-bold" data-toggle="modal" data-target="#hadiah">
                                 <i class="icon icon-folder"></i>Sell Gift Card
                             </button>
                             <a to ="'.$kartu->nextPageUrl().'" onclick="pageLink(2)" id="pageNext" class="pageNext btn btn-secondary col-md-4 font-weight-bold">></a>
@@ -318,6 +318,8 @@ class PosController extends Controller
         $title = $this->title;
         $path = $this->path;
 
+        $penjualan = TransaksiPelangganDetail::where('transaksi_detail_id',$id)->get();
+        
         $pelanggan = $this->pelanggan();
         $kartu = $this->kartu();
         $getKartu = $this->getKategori();
@@ -331,6 +333,7 @@ class PosController extends Controller
             'kartu',
             'getKartu',
             'pengaturan',
+            'penjualan',
         ));
     }
 
