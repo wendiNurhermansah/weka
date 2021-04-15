@@ -155,11 +155,11 @@
         $( "#buttonPayment" ).click(function() {
             if($('#cariPelanggan').val() == ''){
                 $('#buttonPayment').removeAttr('data-target'); 
-                alert('Silahkan isi nama')
+                alert('Please add name')
                 $('#cariPelanggan').css('border','red solid 1px')
             }else if($('#tabelTotal').html() == 0){
                 $('#buttonPayment').removeAttr('data-target'); 
-                alert('Silahkan pilih produk')
+                alert('Please add product')
             }else{
                 $('#buttonPayment').attr('data-target','#modalPayment')
                 $('#cariPelanggan').css('border','')
@@ -169,7 +169,7 @@
                 $('#membayar').val($('#tabelTotal').html())
                 $('#totItems').html($('#totalItems').html())
                 $('#jumlah').val(0)
-                // $('#dataProduk').hide()
+                $('#dataProduk').hide()
                 $('#jumlahItem').val($('#totalItems').html())
             // function payment(){
                 // $('#idPelanggan').val($('#cariPelanggan').val())

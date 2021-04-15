@@ -67,6 +67,11 @@
                         success: function( data ) {
                             if(data[0] == null){
                                 data[0] = 'Data tidak ditemukan'
+                                $('button').attr('disabled',true)
+                                alert('Please add validated name')
+
+                            }else{
+                                $('button').attr('disabled',false)
                             }
                             response( data );
                         }
@@ -76,9 +81,19 @@
                        // Set selection
                         $('#cariPelanggan').val(ui.item.label); // display the selected text
                         $('#idPelanggan').val(ui.item.value); // save selected id to input
+                        // if($('#cariPelanggan').val()==data){
+                        //             alert('sama')
+                        //         }else{
+                        //             alert('tidak')
+                        //         }
+                        $('#cariPelanggan').focusout(function(){
+                            if($('#cariPelanggan').val() != ui.item.label){
+                                $('button').attr('disabled',true)
+                                alert('Please add validated name')
+                            }
+                        })
                         return false;
                     }
-
         });
 
         $('#formPelanggan').on('submit', function (e) {

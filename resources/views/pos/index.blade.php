@@ -143,8 +143,8 @@
                                 <button type="button" class="btn btn-danger button-footer" data-toggle="modal" data-target="#cancel">Cancel</button>
                             </div>
                             <div class="col-md-4">
-                                <button type="button" class="btn btn-primary h-50 button-footer" data-toggle="modal" data-target="#printOrder">Print Order</button>
-                                <button type="button" class="btn btn-dark h-50 button-footer" data-toggle="modal" data-target="#bill">Print Bill</button>
+                                <button type="button" id="buttonPrintOrder" class="btn btn-primary h-50 button-footer" data-toggle="modal" data-target="#printOrder">Print Order</button>
+                                <button type="button" id="buttonPrintBill" class="btn btn-dark h-50 button-footer" data-toggle="modal" data-target="#bill">Print Bill</button>
                             </div>
                             <div class="col-md-4">
                                 <button type="button" class="btn btn-success py-4 button-footer" data-toggle="modal" data-target="#modalPayment" id="buttonPayment">Payment</button>
@@ -496,10 +496,10 @@
                                                             <input type="text"  id="biaya_satuan_`+formAdd+`" class="searchProduk" style="width:70px;" float: right;" name="biaya_satuan[]" readonly>
                                                         </td>
                                                         <td>
-                                                            <input type="text" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas(`+formAdd+`)" class="searchProduk" style="width:30px;" text-align: center;" name="kuantitas[]">
+                                                            <input type="number" id="kuantitas_`+formAdd+`" onkeyup="hitungKuantitas(`+formAdd+`)" class="searchProduk" style="width:30px;" text-align: center;" name="kuantitas[]">
                                                         </td>
                                                         <td>
-                                                            <input type="text"  id="sub_total_`+formAdd+`"  class="searchProduk" style="width:70px;" float: right; border: none;" name="sub_total[]" >
+                                                            <input type="text"  id="sub_total_`+formAdd+`"  class="searchProduk" style="width:70px;" float: right; border: none;" name="sub_total[]" readonly>
                                                         </td>
                                                         <td>
 

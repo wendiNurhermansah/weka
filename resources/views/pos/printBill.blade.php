@@ -77,13 +77,25 @@
 @push('script')
     <script>
         $(document).ready(function(){
-            var total = $("#tabelTotal").text();
-            $("#billTotal").html(total);
-            var pajak = $("#hasilPajak").text();
-            $("#billPajak").html(pajak);
-            var totalPayable = $("#totalPayable").text();
-            $("#grandTotal").html(totalPayable);
-            $("#billTotalPayable").html(totalPayable);
+            $('#buttonPrintBill').click(function(){
+                if($('#cariPelanggan').val() == ''){
+                    $('#buttonPrintBill').removeAttr('data-target'); 
+                    alert('Please add name')
+                    $('#cariPelanggan').css('border','red solid 1px')
+                }else if($('#tabelTotal').html() == 0){
+                    $('#buttonPrintOrder').removeAttr('data-target');
+                    alert('Please add product')
+                }else{
+                    $('#buttonPrintOrder').attr('data-target','#printOrder');
+                    var total = $("#tabelTotal").text();
+                    $("#billTotal").html(total);
+                    var pajak = $("#hasilPajak").text();
+                    $("#billPajak").html(pajak);
+                    var totalPayable = $("#totalPayable").text();
+                    $("#grandTotal").html(totalPayable);
+                    $("#billTotalPayable").html(totalPayable);
+                }
+            })
         })
     </script>
 @endpush

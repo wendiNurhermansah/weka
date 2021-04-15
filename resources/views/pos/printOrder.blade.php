@@ -15,7 +15,7 @@
                     </div>
                     <div class="form-group">
                         <label for="customer" class="">C : </label>
-                        <label for="getCustomter" class=""></label>
+                        <label id="orderCustomer" for="getCustomter" class=""></label>
                     </div>
                     <div class="form-group">
                         <label for="note" class="">R : </label>
@@ -23,7 +23,7 @@
                     </div>
                     <div class="form-group">
                         <label for="pelayan" class="">U : </label>
-                        <label for="getPelayan" class=""></label>
+                        <label for="getPelayan" class="">{{ Auth::user()->username }}</label>
                     </div>
                     <div class="form-group">
                         <label for="date" class="">T : </label>
@@ -33,4 +33,23 @@
             </div>
         </div>
     </div>
+@endpush
+@push('script')
+    <script>
+        $(document).ready(function () {
+            $('#buttonPrintOrder').click(function(){
+                if($('#cariPelanggan').val() == ''){
+                    $('#buttonPrintOrder').removeAttr('data-target'); 
+                    alert('Please add name')
+                    $('#cariPelanggan').css('border','red solid 1px')
+                }else if($('#tabelTotal').html() == 0){
+                    $('#buttonPrintOrder').removeAttr('data-target');
+                    alert('Please add product')
+                }else{
+                    $('#buttonPrintOrder').attr('data-target','#printOrder');
+                    $('#orderCustomer').html($('#cariPelanggan').val())
+                }
+            })  
+        });      
+    </script>
 @endpush
