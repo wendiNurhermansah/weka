@@ -48,6 +48,16 @@
 
 @push('script')
     <script type="text/javascript">
+        $('#cariPelanggan').blur(function(){
+            for(i=0;i<$(".ui-menu-item-wrapper").length;i++){
+                if($('#cariPelanggan').val() == $('.ui-menu-item-wrapper:eq('+i+')').html()){
+                    return false
+                }
+            }
+            $('button').attr('disabled',true)
+            alert("Please add validated name")
+        })
+
         function add(){
             save_method = "add";
             $('input[name=_method]').val('POST');
@@ -68,8 +78,6 @@
                             if(data[0] == null){
                                 data[0] = 'Data tidak ditemukan'
                                 $('button').attr('disabled',true)
-                                alert('Please add validated name')
-
                             }else{
                                 $('button').attr('disabled',false)
                             }
@@ -86,12 +94,14 @@
                         //         }else{
                         //             alert('tidak')
                         //         }
-                        $('#cariPelanggan').focusout(function(){
-                            if($('#cariPelanggan').val() != ui.item.label){
-                                $('button').attr('disabled',true)
-                                alert('Please add validated name')
-                            }
-                        })
+                        
+                        // $('#cariPelanggan').focusout(function(){
+                        //     console.log('p',$('.ui-menu-item-wrapper').html())
+                        //     // if($('#cariPelanggan').val() != ui.item.label){
+                        //     //     $('button').attr('disabled',true)
+                        //     //     alert('Please add validated name')
+                        //     // }
+                        // })
                         return false;
                     }
         });
