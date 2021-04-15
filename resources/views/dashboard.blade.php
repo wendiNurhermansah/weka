@@ -133,7 +133,7 @@
     },
 
     xAxis: {
-        categories: {!!json_encode($categories)!!},
+        categories: {!!json_encode($categories1)!!},
         crosshair: true
     },
     yAxis: {
@@ -158,7 +158,7 @@
     },
     series: [{
         name: 'Produk',
-        data: {!!json_encode($data)!!}
+        data: {!!json_encode($data1)!!}
 
     }]
 });
