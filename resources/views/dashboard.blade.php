@@ -133,8 +133,8 @@
     },
 
     xAxis: {
-        categories: {!!json_encode($categories1)!!},
-        crosshair: true
+        categories: {!!json_encode($kat)!!},
+        crosshair: true,
     },
     yAxis: {
         min: 0,
