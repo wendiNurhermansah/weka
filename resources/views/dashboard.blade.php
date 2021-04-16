@@ -134,7 +134,7 @@
 
     xAxis: {
         categories: {!!json_encode($categories)!!},
-        crosshair: true
+        crosshair: true,
     },
     yAxis: {
         min: 0,
