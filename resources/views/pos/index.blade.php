@@ -269,7 +269,7 @@
                         }
                     })
             }
-            
+
             var formAdd = 0;
 
             function hitungKuantitas(i){
@@ -344,6 +344,10 @@
                 $('#modalPayment').on('hidden.bs.modal', function () {
                     $('#dataProduk > div').remove()
                     $('#dataProduk > input').remove()
+                })
+                $('#printOrder').on('hidden.bs.modal', function () {
+                    console.log('keapus')
+                    $('#appendOrder > tr').remove()
                 })
                 // $('#cariPelanggan').focus(function() {
                 //     if($('#cariPellangggan').val() == null){

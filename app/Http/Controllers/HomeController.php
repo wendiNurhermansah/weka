@@ -40,7 +40,7 @@ class HomeController extends Controller
             $data1[] = $i->total;
         }
         // dd($kat);
-        return view('dashboard', compact('kat', 'data1')) ;
+        return view('dashboard', compact('kat', 'data1'));
 
 
     }

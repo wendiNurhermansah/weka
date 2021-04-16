@@ -29,6 +29,12 @@
                         <label for="date" class="">T : </label>
                         <label for="getDate" class="">{{ date('D d M Y h:i A') }}</label>
                     </div>
+                    {{-- <div id="appendOrder"> --}}
+                        <table class="table">
+                            <tbody id="appendOrder">
+                            </tbody>
+                        </table>
+                    {{-- </div> --}}
                 </div>
             </div>
         </div>
@@ -50,6 +56,20 @@
                     $('#orderCustomer').html($('#cariPelanggan').val())
                 }
             })  
-        });      
+        });
+
+        $('#buttonPrintOrder').click(function(){
+            for(i=1;i<=formAdd;i++){
+                var order = `<tr>
+                                <td>#`+i+`</td>
+                                <td id="orderProduk_`+i+`"></td>
+                                <td id="orderKuantitas_`+i+`"></td>
+                            </tr>`;
+
+                $('#appendOrder').append(order)
+                $('#orderProduk_'+i).html($('#produk_'+i).val())
+                $('#orderKuantitas_'+i).html('['+$('#kuantitas_'+i).val()+']')
+            }  
+        })      
     </script>
 @endpush
