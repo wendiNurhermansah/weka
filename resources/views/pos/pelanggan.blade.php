@@ -5,7 +5,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="text-black modal-title">Tambahkan Pelanggan</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" id="closePelanggan" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <form class="" id="formPelanggan" method="POST"  novalidate>
                     @csrf
@@ -37,8 +37,8 @@
                          </div>
                      </div>
                      <div class="modal-footer">
-                         <button type="button" class="btn btn-light mr-auto border" data-dismiss="modal">Close</button>
-                         <button type="submit" class="btn btn-primary" onclick="add()">Add Customer</button>
+                         <button type="button" id="closePelanggan" class="btn btn-light mr-auto border" data-dismiss="modal">Close</button>
+                         <button type="submit" id="submitPelanggan" class="btn btn-primary" onclick="add()">Add Customer</button>
                      </div>
                 </form>
             </div>
@@ -57,6 +57,13 @@
             $('button').attr('disabled',true)
             alert("Please add validated name")
         })
+
+        $('#tambahPelanggan').click(function(){
+            $('#submitPelanggan').attr('disabled',false)
+            $.each($('#closePelanggan'), function() {
+                $(this).attr('disabled',false);
+            });
+        });
 
         function add(){
             save_method = "add";

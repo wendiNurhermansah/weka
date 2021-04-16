@@ -97,7 +97,7 @@
                         </div> -->
                         <div class="form-group">
                             <input class="form-control" type="text" id="cariPelanggan" placeholder="nama pelanggan">
-                            <a class="btn border" data-toggle="modal" data-target="#pelanggan"><i class="icon icon-add"></i></a>
+                            <a class="btn border" id="tambahPelanggan" data-toggle="modal" data-target="#pelanggan"><i class="icon icon-add"></i></a>
                         </div>
                         <div class="form-group">
                             <input type="text" id="note" name="note" class="form-control" placeholder="Rerefence Note">
