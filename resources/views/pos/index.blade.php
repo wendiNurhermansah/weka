@@ -117,6 +117,12 @@
                                     </tr>
                                 </thead>
                                 <tbody id="appendd"></tbody>
+                                @isset($penjualan)
+                                    @foreach($penjualan as $p)
+                                        {{$p->biaya_satuan}}<br>
+                                        {{$p->sub_total}}<br>
+                                    @endforeach
+                                @endisset
                                 <tfoot>
                                     <tr>
                                         <th>Total Items</th>
@@ -263,7 +269,7 @@
                         }
                     })
             }
-
+            
             var formAdd = 0;
 
             function hitungKuantitas(i){
