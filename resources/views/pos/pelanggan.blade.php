@@ -5,7 +5,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="text-black modal-title">Tambahkan Pelanggan</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" id="closePelanggan" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <form class="" id="formPelanggan" method="POST"  novalidate>
                     @csrf
@@ -37,8 +37,8 @@
                          </div>
                      </div>
                      <div class="modal-footer">
-                         <button type="button" class="btn btn-light mr-auto border" data-dismiss="modal">Close</button>
-                         <button type="submit" class="btn btn-primary" onclick="add()">Add Customer</button>
+                         <button type="button" id="closePelanggan" class="btn btn-light mr-auto border" data-dismiss="modal">Close</button>
+                         <button type="submit" id="submitPelanggan" class="btn btn-primary" onclick="add()">Add Customer</button>
                      </div>
                 </form>
             </div>
@@ -48,6 +48,23 @@
 
 @push('script')
     <script type="text/javascript">
+        $('#cariPelanggan').blur(function(){
+            for(i=0;i<$(".ui-menu-item-wrapper").length;i++){
+                if($('#cariPelanggan').val() == $('.ui-menu-item-wrapper:eq('+i+')').html()){
+                    return false
+                }
+            }
+            $('button').attr('disabled',true)
+            alert("Please add validated name")
+        })
+
+        $('#tambahPelanggan').click(function(){
+            $('#submitPelanggan').attr('disabled',false)
+            $.each($('#closePelanggan'), function() {
+                $(this).attr('disabled',false);
+            });
+        });
+
         function add(){
             save_method = "add";
             $('input[name=_method]').val('POST');
@@ -67,6 +84,9 @@
                         success: function( data ) {
                             if(data[0] == null){
                                 data[0] = 'Data tidak ditemukan'
+                                $('button').attr('disabled',true)
+                            }else{
+                                $('button').attr('disabled',false)
                             }
                             response( data );
                         }
@@ -76,9 +96,21 @@
                        // Set selection
                         $('#cariPelanggan').val(ui.item.label); // display the selected text
                         $('#idPelanggan').val(ui.item.value); // save selected id to input
+                        // if($('#cariPelanggan').val()==data){
+                        //             alert('sama')
+                        //         }else{
+                        //             alert('tidak')
+                        //         }
+                        
+                        // $('#cariPelanggan').focusout(function(){
+                        //     console.log('p',$('.ui-menu-item-wrapper').html())
+                        //     // if($('#cariPelanggan').val() != ui.item.label){
+                        //     //     $('button').attr('disabled',true)
+                        //     //     alert('Please add validated name')
+                        //     // }
+                        // })
                         return false;
                     }
-
         });
 
         $('#formPelanggan').on('submit', function (e) {

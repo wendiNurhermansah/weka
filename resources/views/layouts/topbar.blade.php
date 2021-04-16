@@ -6,7 +6,7 @@
         <div class="navbar navbar-expand navbar-dark d-flex justify-content-between bd-navbar {{$warna->gaya_tema}} accent-3">
             <div class="relative">
                 <div class="d-flex">
-                    <div>e
+                    <div>
                         <a href="#" data-toggle="push-menu" class="paper-nav-toggle pp-nav-toggle">
                             <i></i>
                         </a>

@@ -189,7 +189,11 @@
             total = $('#orderTotal').prop('checked')
             count = $('#appendd tr').length;
             if(all){
-                // console.log('sini',count)
+                for(i=1;i<=formAdd;i++){
+                    if($('#trTable_'+i).html() != null){
+                        $('#sub_total_'+i).val()
+                    }
+                }
                 
             }else if(total){
                 // console.log('sono',count)
