@@ -1,6 +1,9 @@
+@php
+    $warna = App\Models\pengaturan::select('id', 'gaya_tema')->first();
+@endphp
 <div class="has-sidebar-left">
     <div class="sticky">
-        <div class="navbar navbar-expand navbar-dark d-flex justify-content-between bd-navbar blue accent-3">
+        <div class="navbar navbar-expand navbar-dark d-flex justify-content-between bd-navbar {{$warna->gaya_tema}} accent-3">
             <div class="relative">
                 <div class="d-flex">
                     <div>

@@ -21,7 +21,7 @@ class ProductsController extends Controller
      */
     public function api()
     {
-        $produk = product::all();
+        $produk = product::where('status', '1')->get();
         return DataTables::of($produk)
 
             ->addColumn('action', function ($p) {
@@ -54,7 +54,7 @@ class ProductsController extends Controller
 
     public function index()
     {
-        $produk = product::all();
+        $produk = product::where('status', '1')->get();
 
         return view('Produk.DaftarProduk', compact('produk'));
     }
@@ -250,7 +250,11 @@ class ProductsController extends Controller
 
         Storage::disk('sftp')->delete('images/' . $exist);
 
-        product::destroy($id);
+
+        $produk = product::find($id);
+        $produk->status = 0;
+        $produk->save();
+
 
 
 
