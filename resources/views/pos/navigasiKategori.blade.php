@@ -1,6 +1,6 @@
 @push('modal')
-    <aside class="control-sidebar fixed bg-dark">
-        <div class="slimScroll">
+    <aside id="navigasiKategori" class="control-sidebar fixed bg-dark">
+        <div class="slimScroll" >
             <div class="p-3">
                 <input id="cariKategori" type="text" class="form-control col-md-11">
                 <a href="#" data-toggle="control-sidebar" class="paper-nav-toggle  active col-md-2"><i></i></a>
@@ -49,7 +49,7 @@
             $(document).ready(function () {
                 // keyup function looks at the keys typed on the search box
                 $('#cariKategori').focus(function() {
-                    // the text typed in the input field is assigned to a variable 
+                    // the text typed in the input field is assigned to a variable
                     var query = $(this).val();
                     // call to an ajax function
                     $.ajax({
