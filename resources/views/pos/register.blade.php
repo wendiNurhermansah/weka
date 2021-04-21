@@ -4,7 +4,7 @@
         <!-- Modal content-->
         <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="text-black modal-title">Today's Sale ({{ date('D d M Y') }})</h4>
+                    <h6 class="text-black modal-title">Register Details (Opened at: {{ date('D d M Y h:i A') }})</h6>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -12,7 +12,7 @@
                         <tbody>
                             <tr>
                                 <th>Cash Sales :</th>
-                                <th class="text-right">0000</th>
+                                <th class="text-right">{{$saleToday}} ({{$saleAll}})</th>
                             </tr>
                             <tr>
                                 <th>Cheque Sales :</th>
@@ -36,7 +36,7 @@
                             </tr>
                             <tr>
                                 <th>Total Cash :</th>
-                                <th class="text-right">0000</th>
+                                <th class="text-right">{{$saleToday}} ({{$saleAll}})</th>
                             </tr>
                         </tbody>
                     </table>

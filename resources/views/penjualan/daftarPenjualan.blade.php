@@ -34,8 +34,7 @@
                             <th>Discount</th>
                             <th>Grand Total</th>
                             <th>Dibayar</th>
-                            <th>Status</th>
-                        <th width="60">Tindakan</th>
+                            <th width="60">Tindakan</th>
                         </thead>
                         <tbody></tbody>
                     </table>
@@ -69,7 +68,6 @@
             {data: 'diskon', name: 'diskon'},
             {data: 'grand_total', name: 'grand_total'},
             {data: 'dibayar', name: 'dibayar'},
-            {data: 'status', name: 'status'},
             {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-center'}
         ]
     });
@@ -90,7 +88,7 @@
                     btnClass: 'btn-primary',
                     keys: ['enter'],
                     action: function(){
-                        $.post("{{ route('daftarpenjualan.destroy', ':id') }}".replace(':id', id), {'_method' : 'DELETE'}, function(data) {
+                        $.post("{{ route('Pos.main.destroy', ':id') }}".replace(':id', id), {'_method' : 'DELETE'}, function(data) {
                            table.api().ajax.reload();
                         }, "JSON").fail(function(){
                             reload();

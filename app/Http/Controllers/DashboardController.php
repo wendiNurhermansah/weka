@@ -24,8 +24,7 @@ class DashboardController extends Controller
             $kat[] = $i->nama;
             $data1[] = $i->total;
         }
-        dd($kat);
-        return view('dashboard', compact('kat', 'data1
-        ')) ;
+        // dd($kat);
+        return view('dashboard', compact('kat', 'data1')) ;
     }
 }

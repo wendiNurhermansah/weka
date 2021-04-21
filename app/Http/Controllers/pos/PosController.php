@@ -8,6 +8,7 @@ use Illuminate\Contracts\Support\Jsonable;
 
 use App\Http\Controllers\Controller;
 use DataTables;
+use Carbon\Carbon;
 
 use App\Models\Pembelian;
 use App\Models\Pelanggan;
@@ -40,6 +41,8 @@ class PosController extends Controller
         $kartu = $this->kartu();
         $getKartu = $this->getKategori();
         $pengaturan = $this->pengaturan();
+        $saleAll = $this->saleAll();
+        $saleToday = $this->saleToday();
         // dd(Core::count());
         return view($this->view . 'index', compact(
             'route',
@@ -49,7 +52,21 @@ class PosController extends Controller
             'kartu',
             'getKartu',
             'pengaturan',
+            'saleAll',
+            'saleToday'
         ));
+    }
+
+    public function saleAll()
+    {
+        $sale = TransaksiPelanggan::sum('total');
+        return $sale;
+    }
+
+    public function saleToday()
+    {
+        $sale = TransaksiPelanggan::whereDate('created_at', Carbon::today())->get(['metode','total'])->sum('total');
+        return $sale;
     }
 
     public function pelanggan()
@@ -160,7 +177,11 @@ class PosController extends Controller
     }
 
     public function produk($id){
-        return product::find($id);
+        $produk =  product::join('tmkategori', 'produks.kategori_id','=', 'tmkategori.id')
+                    ->select('produks.id as id','tmkategori.kode as kode','produks.nama as nama','produks.harga_jual as harga_jual')
+                    ->where('produks.id',$id)
+                    ->get();             
+        return $produk;
     }
 
     // public function cariKategori(Request $request)
@@ -357,6 +378,16 @@ class PosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $penjualan = TransaksiPelanggan::find($id);
+
+        $penjualan->status = 0;
+        $penjualan->save();
+
+
+
+
+        return response()->json([
+            'message' => 'data berhasil di hapus',
+        ]);
     }
 }

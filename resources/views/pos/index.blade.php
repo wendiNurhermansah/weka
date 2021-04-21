@@ -346,7 +346,6 @@
                     $('#dataProduk > input').remove()
                 })
                 $('#printOrder').on('hidden.bs.modal', function () {
-                    console.log('keapus')
                     $('#appendOrder > tr').remove()
                 })
                 // $('#cariPelanggan').focus(function() {
@@ -499,6 +498,7 @@
                     <tr id="trTable_`+formAdd+`" class="bg-gradient-danger">
                                                         <td text-align: left;">
                                                             <input type="text" class="searchProduk" id="produk_id`+formAdd+`" name="produk_id[]" hidden>
+                                                            <input type="text" id="produkKode_`+formAdd+`" hidden>
                                                             <input type="text" id="produk_`+formAdd+`" name="produk_[]" class="searchProduk" style="width:160px;" readonly>
 
                                                         </td>
@@ -525,11 +525,12 @@
                             var kuantitas = 1;
 
                             $('#appendd').append(html);//tambah item
-                            $('#produk_id'+formAdd).val(res.id);//ambil id
-                            var p = $('#produk_'+formAdd).val(res.nama);//ambil nama
-                            $('#biaya_satuan_'+formAdd).val(res.harga_jual);//ambil biaya
+                            $('#produk_id'+formAdd).val(res[0].id);//ambil id
+                            $('#produkKode_'+formAdd).val(res[0].kode)
+                            var p = $('#produk_'+formAdd).val(res[0].nama);//ambil nama
+                            $('#biaya_satuan_'+formAdd).val(res[0].harga_jual);//ambil biaya
                             $('#kuantitas_'+formAdd).val(kuantitas);//ambil kuantitias
-                            var subTotal = kuantitas*res.harga_jual;
+                            var subTotal = kuantitas*res[0].harga_jual;
                             $('#sub_total_'+formAdd).val(subTotal);//subtotal
 
                             var total = $('#tabelTotal').html();//ambil total lama
@@ -551,7 +552,7 @@
                                         qty++;
                                         $('#kuantitas_'+i).val(qty);
                                         console.log('formAdd3:'+formAdd);
-                                        var subTotal = qty*res.harga_jual;
+                                        var subTotal = qty*res[0].harga_jual;
                                         $('#sub_total_'+i).val(subTotal);
                                         console.log('subsebelum',total)
                                         // total = parseInt(total) + parseInt(subTotal);
@@ -560,7 +561,7 @@
                                         $("#trTable_"+formAdd).remove();
                                 }else{
                                     $('#kuantitas_'+formAdd).val(kuantitas);
-                                    var subTotal = kuantitas*res.harga_jual;
+                                    var subTotal = kuantitas*res[0].harga_jual;
                                     $('#sub_total_'+formAdd).val(subTotal);
                                 }
                             }

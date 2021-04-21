@@ -15,7 +15,7 @@
                     </div>
                     <div class="form-group">
                         <label for="customer" class="">C : </label>
-                        <label id="orderCustomer" for="getCustomter" class=""></label>
+                        <label id="orderCustomer" for="orderCustomer" class=""></label>
                     </div>
                     <div class="form-group">
                         <label for="note" class="">R : </label>
@@ -29,12 +29,10 @@
                         <label for="date" class="">T : </label>
                         <label for="getDate" class="">{{ date('D d M Y h:i A') }}</label>
                     </div>
-                    {{-- <div id="appendOrder"> --}}
-                        <table class="table">
+                    <table class="table">
                             <tbody id="appendOrder">
                             </tbody>
                         </table>
-                    {{-- </div> --}}
                 </div>
             </div>
         </div>
@@ -60,15 +58,22 @@
 
         $('#buttonPrintOrder').click(function(){
             for(i=1;i<=formAdd;i++){
-                var order = `<tr>
-                                <td>#`+i+`</td>
-                                <td id="orderProduk_`+i+`"></td>
-                                <td id="orderKuantitas_`+i+`"></td>
-                            </tr>`;
+                if($('#trTable_'+i).html() != null){
+                    console.log('kode',$('#produkKode_'+i).val())
+                    var order = `<tr>
+                                    <td>
+                                        #`+i+`&nbsp
+                                        <span id="orderProduk_`+i+`"> &nbsp 
+                                        </span><span id="orderKode_`+i+`"></span>
+                                    </td>
+                                    <td id="orderKuantitas_`+i+`"></td>
+                                </tr>`;
 
-                $('#appendOrder').append(order)
-                $('#orderProduk_'+i).html($('#produk_'+i).val())
-                $('#orderKuantitas_'+i).html('['+$('#kuantitas_'+i).val()+']')
+                    $('#appendOrder').append(order)
+                    $('#orderProduk_'+i).html($('#produk_'+i).val())
+                    $('#orderKode_'+i).html('('+$('#produkKode_'+i).val()+')')
+                    $('#orderKuantitas_'+i).html('['+$('#kuantitas_'+i).val()+']')
+                }
             }  
         })      
     </script>

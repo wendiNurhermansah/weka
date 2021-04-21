@@ -67,10 +67,10 @@
         </div>
     </div>
 @endpush
-@push('name')
+@push('script')
 <script>
     $(document).ready(function(){
-        $(this).focus(String.fromCharCode(65)){
+        $(this).keypress(String.fromCharCode(65)){
             alert('kepencet')
         }
     })

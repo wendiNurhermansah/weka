@@ -17,7 +17,7 @@ class daftarPenjualanController extends Controller
 
     public function api()
     {
-        $TransaksiPelanggan = TransaksiPelanggan::orderBy('id');
+        $TransaksiPelanggan = TransaksiPelanggan::where('status',1)->orderBy('id');
         return DataTables::of($TransaksiPelanggan)
 
             ->addColumn('action', function ($p) {
@@ -51,7 +51,7 @@ class daftarPenjualanController extends Controller
 
     public function index()
     {
-        $TransaksiPelanggan = TransaksiPelanggan::all();
+        $TransaksiPelanggan = TransaksiPelanggan::where('status',1);
         // $daftarPenjualan = daftarPenjualan::all();
         return view('penjualan.daftarPenjualan');
 
