@@ -9,6 +9,7 @@ use Illuminate\Contracts\Support\Jsonable;
 use App\Http\Controllers\Controller;
 use DataTables;
 use Carbon\Carbon;
+use PDF;
 
 use App\Models\Pembelian;
 use App\Models\Pelanggan;
@@ -180,7 +181,7 @@ class PosController extends Controller
         $produk =  product::join('tmkategori', 'produks.kategori_id','=', 'tmkategori.id')
                     ->select('produks.id as id','tmkategori.kode as kode','produks.nama as nama','produks.harga_jual as harga_jual')
                     ->where('produks.id',$id)
-                    ->get();             
+                    ->get();
         return $produk;
     }
 
@@ -340,7 +341,7 @@ class PosController extends Controller
         $path = $this->path;
 
         $penjualan = TransaksiPelangganDetail::where('transaksi_detail_id',$id)->get();
-        
+
         $pelanggan = $this->pelanggan();
         $kartu = $this->kartu();
         $getKartu = $this->getKategori();
@@ -390,4 +391,20 @@ class PosController extends Controller
             'message' => 'data berhasil di hapus',
         ]);
     }
+
+
+    public function printing(){
+        return view('pos.printing');
+    }
+
+    public function print(){
+
+
+  return view('pos.printing');
+        // $tes = 'test';
+        // $pdf = PDF::loadview('pos.printing', compact('tes'))->setPaper('A4','potrait');
+        // return $pdf->stream();
+    }
+
+
 }
