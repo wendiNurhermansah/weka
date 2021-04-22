@@ -53,7 +53,7 @@
         <a id="tutupDaftar-nav" data-toggle='modal' data-target='#tutupDaftar'>Close Register</a>
     </li>
     <li id="kategori-nav-li" type="none" class="mx-2 fs-13 text-white">
-        <a id="kategori-nav"data-toggle="control-sidebar"><i class="icon-file"></i></a>
+        <a id="kategori-nav" data-toggle="control-sidebar"><i class="icon-file"></i></a>
     </li>
 @endsection
 @section('content')
@@ -341,6 +341,10 @@
             }
 
             $(document).ready(function(){
+                $('#closeBill').click(function () { 
+                    console.log('tutup')
+                    $('#bill').modal('toggle')
+                });
                 $('#modalPayment').on('hidden.bs.modal', function () {
                     $('#dataProduk > div').remove()
                     $('#dataProduk > input').remove()

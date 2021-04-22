@@ -7,7 +7,7 @@
                 <div class="modal-header">
                     {{-- <a href="{{ route('Pos.print')}}" class="btn btn-sm btn-danger"> Print Bill</a> --}}
                     <button type="button" class="btn btn-light" data-dismiss="modal" onclick="printContent()"  id="printbill">PRINT</button>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal" id="closeBill">&times;</button>
                 </div>
                 <div class="modal-body" id="BillPrint">
                     <div class="text-center my-4">
@@ -110,7 +110,6 @@
             $('#bill').on('hidden.bs.modal', function () {
                     $('#appendBill > tr').remove()
                 })
-
         })
 
 
@@ -152,6 +151,7 @@
         //     $(document).not('#bill').remove();    
         // })
         function printContent(){
+            $('#bill').modal('hide')
             var restorepage = document.body.innerHTML;
             var printcontent = document.getElementById('BillPrint').innerHTML;
             document.body.innerHTML = printcontent;
