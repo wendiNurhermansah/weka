@@ -421,18 +421,5 @@ class PosController extends Controller
     }
 
 
-    public function printing(){
-        return view('pos.printing');
-    }
-
-    public function print(){
-
-
-  return view('pos.printing');
-        // $tes = 'test';
-        // $pdf = PDF::loadview('pos.printing', compact('tes'))->setPaper('A4','potrait');
-        // return $pdf->stream();
-    }
-
 
 }

@@ -4,10 +4,12 @@
         <!-- Modal content-->
         <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="text-black modal-title">Register Details (Opened at: {{ date('d F Y h:i A') }})</h4>
+                    <button type="button" class="btn btn-light" data-dismiss="modal" onclick="printContent3()"  id="printbill">PRINT</button>
+
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="tutupPrint">
+                    <h4 class="text-black modal-title">Register Details (Opened at: {{ date('d F Y h:i A') }})</h4>
                     <table class="table">
                         <tbody>
                             <tr>
@@ -44,4 +46,16 @@
             </div>
         </div>
     </div>
+@endpush
+@push('script')
+<script>
+    function printContent3(){
+    var restorepage = document.body.innerHTML;
+    var printcontent = document.getElementById('tutupPrint').innerHTML;
+    document.body.innerHTML = printcontent;
+    window.print();
+    document.body.innerHTML = restorepage;
+}
+</script>
+
 @endpush

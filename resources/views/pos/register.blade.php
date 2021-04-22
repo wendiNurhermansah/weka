@@ -2,12 +2,14 @@
     <div class="modal fade" id="register" role="dialog">
         <div class="modal-dialog">
         <!-- Modal content-->
-        <div class="modal-content">
+        <div class="modal-content" >
                 <div class="modal-header">
-                    <h6 class="text-black modal-title">Register Details (Opened at: {{ date('D d M Y h:i A') }})</h6>
+
+                    <button type="button" class="btn btn-light" data-dismiss="modal" onclick="printContent2()"  id="printbill">PRINT</button>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="registerPrint">
+                    <h6 class="text-black modal-title">Register Details (Opened at: {{ date('D d M Y h:i A') }})</h6>
                     <table class="table">
                         <tbody>
                             <tr>
@@ -44,4 +46,16 @@
             </div>
         </div>
     </div>
+@endpush
+@push('script')
+<script>
+    function printContent2(){
+    var restorepage = document.body.innerHTML;
+    var printcontent = document.getElementById('registerPrint').innerHTML;
+    document.body.innerHTML = printcontent;
+    window.print();
+    document.body.innerHTML = restorepage;
+}
+</script>
+
 @endpush
