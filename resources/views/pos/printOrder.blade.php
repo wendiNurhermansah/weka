@@ -2,10 +2,10 @@
     <div class="modal fade" id="printOrder" role="dialog">
         <div class="modal-dialog">
         <!-- Modal content-->
-        <div class="modal-content">
-                <div class="modal-header">
+        <div class="modal-content" id="OrderPrint">
+                <div class="modal-header" >
                     <h4 class="text-black modal-title">Print Order</h4>
-                    <button type="button" class="btn btn-light" data-dismiss="modal">PRINT</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal" onclick="printContent1()">PRINT</button>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -43,7 +43,7 @@
         $(document).ready(function () {
             $('#buttonPrintOrder').click(function(){
                 if($('#cariPelanggan').val() == ''){
-                    $('#buttonPrintOrder').removeAttr('data-target'); 
+                    $('#buttonPrintOrder').removeAttr('data-target');
                     alert('Please add name')
                     $('#cariPelanggan').css('border','red solid 1px')
                 }else if($('#tabelTotal').html() == 0){
@@ -53,7 +53,7 @@
                     $('#buttonPrintOrder').attr('data-target','#printOrder');
                     $('#orderCustomer').html($('#cariPelanggan').val())
                 }
-            })  
+            })
         });
 
         $('#buttonPrintOrder').click(function(){
@@ -63,7 +63,7 @@
                     var order = `<tr>
                                     <td>
                                         #`+i+`&nbsp
-                                        <span id="orderProduk_`+i+`"> &nbsp 
+                                        <span id="orderProduk_`+i+`"> &nbsp
                                         </span><span id="orderKode_`+i+`"></span>
                                     </td>
                                     <td id="orderKuantitas_`+i+`"></td>
@@ -74,7 +74,15 @@
                     $('#orderKode_'+i).html('('+$('#produkKode_'+i).val()+')')
                     $('#orderKuantitas_'+i).html('['+$('#kuantitas_'+i).val()+']')
                 }
-            }  
-        })      
+            }
+        })
+
+        function printContent1(){
+            var restorepage = document.body.innerHTML;
+            var printcontent = document.getElementById('OrderPrint').innerHTML;
+            document.body.innerHTML = printcontent;
+            window.print();
+            document.body.innerHTML = restorepage;
+        }
     </script>
 @endpush

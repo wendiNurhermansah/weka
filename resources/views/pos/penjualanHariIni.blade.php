@@ -4,10 +4,12 @@
         <!-- Modal content-->
         <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="text-black modal-title">Today's Sale ({{ date('D d M Y') }})</h4>
+                    <button type="button" class="btn btn-light" data-dismiss="modal" onclick="printContent4()"  id="printbill">PRINT</button>
+
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="Todays">
+                    <h4 class="text-black modal-title">Today's Sale ({{ date('D d M Y') }})</h4>
                     <table class="table">
                         <tbody>
                             <tr>
@@ -44,4 +46,16 @@
             </div>
         </div>
     </div>
+@endpush
+@push('script')
+<script>
+    function printContent4(){
+    var restorepage = document.body.innerHTML;
+    var printcontent = document.getElementById('Todays').innerHTML;
+    document.body.innerHTML = printcontent;
+    window.print();
+    document.body.innerHTML = restorepage;
+}
+</script>
+
 @endpush
