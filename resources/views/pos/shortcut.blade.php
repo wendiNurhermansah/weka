@@ -69,10 +69,12 @@
 @endpush
 @push('script')
 <script>
-    $(document).ready(function(){
-        $(this).keypress(String.fromCharCode(65)){
-            alert('kepencet')
-        }
-    })
+    $(document).ready(function () {
+        $(document).keyup(function(e){
+                    if(e.which === 65){
+                        console.log('kpeencet');
+                    }
+                }); 
+    });
 </script>
 @endpush

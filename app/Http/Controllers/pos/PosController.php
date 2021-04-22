@@ -43,6 +43,8 @@ class PosController extends Controller
         $pengaturan = $this->pengaturan();
         $saleAll = $this->saleAll();
         $saleToday = $this->saleToday();
+        $saleAllCash = $this->saleAllCash();
+        $saleTodayCash = $this->saleTodayCash();
         // dd(Core::count());
         return view($this->view . 'index', compact(
             'route',
@@ -53,17 +55,43 @@ class PosController extends Controller
             'getKartu',
             'pengaturan',
             'saleAll',
-            'saleToday'
+            'saleToday',
+            'saleAllCash',
+            'saleTodayCash'
         ));
     }
 
     public function saleAll()
     {
-        $sale = TransaksiPelanggan::sum('total');
+        $sale = TransaksiPelanggan::all('metode','total');
         return $sale;
     }
 
     public function saleToday()
+    {
+        $sale = TransaksiPelanggan::whereDate('created_at', Carbon::today());
+        return $sale;
+    }
+
+    public function saleAllCash()
+    {
+        $sale = TransaksiPelanggan::where('metode','cash')->sum('total');
+        return $sale;
+    }
+
+    public function saleTodayCash()
+    {
+        $sale = TransaksiPelanggan::whereDate('created_at', Carbon::today())->get(['metode','total']);
+        return $sale;
+    }
+
+    public function saleAllCredit()
+    {
+        $sale = TransaksiPelanggan::sum('total');
+        return $sale;
+    }
+
+    public function saleTodayCredit()
     {
         $sale = TransaksiPelanggan::whereDate('created_at', Carbon::today())->get(['metode','total'])->sum('total');
         return $sale;

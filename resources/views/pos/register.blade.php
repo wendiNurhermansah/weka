@@ -12,7 +12,7 @@
                         <tbody>
                             <tr>
                                 <th>Cash Sales :</th>
-                                <th class="text-right">{{$saleToday}} ({{$saleAll}})</th>
+                                <th class="text-right">{{$saleToday->where('metode','cash')->take(1)->get(['total'])}} ({{$saleAll->where('metode','cash')->sum('total')}})</th>
                             </tr>
                             <tr>
                                 <th>Cheque Sales :</th>
@@ -36,7 +36,7 @@
                             </tr>
                             <tr>
                                 <th>Total Cash :</th>
-                                <th class="text-right">{{$saleToday}} ({{$saleAll}})</th>
+                                <th class="text-right">{{$saleToday->sum('total')}} ({{$saleAll->sum('total')}})</th>
                             </tr>
                         </tbody>
                     </table>
