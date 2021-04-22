@@ -1,14 +1,15 @@
 @push('modal')
     <div class="modal fade" id="bill" role="dialog">
         <div class="modal-dialog">
+
         <!-- Modal content-->
-        <div class="modal-content">
+        <div class="modal-content" id="printbill">
                 <div class="modal-header">
-                    <h4 class="text-black modal-title">Print Bill</h4>
-                    <button type="button" class="btn btn-light" data-dismiss="modal">PRINT</button>
+                    {{-- <a href="{{ route('Pos.print')}}" class="btn btn-sm btn-danger"> Print Bill</a> --}}
+                    <button type="button" class="btn btn-light" data-dismiss="modal" onclick="printContent()"  id="printbill">PRINT</button>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="BillPrint">
                     <div class="text-center my-4">
                         <h4 class="text-black modal-title font-weight-bold">Simple POS</h4>
                         <p class="text-black modal-title">Order</p>
@@ -83,10 +84,11 @@
 
 @push('script')
     <script>
+
         $(document).ready(function(){
             $('#buttonPrintBill').click(function(){
                 if($('#cariPelanggan').val() == ''){
-                    $('#buttonPrintBill').removeAttr('data-target'); 
+                    $('#buttonPrintBill').removeAttr('data-target');
                     alert('Please add name')
                     $('#cariPelanggan').css('border','red solid 1px')
                 }else if($('#tabelTotal').html() == 0){
@@ -108,7 +110,10 @@
             $('#bill').on('hidden.bs.modal', function () {
                     $('#appendBill > tr').remove()
                 })
+
         })
+
+
 
         $('#buttonPrintBill').click(function(){
             let totalItem = 0
@@ -118,7 +123,7 @@
                     var order = `<tr>
                                     <td colspan="2">
                                         #`+i+`&nbsp
-                                        <span id="billProduk_`+i+`"> &nbsp 
+                                        <span id="billProduk_`+i+`"> &nbsp
                                         </span><span id="billKode_`+i+`"></span>
                                     </td>
                                 </tr>
@@ -140,7 +145,18 @@
                 }
                 console.log('tot',totalItem)
                 $('#billTotalItem').html(totalItem)
-            }  
-        })  
+            }
+        })
+
+        // $("#printBill").click(function () {
+        //     $(document).not('#bill').remove();    
+        // })
+        function printContent(){
+            var restorepage = document.body.innerHTML;
+            var printcontent = document.getElementById('BillPrint').innerHTML;
+            document.body.innerHTML = printcontent;
+            window.print();
+            document.body.innerHTML = restorepage;
+        }
     </script>
 @endpush
