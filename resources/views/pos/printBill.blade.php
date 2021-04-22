@@ -5,7 +5,7 @@
         <!-- Modal content-->
         <div class="modal-content" id="printbill">
                 <div class="modal-header">
-                    <a href="{{ route('Pos.print')}}" class="btn btn-sm btn-danger"> Print Bill</a>
+                    {{-- <a href="{{ route('Pos.print')}}" class="btn btn-sm btn-danger"> Print Bill</a> --}}
                     <button type="button" class="btn btn-light" data-dismiss="modal" onclick="window.print()"  id="print">PRINT</button>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
