@@ -106,7 +106,7 @@
 
     <li class="treeview ">
         <a href="#">
-            <i class="icon icon-folder-open text-lime s-18"></i> <span>Penjualan</span>
+            <i class="icon icon-shopping-cart text-lime s-18"></i> <span>Penjualan</span>
             <i class="icon icon-angle-left s-18 pull-right"></i>
         </a>
         <ul class="treeview-menu">
@@ -122,8 +122,8 @@
             </li> --}}
 
             <li class="no-b">
-                <a href="{{ route('Orang.pengguna.index') }}">
-                    <i class="icon icon-list blue-text s-18"></i>
+                <a href="{{ route('DaftarBill') }}">
+                    <i class="icon icon-circle-o blue-text s-18"></i>
                     <span>Daftar Opened Bills</span>
                 </a>
             </li>

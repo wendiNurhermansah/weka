@@ -62,6 +62,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('cariPelanggan', 'PosController@cariPelanggan')->name('cariPelanggan');
         Route::get('produk/{id}', 'PosController@produk')->name('produk');
 
+
+
     });
 
     Route::prefix('Kategori')->namespace('kategori')->name('Kategori.')->group(function () {
@@ -163,6 +165,11 @@ Route::group(['middleware' => ['auth']], function () {
     // Penjualan
     Route::resource('daftarpenjualan','daftarPenjualanController');
     Route::post('daftarPenjualan/api', 'daftarPenjualanController@api')->name('daftarpenjualan.api');
+    Route::get('DaftarBill', 'daftarPenjualanController@DaftarBill')->name('DaftarBill');
+    Route::post('DaftarBill/api', 'daftarPenjualanController@apii')->name('DaftarBill.apii');
+
+    Route::post('daftarpenjualan/openBill', 'daftarPenjualanController@storeBill')->name('daftarpenjualan.openBill');
+    Route::delete('/DaftarBill/{id}', 'daftarPenjualanController@destroyy')->name('DaftarBill.');
     // Route::post('daftarpenjualan/index', 'daftarPenjualanController@index')->name('daftarpenjualan');
 
 

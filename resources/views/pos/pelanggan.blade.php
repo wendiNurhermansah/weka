@@ -69,14 +69,14 @@
             save_method = "add";
             $('input[name=_method]').val('POST');
         }
-        
+
         $( "#cariPelanggan" ).autocomplete({
                     source: function( request, response ) {
                         // Fetch data
                         $.ajax({
                         url:"{{route('Pos.cariPelanggan')}}",
                         type: 'post',
-                        dataType: "json", 
+                        dataType: "json",
                         data: {
                             _token: CSRF_TOKEN,
                             search: request.term
@@ -96,12 +96,12 @@
                        // Set selection
                         $('#cariPelanggan').val(ui.item.label); // display the selected text
                         $('#idPelanggan').val(ui.item.value); // save selected id to input
-                        // if($('#cariPelanggan').val()==data){
+                        // var pelangaan = ui.item.value;// if($('#cariPelanggan').val()==data){
                         //             alert('sama')
                         //         }else{
                         //             alert('tidak')
                         //         }
-                        
+
                         // $('#cariPelanggan').focusout(function(){
                         //     console.log('p',$('.ui-menu-item-wrapper').html())
                         //     // if($('#cariPelanggan').val() != ui.item.label){

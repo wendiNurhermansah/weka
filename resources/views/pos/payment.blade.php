@@ -12,7 +12,7 @@
 @push('modal')
 <div class="modal fade" id="modalPayment" role="dialog">
     <div class="modal-dialog">
-    
+
         <form id="formPayment" action="{{route('Pos.main.store')}}" method="POST">
             @csrf
         <!-- Modal content-->
@@ -55,7 +55,7 @@
                                     <span class="d-flex">
                                         <span>Total Payable</span>
                                         <span id="totalPayable_Payment" class="ml-auto"></span>
-                                    </span> 
+                                    </span>
                                 </th>
                               </tr>
                               <tr>
@@ -69,7 +69,7 @@
                                     <span class="d-flex">
                                         <span>Balance</span>
                                         <span id="saldo" class="ml-auto"></span>
-                                    </span> 
+                                    </span>
                                 </th>
                               </tr>
                             </tbody>
@@ -122,10 +122,10 @@
                             <span id="uang500">500</span>
                             <span id="notif500" class="badge badge-dark">0</span>
                         </button> <br>
-                        <button type="button" id="clear" onclick="hapus()" class="border uang btn btn-danger">clear</button>   <br>                     
+                        <button type="button" id="clear" onclick="hapus()" class="border uang btn btn-danger">clear</button>   <br>
                     </div>
                 </div>
-            
+
             </div>
             <div class="modal-footer bg-green">
                 <button type="button" class="btn btn-light mr-auto border" data-dismiss="modal">Close</button>
@@ -147,18 +147,18 @@
         //     console.log('dibayar',$('#totalPaying').text())
         //     $('#dibayar').val($('#totalPaying').text())
         // }
-            
-        
+
+
         // $('#formPelanggan').on('submit', function (e) {
         //     $('#namaPelanggan').val($('#cariPelanggan').val())
         // })
         $( "#buttonPayment" ).click(function() {
             if($('#cariPelanggan').val() == ''){
-                $('#buttonPayment').removeAttr('data-target'); 
+                $('#buttonPayment').removeAttr('data-target');
                 alert('Please add name')
                 $('#cariPelanggan').css('border','red solid 1px')
             }else if($('#tabelTotal').html() == 0){
-                $('#buttonPayment').removeAttr('data-target'); 
+                $('#buttonPayment').removeAttr('data-target');
                 alert('Please add product')
             }else{
                 $('#buttonPayment').attr('data-target','#modalPayment')
@@ -182,13 +182,13 @@
                                         <input id="payment_biaya`+i+`" name="payment_biaya[]">
                                         <input id="payment_kuantitas`+i+`" name="payment_kuantitas[]">
                                         <input id="payment_sub_total`+i+`" name="payment_sub_total[]">
-                                    <div>`; 
+                                    <div>`;
                         $('#dataProduk').append(produk)
 
                         $('#payment_produk_id'+i).val($('#produk_id'+i).val())
                         $('#payment_biaya'+i).val($('#biaya_satuan_'+i).val())
                         $('#payment_kuantitas'+i).val($('#kuantitas_'+i).val())
-                        $('#payment_sub_total'+i).val($('#sub_total_'+i).val())    
+                        $('#payment_sub_total'+i).val($('#sub_total_'+i).val())
                     }
                 }
 

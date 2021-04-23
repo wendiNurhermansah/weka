@@ -12,6 +12,7 @@
 @include('pos.printOrder')
 @include('pos.printBill')
 @include('pos.payment')
+@include('pos.tahan')
 @section('title', ' | '.$title.'')
 @section('style')
 <style>
@@ -145,7 +146,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <button type="button" class="btn btn-warning button-footer" data-toggle="modal" data-target="#hold">Hold</button>
+                                <button type="button" class="btn btn-warning button-footer" id="buttonHold" data-toggle="modal" data-target="#hold">Hold</button>
                                 <button type="button" class="btn btn-danger button-footer" data-toggle="modal" data-target="#cancel">Cancel</button>
                             </div>
                             <div class="col-md-4">
@@ -187,28 +188,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="hold" role="dialog">
-        <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="text-black modal-title">Suspend Sale</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Type Reference Note</p>
-                    <div class="form-group">
-                        <label for="note" class="font-weight-bold">Reference Note</label>
-                        <input class="form-control" type="text" value="" id="note" name="note">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light mr-auto border" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <div class="modal fade" id="cancel" role="dialog">
         <div class="modal-dialog">
@@ -341,7 +321,7 @@
             }
 
             $(document).ready(function(){
-                $('#closeBill').click(function () { 
+                $('#closeBill').click(function () {
                     console.log('tutup')
                     $('#bill').modal('toggle')
                 });
@@ -351,6 +331,10 @@
                 })
                 $('#printOrder').on('hidden.bs.modal', function () {
                     $('#appendOrder > tr').remove()
+                })
+                $('#hold').on('hidden.bs.modal', function () {
+                    $('#HoldDataProduk > div').remove()
+                    $('#HoldDataProduk > input').remove()
                 })
                 // $('#cariPelanggan').focus(function() {
                 //     if($('#cariPellangggan').val() == null){
