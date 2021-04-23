@@ -83,8 +83,9 @@
 
 @push('script')
     <script>
-
+        var restorepage = '';
         $(document).ready(function(){
+            restorepage = document.body.innerHTML;
             $('#buttonPrintBill').click(function(){
                 if($('#cariPelanggan').val() == ''){
                     $('#buttonPrintBill').removeAttr('data-target');
@@ -151,7 +152,6 @@
         // })
         function printContent(){
             $('#bill').modal('hide')
-            var restorepage = document.body.innerHTML;
             var printcontent = document.getElementById('BillPrint').innerHTML;
             document.body.innerHTML = printcontent;
             window.print();

@@ -374,6 +374,10 @@ class PosController extends Controller
         $kartu = $this->kartu();
         $getKartu = $this->getKategori();
         $pengaturan = $this->pengaturan();
+        $saleAll = $this->saleAll();
+        $saleToday = $this->saleToday();
+        $saleAllCash = $this->saleAllCash();
+        $saleTodayCash = $this->saleTodayCash();
         // dd(Core::count());
         return view($this->view . 'index', compact(
             'route',
@@ -384,6 +388,10 @@ class PosController extends Controller
             'getKartu',
             'pengaturan',
             'penjualan',
+            'saleAll',
+            'saleToday',
+            'saleAllCash',
+            'saleTodayCash',
         ));
     }
 
